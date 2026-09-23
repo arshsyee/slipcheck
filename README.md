@@ -1,97 +1,108 @@
 # SlipCheck
 
-Upload a screenshot of your **football bet slip** and get a match file for every selection, built from free public data:
-- form and xG
-- goal, BTTS and over/under rates
+The canvas, not the painter: SlipCheck gathers **free, public football data** for every match on your bet slip and puts it in one place. It makes no predictions and gives no tips. Bring your own AI (Claude or ChatGPT key) to read slips and analyse the data.
+
+For every match you get:
+- a comparison table for your bet type
+- form and the league table
+- xG
 - head-to-head
-- the referee's record
-- league table and rest days
-- injuries and team news
-- lineups
+- the coach
+- squad by position, with a likely XI and backups
+- who's out and players to watch
+- the referee
 - kick-off weather
+- team news
 
-The stats that matter for your particular pick are shown first.
+**Honest by design:**
+- Anything no free source has is shown in red as **N/A · no free source**. Nothing is guessed or estimated.
+- Every number is a plain count ("3 of 5"), and every section says which source it came from.
+- If a source is down, you see its last saved copy with its age, not a gap.
 
-- 🧾 **Reads your slip with AI** (Claude or ChatGPT, your own key). Understands fractional odds and bookmaker abbreviations. Or type the bet in by hand.
-- ⚽ **22 European divisions + Champions League, Europa League and Conference League**
-- 🆓 **Every data source is free and needs no key**
-- 🔒 **Runs on your computer.** Your AI key only goes to the AI provider.
+## Covered
+
+- **Clubs:** Premier League, La Liga, Serie A, Bundesliga, Ligue 1, Champions League.
+- **National teams:** Nations League, qualifiers and friendlies.
 
 ## Quick start
 
 You need [Node.js 20+](https://nodejs.org).
 
 ```bash
-git clone https://github.com/<you>/slipcheck.git
+git clone https://github.com/arshsyee/slipcheck.git
 cd slipcheck
 npm install
-npm run dev
 ```
 
-Open **http://localhost:3000**. Try a **sample slip** straight away; they're built from this week's real fixtures. To read your own screenshots, add a [Claude](https://console.anthropic.com/settings/keys) or [ChatGPT](https://platform.openai.com/api-keys) key in **Settings**, or put it in `.env.local` (see `.env.example`).
+Research matches in the terminal (no key needed):
 
-## What's in a match file
+```bash
+npm run research -- "Arsenal v Leeds" "Inter v Parma" --league SERIE_A --market btts --pick Yes
+```
 
-| Section | What you get | Source |
-| --- | --- | --- |
-| Header | Kick-off, venue, referee, weather at kick-off, table positions, last-5 form | ESPN, Premier League, UEFA, football-data.co.uk, Open-Meteo, Wikidata |
-| **What matters for this pick** | 3–7 plain facts chosen for the bet type (e.g. Over 2.5 → over rates, total xG, first-half goals, head-to-head goals) | computed from the tabs below |
-| Form | Last 5 / 10, home or away only, rest days (European games included) | football-data.co.uk, ESPN |
-| Stats | Goals, **xG**, shots, corners, cards per game; BTTS, over 1.5/2.5/3.5, clean-sheet and failed-to-score rates; result margins | football-data.co.uk |
-| Head-to-head | League meetings over the last 5 seasons | football-data.co.uk |
-| Availability | **Premier League:** official injury and suspension flags with % chance of playing. **Other leagues:** injury and team-news headlines (labelled as news) | Fantasy Premier League, Google News, BBC Sport |
-| Referee | Cards, fouls, home-win and over-2.5 rates this season and last | football-data.co.uk |
-| Match centre | Lineups once announced; key attackers by xG+xA (EPL); top scorers and goal timing (Bundesliga) | ESPN, Premier League, UEFA, FPL, OpenLigaDB |
-| News | Latest headlines for both clubs | Google News, BBC Sport, ESPN |
-| Club | Founded, ground, capacity, profile | Wikidata, TheSportsDB |
+Options per match: `--league EPL|LA_LIGA|SERIE_A|BUNDESLIGA|LIGUE_1|UCL`, `--market 1x2|double_chance|draw_no_bet|total_goals|asian_handicap|btts`, `--pick`, `--line`. Add `--json` for the full data.
 
-Every section says where its data came from and when. If a source is down, that section says so and the rest still loads.
+Or use the web app: `npm run dev`, then open http://localhost:3000. Sample slips come from real upcoming fixtures. To read slip screenshots, add a Claude or ChatGPT key in Settings or in `.env.local` (see `.env.example`).
+
+## What's in a report
+
+| Section | Contents |
+| --- | --- |
+| 1. Your pick | A comparison table for the bet type, grouped by "home team at home · away team away" and "all games", plus facts that don't fit a table: head-to-head, a coach change, missing players, short rest |
+| Match | Kick-off, venue, referee, weather |
+| Season / Standing | Table, home and away record, xG and finishing, position game by game, same point last season. National teams: FIFA and Elo ranking |
+| Form | Last 5, last 5 at home (named team) and away (named team), rest days, last game |
+| Coach | Current coach, their record since arriving, the record before them if they arrived mid-season |
+| Availability | Premier League: the official list with % chance of playing. Elsewhere: injury headlines, labelled as news |
+| Matchup | Every head-to-head meeting counted, with the winner (and the competition for national teams) |
+| Lineup & squad | Premier League: likely XI (most starts in the last 5 games, injured left out; not an official lineup), next in line per position, who's out, penalty and free-kick takers. Other clubs: squad by position. National teams: this window's squad with caps, and injured withdrawals by name. Players named in injury headlines are flagged, with the headline |
 
 ## Data sources
 
-All free, all no-key:
-- [football-data.co.uk](https://www.football-data.co.uk) (results, xG, match stats, referees)
-- [ESPN](https://www.espn.com/soccer)
-- [OpenLigaDB](https://www.openligadb.de)
-- [Open-Meteo](https://open-meteo.com)
-- [Wikidata](https://www.wikidata.org)
-- [BBC Sport](https://www.bbc.co.uk/sport/football)
-- [Google News](https://news.google.com)
-- [TheSportsDB](https://www.thesportsdb.com)
-- [Fantasy Premier League](https://fantasy.premierleague.com)
-- [Premier League](https://www.premierleague.com)
-- [UEFA](https://www.uefa.com)
+All free, no key:
 
-ESPN, FPL, the Premier League and UEFA are the sites' own public data feeds rather than documented APIs, so they could change without notice. Every response is checked against a schema, so a change shows up as a clear error, not wrong numbers.
+| Source | Used for |
+| --- | --- |
+| [football-data.co.uk](https://www.football-data.co.uk) | Club results, xG, shots, cards, referees, fixtures |
+| [International results](https://github.com/martj42/international_results) (CC0) | National-team results since 1872 |
+| [Fantasy Premier League](https://fantasy.premierleague.com) | Premier League injuries, recent starts, set-piece takers, xG/xA |
+| [Premier League](https://www.premierleague.com) · [UEFA](https://www.uefa.com) | Fixtures, referees, lineups, European results, Nations League |
+| [Wikipedia](https://en.wikipedia.org) · [Wikidata](https://www.wikidata.org) | Coaches, squads, national-team rankings and withdrawals, stadium locations |
+| [TheSportsDB](https://www.thesportsdb.com) | Badges, next fixture when other lists don't have it yet |
+| [OpenLigaDB](https://www.openligadb.de) | Bundesliga goal times |
+| [Open-Meteo](https://open-meteo.com) | Kick-off weather |
+| [Google News](https://news.google.com) · [BBC Sport](https://www.bbc.co.uk/sport/football) | Team and injury news |
+| [ESPN](https://www.espn.com/soccer) (optional) | Domestic cup results only; everything else works without it |
 
-Check that every source is up and current:
+Every response is checked against a schema, so a changed feed shows up as a clear error rather than wrong numbers. Every source is saved on disk (`.cache/`); if one goes down, the last good copy (up to 14 days old) is used and labelled with its age.
 
 ```bash
-npm run check-sources
+npm run check-sources   # asks every source live, then shows each data item and where it came from
 ```
-
-## Covered competitions
-
-England (Premier League, Championship, League One, League Two, National League) · Scotland (Premiership, Championship, League One, League Two) · Germany (Bundesliga, 2. Bundesliga) · Spain (La Liga, La Liga 2) · Italy (Serie A, Serie B) · France (Ligue 1, Ligue 2) · Netherlands · Belgium · Portugal · Turkey · Greece · UEFA Champions League, Europa League, Conference League
-
-## Roadmap
-
-- **Phase 2:** compare your slip's odds across bookmakers.
-- **Phase 3:** optional free-key sources: official injury and suspension lists for every league, predicted lineups.
-- **Phase 4:** one-command install (`npx` / Docker), desktop app, setup wizard.
-- **Phase 5:** saved slips, history, alerts.
 
 ## Development
 
 ```bash
-npm test               # stats, team-name matching across every source, offline dossier build
+npm test          # offline, on real recorded data (tests/fixtures/snapshot)
 npm run lint
-npm run check-sources  # live health + freshness of every data source
-npm run fixtures       # render fake slip screenshots from this week's fixtures → tests/fixtures/slips/
-npx tsx scripts/collect-team-names.ts   # re-record club names from every source for the matching tests
+npx tsc --noEmit
+npm run verify -- accuracy|goals|referees|xg|coverage   # cross-check sources against each other (live)
 ```
 
-Code map: `lib/sources/*` (one module per data source) · `lib/teams/*` (matching club names across sources) · `lib/stats/*` (form, rates, head-to-head, referee, pick focus) · `lib/dossier/build.ts` (joins it all per leg) · `app/api/dossier` (streams one match file per leg) · `components/dossier/*` (UI).
+Code map:
+- `lib/sources/*`: one module per data source.
+- `lib/teams/*`: matching team names across sources.
+- `lib/stats/*`: form, rates, head-to-head, season, lineup, the pick table.
+- `lib/dossier/build.ts` (clubs) and `lib/dossier/national.ts` (national teams): join everything per match.
+- `scripts/research.ts`: the terminal report.
+- `components/dossier/*`: the web UI.
+
+## Roadmap
+
+- **Phase 2:** compare your slip's odds across bookmakers.
+- **Phase 3:** optional free-key sources, such as official injury lists for every league and predicted lineups.
+- **Phase 4:** an MCP server or plugin, so your own AI can read SlipCheck directly.
+- **Phase 5:** saved slips and history.
 
 ---
 

@@ -4,7 +4,7 @@
  *   npm run research -- "Arsenal v Leeds"
  *   npm run research -- "Real Madrid v Villarreal" --market total_goals --pick Over --line 2.5
  *   npm run research -- "Inter v Parma" --market btts --pick Yes "Augsburg v Bayern" --market asian_handicap --pick Bayern --line -1.5
- *   npm run research -- "Celtic v Hearts" --json          (full dossier as JSON)
+ *   npm run research -- "England v Spain" --json          (national teams; full dossier as JSON)
  *
  * Options apply to the match before them. --league is optional (EPL, LA_LIGA, UCL, …); it's inferred when left out.
  * Markets: 1x2 (default, pick = home team), double_chance, draw_no_bet, total_goals, asian_handicap, btts.
