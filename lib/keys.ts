@@ -11,7 +11,6 @@ export function resolveSettings(s: Partial<ClientSettings> = {}) {
     provider,
     anthropicKey: s.anthropicKey || process.env.ANTHROPIC_API_KEY || "",
     openaiKey: s.openaiKey || process.env.OPENAI_API_KEY || "",
-    oddsKey: s.oddsKey || process.env.ODDS_API_KEY || "",
     anthropicModel: s.anthropicModel || process.env.ANTHROPIC_MODEL || undefined,
     openaiModel: s.openaiModel || process.env.OPENAI_MODEL || undefined,
   };

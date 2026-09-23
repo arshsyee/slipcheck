@@ -1,29 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, FlaskConical, KeyRound, Loader2, PencilLine, RotateCcw, Sparkles } from "lucide-react";
+import { ArrowRight, Database, FlaskConical, KeyRound, Loader2, PencilLine, RotateCcw, Sparkles } from "lucide-react";
+import clsx from "clsx";
 import { SlipDropzone } from "@/components/SlipDropzone";
 import { EMPTY_LEG, LegEditor } from "@/components/LegEditor";
-import { OddsTable } from "@/components/OddsTable";
-import { InfoCard } from "@/components/InfoCard";
+import { MatchCard, MatchCardSkeleton } from "@/components/dossier/MatchCard";
+import { Crest } from "@/components/dossier/bits";
 import { useSettings } from "@/lib/useSettings";
-import { SAMPLE_SLIPS, type SampleSlip } from "@/lib/demo/slips";
-import type { TeamInfo } from "@/lib/info/espn";
-import type { CompareResult, Slip } from "@/lib/types";
+import { formatMoney, formatOdds } from "@/lib/odds/convert";
+import type { MatchDossier } from "@/lib/dossier/types";
+import type { SampleSlip } from "@/lib/samples";
+import type { OddsFormat, Slip } from "@/lib/types";
 
-type Stage = "upload" | "parsing" | "review" | "comparing" | "results";
+type Stage = "upload" | "parsing" | "review" | "results";
+type LegState = { status: "loading" } | { status: "ready"; dossier: MatchDossier } | { status: "error"; error: string };
+
+const BLANK_SLIP: Slip = { sportsbook: null, currency: "GBP", stake: 10, betType: "single", totalOddsDecimal: null, potentialReturn: null, legs: [{ ...EMPTY_LEG }] };
 
 export default function Home() {
-  const { settings, hasAiKey, hasOddsKey, loaded } = useSettings();
+  const { settings, hasAiKey, loaded } = useSettings();
+  const oddsFormat = settings.oddsFormat ?? "fractional";
   const [stage, setStage] = useState<Stage>("upload");
   const [preview, setPreview] = useState<string | null>(null);
   const [slip, setSlip] = useState<Slip | null>(null);
-  const [result, setResult] = useState<CompareResult | null>(null);
-  const [teams, setTeams] = useState<Record<string, TeamInfo | null> | null>(null);
+  const [legs, setLegs] = useState<LegState[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [demo, setDemo] = useState(false);
+  const [samples, setSamples] = useState<SampleSlip[] | null>(null);
+
+  useEffect(() => {
+    fetch("/api/samples")
+      .then((r) => r.json())
+      .then((d) => setSamples(d.samples ?? []))
+      .catch(() => setSamples([]));
+  }, []);
 
   async function handleFile(file: File) {
     setError(null);
@@ -37,7 +49,7 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       const parsed = data.slip as Slip;
-      if (!parsed.legs.length) throw new Error("Couldn't find any bets in that image. Try a clearer screenshot, or enter the bet manually.");
+      if (!parsed.legs.length) throw new Error("Couldn't find any football selections in that image. Try a clearer screenshot, or enter the bet manually.");
       setSlip(parsed);
       setStage("review");
     } catch (e) {
@@ -46,82 +58,75 @@ export default function Home() {
     }
   }
 
-  function loadSample(sample: SampleSlip) {
-    setDemo(true);
-    setPreview(null);
-    setSlip(sample.slip);
-    compare(sample.slip, true);
-  }
-
-  async function compare(current = slip, demoMode = demo) {
-    if (!current) return;
-    const s: Slip = { ...current, betType: current.legs.length > 1 ? "parlay" : "single" };
+  async function research(current = slip) {
+    if (!current?.legs.length) return;
+    const s: Slip = { ...current, betType: current.legs.length > 1 ? "acca" : "single" };
+    setSlip(s);
     setError(null);
-    setStage("comparing");
-    setTeams(null);
-    const body = JSON.stringify({ slip: s, settings, demo: demoMode });
-    const headers = { "content-type": "application/json" };
-
-    // Public info loads independently so a slow ESPN response doesn't block the odds.
-    fetch("/api/info", { method: "POST", headers, body })
-      .then((r) => r.json())
-      .then((d) => setTeams(d.teams ?? {}))
-      .catch(() => setTeams({}));
+    setLegs(s.legs.map(() => ({ status: "loading" })));
+    setStage("results");
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     try {
-      const res = await fetch("/api/compare", { method: "POST", headers, body });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-      setSlip(s);
-      setResult(data);
-      setStage("results");
+      const res = await fetch("/api/dossier", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ slip: s }) });
+      if (!res.ok || !res.body) throw new Error((await res.json().catch(() => ({}))).error ?? "Couldn't gather match data");
+      // NDJSON: one match file per line, in the order they finish.
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+        for (const line of lines.filter(Boolean)) {
+          const msg = JSON.parse(line) as { legIndex: number; dossier?: MatchDossier; error?: string };
+          setLegs((prev) =>
+            prev.map((l, i) =>
+              i !== msg.legIndex ? l : msg.dossier ? { status: "ready", dossier: msg.dossier } : { status: "error", error: msg.error ?? "Failed" },
+            ),
+          );
+        }
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong");
-      setStage("review");
+      setLegs((prev) => prev.map((l) => (l.status === "loading" ? { status: "error", error: "Request failed" } : l)));
     }
   }
 
   function reset() {
     setStage("upload");
     setSlip(null);
-    setResult(null);
-    setTeams(null);
+    setLegs([]);
     setPreview(null);
     setError(null);
-    setDemo(false);
   }
-
-  const missingKeys = loaded && (!hasAiKey || !hasOddsKey);
 
   return (
     <div className="space-y-10">
-      <section className="mx-auto max-w-2xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-xs text-muted"
-        >
-          <Sparkles size={13} className="text-accent" /> AI reads your slip, then we price it at every US book
-        </motion.div>
-        <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">
-          Are you getting the <span className="bg-gradient-to-r from-accent to-emerald-300 bg-clip-text text-transparent">best payout</span>?
-        </h1>
-        <p className="mt-4 text-muted">Upload a bet slip screenshot to compare odds across DraftKings, FanDuel, BetMGM, Caesars and more.</p>
-      </section>
+      {stage !== "results" && (
+        <section className="mx-auto max-w-2xl text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-xs text-muted"
+          >
+            <Database size={13} className="text-accent" /> 11 free public data sources · 22 European leagues + UEFA
+          </motion.div>
+          <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">
+            Know every match <span className="bg-gradient-to-r from-accent to-emerald-300 bg-clip-text text-transparent">on your slip</span>
+          </h1>
+          <p className="mt-4 text-muted">
+            Upload your football bet slip. We pull form, xG, head-to-heads, referees, team news, lineups and weather for every selection.
+          </p>
+        </section>
+      )}
 
-      {missingKeys && (
-        <Link
-          href="/settings"
-          className="glass mx-auto flex max-w-2xl items-center gap-3 rounded-xl border-warn/40 px-4 py-3 text-sm transition hover:border-warn"
-        >
+      {loaded && !hasAiKey && stage === "upload" && (
+        <Link href="/settings" className="glass mx-auto flex max-w-2xl items-center gap-3 rounded-xl px-4 py-3 text-sm transition hover:border-warn">
           <KeyRound size={18} className="shrink-0 text-warn" />
-          <span className="flex-1">
-            {!hasAiKey && !hasOddsKey
-              ? "Add your AI key and Odds API key to get started."
-              : !hasAiKey
-                ? "Add a Claude or ChatGPT API key to read slips."
-                : "Add an Odds API key to compare sportsbooks."}
-          </span>
+          <span className="flex-1">Add a Claude or ChatGPT API key to read slip screenshots. You can still enter bets by hand or try a sample.</span>
           <ArrowRight size={16} className="text-muted" />
         </Link>
       )}
@@ -145,11 +150,11 @@ export default function Home() {
             <ParsingState preview={preview} />
           ) : (
             <>
-              <SlipDropzone onFile={handleFile} />
+              <SlipDropzone onFile={handleFile} disabled={loaded && !hasAiKey} />
               <div className="mt-4 text-center">
                 <button
                   onClick={() => {
-                    setSlip({ sportsbook: null, stake: 10, betType: "single", totalOddsAmerican: null, potentialPayout: null, legs: [{ ...EMPTY_LEG }] });
+                    setSlip(structuredClone(BLANK_SLIP));
                     setStage("review");
                   }}
                   className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-fg"
@@ -157,30 +162,35 @@ export default function Home() {
                   <PencilLine size={14} /> or enter a bet manually
                 </button>
               </div>
-              <SamplePicker onPick={loadSample} />
+              <SamplePicker
+                samples={samples}
+                onPick={(s) => {
+                  setPreview(null);
+                  research(s.slip);
+                }}
+              />
             </>
           )}
         </div>
       )}
 
-      {slip && (stage === "review" || stage === "comparing" || stage === "results") && (
+      {slip && stage === "review" && (
         <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-5 sm:p-6">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold">Your slip</h2>
-              <p className="text-sm text-muted">Check that everything was read correctly and fix anything that&apos;s off.</p>
+              <h2 className="text-lg font-semibold">Check your slip</h2>
+              <p className="text-sm text-muted">Fix anything that was read wrong, then gather the match data.</p>
             </div>
             <div className="flex gap-2">
               <button onClick={reset} className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted transition hover:text-fg">
-                <RotateCcw size={14} /> New slip
+                <RotateCcw size={14} /> Start over
               </button>
               <button
-                onClick={() => compare()}
-                disabled={stage === "comparing" || !slip.legs.length}
-                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg shadow-[0_0_24px_rgba(46,224,127,0.35)] transition hover:brightness-110 disabled:opacity-60"
+                onClick={() => research()}
+                disabled={!slip.legs.some((l) => l.homeTeam || l.awayTeam)}
+                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg shadow-[0_0_24px_rgba(46,224,127,0.35)] transition hover:brightness-110 disabled:opacity-50"
               >
-                {stage === "comparing" ? <Loader2 size={15} className="animate-spin" /> : <ArrowRight size={15} />}
-                {stage === "results" ? "Re-compare" : "Compare odds"}
+                <Sparkles size={15} /> Research {slip.legs.length > 1 ? `${slip.legs.length} matches` : "match"}
               </button>
             </div>
           </div>
@@ -190,42 +200,130 @@ export default function Home() {
               <img src={preview} alt="Uploaded slip" className="max-h-72 w-full rounded-xl border border-line object-contain lg:w-48" />
             )}
             <div className="min-w-0 flex-1">
-              <LegEditor slip={slip} onChange={setSlip} />
+              <LegEditor slip={slip} onChange={setSlip} oddsFormat={oddsFormat} />
             </div>
           </div>
         </motion.section>
       )}
 
-      {stage === "results" && result && slip && (
-        <>
-          <section className="space-y-4">
-            <div className="flex flex-wrap items-center gap-3">
-              <h2 className="text-lg font-semibold">Odds comparison</h2>
-              {result.demo && (
-                <span className="flex items-center gap-1.5 rounded-full border border-warn/40 bg-warn/10 px-2.5 py-0.5 text-xs text-warn">
-                  <FlaskConical size={12} /> Demo odds (sample data, not live)
-                </span>
+      {slip && stage === "results" && (
+        <div className="space-y-6">
+          <SlipSummary slip={slip} legs={legs} oddsFormat={oddsFormat} onEdit={() => setStage("review")} onReset={reset} />
+          {legs.map((l, i) =>
+            l.status === "ready" ? (
+              <MatchCard key={i} d={l.dossier} oddsFormat={oddsFormat} />
+            ) : l.status === "loading" ? (
+              <MatchCardSkeleton key={i} index={i} home={slip.legs[i].homeTeam} away={slip.legs[i].awayTeam} />
+            ) : (
+              <div key={i} className="rounded-2xl border border-danger/40 bg-danger/10 p-5 text-sm text-danger">
+                Leg {i + 1} ({slip.legs[i].homeTeam} v {slip.legs[i].awayTeam}): {l.error}
+              </div>
+            ),
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SlipSummary({
+  slip,
+  legs,
+  oddsFormat,
+  onEdit,
+  onReset,
+}: {
+  slip: Slip;
+  legs: LegState[];
+  oddsFormat: OddsFormat;
+  onEdit: () => void;
+  onReset: () => void;
+}) {
+  const done = legs.filter((l) => l.status !== "loading").length;
+  return (
+    <section className="glass z-10 rounded-2xl px-4 py-3 sm:sticky sm:top-16 sm:px-5">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="text-sm">
+          <span className="font-semibold">{slip.legs.length > 1 ? `${slip.legs.length}-fold acca` : "Single"}</span>
+          <span className="text-muted">
+            {slip.sportsbook && ` · ${slip.sportsbook}`}
+            {slip.stake != null && ` · ${formatMoney(slip.stake, slip.currency ?? "GBP")} stake`}
+            {slip.totalOddsDecimal && ` · ${formatOdds(slip.totalOddsDecimal, oddsFormat)}`}
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-sm">
+          {done < legs.length && (
+            <span className="flex items-center gap-1.5 text-muted">
+              <Loader2 size={14} className="animate-spin text-accent" /> {done}/{legs.length} ready
+            </span>
+          )}
+          <button onClick={onEdit} className="rounded-lg border border-line px-3 py-1.5 text-muted transition hover:text-fg">
+            Edit slip
+          </button>
+          <button onClick={onReset} className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-1.5 text-muted transition hover:text-fg">
+            <RotateCcw size={13} /> New slip
+          </button>
+        </div>
+      </div>
+      <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+        {slip.legs.map((leg, i) => {
+          const l = legs[i];
+          const d = l?.status === "ready" ? l.dossier : null;
+          return (
+            <a
+              key={i}
+              href={`#leg-${i}`}
+              className={clsx(
+                "flex shrink-0 items-center gap-2 rounded-lg border px-2.5 py-1.5 text-xs transition hover:border-accent/60",
+                l?.status === "error" ? "border-danger/40" : "border-line",
               )}
-            </div>
-            <OddsTable slip={slip} result={result} />
-          </section>
-          <section className="space-y-4">
-            <h2 className="text-lg font-semibold">Matchup info</h2>
-            <div className="grid gap-4 lg:grid-cols-2">
-              {slip.legs.map((leg, i) => (
-                <InfoCard
-                  key={i}
-                  leg={leg}
-                  index={i}
-                  match={result.matches[i]}
-                  away={teams ? (teams[`${leg.sport}:${leg.awayTeam}`] ?? null) : undefined}
-                  home={teams ? (teams[`${leg.sport}:${leg.homeTeam}`] ?? null) : undefined}
-                />
-              ))}
-            </div>
-            <p className="text-xs text-muted">Team records, results and injuries come from ESPN&apos;s public data.</p>
-          </section>
-        </>
+            >
+              {d ? (
+                <span className="flex -space-x-1.5">
+                  <Crest src={d.home.espn?.logo} name={d.home.name} size={18} />
+                  <Crest src={d.away.espn?.logo} name={d.away.name} size={18} />
+                </span>
+              ) : (
+                <Loader2 size={14} className={clsx(l?.status === "loading" ? "animate-spin text-muted" : "text-danger")} />
+              )}
+              <span className="max-w-[180px] truncate">
+                {leg.homeTeam} v {leg.awayTeam}
+              </span>
+              <span className="text-muted">{leg.selection}</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function SamplePicker({ samples, onPick }: { samples: SampleSlip[] | null; onPick: (s: SampleSlip) => void }) {
+  return (
+    <div className="mt-10">
+      <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider text-muted">
+        <FlaskConical size={13} /> Or try a sample slip (real upcoming fixtures)
+      </div>
+      {samples === null ? (
+        <div className="grid gap-2 sm:grid-cols-3">
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="glass h-[74px] animate-pulse rounded-xl" />
+          ))}
+        </div>
+      ) : samples.length === 0 ? (
+        <p className="text-sm text-muted">No samples available right now.</p>
+      ) : (
+        <div className="grid gap-2 sm:grid-cols-3">
+          {samples.map((s) => (
+            <button key={s.id} onClick={() => onPick(s)} className="glass group rounded-xl px-4 py-3 text-left transition hover:border-accent/50">
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-medium">{s.title}</span>
+                <ArrowRight size={14} className="text-muted transition group-hover:translate-x-0.5 group-hover:text-accent" />
+              </div>
+              <div className="mt-0.5 text-xs text-muted">{s.blurb}</div>
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -247,31 +345,6 @@ function ParsingState({ preview }: { preview: string | null }) {
       )}
       <div className="flex items-center gap-2 text-sm text-muted">
         <Loader2 size={16} className="animate-spin text-accent" /> Reading your slip…
-      </div>
-    </div>
-  );
-}
-
-function SamplePicker({ onPick }: { onPick: (s: SampleSlip) => void }) {
-  return (
-    <div className="mt-10">
-      <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider text-muted">
-        <FlaskConical size={13} /> No keys yet? Try a sample slip
-      </div>
-      <div className="grid gap-2 sm:grid-cols-2">
-        {SAMPLE_SLIPS.map((s) => (
-          <button
-            key={s.id}
-            onClick={() => onPick(s)}
-            className="glass group rounded-xl px-4 py-3 text-left transition hover:border-accent/50"
-          >
-            <div className="flex items-center justify-between gap-2">
-              <span className="font-medium">{s.title}</span>
-              <ArrowRight size={14} className="text-muted transition group-hover:translate-x-0.5 group-hover:text-accent" />
-            </div>
-            <div className="mt-0.5 text-xs text-muted">{s.blurb}</div>
-          </button>
-        ))}
       </div>
     </div>
   );

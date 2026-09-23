@@ -1,20 +1,7 @@
 import { z } from "zod";
 
-export const LEAGUES = [
-  "EPL",
-  "CHAMPIONSHIP",
-  "LA_LIGA",
-  "SERIE_A",
-  "BUNDESLIGA",
-  "LIGUE_1",
-  "EREDIVISIE",
-  "PRIMEIRA_LIGA",
-  "SCOTTISH_PREM",
-  "UCL",
-  "UEL",
-  "UECL",
-  "OTHER",
-] as const;
+// Scope: Europe's top 5 leagues + the Champions League.
+export const LEAGUES = ["EPL", "LA_LIGA", "SERIE_A", "BUNDESLIGA", "LIGUE_1", "UCL", "OTHER"] as const;
 
 export const MARKETS = [
   "1x2",
@@ -59,7 +46,6 @@ export type Market = (typeof MARKETS)[number];
 export type Currency = (typeof CURRENCIES)[number];
 
 export type AIProvider = "anthropic" | "openai";
-export type Region = "uk" | "eu";
 export type OddsFormat = "decimal" | "fractional" | "american";
 
 /** Keys + prefs the browser sends to the local API routes. */
@@ -67,44 +53,7 @@ export interface ClientSettings {
   provider: AIProvider;
   anthropicKey?: string;
   openaiKey?: string;
-  oddsKey?: string;
   anthropicModel?: string;
   openaiModel?: string;
-  regions?: Region[];
   oddsFormat?: OddsFormat;
-}
-
-export interface BookQuote {
-  book: string;
-  bookKey: string;
-  /** Betting exchange: prices are before commission. */
-  exchange: boolean;
-  /** Per-leg decimal odds, aligned with slip.legs (null = book doesn't offer that leg at that line). */
-  legOdds: (number | null)[];
-  /** Per-leg line the book offers (may differ from the slip's line). */
-  legLines: (number | null)[];
-  decimal: number | null;
-  payout: number | null;
-  complete: boolean;
-  lastUpdate?: string;
-}
-
-export interface LegMatch {
-  legIndex: number;
-  eventId: string | null;
-  eventName: string | null;
-  commenceTime: string | null;
-  note?: string;
-}
-
-export interface CompareResult {
-  stake: number;
-  currency: Currency;
-  slipDecimal: number | null;
-  slipPayout: number | null;
-  matches: LegMatch[];
-  quotes: BookQuote[];
-  requestsRemaining?: string | null;
-  /** True when priced against the built-in sample odds instead of the live API. */
-  demo?: boolean;
 }

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "fixtures": "tsx scripts/make-slip-images.ts"
+    "check-sources": "tsx scripts/check-sources.ts",
+    "verify": "tsx scripts/verify-core.ts",
+    "research": "tsx scripts/research.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",

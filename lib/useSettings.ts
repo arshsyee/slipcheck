@@ -11,7 +11,6 @@ const DEFAULTS: ClientSettings = { provider: "anthropic" };
 export interface EnvStatus {
   anthropic: boolean;
   openai: boolean;
-  odds: boolean;
   provider: "anthropic" | "openai";
 }
 
@@ -67,7 +66,6 @@ export function useSettings() {
     settings.provider === "openai"
       ? Boolean(settings.openaiKey || env?.openai)
       : Boolean(settings.anthropicKey || env?.anthropic);
-  const hasOddsKey = Boolean(settings.oddsKey || env?.odds);
 
-  return { settings, update, env, loaded, hasAiKey, hasOddsKey };
+  return { settings, update, env, loaded, hasAiKey };
 }

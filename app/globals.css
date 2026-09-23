@@ -11,6 +11,9 @@
   --color-accent-dim: #1a7f4a;
   --color-danger: #ff5c6c;
   --color-warn: #ffb547;
+  --color-win: #2ee07f;
+  --color-home: #4f8cff;
+  --color-away: #ff8a4c;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

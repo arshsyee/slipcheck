@@ -1,0 +1,512 @@
+{
+ "EPL": {
+  "fd": [
+   "Arsenal",
+   "Aston Villa",
+   "Bournemouth",
+   "Brentford",
+   "Brighton",
+   "Chelsea",
+   "Coventry",
+   "Crystal Palace",
+   "Everton",
+   "Fulham",
+   "Hull",
+   "Ipswich",
+   "Leeds",
+   "Liverpool",
+   "Man City",
+   "Man United",
+   "Newcastle",
+   "Nott'm Forest",
+   "Sunderland",
+   "Tottenham"
+  ],
+  "espn": [
+   {
+    "id": "349",
+    "name": "AFC Bournemouth"
+   },
+   {
+    "id": "359",
+    "name": "Arsenal"
+   },
+   {
+    "id": "362",
+    "name": "Aston Villa"
+   },
+   {
+    "id": "337",
+    "name": "Brentford"
+   },
+   {
+    "id": "331",
+    "name": "Brighton & Hove Albion"
+   },
+   {
+    "id": "363",
+    "name": "Chelsea"
+   },
+   {
+    "id": "388",
+    "name": "Coventry City"
+   },
+   {
+    "id": "384",
+    "name": "Crystal Palace"
+   },
+   {
+    "id": "368",
+    "name": "Everton"
+   },
+   {
+    "id": "370",
+    "name": "Fulham"
+   },
+   {
+    "id": "306",
+    "name": "Hull City"
+   },
+   {
+    "id": "373",
+    "name": "Ipswich Town"
+   },
+   {
+    "id": "357",
+    "name": "Leeds United"
+   },
+   {
+    "id": "364",
+    "name": "Liverpool"
+   },
+   {
+    "id": "382",
+    "name": "Manchester City"
+   },
+   {
+    "id": "360",
+    "name": "Manchester United"
+   },
+   {
+    "id": "361",
+    "name": "Newcastle United"
+   },
+   {
+    "id": "393",
+    "name": "Nottingham Forest"
+   },
+   {
+    "id": "366",
+    "name": "Sunderland"
+   },
+   {
+    "id": "367",
+    "name": "Tottenham Hotspur"
+   }
+  ]
+ },
+ "LA_LIGA": {
+  "fd": [
+   "Alaves",
+   "Ath Bilbao",
+   "Ath Madrid",
+   "Barcelona",
+   "Betis",
+   "Celta",
+   "Elche",
+   "Espanol",
+   "Getafe",
+   "La Coruna",
+   "Levante",
+   "Malaga",
+   "Osasuna",
+   "Real Madrid",
+   "Santander",
+   "Sevilla",
+   "Sociedad",
+   "Valencia",
+   "Vallecano",
+   "Villarreal"
+  ],
+  "espn": [
+   {
+    "id": "96",
+    "name": "Alavés"
+   },
+   {
+    "id": "93",
+    "name": "Athletic Club"
+   },
+   {
+    "id": "1068",
+    "name": "Atlético Madrid"
+   },
+   {
+    "id": "83",
+    "name": "Barcelona"
+   },
+   {
+    "id": "85",
+    "name": "Celta Vigo"
+   },
+   {
+    "id": "90",
+    "name": "Deportivo"
+   },
+   {
+    "id": "3751",
+    "name": "Elche"
+   },
+   {
+    "id": "88",
+    "name": "Espanyol"
+   },
+   {
+    "id": "2922",
+    "name": "Getafe"
+   },
+   {
+    "id": "1538",
+    "name": "Levante"
+   },
+   {
+    "id": "99",
+    "name": "Málaga"
+   },
+   {
+    "id": "97",
+    "name": "Osasuna"
+   },
+   {
+    "id": "87",
+    "name": "Racing Santander"
+   },
+   {
+    "id": "101",
+    "name": "Rayo Vallecano"
+   },
+   {
+    "id": "244",
+    "name": "Real Betis"
+   },
+   {
+    "id": "86",
+    "name": "Real Madrid"
+   },
+   {
+    "id": "89",
+    "name": "Real Sociedad"
+   },
+   {
+    "id": "243",
+    "name": "Sevilla"
+   },
+   {
+    "id": "94",
+    "name": "Valencia"
+   },
+   {
+    "id": "102",
+    "name": "Villarreal"
+   }
+  ]
+ },
+ "SERIE_A": {
+  "fd": [
+   "Atalanta",
+   "Bologna",
+   "Cagliari",
+   "Como",
+   "Fiorentina",
+   "Frosinone",
+   "Genoa",
+   "Inter",
+   "Juventus",
+   "Lazio",
+   "Lecce",
+   "Milan",
+   "Monza",
+   "Napoli",
+   "Parma",
+   "Roma",
+   "Sassuolo",
+   "Torino",
+   "Udinese",
+   "Venezia"
+  ],
+  "espn": [
+   {
+    "id": "103",
+    "name": "AC Milan"
+   },
+   {
+    "id": "104",
+    "name": "AS Roma"
+   },
+   {
+    "id": "105",
+    "name": "Atalanta"
+   },
+   {
+    "id": "107",
+    "name": "Bologna"
+   },
+   {
+    "id": "2925",
+    "name": "Cagliari"
+   },
+   {
+    "id": "2572",
+    "name": "Como"
+   },
+   {
+    "id": "109",
+    "name": "Fiorentina"
+   },
+   {
+    "id": "4057",
+    "name": "Frosinone"
+   },
+   {
+    "id": "3263",
+    "name": "Genoa"
+   },
+   {
+    "id": "110",
+    "name": "Internazionale"
+   },
+   {
+    "id": "111",
+    "name": "Juventus"
+   },
+   {
+    "id": "112",
+    "name": "Lazio"
+   },
+   {
+    "id": "113",
+    "name": "Lecce"
+   },
+   {
+    "id": "4007",
+    "name": "Monza"
+   },
+   {
+    "id": "114",
+    "name": "Napoli"
+   },
+   {
+    "id": "115",
+    "name": "Parma"
+   },
+   {
+    "id": "3997",
+    "name": "Sassuolo"
+   },
+   {
+    "id": "239",
+    "name": "Torino"
+   },
+   {
+    "id": "118",
+    "name": "Udinese"
+   },
+   {
+    "id": "17530",
+    "name": "Venezia"
+   }
+  ]
+ },
+ "BUNDESLIGA": {
+  "fd": [
+   "Augsburg",
+   "Bayern Munich",
+   "Dortmund",
+   "Ein Frankfurt",
+   "Elversberg",
+   "FC Koln",
+   "Freiburg",
+   "Hamburg",
+   "Hoffenheim",
+   "Leverkusen",
+   "M'gladbach",
+   "Mainz",
+   "Paderborn",
+   "RB Leipzig",
+   "Schalke 04",
+   "Stuttgart",
+   "Union Berlin",
+   "Werder Bremen"
+  ],
+  "espn": [
+   {
+    "id": "598",
+    "name": "1. FC Union Berlin"
+   },
+   {
+    "id": "131",
+    "name": "Bayer Leverkusen"
+   },
+   {
+    "id": "132",
+    "name": "Bayern Munich"
+   },
+   {
+    "id": "124",
+    "name": "Borussia Dortmund"
+   },
+   {
+    "id": "268",
+    "name": "Borussia Mönchengladbach"
+   },
+   {
+    "id": "125",
+    "name": "Eintracht Frankfurt"
+   },
+   {
+    "id": "3841",
+    "name": "FC Augsburg"
+   },
+   {
+    "id": "122",
+    "name": "FC Cologne"
+   },
+   {
+    "id": "127",
+    "name": "Hamburg SV"
+   },
+   {
+    "id": "2950",
+    "name": "Mainz"
+   },
+   {
+    "id": "11420",
+    "name": "RB Leipzig"
+   },
+   {
+    "id": "126",
+    "name": "SC Freiburg"
+   },
+   {
+    "id": "3307",
+    "name": "SC Paderborn 07"
+   },
+   {
+    "id": "133",
+    "name": "Schalke 04"
+   },
+   {
+    "id": "10388",
+    "name": "SV Elversberg"
+   },
+   {
+    "id": "7911",
+    "name": "TSG Hoffenheim"
+   },
+   {
+    "id": "134",
+    "name": "VfB Stuttgart"
+   },
+   {
+    "id": "137",
+    "name": "Werder Bremen"
+   }
+  ]
+ },
+ "LIGUE_1": {
+  "fd": [
+   "Angers",
+   "Auxerre",
+   "Brest",
+   "Le Havre",
+   "Le Mans",
+   "Lens",
+   "Lille",
+   "Lorient",
+   "Lyon",
+   "Marseille",
+   "Monaco",
+   "Nice",
+   "Paris FC",
+   "Paris SG",
+   "Rennes",
+   "Strasbourg",
+   "Toulouse",
+   "Troyes"
+  ],
+  "espn": [
+   {
+    "id": "172",
+    "name": "AJ Auxerre"
+   },
+   {
+    "id": "7868",
+    "name": "Angers"
+   },
+   {
+    "id": "174",
+    "name": "AS Monaco"
+   },
+   {
+    "id": "6997",
+    "name": "Brest"
+   },
+   {
+    "id": "3236",
+    "name": "Le Havre AC"
+   },
+   {
+    "id": "2697",
+    "name": "Le Mans"
+   },
+   {
+    "id": "175",
+    "name": "Lens"
+   },
+   {
+    "id": "166",
+    "name": "Lille"
+   },
+   {
+    "id": "273",
+    "name": "Lorient"
+   },
+   {
+    "id": "167",
+    "name": "Lyon"
+   },
+   {
+    "id": "176",
+    "name": "Marseille"
+   },
+   {
+    "id": "2502",
+    "name": "Nice"
+   },
+   {
+    "id": "6851",
+    "name": "Paris FC"
+   },
+   {
+    "id": "160",
+    "name": "Paris Saint-Germain"
+   },
+   {
+    "id": "169",
+    "name": "Stade Rennais"
+   },
+   {
+    "id": "180",
+    "name": "Strasbourg"
+   },
+   {
+    "id": "179",
+    "name": "Toulouse"
+   },
+   {
+    "id": "170",
+    "name": "Troyes"
+   }
+  ]
+ }
+}

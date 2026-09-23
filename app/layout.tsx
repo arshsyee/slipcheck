@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "SlipCheck",
-  description: "Upload a bet slip and see which sportsbook pays the most for the same bet.",
+  description: "Upload a football bet slip and get every public fact about each match: form, xG, head-to-head, referee, team news, lineups and weather.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -25,12 +25,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 sm:py-12">{children}</main>
         <footer className="border-t border-line/70 px-4 py-6 text-center text-xs text-muted">
-          For information only. Odds change quickly, so always confirm on the sportsbook before betting. Must be 21+.
-          Gambling problem? Call{" "}
-          <a className="underline hover:text-fg" href="tel:18004262537">
-            1-800-GAMBLER
-          </a>
-          .
+          Information only, not betting advice. Data comes from free public sources and can be incomplete or late. 18+ only. Need help?{" "}
+          <a className="underline hover:text-fg" href="https://www.begambleaware.org" target="_blank" rel="noreferrer">
+            BeGambleAware.org
+          </a>{" "}
+          · National Gambling Helpline 0808 8020 133.
         </footer>
       </body>
     </html>

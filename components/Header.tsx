@@ -8,7 +8,7 @@ import clsx from "clsx";
 export function Header() {
   const path = usePathname();
   const nav = [
-    { href: "/", label: "Compare", icon: Receipt },
+    { href: "/", label: "My slip", icon: Receipt },
     { href: "/settings", label: "Settings", icon: Settings },
   ];
   return (

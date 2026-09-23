@@ -7,11 +7,11 @@ import clsx from "clsx";
 import { useSettings } from "@/lib/useSettings";
 import type { ClientSettings } from "@/lib/types";
 
-type Which = "anthropic" | "openai" | "odds";
+type Which = "anthropic" | "openai";
 
 const KEY_FIELDS: {
   which: Which;
-  field: "anthropicKey" | "openaiKey" | "oddsKey";
+  field: "anthropicKey" | "openaiKey";
   label: string;
   placeholder: string;
   help: string;
@@ -30,16 +30,8 @@ const KEY_FIELDS: {
     field: "openaiKey",
     label: "ChatGPT (OpenAI) API key",
     placeholder: "sk-…",
-    help: "Alternative slip reader. You only need one of the two AI keys.",
+    help: "Alternative slip reader. You only need one of the two.",
     href: "https://platform.openai.com/api-keys",
-  },
-  {
-    which: "odds",
-    field: "oddsKey",
-    label: "The Odds API key",
-    placeholder: "32-character key",
-    help: "Live odds from 40+ US sportsbooks. The free tier gives 500 requests a month.",
-    href: "https://the-odds-api.com/#get-access",
   },
 ];
 
@@ -53,8 +45,8 @@ export default function SettingsPage() {
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">Settings</h1>
         <p className="mt-2 text-muted">
-          Bring your own keys. They are saved only in this browser and sent only to this app running on your machine,
-          which passes them straight to each provider.
+          Your AI key reads bet slip screenshots. It&apos;s saved only in this browser and sent only to this app on your machine,
+          which passes it straight to the provider. All match data comes from free public sources and needs no key.
         </p>
       </div>
 
@@ -94,8 +86,35 @@ export default function SettingsPage() {
         </label>
       </section>
 
+      <section className="glass rounded-2xl p-6">
+        <h2 className="text-sm font-medium uppercase tracking-wider text-muted">Odds display</h2>
+        <div className="mt-4 grid grid-cols-3 gap-3">
+          {(
+            [
+              ["fractional", "Fractional", "6/4"],
+              ["decimal", "Decimal", "2.50"],
+              ["american", "American", "+150"],
+            ] as const
+          ).map(([id, label, example]) => (
+            <button
+              key={id}
+              onClick={() => update({ oddsFormat: id })}
+              className={clsx(
+                "rounded-xl border px-4 py-3 text-left transition",
+                (settings.oddsFormat ?? "fractional") === id
+                  ? "border-accent bg-accent/10 shadow-[0_0_0_1px_var(--color-accent)]"
+                  : "border-line hover:border-muted/50",
+              )}
+            >
+              <div className="font-medium">{label}</div>
+              <div className="tabular text-xs text-muted">{example}</div>
+            </button>
+          ))}
+        </div>
+      </section>
+
       <section className="glass space-y-6 rounded-2xl p-6">
-        <h2 className="text-sm font-medium uppercase tracking-wider text-muted">API keys</h2>
+        <h2 className="text-sm font-medium uppercase tracking-wider text-muted">API key</h2>
         {KEY_FIELDS.map((f) => (
           <KeyField
             key={f.which}
