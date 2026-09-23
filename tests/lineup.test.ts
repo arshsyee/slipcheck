@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { likelyLineup, type SquadPlayer } from "../lib/stats/lineup";
-import { parseWikiSquad } from "../lib/sources/squad";
+import { fplWatch, parseWikiSquad } from "../lib/sources/squad";
 
 /** Real data recorded 2026-09-23: Arsenal's FPL squad (starts in the last 5 gameweeks) and England's Wikipedia squad. */
 describe("lineup & squad (real snapshots)", () => {
@@ -26,5 +26,25 @@ describe("lineup & squad (real snapshots)", () => {
     expect(kane).toMatchObject({ pos: "FWD", caps: 121, goals: 85, note: "captain" });
     expect(s.players.filter((p) => p.pos === "GK").map((p) => p.name)).toEqual(["Jordan Pickford", "James Trafford", "Jason Steele"]);
     expect(s.intro).toMatch(/withdrew due to injury/);
+  });
+});
+
+describe("players to watch (real FPL data, Man City, 2026-09-23)", () => {
+  // Foden is suspended in this snapshot.
+  const city = JSON.parse(readFileSync("tests/fixtures/snapshot/mancity-fpl-players.json", "utf8")) as Parameters<typeof fplWatch>[0];
+
+  it("never lists a player who is out", () => {
+    const watch = fplWatch(city);
+    expect(watch.length).toBeGreaterThan(0);
+    const out = city.filter((p) => ["i", "s", "u", "n"].includes(p.status) || p.chance_of_playing_next_round === 0).map((p) => p.web_name);
+    for (const w of watch) for (const name of out) expect(w.startsWith(`${name}:`) || w.startsWith(`${name} takes`)).toBe(false);
+  });
+
+  it("names the next set-piece taker when the first choice is out", () => {
+    const pensFirst = [...city].filter((p) => p.penalties_order != null).sort((a, b) => a.penalties_order! - b.penalties_order!)[0];
+    const suspended = city.map((p) => (p === pensFirst ? { ...p, status: "s" } : p));
+    const line = fplWatch(suspended).find((w) => w.includes("penalties"))!;
+    expect(line).toContain(`first choice ${pensFirst.web_name} is out`);
+    expect(line.startsWith(pensFirst.web_name)).toBe(false);
   });
 });

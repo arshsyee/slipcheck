@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { cached, HOUR } from "./cache";
 import { fetchJson } from "./http";
-import { bootstrap, getGameweekStarts } from "./fpl";
+import { bootstrap, getGameweekStarts, type Bootstrap } from "./fpl";
 import { bestTeamMatch } from "../teams/match";
 import { likelyLineup, POSITIONS, type LikelyLineup, type Position, type SquadPlayer } from "../stats/lineup";
 
@@ -56,25 +56,7 @@ export function getFplSquad(club: string): Promise<Squad | null> {
     const shape = Object.fromEntries(POSITIONS.map((p) => [p, 0])) as Record<Position, number>;
     for (const e of mine) if (last?.get(e.id)?.starts) shape[pos(e.element_type)]++;
 
-    // Players to watch: only those who can play. Injured, suspended or 0% players are listed under "Out" instead.
-    const canPlay = (e: (typeof mine)[number]) => !["i", "s", "u", "n"].includes(e.status) && e.chance_of_playing_next_round !== 0;
-    const watch: string[] = [];
-    const taker = (order: (e: (typeof mine)[number]) => number | null | undefined, what: string) => {
-      const ranked = mine.filter((e) => order(e) != null).sort((a, b) => order(a)! - order(b)!);
-      const first = ranked[0];
-      const next = ranked.find(canPlay);
-      if (!first) return;
-      if (canPlay(first)) watch.push(`${first.web_name} takes ${what} (first choice).`);
-      else if (next) watch.push(`${next.web_name} likely takes ${what}: first choice ${first.web_name} is out, ${next.web_name} is next in the order.`);
-    };
-    taker((e) => e.penalties_order, "penalties");
-    taker((e) => e.direct_freekicks_order, "direct free kicks");
-    const nOf = (n: number, w: string) => `${n} ${w}${n === 1 ? "" : "s"}`;
-    const threat = mine
-      .filter((e) => e.minutes >= 180 && canPlay(e))
-      .sort((a, b) => Number(b.expected_goals) + Number(b.expected_assists) - (Number(a.expected_goals) + Number(a.expected_assists)))
-      .slice(0, 2);
-    for (const e of threat) watch.push(`${e.web_name}: ${nOf(e.goals_scored, "goal")}, ${nOf(e.assists, "assist")}; xG ${Number(e.expected_goals).toFixed(1)} + xA ${Number(e.expected_assists).toFixed(1)} in ${e.minutes} minutes.`);
+    const watch = fplWatch(mine);
 
     return {
       source: "fpl",
@@ -85,6 +67,35 @@ export function getFplSquad(club: string): Promise<Squad | null> {
       withdrawals: null,
     };
   });
+}
+
+type FplPlayer = Bootstrap["elements"][number];
+
+/**
+ * Players to watch from FPL, only among players who can play: injured, suspended or 0% players are listed under
+ * "Out" instead. If the first-choice set-piece taker is out, the next one in the order is named, with the reason.
+ */
+export function fplWatch(players: FplPlayer[]): string[] {
+  const canPlay = (e: FplPlayer) => !["i", "s", "u", "n"].includes(e.status) && e.chance_of_playing_next_round !== 0;
+  const watch: string[] = [];
+  const taker = (order: (e: FplPlayer) => number | null | undefined, what: string) => {
+    const ranked = players.filter((e) => order(e) != null).sort((a, b) => order(a)! - order(b)!);
+    const first = ranked[0];
+    const next = ranked.find(canPlay);
+    if (!first) return;
+    if (canPlay(first)) watch.push(`${first.web_name} takes ${what} (first choice).`);
+    else if (next) watch.push(`${next.web_name} likely takes ${what}: first choice ${first.web_name} is out, ${next.web_name} is next in the order.`);
+  };
+  taker((e) => e.penalties_order, "penalties");
+  taker((e) => e.direct_freekicks_order, "direct free kicks");
+  const nOf = (n: number, w: string) => `${n} ${w}${n === 1 ? "" : "s"}`;
+  const xgi = (e: FplPlayer) => Number(e.expected_goals) + Number(e.expected_assists);
+  const threat = players
+    .filter((e) => e.minutes >= 180 && canPlay(e))
+    .sort((a, b) => xgi(b) - xgi(a) || a.web_name.localeCompare(b.web_name))
+    .slice(0, 2);
+  for (const e of threat) watch.push(`${e.web_name}: ${nOf(e.goals_scored, "goal")}, ${nOf(e.assists, "assist")}; xG ${Number(e.expected_goals).toFixed(1)} + xA ${Number(e.expected_assists).toFixed(1)} in ${e.minutes} minutes.`);
+  return watch;
 }
 
 // ---------------- Wikipedia squad lists ----------------
