@@ -46,33 +46,6 @@ export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <Field label="Bookmaker">
-          <input className={input} value={slip.sportsbook ?? ""} onChange={(e) => onChange({ ...slip, sportsbook: e.target.value || null })} />
-        </Field>
-        <Field label="Stake">
-          <div className="flex gap-1">
-            <select
-              className={clsx(input, "w-16 shrink-0")}
-              value={slip.currency ?? "GBP"}
-              onChange={(e) => onChange({ ...slip, currency: e.target.value as Slip["currency"] })}
-              aria-label="Currency"
-            >
-              <option value="GBP">£</option>
-              <option value="EUR">€</option>
-              <option value="USD">$</option>
-            </select>
-            <input className={input + " tabular"} type="number" min={0} step="any" value={slip.stake ?? ""} onChange={(e) => onChange({ ...slip, stake: num(e.target.value) })} />
-          </div>
-        </Field>
-        <Field label="Total odds">
-          <OddsInput key={`total-${slip.totalOddsDecimal}`} value={slip.totalOddsDecimal} format={oddsFormat} onChange={(v) => onChange({ ...slip, totalOddsDecimal: v })} />
-        </Field>
-        <Field label="Bet type">
-          <div className={input + " text-muted"}>{slip.legs.length > 1 ? `${slip.legs.length}-fold acca` : "Single"}</div>
-        </Field>
-      </div>
-
       <div className="space-y-2">
         {slip.legs.map((leg, i) => (
           <div

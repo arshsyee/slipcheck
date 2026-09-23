@@ -40,13 +40,6 @@ export function handicapRecord(games: TeamGame[], line: number) {
   return { win, push, lose, games: games.length };
 }
 
-/** "won 3, drew 1 and lost 1 of their last 5 games" */
-const record = (g: TeamGame[], what: string) => {
-  const w = g.filter((x) => x.gf > x.ga).length;
-  const d = g.filter((x) => x.gf === x.ga).length;
-  return g.length ? `won ${w}, drew ${d} and lost ${g.length - w - d} of their ${what}` : `have no ${what} yet`;
-};
-
 /** "in all 4 away games" / "in 3 of 4 away games" / "in none of their 4 away games". Counts, never bare percentages. */
 export function inGames(g: TeamGame[], f: (x: TeamGame) => boolean, what: string) {
   const k = g.filter(f).length;
@@ -56,7 +49,6 @@ export function inGames(g: TeamGame[], f: (x: TeamGame) => boolean, what: string
   if (k === 0) return `in none of their ${g.length} ${what}`;
   return `in ${k} of ${g.length} ${what}`;
 }
-const times = (k: number) => (k === 0 ? "0 times" : k === 1 ? "once" : k === 2 ? "twice" : `${k} times`);
 
 export function buildPick(
   leg: Leg,
@@ -72,63 +64,32 @@ export function buildPick(
   const pickSide: Pick["pickSide"] =
     leg.market === "total_goals" || leg.market === "btts" ? "both" : sides.length === 1 ? sides[0] : sides.includes("home") ? "home" : sides.includes("away") ? "away" : null;
 
-  // Home side's home games and away side's away games this season.
-  const hv = hs?.venue.allGames ?? [];
-  const av = as?.venue.allGames ?? [];
-  const both = (f: (x: TeamGame) => boolean, verb: string) => {
-    if (hs) bullets.push(`${home.name} ${verb} ${inGames(hv, f, "home games")} this season.`);
-    if (as) bullets.push(`${away.name} ${verb} ${inGames(av, f, "away games")} this season.`);
-  };
-  const rank = (t: TeamSection) => (t.standing?.ok && t.standing.data ? `${ordinal(t.standing.data.rank)} with ${t.standing.data.points} points` : null);
-
+  // The comparison lives in `stats` (a table); bullets are only facts that don't fit it.
   switch (leg.market) {
-    case "1x2":
-    case "draw_no_bet":
-    case "double_chance":
-    case "other": {
-      const hr = rank(home);
-      const ar = rank(away);
-      if (hr && ar) bullets.push(`${home.name} are ${hr}; ${away.name} are ${ar}.`);
-      if (hs) bullets.push(`${home.name} ${record(hs.overall.form5.games, "last 5 league games")}.`);
-      if (as) bullets.push(`${away.name} ${record(as.overall.form5.games, "last 5 league games")}.`);
-      if (hs) bullets.push(`At home this season, ${home.name} ${record(hv, "home games")}.`);
-      if (as) bullets.push(`Away this season, ${away.name} ${record(av, "away games")}.`);
-      break;
-    }
     case "total_goals": {
       const line = leg.line ?? 2.5;
-      const goals = Math.floor(line) + 1;
-      both((g) => g.gf + g.ga > line, `had ${goals} or more goals`);
       if (h2h?.meetings.length) {
         const over = h2h.meetings.filter((m) => m.homeGoals + m.awayGoals > line).length;
-        bullets.push(`${over} of their last ${h2h.meetings.length} meetings had ${goals} or more goals (${n(h2h.avgGoals)} goals per game on average).`);
+        bullets.push(`Head-to-head: ${over} of the last ${h2h.meetings.length} meetings had ${Math.floor(line) + 1}+ goals (${n(h2h.avgGoals)} per game).`);
       }
-      if (!bullets.length) bullets.push(`Not enough games yet to say how often these teams see ${goals} or more goals.`);
       break;
     }
-    case "btts": {
-      both((g) => g.gf > 0 && g.ga > 0, "saw both teams score");
-      both((g) => g.gf > 0, "scored");
-      both((g) => g.ga > 0, "conceded");
-      if (h2h?.meetings.length) bullets.push(`Both teams scored in ${h2h.btts} of their last ${h2h.meetings.length} meetings.`);
+    case "btts":
+      if (h2h?.meetings.length) bullets.push(`Head-to-head: both teams scored in ${h2h.btts} of the last ${h2h.meetings.length} meetings.`);
       break;
-    }
     case "asian_handicap": {
       const s = pickSide === "home" ? hs : pickSide === "away" ? as : null;
       const team = pickSide === "home" ? home.name : away.name;
       if (s && leg.line != null) {
         const r = handicapRecord(s.overall.form10.games, leg.line);
-        const line = `${leg.line > 0 ? "+" : ""}${leg.line}`;
-        bullets.push(`${team} ${line} in each of their last ${r.games} games would have won ${fmt(r.win)}, lost ${fmt(r.lose)}${r.push ? ` and been refunded ${fmt(r.push)}` : ""}.`);
-        const m = s.overall.rates.margins;
-        bullets.push(`This season ${team} won by 2 or more ${times(m.ge_p2)}, won by 1 ${times(m.p1)}, drew ${times(m.zero)}, lost by 1 ${times(m.m1)} and lost by 2 or more ${times(m.le_m2)}.`);
+        bullets.push(`${team} ${leg.line > 0 ? "+" : ""}${leg.line} over their last ${r.games} games: won ${fmt(r.win)}, lost ${fmt(r.lose)}${r.push ? `, refunded ${fmt(r.push)}` : ""}.`);
       }
       break;
     }
   }
 
   if (h2h?.meetings.length && (leg.market === "1x2" || leg.market === "double_chance" || leg.market === "draw_no_bet")) {
-    bullets.push(`Last ${h2h.meetings.length} meetings: ${home.name} won ${h2h.aWins}, ${away.name} won ${h2h.bWins}, ${h2h.draws} drawn.`);
+    bullets.push(`Head-to-head (last ${h2h.meetings.length}): ${home.name} won ${h2h.aWins}, ${away.name} won ${h2h.bWins}, ${h2h.draws} drawn.`);
   }
   for (const t of [home, away]) {
     // A coach appointed this season changes what the season averages mean.
@@ -138,6 +99,11 @@ export function buildPick(
       bullets.push(`${t.name} have a new coach, ${c.coach.name}, since ${c.coach.since.slice(0, 10)}.${r ? ` Under them: won ${r.won}, drew ${r.drawn}, lost ${r.lost}.` : " No games under them yet."}`);
     }
     if (t.restDays != null && t.restDays <= 3) bullets.push(`${t.name} last played ${t.restDays} day${t.restDays === 1 ? "" : "s"} before this match.`);
+    // No official list: players this team's injury headlines name (from the squad cross-check).
+    const named = t.squad?.ok ? (t.squad.data?.players.filter((p) => p.inNews).map((p) => p.name) ?? []) : [];
+    if (named.length && !(t.availability.ok && t.availability.data.kind === "official")) {
+      bullets.push(`${t.name}: ${named.slice(0, 4).join(", ")}${named.length > 4 ? ` and ${named.length - 4} more` : ""} named in injury news (headlines, not an official list).`);
+    }
     if (t.availability.ok && t.availability.data.kind === "official") {
       const out = t.availability.data.players.filter((p) => p.chance === 0 || p.status === "injured" || p.status === "suspended");
       if (out.length) bullets.push(`${t.name} are missing ${out.slice(0, 4).map((p) => p.player).join(", ")}${out.length > 4 ? ` and ${out.length - 4} more` : ""}.`);
@@ -159,6 +125,7 @@ function ordinal(i: number) {
   return `${i}${s[(v - 20) % 10] ?? s[v] ?? s[0]}`;
 }
 
+const pts = (n: number) => `${n} point${n === 1 ? "" : "s"}`;
 const fmt = (x: number) => (Number.isInteger(x) ? String(x) : x.toFixed(1));
 
 /** "3 of 4" */
@@ -168,7 +135,6 @@ const avgOf = (g: TeamGame[], f: (x: TeamGame) => number | null) => {
   const v = g.map(f).filter((x): x is number => x != null);
   return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
 };
-const xgd = (x: TeamGame) => (x.xgf != null && x.xga != null ? x.xgf - x.xga : null);
 
 /**
  * The numbers that matter for this bet type, side by side. "home / away games" rows use the home side's
@@ -182,13 +148,21 @@ export function marketStats(leg: Leg, home: TeamSection, away: TeamSection): Pic
   const av = as.venue.allGames ?? [];
   const ho = hs.overall.allGames ?? [];
   const ao = as.overall.allGames ?? [];
-  const row = (label: string, f: (g: TeamGame[]) => string, venue = true): PickStat => ({ label, home: f(venue ? hv : ho), away: f(venue ? av : ao) });
+  const VENUE = `${home.name} at home · ${away.name} away`;
+  const ALL = `All games ${hs.period}`;
+  const venue = (label: string, f: (g: TeamGame[]) => string): PickStat => ({ group: VENUE, label, home: f(hv), away: f(av) });
+  const all = (label: string, f: (g: TeamGame[]) => string): PickStat => ({ group: ALL, label, home: f(ho), away: f(ao) });
   const lg = (t: TeamSection) => (t.season.ok ? t.season.data?.league : null);
-  const position: PickStat = {
-    label: "League position",
-    home: lg(home) ? `${ordinal(lg(home)!.table.rank)}, ${lg(home)!.table.points} points` : "—",
-    away: lg(away) ? `${ordinal(lg(away)!.table.rank)}, ${lg(away)!.table.points} points` : "—",
-  };
+  const position: PickStat[] =
+    lg(home) || lg(away)
+      ? [{ group: ALL, label: "League position", home: lg(home) ? `${ordinal(lg(home)!.table.rank)} · ${pts(lg(home)!.table.points)}` : "—", away: lg(away) ? `${ordinal(lg(away)!.table.rank)} · ${pts(lg(away)!.table.points)}` : "—" }]
+      : [];
+  const wdl = (g: TeamGame[]) => (g.length ? `W${g.filter((x) => x.gf > x.ga).length} D${g.filter((x) => x.gf === x.ga).length} L${g.filter((x) => x.gf < x.ga).length}` : "—");
+  const goals = (g: TeamGame[]) => (g.length ? `${g.reduce((a, x) => a + x.gf, 0)}–${g.reduce((a, x) => a + x.ga, 0)}` : "—");
+  const last5 = (g: TeamGame[]) => (g.length ? g.slice(0, 5).reverse().map((x) => (x.gf > x.ga ? "W" : x.gf < x.ga ? "L" : "D")).join(" ") : "—");
+  const xg = (g: TeamGame[]) => (g.some((x) => x.xgf != null) ? `${n(avgOf(g, (x) => x.xgf), 2)} – ${n(avgOf(g, (x) => x.xga), 2)}` : "—");
+  const line = leg.line ?? 2.5;
+  const plus = `${Math.floor(line) + 1}+ goals`;
 
   switch (leg.market) {
     case "1x2":
@@ -196,45 +170,43 @@ export function marketStats(leg: Leg, home: TeamSection, away: TeamSection): Pic
     case "double_chance":
     case "other":
       return [
-        position,
-        row("Games won (home / away games)", (g) => count(g, (x) => x.gf > x.ga)),
-        row("Games drawn (home / away games)", (g) => count(g, (x) => x.gf === x.ga)),
-        row("Points per game (home / away)", (g) => n(ppg(g), 2)),
-        row("Points per game (all games)", (g) => n(ppg(g), 2), false),
-        row("Expected goals (xG) for minus against, per game", (g) => n(avgOf(g, xgd), 2), false),
+        venue("Record", wdl),
+        venue("Goals (for–against)", goals),
+        ...position,
+        all("Last 5 (oldest → newest)", last5),
+        all("Points per game", (g) => n(ppg(g), 2)),
+        all("xG per game (for – against)", xg),
       ];
-    case "total_goals": {
-      const line = leg.line ?? 2.5;
+    case "total_goals":
       return [
-        row(`Games with ${Math.floor(line) + 1}+ goals (home / away games)`, (g) => count(g, (x) => x.gf + x.ga > line)),
-        row(`Games with ${Math.floor(line) + 1}+ goals (all games)`, (g) => count(g, (x) => x.gf + x.ga > line), false),
-        row(`Games with ${Math.floor(line) + 1}+ goals (last 5)`, (g) => count(g.slice(0, 5), (x) => x.gf + x.ga > line), false),
-        row("Total goals per game (home / away games)", (g) => n(avgOf(g, (x) => x.gf + x.ga), 2)),
-        row("Total expected goals (xG) per game (home / away games)", (g) => n(avgOf(g, (x) => (x.xgf != null && x.xga != null ? x.xgf + x.xga : null)), 2)),
+        venue(`Games with ${plus}`, (g) => count(g, (x) => x.gf + x.ga > line)),
+        venue("Goals per game (both teams)", (g) => n(avgOf(g, (x) => x.gf + x.ga), 1)),
+        all(`Games with ${plus}`, (g) => count(g, (x) => x.gf + x.ga > line)),
+        all(`${plus} in last 5`, (g) => count(g.slice(0, 5), (x) => x.gf + x.ga > line)),
+        all("xG per game (for – against)", xg),
       ];
-    }
     case "btts":
       return [
-        row("Both teams scored (home / away games)", (g) => count(g, (x) => x.gf > 0 && x.ga > 0)),
-        row("Both teams scored (all games)", (g) => count(g, (x) => x.gf > 0 && x.ga > 0), false),
-        row("Games they scored in (home / away games)", (g) => count(g, (x) => x.gf > 0)),
-        row("Games they conceded in (home / away games)", (g) => count(g, (x) => x.ga > 0)),
-        row("Expected goals (xG) for / against per game", (g) => `${n(avgOf(g, (x) => x.xgf), 2)} / ${n(avgOf(g, (x) => x.xga), 2)}`, false),
+        venue("Both teams scored", (g) => count(g, (x) => x.gf > 0 && x.ga > 0)),
+        venue("Scored", (g) => count(g, (x) => x.gf > 0)),
+        venue("Conceded", (g) => count(g, (x) => x.ga > 0)),
+        all("Both teams scored", (g) => count(g, (x) => x.gf > 0 && x.ga > 0)),
+        all("xG per game (for – against)", xg),
       ];
     case "asian_handicap": {
-      const line = leg.line ?? 0;
       // The line is quoted for the picked side; the other side gets the opposite line.
       const pickHome = sidesOf(leg.selection, home.name, away.name)[0] !== "away";
-      const cover = (g: TeamGame[], l: number) => {
-        const r = handicapRecord(g, l);
-        return r.games ? `${fmt(r.win)} / ${fmt(r.push)} / ${fmt(r.lose)}` : "—";
+      const l = leg.line ?? 0;
+      const cover = (g: TeamGame[], x: number) => {
+        const r = handicapRecord(g, x);
+        return r.games ? `won ${fmt(r.win)} · refund ${fmt(r.push)} · lost ${fmt(r.lose)}` : "—";
       };
       return [
-        position,
-        { label: "Bet at this line: won / refunded / lost (all games)", home: cover(ho, pickHome ? line : -line), away: cover(ao, pickHome ? -line : line) },
-        row("Goals for minus against, per game", (g) => n(avgOf(g, (x) => x.gf - x.ga), 2), false),
-        row("Expected goals (xG) for minus against, per game", (g) => n(avgOf(g, xgd), 2), false),
-        row("Won by 2 or more goals (all games)", (g) => count(g, (x) => x.gf - x.ga >= 2), false),
+        ...position,
+        { group: ALL, label: "At this line", home: cover(ho, pickHome ? l : -l), away: cover(ao, pickHome ? -l : l) },
+        all("Won by 2+", (g) => count(g, (x) => x.gf - x.ga >= 2)),
+        all("Goals (for–against)", goals),
+        all("xG per game (for – against)", xg),
       ];
     }
   }

@@ -10,15 +10,14 @@ import { EMPTY_LEG, LegEditor } from "@/components/LegEditor";
 import { MatchCard, MatchCardSkeleton } from "@/components/dossier/MatchCard";
 import { Crest } from "@/components/dossier/bits";
 import { useSettings } from "@/lib/useSettings";
-import { formatMoney, formatOdds } from "@/lib/odds/convert";
 import type { MatchDossier } from "@/lib/dossier/types";
 import type { SampleSlip } from "@/lib/samples";
-import type { OddsFormat, Slip } from "@/lib/types";
+import type { Slip } from "@/lib/types";
 
 type Stage = "upload" | "parsing" | "review" | "results";
 type LegState = { status: "loading" } | { status: "ready"; dossier: MatchDossier } | { status: "error"; error: string };
 
-const BLANK_SLIP: Slip = { sportsbook: null, currency: "GBP", stake: 10, betType: "single", totalOddsDecimal: null, potentialReturn: null, legs: [{ ...EMPTY_LEG }] };
+const BLANK_SLIP: Slip = { legs: [{ ...EMPTY_LEG }] };
 
 export default function Home() {
   const { settings, hasAiKey, loaded } = useSettings();
@@ -60,7 +59,7 @@ export default function Home() {
 
   async function research(current = slip) {
     if (!current?.legs.length) return;
-    const s: Slip = { ...current, betType: current.legs.length > 1 ? "acca" : "single" };
+    const s = current;
     setSlip(s);
     setError(null);
     setLegs(s.legs.map(() => ({ status: "loading" })));
@@ -112,7 +111,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-xs text-muted"
           >
-            <Database size={13} className="text-accent" /> 11 free public data sources · 22 European leagues + UEFA
+            <Database size={13} className="text-accent" /> Free public data · Premier League, La Liga, Serie A, Bundesliga, Ligue 1 + Champions League
           </motion.div>
           <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">
             Know every match <span className="bg-gradient-to-r from-accent to-emerald-300 bg-clip-text text-transparent">on your slip</span>
@@ -208,7 +207,7 @@ export default function Home() {
 
       {slip && stage === "results" && (
         <div className="space-y-6">
-          <SlipSummary slip={slip} legs={legs} oddsFormat={oddsFormat} onEdit={() => setStage("review")} onReset={reset} />
+          <SlipSummary slip={slip} legs={legs} onEdit={() => setStage("review")} onReset={reset} />
           {legs.map((l, i) =>
             l.status === "ready" ? (
               <MatchCard key={i} d={l.dossier} oddsFormat={oddsFormat} />
@@ -229,13 +228,11 @@ export default function Home() {
 function SlipSummary({
   slip,
   legs,
-  oddsFormat,
   onEdit,
   onReset,
 }: {
   slip: Slip;
   legs: LegState[];
-  oddsFormat: OddsFormat;
   onEdit: () => void;
   onReset: () => void;
 }) {
@@ -244,12 +241,7 @@ function SlipSummary({
     <section className="glass z-10 rounded-2xl px-4 py-3 sm:sticky sm:top-16 sm:px-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="text-sm">
-          <span className="font-semibold">{slip.legs.length > 1 ? `${slip.legs.length}-fold acca` : "Single"}</span>
-          <span className="text-muted">
-            {slip.sportsbook && ` · ${slip.sportsbook}`}
-            {slip.stake != null && ` · ${formatMoney(slip.stake, slip.currency ?? "GBP")} stake`}
-            {slip.totalOddsDecimal && ` · ${formatOdds(slip.totalOddsDecimal, oddsFormat)}`}
-          </span>
+          <span className="font-semibold">{slip.legs.length === 1 ? "1 match" : `${slip.legs.length} matches`}</span>
         </div>
         <div className="flex items-center gap-2 text-sm">
           {done < legs.length && (
@@ -280,8 +272,8 @@ function SlipSummary({
             >
               {d ? (
                 <span className="flex -space-x-1.5">
-                  <Crest src={d.home.espn?.logo} name={d.home.name} size={18} />
-                  <Crest src={d.away.espn?.logo} name={d.away.name} size={18} />
+                  <Crest src={d.home.badge} name={d.home.name} size={18} />
+                  <Crest src={d.away.badge} name={d.away.name} size={18} />
                 </span>
               ) : (
                 <Loader2 size={14} className={clsx(l?.status === "loading" ? "animate-spin text-muted" : "text-danger")} />

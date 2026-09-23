@@ -138,7 +138,7 @@ export interface CoachRecord {
   /** All competitions this season since the coach arrived (ESPN). */
   allCompsThisSeason: Split & { results: { date: string; competition: string; opponent: string; score: string; result: "W" | "D" | "L" }[] };
   /** Domestic league games in charge, within the seasons we have (football-data.co.uk, up to 5 seasons). */
-  league: (Split & { xgForPg: number | null; xgAgainstPg: number | null; from: string }) | null;
+  league: (Split & { xgForPg: number | null; xgAgainstPg: number | null; xgGames: number; from: string }) | null;
   /** League this season before they arrived, when they took over mid-season. */
   leagueBeforeThisSeason: Split | null;
 }
@@ -170,6 +170,7 @@ export function coachRecord(
           ...split(inCharge),
           xgForPg: xgGames.length ? round(xgGames.reduce((s, g) => s + g.xgf!, 0) / xgGames.length) : null,
           xgAgainstPg: xgGames.length ? round(xgGames.reduce((s, g) => s + g.xga!, 0) / xgGames.length) : null,
+          xgGames: xgGames.length,
           from: inCharge.at(-1)!.kickoff,
         }
       : null,

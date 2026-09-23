@@ -32,13 +32,13 @@ export function leagueLabel(league: League) {
 export const DOMESTIC_LEAGUES = (Object.keys(LEAGUE_INFO) as Exclude<League, "OTHER">[]).filter((l) => LEAGUE_INFO[l].fd);
 
 export const MARKET_LABEL: Record<Market, string> = {
-  "1x2": "Match result (1X2)",
-  double_chance: "Double chance",
-  draw_no_bet: "Draw no bet",
-  total_goals: "Over/Under goals",
-  asian_handicap: "Asian handicap",
-  btts: "Both teams to score",
-  other: "Other",
+  "1x2": "Who wins",
+  double_chance: "One of two results",
+  draw_no_bet: "Who wins, refund if draw",
+  total_goals: "Number of goals",
+  asian_handicap: "Win by a margin",
+  btts: "Both teams score",
+  other: "Something else",
 };
 
 /** football-data.co.uk season code for the season containing `date` (Aug–Jun seasons): 2026-09 → "2627". */

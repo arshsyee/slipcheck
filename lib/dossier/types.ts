@@ -10,6 +10,7 @@ import type { Averages, FormSummary, Rates, TeamGame } from "../stats/team";
 import type { HeadToHead, RefereeStats } from "../stats/match";
 import type { GoalTiming, ScorerLine } from "../sources/openLigaDb";
 import type { Coach } from "../sources/coach";
+import type { Squad } from "../sources/squad";
 import type { CoachRecord, CompetitionRun, LeagueSeason, SameStageLastSeason } from "../stats/season";
 
 export type Side = "home" | "away";
@@ -26,6 +27,8 @@ export interface StatBlock {
 export interface TeamStats {
   /** Club name as spelled in the football-data.co.uk files. */
   fdName: string;
+  /** The window the numbers cover, as a phrase: "this season", "in the last 2 years". */
+  period: string;
   division: string;
   /** Whole season, all venues. */
   overall: StatBlock;
@@ -37,6 +40,8 @@ export interface TeamSection {
   side: Side;
   name: string;
   espn: { id: string; logo: string | null; color: string | null; abbreviation: string } | null;
+  /** Club badge image: TheSportsDB, else ESPN. */
+  badge: string | null;
   standing: SourceResult<StandingRow | null> | null;
   stats: SourceResult<TeamStats | null>;
   restDays: number | null;
@@ -48,9 +53,13 @@ export interface TeamSection {
   profile: SourceResult<{ sportsDb: ClubProfile | null; wikidata: ClubFacts | null }>;
   /** How the club's season is going: league (from results) + Europe/cups (ESPN). */
   season: SourceResult<{ league: LeagueSeason | null; lastSeasonSameStage: SameStageLastSeason | null; otherCompetitions: CompetitionRun[] } | null>;
+  /** National teams only: FIFA and Elo world ranking (Wikipedia). */
+  ranking?: SourceResult<{ fifa: number | null; elo: number | null; asOf: string | null } | null>;
   /** Current coach (Wikipedia + Wikidata) and form since they arrived. */
   coach: SourceResult<{ coach: Coach; record: CoachRecord | null } | null>;
   news: SourceResult<Headline[]>;
+  /** Squad by position, who's out, likely XI (Premier League only), players to watch. */
+  squad: SourceResult<Squad | null> | null;
 }
 
 export interface Lineup {
@@ -76,6 +85,8 @@ export interface FixtureInfo {
 
 /** One row of the market-specific comparison shown with the pick. */
 export interface PickStat {
+  /** Which games the row covers, e.g. "Inter at home · Parma away" or "All games this season". */
+  group: string;
   label: string;
   home: string;
   away: string;
@@ -92,7 +103,7 @@ export interface Pick {
   primaryTab: DossierTab;
 }
 
-export type DossierTab = "form" | "stats" | "h2h" | "availability" | "referee" | "matchCentre" | "news" | "club";
+export type DossierTab = "form" | "stats" | "h2h" | "availability" | "squad" | "referee" | "matchCentre" | "news" | "club";
 
 export interface MatchDossier {
   legIndex: number;
@@ -110,6 +121,8 @@ export interface MatchDossier {
   pick: Pick;
   /** Every source call made for this match (for the sources footer). */
   sourceLog: { source: SourceId; ok: boolean; fetchedAt: string; error?: string; url?: string }[];
+  /** Sources that were down, so their last saved copy was used instead (and how old it is). */
+  stale: { source: SourceId; savedAt: string; error: string }[];
   builtAt: string;
 }
 

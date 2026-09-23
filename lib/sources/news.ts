@@ -86,7 +86,8 @@ export const AVAILABILITY_RE = /injur|fitness|doubt|ruled out|sidelined|suspend|
 
 /** Position of the first mention of a club in a headline (-1 if absent). Knows nicknames: "Inter", "Spurs", "Man Utd". */
 export function mentionIndex(title: string, club: string): number {
-  const t = ` ${normalize(title)} `;
+  // Possessives ("Brazil's friendlies") must still count as a mention of "Brazil".
+  const t = ` ${normalize(title.replace(/['’]s\b/gi, ""))} `;
   const full = canonical(club);
   const names = new Set([normalize(club), full, ...Object.keys(TEAM_ALIASES).filter((k) => TEAM_ALIASES[k] === full && k.length >= 3)]);
   // A distinctive single word is enough ("Villarreal", "Arsenal"), but not generic ones ("City", "United").
@@ -106,4 +107,43 @@ export function aboutClub(headlines: Headline[], club: string, opponent: string)
     const opp = mentionIndex(h.title, opponent);
     return own >= 0 && (opp < 0 || own <= opp);
   });
+}
+
+/** A headline saying someone can't play. */
+const OUT_RE = /ruled out|withdr[ae]w|injur|\bmiss(es|ing)?\b|doubt|suspend|\bban(ned)?\b|setback|sidelined|absen(ce|t)|surgery|\bblow\b|\bout of\b/i;
+/** …unless it's (also) about someone coming in: then who is out vs in is ambiguous, so it isn't used. */
+const IN_RE = /\breturns?\b|\breturn to\b|called up|call-?up|\bcall\b|replac|recalled|back in\b|\bearns?\b/i;
+
+/**
+ * Squad players that injury headlines say may not play. A headline counts only if it reports an absence and isn't
+ * about someone returning or replacing. A player matches by full name, or by a surname (5+ letters) no one else in the
+ * squad shares and that isn't preceded by a different first name ("Joan García" never matches "Eric García").
+ * Returns name → first matching headline. Misses some; never guesses.
+ */
+export function playersInHeadlines(names: string[], headlines: Headline[]): Map<string, Headline> {
+  const tokens = (n: string) => normalize(n).split(" ").filter(Boolean);
+  const surname = (n: string) => tokens(n).at(-1) ?? "";
+  const counts = new Map<string, number>();
+  for (const n of names) counts.set(surname(n), (counts.get(surname(n)) ?? 0) + 1);
+  const out = new Map<string, Headline>();
+  for (const h of headlines) {
+    if (!OUT_RE.test(h.title) || IN_RE.test(h.title)) continue;
+    const raw = h.title.replace(/['’]s\b/gi, "");
+    const t = ` ${normalize(raw)} `;
+    for (const n of names) {
+      if (out.has(n)) continue;
+      if (t.includes(` ${normalize(n)} `)) {
+        out.set(n, h);
+        continue;
+      }
+      const sn = surname(n);
+      if (sn.length < 5 || counts.get(sn) !== 1 || !t.includes(` ${sn} `)) continue;
+      // "Joan García": a different first name directly before the surname (just a space between) means another person.
+      const first = tokens(n)[0];
+      const before = [...raw.matchAll(/(\p{Lu}[\p{L}-]*) (\p{L}[\p{L}-]*)/gu)].filter((m) => normalize(m[2]) === sn).map((m) => normalize(m[1]));
+      const ok = !before.length || before.some((b) => b === first);
+      if (ok) out.set(n, h);
+    }
+  }
+  return out;
 }

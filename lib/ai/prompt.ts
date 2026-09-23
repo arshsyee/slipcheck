@@ -22,7 +22,4 @@ Extract every selection exactly as shown. Rules:
   "<team> or <team>" for double chance; "Over"/"Under" for totals; "Yes"/"No" for BTTS; otherwise the text as shown.
 - line: the goal line for totals (2.5) or the handicap on the picked team (-0.75, +1). Null otherwise.
 - oddsDecimal: that selection's odds as DECIMAL. Convert fractional (6/4 → 2.5, 11/10 → 2.1, Evens → 2.0) and American (+150 → 2.5).
-- betType: "acca" when several selections are combined into one bet (acca, treble, double, parlay, bet builder); else "single".
-- currency: GBP for £, EUR for €, USD for $; null if no symbol is shown.
-- stake, totalOddsDecimal and potentialReturn come from the slip's summary; null if not shown.
 If the image is not a football bet slip, return an empty legs array.`;

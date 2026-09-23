@@ -1,0 +1,33 @@
+===Current squad===
+The following 24 players were named in the squad for the [[2026–27 UEFA Nations League]] matches against [[Spain national football team|Spain]], [[Czech Republic national football team|Czech Republic]] and [[Croatia national football team|Croatia]] between 26 September and 6 October. On 21 September, [[Tino Livramento]], [[Kobbie Mainoo]], [[Cole Palmer]], [[Marcus Rashford]] and [[Declan Rice]] withdrew due to injury and were replaced by [[James Garner (footballer, born 2001)|James Garner]] and [[Morgan Gibbs-White]].<ref>{{Cite web |publisher=England Football |title=England squad named for September and October window |url=https://www.englandfootball.com/articles/2026/Sep/18/england-mens-senior-squad-announcement-september-october-20261809 |access-date=2026-09-21 |website=www.englandfootball.com |language=en}}</ref>
+{{block indent|left=1.5|1=''Caps and goals are correct as of 18 July 2026, after the match against [[France national football team|France]].''<ref>{{Cite web|url=https://eu-football.info/_players.php?id=60&data=9|title=Most England Caps - EU-Football.info|website=eu-football.info|access-date=9 June 2022|archive-date=16 August 2022|archive-url=https://web.archive.org/web/20220816210906/https://eu-football.info/_players.php?id=60&data=9|url-status=live}}</ref>}}
+{{nat fs g start}}
+{{nat fs g player|no=|pos=GK|name=[[Jordan Pickford]]|age={{Birth date and age|1994|3|7|df=y}}|caps=91|goals=0|club=[[Everton F.C.|Everton]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=GK|name=[[James Trafford]]|age={{Birth date and age|2002|10|10|df=y}}|caps=2|goals=0|club=[[Leeds United F.C.|Leeds United]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=GK|name=[[Jason Steele (footballer)|Jason Steele]]|age={{Birth date and age|1990|8|18|df=y}}|caps=0|goals=0|club=[[Brighton & Hove Albion F.C.|Brighton & Hove Albion]]|clubnat=ENG}}
+{{nat fs break}}
+{{nat fs g player|no=|pos=DF|name=[[Marc Guéhi]]|age={{Birth date and age|2000|7|13|df=y}}|caps=37|goals=1|club=[[Manchester City F.C.|Manchester City]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=DF|name=[[Trent Alexander-Arnold]]|age={{Birth date and age|1998|10|7|df=y}}|caps=34|goals=4|club=[[Real Madrid F.C.|Real Madrid]]|clubnat=ESP}}
+{{nat fs g player|no=|pos=DF|name=[[Ezri Konsa]]|age={{Birth date and age|1997|10|23|df=y}}|caps=28|goals=2|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=DF|name=[[Nico O'Reilly]]|age={{Birth date and age|2005|3|21|df=y}}|caps=12|goals=0|club=[[Manchester City F.C.|Manchester City]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=DF|name=[[Jarell Quansah]]|age={{Birth date and age|2003|1|29|df=y}}|caps=6|goals=0|club=[[Bayer 04 Leverkusen|Bayer Leverkusen]]|clubnat=GER}}
+{{nat fs g player|no=|pos=DF|name=[[Lewis Hall (footballer)|Lewis Hall]]|age={{Birth date and age|2004|9|8|df=y}}|caps=4|goals=0|club=[[Newcastle United F.C.|Newcastle United]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=DF|name=[[Trevoh Chalobah]]|age={{Birth date and age|1999|7|5|df=y}}|caps=2|goals=0|club=[[Como 1907|Como]]|clubnat=ITA}}
+{{nat fs g player|no=|pos=DF|name=[[Jarrad Branthwaite]]|age={{Birth date and age|2002|6|27|df=y}}|caps=1|goals=0|club=[[Everton F.C.|Everton]]|clubnat=ENG}}
+{{nat fs break}}
+{{nat fs g player|no=|pos=MF|name=[[Jude Bellingham]]|age={{Birth date and age|2003|6|29|df=y}}|caps=56|goals=13|club=[[Real Madrid CF|Real Madrid]]|clubnat=ESP}}
+{{nat fs g player|no=|pos=MF|name=[[Elliot Anderson]]|age={{Birth date and age|2002|11|6|df=y}}|caps=17|goals=0|club=[[Manchester City F.C.|Manchester City]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=MF|name=[[Myles Lewis-Skelly]]|age={{Birth date and age|2006|9|26|df=y}}|caps=6|goals=1|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=MF|name=[[Morgan Gibbs-White]]|age={{Birth date and age|2000|1|27|df=y}}|caps=6|goals=0|club=[[Nottingham Forest F.C.|Nottingham Forest]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=MF|name=[[James Garner (footballer, born 2001)|James Garner]]|age={{Birth date and age|2001|3|13|df=y}}|caps=2|goals=0|club=[[Everton F.C.|Everton]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=MF|name=[[Alex Scott (footballer, born 2003)|Alex Scott]]|age={{Birth date and age|2003|8|21|df=y}}|caps=0|goals=0|club=[[AFC Bournemouth|Bournemouth]]|clubnat=ENG}}
+{{nat fs break}}
+{{nat fs g player|no=|pos=FW|name=[[Harry Kane]]|other=[[Captain (association football)|captain]]|age={{Birth date and age|1993|7|28|df=y}}|caps=121|goals=[[List of international goals scored by Harry Kane|85]]|club=[[FC Bayern Munich|Bayern Munich]]|clubnat=GER}}
+{{nat fs g player|no=|pos=FW|name=[[Bukayo Saka]]|age={{Birth date and age|2001|9|5|df=y}}|caps=56|goals=17|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=FW|name=[[Anthony Gordon (footballer)|Anthony Gordon]]|age={{Birth date and age|2001|2|24|df=y}}|caps=25|goals=4|club=[[FC Barcelona|Barcelona]]|clubnat=ESP}}
+{{nat fs g player|no=|pos=FW|name=[[Eberechi Eze]]|age={{Birth date and age|1998|6|29|df=y}}|caps=22|goals=3|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=FW|name=[[Morgan Rogers]]|age={{Birth date and age|2002|7|26|df=y}}|caps=22|goals=1|club=[[Chelsea F.C.|Chelsea]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=FW|name=[[Dominic Calvert-Lewin]]|age={{Birth date and age|1997|3|16|df=y}}|caps=12|goals=4|club=[[Leeds United F.C.|Leeds United]]|clubnat=ENG}}
+{{nat fs g player|no=|pos=FW|name=[[Rio Ngumoha]]|age={{Birth date and age|2008|8|29|df=y}}|caps=1|goals=0|club=[[Liverpool F.C.|Liverpool]]|clubnat=ENG}}
+{{nat fs end|background#0B0B3F}}
+

@@ -10,7 +10,8 @@ export type SourceId =
   | "thesportsdb"
   | "fpl"
   | "premier-league"
-  | "uefa";
+  | "uefa"
+  | "international-results";
 
 export const SOURCES: Record<SourceId, { name: string; homepage: string; tier: "A" | "B" }> = {
   "football-data": { name: "football-data.co.uk", homepage: "https://www.football-data.co.uk", tier: "A" },
@@ -25,6 +26,7 @@ export const SOURCES: Record<SourceId, { name: string; homepage: string; tier: "
   fpl: { name: "Fantasy Premier League", homepage: "https://fantasy.premierleague.com", tier: "B" },
   "premier-league": { name: "Premier League", homepage: "https://www.premierleague.com", tier: "B" },
   uefa: { name: "UEFA", homepage: "https://www.uefa.com", tier: "B" },
+  "international-results": { name: "International results (martj42, CC0)", homepage: "https://github.com/martj42/international_results", tier: "A" },
 };
 
 /** Every dossier section carries where its data came from and when. */

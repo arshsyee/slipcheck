@@ -81,7 +81,7 @@ export function TeamHeading({ t }: { t: TeamSection }) {
   const st = t.standing?.ok ? t.standing.data : null;
   return (
     <div className="flex items-center gap-2.5">
-      <Crest src={t.espn?.logo} name={t.name} size={28} />
+      <Crest src={t.badge} name={t.name} size={28} />
       <div className="min-w-0">
         <div className="truncate font-medium">{t.name}</div>
         <div className="text-xs text-muted">
@@ -196,8 +196,10 @@ export function H2HTab({ d }: Props) {
   if (!d.h2h) return <Unavailable>Head-to-head is only available when both clubs play in the same league.</Unavailable>;
   if (!d.h2h.ok) return <Unavailable result={d.h2h} />;
   const h = d.h2h.data;
-  if (!h.meetings.length) return <Unavailable>No league meetings in the last five seasons.</Unavailable>;
+  const intl = d.league.country === "International";
+  if (!h.meetings.length) return <Unavailable>{intl ? "These two teams have never met." : "No league meetings in the last five seasons."}</Unavailable>;
   const total = h.meetings.length;
+  const friendlies = intl ? h.meetings.filter((m) => /friendly/i.test(m.competition)).length : 0;
   return (
     <div className="space-y-4">
       <div>
@@ -216,7 +218,8 @@ export function H2HTab({ d }: Props) {
           <div className="bg-away" style={{ width: `${(h.bWins / total) * 100}%` }} />
         </div>
         <p className="mt-2 text-xs text-muted">
-          Last {total} league meetings · avg {fix(h.avgGoals, 1)} goals · both scored {h.btts}/{total} · over 2.5 {h.over25}/{total}
+          Last {total} {intl ? "meetings" : "league meetings"} · avg {fix(h.avgGoals, 1)} goals · both scored {h.btts}/{total} · over 2.5 {h.over25}/{total}
+          {friendlies > 0 && ` · ${friendlies} of the ${total} were friendlies`}
         </p>
       </div>
       <ul className="divide-y divide-line/60 rounded-xl border border-line">
@@ -228,6 +231,7 @@ export function H2HTab({ d }: Props) {
               {m.homeGoals}–{m.awayGoals}
             </span>
             <span className="truncate">{m.away}</span>
+            {intl && <span className="col-span-4 -mt-1 text-right text-[11px] text-muted">{m.competition}</span>}
           </li>
         ))}
       </ul>
@@ -293,6 +297,125 @@ function statusColor(status: string, chance: number | null) {
   if (status === "suspended" || status === "injured" || chance === 0) return "bg-danger/15 text-danger";
   if (chance != null && chance >= 75) return "bg-win/15 text-win";
   return "bg-warn/15 text-warn";
+}
+
+// ---------------- Squad ----------------
+
+const POS = ["GK", "DEF", "MID", "FWD"] as const;
+const NoFree = () => <span className="text-xs text-danger">N/A · no free source</span>;
+
+export function SquadTab({ d }: Props) {
+  return (
+    <div className="grid gap-4 md:grid-cols-2">
+      {[d.home, d.away].map((t) => (
+        <div key={t.side} className="space-y-3 rounded-xl border border-line bg-surface/50 p-4">
+          <TeamHeading t={t} />
+          <SquadBody t={t} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function SquadBody({ t }: { t: TeamSection }) {
+  if (!t.squad) return <p className="text-sm">Squad: <NoFree /></p>;
+  if (!t.squad.ok) return <Unavailable result={t.squad} />;
+  const s = t.squad.data;
+  if (!s) return <p className="text-sm">Squad: <NoFree /></p>;
+  const outs = s.players.filter((p) => ["injured", "suspended", "unavailable"].includes(p.status) || p.chance === 0);
+  const inNews = s.players.filter((p) => p.inNews);
+  const L = s.likely;
+  return (
+    <div className="space-y-3 text-sm">
+      {L && L.xi.length ? (
+        <>
+          <p className="text-xs text-muted">
+            Likely XI <b className="text-fg">{L.shape}</b>: most starts in the last {L.window} league games, injured left out. Not an official lineup. “3/{L.window}” = started 3 of the last {L.window}.
+          </p>
+          {/* Pitch: forwards at the top, goalkeeper at the bottom. */}
+          <div className="space-y-2 rounded-xl border border-win/20 bg-win/[0.06] p-3">
+            {[...POS].reverse().map((pos) => (
+              <div key={pos} className="flex flex-wrap justify-around gap-1.5">
+                {L.xi.filter((p) => p.pos === pos).map((p) => (
+                  <span key={p.name} className={clsx("rounded-md px-2 py-1 text-xs", p.status === "doubtful" ? "bg-warn/15 text-warn" : "bg-surface-2")}>
+                    {p.name} <span className="tabular text-muted">{p.starts}/{L.window}</span>
+                    {p.status === "doubtful" && p.chance != null && <span> · {p.chance}%</span>}
+                  </span>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="space-y-1">
+            <div className="text-xs font-medium uppercase tracking-wider text-muted">Next in line</div>
+            {POS.filter((pos) => L.backups[pos].length).map((pos) => (
+              <div key={pos} className="flex gap-2 text-xs">
+                <span className="w-9 shrink-0 text-muted">{pos}</span>
+                <span>{L.backups[pos].map((p) => `${p.name} ${p.starts}/${L.window}`).join(" · ")}</span>
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <p className="text-xs">
+            Likely XI: <NoFree /> <span className="text-muted">· squad from Wikipedia{s.asOf && s.asOf.length < 25 ? `, updated ${s.asOf}` : ""}</span>
+          </p>
+          {s.asOf && s.asOf.length >= 25 && <p className="text-xs text-muted">{s.asOf}</p>}
+          {POS.map((pos) => (
+            <div key={pos} className="flex gap-2 text-xs">
+              <span className="w-9 shrink-0 text-muted">{pos}</span>
+              <span>
+                {s.players
+                  .filter((p) => p.pos === pos)
+                  .map((p) => `${p.number ? `${p.number} ` : ""}${p.name}${p.caps != null ? ` (${p.caps} cap${p.caps === 1 ? "" : "s"})` : ""}`)
+                  .join(" · ")}
+              </span>
+            </div>
+          ))}
+        </>
+      )}
+
+      <div className="space-y-1">
+        <div className="text-xs font-medium uppercase tracking-wider text-muted">Out</div>
+        {s.source === "fpl" ? (
+          outs.length ? (
+            outs.map((p) => (
+              <div key={p.name} className="text-xs">
+                <span className="text-danger">{p.name}</span> <span className="text-muted">{p.pos}, {p.status}</span>
+                {p.note && <div className="text-muted">{p.note}</div>}
+              </div>
+            ))
+          ) : (
+            <p className="text-xs text-muted">Nobody flagged.</p>
+          )
+        ) : (
+          <p className="text-xs">
+            Official list: <NoFree />
+            {s.withdrawals && <span className="mt-1 block text-danger">{s.withdrawals}</span>}
+          </p>
+        )}
+      </div>
+
+      {inNews.length > 0 && (
+        <div className="space-y-1">
+          <div className="text-xs font-medium uppercase tracking-wider text-warn">Named in injury news</div>
+          {inNews.map((p) => (
+            <div key={p.name} className="text-xs">
+              {p.name} <span className="text-muted">({p.pos}): “{p.inNews!.title}” — {p.inNews!.publisher}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="space-y-1">
+        <div className="text-xs font-medium uppercase tracking-wider text-muted">Players to watch</div>
+        {s.watch.length ? s.watch.map((w) => <p key={w} className="text-xs">{w}</p>) : <NoFree />}
+      </div>
+      <div className="text-right">
+        <SourceTag source={t.squad.source} at={t.squad.fetchedAt} />
+      </div>
+    </div>
+  );
 }
 
 // ---------------- Referee ----------------
@@ -491,7 +614,7 @@ export function ClubTab({ d }: Props) {
         return (
           <div key={t.side} className="space-y-3 rounded-xl border border-line bg-surface/50 p-4">
             <div className="flex items-center gap-3">
-              <Crest src={t.espn?.logo ?? sdb?.badge} name={t.name} size={44} />
+              <Crest src={t.badge} name={t.name} size={44} />
               <div>
                 <div className="font-medium">{t.name}</div>
                 <div className="text-xs text-muted">{sdb?.location ?? ""}</div>

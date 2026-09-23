@@ -13,7 +13,6 @@ export const MARKETS = [
   "other",
 ] as const;
 
-export const CURRENCIES = ["GBP", "EUR", "USD"] as const;
 
 export const LegSchema = z.object({
   league: z.enum(LEAGUES).describe("Competition the match is in; OTHER if not one of the listed ones"),
@@ -30,12 +29,6 @@ export const LegSchema = z.object({
 });
 
 export const SlipSchema = z.object({
-  sportsbook: z.string().nullable().describe("Bookmaker the slip is from, e.g. 'Bet365', 'Sky Bet'"),
-  currency: z.enum(CURRENCIES).nullable().describe("Currency of the stake; GBP for £, EUR for €"),
-  stake: z.number().nullable().describe("Total stake"),
-  betType: z.enum(["single", "acca"]).describe("'acca' when several selections are combined into one bet"),
-  totalOddsDecimal: z.number().nullable().describe("Combined odds shown on the slip, as decimal"),
-  potentialReturn: z.number().nullable().describe("Potential returns shown on the slip (including stake)"),
   legs: z.array(LegSchema),
 });
 
@@ -43,7 +36,6 @@ export type Leg = z.infer<typeof LegSchema>;
 export type Slip = z.infer<typeof SlipSchema>;
 export type League = (typeof LEAGUES)[number];
 export type Market = (typeof MARKETS)[number];
-export type Currency = (typeof CURRENCIES)[number];
 
 export type AIProvider = "anthropic" | "openai";
 export type OddsFormat = "decimal" | "fractional" | "american";

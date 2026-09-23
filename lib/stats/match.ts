@@ -3,6 +3,8 @@ import { normalize } from "../teams/match";
 import { avg, round } from "./team";
 
 export interface H2HMeeting {
+  /** football-data.co.uk division code for clubs ("E0"); the tournament for national teams ("FIFA World Cup"). */
+  competition: string;
   kickoff: string;
   home: string;
   away: string;
@@ -27,7 +29,7 @@ export function headToHead(rows: MatchRow[], a: string, b: string, limit = 10): 
     .filter((r) => (r.home === a && r.away === b) || (r.home === b && r.away === a))
     .sort((x, y) => y.kickoff.localeCompare(x.kickoff))
     .slice(0, limit)
-    .map((r) => ({ kickoff: r.kickoff, home: r.home, away: r.away, homeGoals: r.fthg, awayGoals: r.ftag }));
+    .map((r) => ({ kickoff: r.kickoff, home: r.home, away: r.away, homeGoals: r.fthg, awayGoals: r.ftag, competition: r.div }));
   const aGoals = (m: H2HMeeting) => (m.home === a ? m.homeGoals : m.awayGoals);
   const bGoals = (m: H2HMeeting) => (m.home === a ? m.awayGoals : m.homeGoals);
   return {
