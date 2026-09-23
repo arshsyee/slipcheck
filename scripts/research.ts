@@ -5,22 +5,27 @@
  *   npm run research -- "Real Madrid v Villarreal" --market total_goals --pick Over --line 2.5
  *   npm run research -- "Inter v Parma" --market btts --pick Yes "Augsburg v Bayern" --market asian_handicap --pick Bayern --line -1.5
  *   npm run research -- "England v Spain" --json          (national teams; full dossier as JSON)
+ *   npm run research -- "England v Spain" --html report.html   (save a printable report; Print → Save as PDF)
  *
  * Options apply to the match before them. --league is optional (EPL, LA_LIGA, UCL, …); it's inferred when left out.
  * Markets: 1x2 (default, pick = home team), double_chance, draw_no_bet, total_goals, asian_handicap, btts.
  */
+import { writeFileSync } from "node:fs";
 import { buildDossier } from "../lib/dossier/build";
+import { reportHtml } from "./report-html";
 import type { MatchDossier } from "../lib/dossier/types";
 import { LEAGUES, MARKETS, type Leg } from "../lib/types";
 
-function parseArgs(argv: string[]): { legs: Leg[]; json: boolean } {
+function parseArgs(argv: string[]): { legs: Leg[]; json: boolean; html: string | null } {
   const legs: Leg[] = [];
   let json = false;
+  let html: string | null = null;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = () => argv[++i];
     const cur = legs.at(-1);
     if (a === "--json") json = true;
+    else if (a === "--html") html = next();
     else if (a === "--league" && cur) cur.league = next().toUpperCase() as Leg["league"];
     else if (a === "--market" && cur) cur.market = next() as Leg["market"];
     else if (a === "--pick" && cur) cur.selection = next();
@@ -36,7 +41,7 @@ function parseArgs(argv: string[]): { legs: Leg[]; json: boolean } {
     if (!l.selection) l.selection = l.market === "btts" ? "Yes" : l.market === "total_goals" ? "Over" : (l.homeTeam ?? "");
     if (l.line == null && l.market === "total_goals") l.line = 2.5;
   }
-  return { legs, json };
+  return { legs, json, html };
 }
 
 const n = (x: number | null | undefined, dp = 2) => (x == null ? "—" : x.toFixed(dp));
@@ -211,9 +216,9 @@ function print(d: MatchDossier, ms: number) {
 }
 
 async function main() {
-  const { legs, json } = parseArgs(process.argv.slice(2));
+  const { legs, json, html } = parseArgs(process.argv.slice(2));
   if (!legs.length) {
-    console.log('Usage: npm run research -- "Arsenal v Leeds" [--market btts --pick Yes] [--league EPL] [--json]');
+    console.log('Usage: npm run research -- "Arsenal v Leeds" [--market btts --pick Yes] [--league EPL] [--json] [--html report.html]');
     process.exit(1);
   }
   const results = await Promise.all(
@@ -223,8 +228,24 @@ async function main() {
       return { d, ms: Date.now() - t0 };
     }),
   );
-  if (json) console.log(JSON.stringify(results.map((r) => r.d), null, 2));
-  else results.forEach((r) => print(r.d, r.ms));
+  if (json) return console.log(JSON.stringify(results.map((r) => r.d), null, 2));
+  // --html: record what each match prints (still shown in the terminal) and save it as a page.
+  const blocks: string[] = [];
+  const log = console.log;
+  for (const r of results) {
+    const lines: string[] = [];
+    console.log = (...args: unknown[]) => {
+      lines.push(args.join(" "));
+      log(...args);
+    };
+    print(r.d, r.ms);
+    console.log = log;
+    blocks.push(lines.join("\n"));
+  }
+  if (html) {
+    writeFileSync(html, reportHtml(blocks, new Date()));
+    console.error(dim(`  saved ${html}: open it and choose Print → Save as PDF`));
+  }
 }
 
 main().catch((e) => {
