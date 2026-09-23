@@ -16,6 +16,8 @@ export interface Squad {
   watch: string[];
   /** National teams: the sentence(s) on Wikipedia about players who withdrew from this squad. */
   withdrawals: string | null;
+  /** National teams: players marked injured/suspended/withdrawn for the current window ("Recent call-ups"). */
+  outs: SquadPlayer[];
 }
 
 const FPL_POS: Record<string, Position> = { GKP: "GK", DEF: "DEF", MID: "MID", FWD: "FWD" };
@@ -65,6 +67,7 @@ export function getFplSquad(club: string): Promise<Squad | null> {
       likely: last ? likelyLineup(players, shape, gws.length) : null,
       watch,
       withdrawals: null,
+      outs: [],
     };
   });
 }
@@ -205,9 +208,36 @@ export function parseWikiSquad(wikitext: string): { players: SquadPlayer[]; asOf
   return { players, asOf: updated, intro };
 }
 
+const MARK: Record<string, { status: SquadPlayer["status"]; why: string }> = {
+  INJ: { status: "injured", why: "withdrew injured" },
+  SUS: { status: "suspended", why: "suspended" },
+  WD: { status: "unavailable", why: "withdrew (reason not given)" },
+};
+
+/**
+ * National teams' "Recent call-ups": players marked INJ / SUS / WD for a match on or after `since` (ISO date),
+ * i.e. this window's withdrawals, not old ones.
+ */
+export function parseRecentWithdrawals(wikitext: string, since: string): SquadPlayer[] {
+  const i = wikitext.search(/==+\s*Recent call-ups\s*==+/i);
+  if (i < 0) return [];
+  const out: SquadPlayer[] = [];
+  for (const t of templates(wikitext.slice(i, i + 40000))) {
+    const p = params(t);
+    if (!/^nat fs r player$/i.test(p[0])) continue;
+    const latest = p.latest ?? "";
+    const mark = latest.match(/<sup>\s*(INJ|SUS|WD)\s*<\/sup>/i)?.[1]?.toUpperCase();
+    const date = latest.match(/\{\{\s*sort\s*\|\s*(\d{4}-\d{2}-\d{2})/i)?.[1];
+    const pos = WIKI_POS[(p.pos ?? "").toUpperCase()];
+    if (!mark || !date || date < since || !pos) continue;
+    out.push({ name: plain(p.name ?? ""), pos, number: null, status: MARK[mark].status, chance: null, note: MARK[mark].why, starts: null, minutes: null, goals: null, caps: null, club: p.club ? plain(p.club) : null });
+  }
+  return out;
+}
+
 /** Squad from a club's or national team's Wikipedia page. No availability or lineups: Wikipedia doesn't have them. */
 export function getWikiSquad(title: string): Promise<Squad | null> {
-  return cached(`squad:wiki:v3:${title}`, 6 * HOUR, async () => {
+  return cached(`squad:wiki:v4:${title}`, 6 * HOUR, async () => {
     const d = await fetchJson(`https://en.wikipedia.org/w/api.php?action=parse&format=json&formatversion=2&redirects=1&prop=wikitext&page=${encodeURIComponent(title)}`, ParseSchema);
     const parsed = parseWikiSquad(d.parse?.wikitext ?? "");
     if (!parsed) return null;
@@ -223,6 +253,9 @@ export function getWikiSquad(title: string): Promise<Squad | null> {
           .slice(0, 3)
           .map((p) => `${p.name}: ${p.goals} international goal${p.goals === 1 ? "" : "s"} in ${p.caps} cap${p.caps === 1 ? "" : "s"}${p.club ? ` (${p.club})` : ""}.`)
       : [];
-    return { source: "wikipedia", asOf: parsed.asOf ?? named, players: parsed.players, likely: null, watch, withdrawals: withdrew };
+    // This window only: marks dated within the last 30 days or later (upcoming matches).
+    const since = new Date(Date.now() - 30 * 86_400_000).toISOString().slice(0, 10);
+    const outs = national ? parseRecentWithdrawals(d.parse?.wikitext ?? "", since) : [];
+    return { source: "wikipedia", asOf: parsed.asOf ?? named, players: parsed.players, likely: null, watch, withdrawals: withdrew, outs };
   });
 }

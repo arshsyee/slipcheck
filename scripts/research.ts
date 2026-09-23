@@ -278,8 +278,9 @@ function printSquad(t: MatchDossier["home"], NA: string) {
     if (outs.length) outs.forEach((p) => console.log(`     ${red("Out")}   ${p.name} (${p.pos}, ${p.status})${p.note ? `: ${p.note}` : ""}`));
     else console.log(`     ${dim("Out   nobody flagged")}`);
   } else {
-    console.log(`     Out   official list ${NA}${s.withdrawals ? "" : dim(" · see injury news above")}`);
-    if (s.withdrawals) console.log(`     ${red("Withdrew")} ${s.withdrawals}`);
+    if (s.outs.length) s.outs.forEach((p, i) => console.log(`     ${pad(i ? "" : red("Out"), 6)}${p.name} (${p.pos}, ${p.note})${p.club ? dim(` · ${p.club}`) : ""}`));
+    else if (s.withdrawals) console.log(`     ${red("Withdrew")} ${s.withdrawals}`);
+    else console.log(`     Out   official list ${NA}${dim(" · see injury news above")}`);
     if (s.players.some((p) => p.caps != null)) console.log(`     ${dim("Wikipedia's squad list can lag behind late withdrawals: check the injury news above.")}`);
   }
   // Squad players named in this team's injury/team-news headlines: the headline, not a diagnosis.

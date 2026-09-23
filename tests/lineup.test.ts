@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { likelyLineup, type SquadPlayer } from "../lib/stats/lineup";
-import { fplWatch, parseWikiSquad } from "../lib/sources/squad";
+import { fplWatch, parseRecentWithdrawals, parseWikiSquad } from "../lib/sources/squad";
 
 /** Real data recorded 2026-09-23: Arsenal's FPL squad (starts in the last 5 gameweeks) and England's Wikipedia squad. */
 describe("lineup & squad (real snapshots)", () => {
@@ -46,5 +46,17 @@ describe("players to watch (real FPL data, Man City, 2026-09-23)", () => {
     const line = fplWatch(suspended).find((w) => w.includes("penalties"))!;
     expect(line).toContain(`first choice ${pensFirst.web_name} is out`);
     expect(line.startsWith(pensFirst.web_name)).toBe(false);
+  });
+});
+
+describe("national-team withdrawals (real Wikipedia, England, 2026-09-23)", () => {
+  const w = readFileSync("tests/fixtures/snapshot/england-recent-callups.wikitext", "utf8");
+
+  it("lists this window's injured withdrawals, not old ones", () => {
+    const outs = parseRecentWithdrawals(w, "2026-08-24");
+    expect(outs.map((p) => p.name).sort()).toEqual(["Cole Palmer", "Declan Rice", "Kobbie Mainoo", "Marcus Rashford", "Tino Livramento"]);
+    expect(outs.every((p) => p.status === "injured" && p.note === "withdrew injured")).toBe(true);
+    // Nick Pope's INJ mark is from November 2025: a past window.
+    expect(outs.find((p) => p.name === "Nick Pope")).toBeUndefined();
   });
 });

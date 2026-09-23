@@ -389,10 +389,17 @@ function SquadBody({ t }: { t: TeamSection }) {
             <p className="text-xs text-muted">Nobody flagged.</p>
           )
         ) : (
-          <p className="text-xs">
-            Official list: <NoFree />
-            {s.withdrawals && <span className="mt-1 block text-danger">{s.withdrawals}</span>}
-          </p>
+          s.outs.length ? (
+            s.outs.map((p) => (
+              <div key={p.name} className="text-xs">
+                <span className="text-danger">{p.name}</span> <span className="text-muted">{p.pos}, {p.note}{p.club ? ` · ${p.club}` : ""}</span>
+              </div>
+            ))
+          ) : s.withdrawals ? (
+            <p className="text-xs text-danger">{s.withdrawals}</p>
+          ) : (
+            <p className="text-xs">Official list: <NoFree /></p>
+          )
         )}
       </div>
 
