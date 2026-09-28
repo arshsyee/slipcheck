@@ -202,3 +202,17 @@ describe("players named in injury headlines (real headlines, 2026-09-23)", () =>
     expect(playersInHeadlines(["Eric García"], [h("Joan García ruled out with knee injury")]).size).toBe(0);
   });
 });
+
+describe("cup results from Wikipedia (real EFL Cup page, 2026-09-28)", () => {
+  it("reads played ties with scores and penalties, skipping unplayed ones", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { parseFootballBoxes } = await import("../lib/sources/cups");
+    const m = parseFootballBoxes(readFileSync("tests/fixtures/snapshot/efl-cup-2026-27.wikitext", "utf8"));
+    expect(m.length).toBeGreaterThan(40);
+    // Tier numbers and bold are stripped from team names.
+    const first = m.find((x) => x.home === "Tranmere Rovers" && x.away === "Rochdale")!;
+    expect(first).toMatchObject({ homeGoals: 2, awayGoals: 2, date: "2026-08-01T12:00:00.000Z" });
+    const spurs = m.filter((x) => x.home === "Tottenham Hotspur" || x.away === "Tottenham Hotspur");
+    expect(spurs.map((x) => `${x.home} ${x.homeGoals}-${x.awayGoals} ${x.away}`)).toEqual(["Tottenham Hotspur 5-1 Charlton Athletic", "Liverpool 3-1 Tottenham Hotspur"]);
+  });
+});

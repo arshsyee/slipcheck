@@ -48,14 +48,6 @@ export function seasonCode(date = new Date(), yearsBack = 0): string {
   return `${two(startYear)}${two(startYear + 1)}`;
 }
 
-/** ESPN cup competitions per country (checked 2026-09-23). */
-export const CUP_SLUGS: Record<string, string[]> = {
-  England: ["eng.fa", "eng.league_cup"],
-  Germany: ["ger.dfb_pokal"],
-  Spain: ["esp.copa_del_rey"],
-  Italy: ["ita.coppa_italia"],
-  France: ["fra.coupe_de_france"],
-};
 
 /** 1 July of the season containing `date` (seasons run Aug–May). */
 export function seasonStart(date = new Date()): string {
