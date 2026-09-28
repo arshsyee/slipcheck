@@ -69,7 +69,7 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
             {MARKET_LABEL[d.leg.market]}: <b className="font-semibold">{d.leg.selection}</b>
             {d.leg.line != null && ` ${d.leg.market === "asian_handicap" && d.leg.line > 0 ? "+" : ""}${d.leg.line}`}
           </span>
-          {d.leg.oddsDecimal && <span className="tabular rounded-full bg-surface-2 px-3 py-1 text-muted">@ {formatOdds(d.leg.oddsDecimal, oddsFormat)} on your slip</span>}
+          {d.leg.oddsDecimal && <span className="tabular rounded-full bg-surface-2 px-3 py-1 text-muted">@ {formatOdds(d.leg.oddsDecimal, oddsFormat)} on your slip · implies {Math.round((1 / d.leg.oddsDecimal) * 100)}%</span>}
           {d.fixture.referee && <span className="rounded-full bg-surface-2 px-3 py-1 text-muted">Referee: {d.fixture.referee}</span>}
           {!d.fixture.found && (
             <span className="flex items-center gap-1 rounded-full bg-warn/10 px-3 py-1 text-warn">

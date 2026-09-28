@@ -6,6 +6,7 @@
  *   npm run research -- "Inter v Parma" --market btts --pick Yes "Augsburg v Bayern" --market asian_handicap --pick Bayern --line -1.5
  *   npm run research -- "England v Spain" --json          (national teams; full dossier as JSON)
  *   npm run research -- "England v Spain" --html report.html   (save a printable report; Print → Save as PDF)
+ *   npm run research -- "Arsenal v Leeds" --odds 4/6 "Inter v Parma" --odds 2.1   (what the odds imply, and the accumulator's combined chance)
  *
  * Options apply to the match before them. --league is optional (EPL, LA_LIGA, UCL, …); it's inferred when left out.
  * Markets: 1x2 (default, pick = home team), double_chance, draw_no_bet, total_goals, asian_handicap, btts.
@@ -13,6 +14,7 @@
 import { writeFileSync } from "node:fs";
 import { buildDossier } from "../lib/dossier/build";
 import { reportHtml } from "./report-html";
+import { accaDecimal, impliedProbability, parseOdds } from "../lib/odds/convert";
 import type { MatchDossier } from "../lib/dossier/types";
 import { LEAGUES, MARKETS, type Leg } from "../lib/types";
 
@@ -30,6 +32,11 @@ function parseArgs(argv: string[]): { legs: Leg[]; json: boolean; html: string |
     else if (a === "--market" && cur) cur.market = next() as Leg["market"];
     else if (a === "--pick" && cur) cur.selection = next();
     else if (a === "--line" && cur) cur.line = Number(next());
+    else if (a === "--odds" && cur) {
+      const o = parseOdds(next());
+      if (o == null) throw new Error("--odds takes 6/4, 2.5, evens or +150");
+      cur.oddsDecimal = o;
+    }
     else if (!a.startsWith("--")) {
       const [home, away] = a.split(/\s+(?:v|vs|-)\s+/i).map((s) => s.trim());
       legs.push({ league: "OTHER", homeTeam: home || null, awayTeam: away || null, market: "1x2", selection: "", line: null, oddsDecimal: null });
@@ -49,6 +56,8 @@ const bold = (s: string) => `\x1b[1m${s}\x1b[0m`;
 const dim = (s: string) => `\x1b[2m${s}\x1b[0m`;
 const green = (s: string) => `\x1b[32m${s}\x1b[0m`;
 const red = (s: string) => `\x1b[31m${s}\x1b[0m`;
+/** 40%, or 0.4% for long shots, so an accumulator never rounds to "0%". */
+const fmtPct = (p: number) => (p >= 0.01 ? `${Math.round(p * 100)}%` : `${(p * 100).toFixed(1)}%`);
 const pts = (n: number) => `${n} point${n === 1 ? "" : "s"}`;
 const yellow = (s: string) => `\x1b[33m${s}\x1b[0m`;
 // padEnd that ignores colour codes.
@@ -236,7 +245,7 @@ function print(d: MatchDossier, ms: number) {
 async function main() {
   const { legs, json, html } = parseArgs(process.argv.slice(2));
   if (!legs.length) {
-    console.log('Usage: npm run research -- "Arsenal v Leeds" [--market btts --pick Yes] [--league EPL] [--json] [--html report.html]');
+    console.log('Usage: npm run research -- "Arsenal v Leeds" [--market btts --pick Yes] [--league EPL] [--odds 6/4] [--json] [--html report.html]');
     process.exit(1);
   }
   const results = await Promise.all(
@@ -259,6 +268,17 @@ async function main() {
     print(r.d, r.ms);
     console.log = log;
     blocks.push(lines.join("\n"));
+  }
+  // Accumulator: every pick has to win, so the chances multiply.
+  const priced = legs.filter((l) => l.oddsDecimal);
+  if (legs.length > 1 && priced.length) {
+    const acca = accaDecimal(priced.map((l) => l.oddsDecimal!));
+    const line =
+      priced.length < legs.length
+        ? `  ${bold("All picks together")}: ${red(`combined chance N/A · ${legs.length - priced.length} of ${legs.length} picks have no odds (add --odds)`)}`
+        : `  ${bold("All picks together")}: combined odds ${acca.toFixed(2)} imply a ${fmtPct(impliedProbability(acca))} chance that all ${legs.length} win (bookmaker margins included).`;
+    console.log(`\n${line}`);
+    blocks.push(line);
   }
   if (html) {
     writeFileSync(html, reportHtml(blocks, new Date()));

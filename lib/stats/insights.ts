@@ -4,6 +4,7 @@ import type { HeadToHead } from "./match";
 import type { TeamGame } from "./team";
 import { isDraw, teamScore } from "../teams/match";
 import { MARKET_LABEL, seasonStart as seasonStartIso } from "../leagues";
+import { impliedProbability } from "../odds/convert";
 
 const n = (x: number | null | undefined, dp = 1) => (x == null ? "?" : x.toFixed(dp));
 
@@ -64,6 +65,10 @@ export function buildPick(
   const pickSide: Pick["pickSide"] =
     leg.market === "total_goals" || leg.market === "btts" ? "both" : sides.length === 1 ? sides[0] : sides.includes("home") ? "home" : sides.includes("away") ? "away" : null;
 
+  // What the slip's odds mean, as a probability. Not a prediction: the bettor compares it with the counts below.
+  if (leg.oddsDecimal && leg.oddsDecimal > 1) {
+    bullets.push(`Your odds (${leg.oddsDecimal.toFixed(2)}) imply a ${Math.round(impliedProbability(leg.oddsDecimal) * 100)}% chance, bookmaker's margin included.`);
+  }
   // The comparison lives in `stats` (a table); bullets are only facts that don't fit it.
   switch (leg.market) {
     case "total_goals": {

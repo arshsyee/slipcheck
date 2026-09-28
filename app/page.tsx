@@ -242,6 +242,14 @@ function SlipSummary({
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="text-sm">
           <span className="font-semibold">{slip.legs.length === 1 ? "1 match" : `${slip.legs.length} matches`}</span>
+          {slip.legs.length > 1 && (
+            <span className="text-muted">
+              {" · "}
+              {slip.legs.every((l) => l.oddsDecimal)
+                ? `all ${slip.legs.length} together: ${(slip.legs.reduce((p, l) => p / l.oddsDecimal!, 1) * 100).toFixed(1)}% implied chance`
+                : "add every pick's odds to see the combined chance"}
+            </span>
+          )}
         </div>
         <div className="flex items-center gap-2 text-sm">
           {done < legs.length && (
