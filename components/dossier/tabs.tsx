@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { ExternalLink, Newspaper, ShieldAlert, Users } from "lucide-react";
 import type { MatchDossier, StatBlock, TeamSection } from "@/lib/dossier/types";
 import type { Headline } from "@/lib/sources/news";
+import { stakesText } from "@/lib/stats/season";
 import { CompareRow, Crest, ResultChip, SectionTitle, SourceTag, Unavailable, fix, kickoffLabel, pct, timeAgo } from "./bits";
 
 type Props = { d: MatchDossier };
@@ -34,6 +35,7 @@ export function FormTab({ d }: Props) {
                 </div>
               </>
             )}
+            <StakesLine t={t} />
             <SeasonRuns t={t} />
             {t.lastMatch && (
               <p className="text-xs text-muted">
@@ -233,6 +235,19 @@ function Meetings({ result, empty }: { result: MatchDossier["h2hEurope"]; empty:
         </li>
       ))}
     </ul>
+  );
+}
+
+/** What's at stake in the table, in one line. */
+function StakesLine({ t }: { t: TeamSection }) {
+  const lg = t.season.ok ? t.season.data?.league : null;
+  if (!lg) return null;
+  const x = stakesText(lg.stakes);
+  return (
+    <div>
+      <SectionTitle>What&apos;s at stake</SectionTitle>
+      <p className="text-xs">{[x.first, x.fourth, x.relegation, x.left].join(" · ")}</p>
+    </div>
   );
 }
 

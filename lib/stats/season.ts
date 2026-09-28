@@ -42,6 +42,43 @@ export interface LeagueSeason {
   xgaMinusGoalsAgainst: number | null;
   /** League position after each of the club's games, oldest first. */
   positionByRound: { date: string; position: number }[];
+  /** What's at stake: points gaps to the places that matter, and what's left to play. */
+  stakes: Stakes;
+}
+
+export interface Stakes {
+  /** Points behind 1st (0 = top). When top: lead over 2nd. */
+  toFirst: number;
+  leadOverSecond: number | null;
+  /** Points behind 4th, or ahead of 5th when in the top four. */
+  behindFourth: number | null;
+  aheadOfFifth: number | null;
+  /** First place that goes down automatically, e.g. 18 in a 20-team league. */
+  relegationPlace: number;
+  /** Points above that place, or below the last safe place when in it. */
+  aboveRelegation: number | null;
+  belowSafety: number | null;
+  gamesLeft: number;
+}
+
+/** Automatic relegation places (Germany and France also have a play-off place above these). */
+const RELEGATED: Partial<Record<League, number>> = { EPL: 3, LA_LIGA: 3, SERIE_A: 3, BUNDESLIGA: 2, LIGUE_1: 2 };
+
+export function stakes(table: StandingRow[], team: string, league: League): Stakes {
+  const row = table.find((r) => r.team === team)!;
+  const at = (rank: number) => table[rank - 1]?.points ?? 0;
+  const relegationPlace = table.length - (RELEGATED[league] ?? 3) + 1;
+  return {
+    toFirst: at(1) - row.points,
+    leadOverSecond: row.rank === 1 ? row.points - at(2) : null,
+    behindFourth: row.rank > 4 ? at(4) - row.points : null,
+    aheadOfFifth: row.rank <= 4 ? row.points - at(5) : null,
+    relegationPlace,
+    aboveRelegation: row.rank < relegationPlace ? row.points - at(relegationPlace) : null,
+    belowSafety: row.rank >= relegationPlace ? at(relegationPlace - 1) - row.points : null,
+    // Double round robin: every team plays every other twice.
+    gamesLeft: (table.length - 1) * 2 - row.played,
+  };
 }
 
 /** The club's domestic league season so far. `fdName` is the football-data.co.uk spelling. */
@@ -75,6 +112,7 @@ export function leagueSeason(rows: MatchRow[], fdName: string, league: League, d
     goalsMinusXg: xgFor != null ? round(row.goalsFor - xgFor) : null,
     xgaMinusGoalsAgainst: xgAgainst != null ? round(xgAgainst - row.goalsAgainst) : null,
     positionByRound,
+    stakes: stakes(table, fdName, league),
   };
 }
 
@@ -177,3 +215,22 @@ export function coachRecord(
     leagueBeforeThisSeason: since > seasonStartIso && before.length ? split(before) : null,
   };
 }
+
+/** Plain phrases for each gap, e.g. "3 points behind 1st", "top, 2 points clear". */
+export function stakesText(k: Stakes) {
+  const p = (x: number) => `${x} point${x === 1 ? "" : "s"}`;
+  return {
+    first: k.leadOverSecond != null ? `top, ${p(k.leadOverSecond)} clear` : k.toFirst === 0 ? "level on points with 1st" : `${p(k.toFirst)} behind 1st`,
+    fourth:
+      k.aheadOfFifth != null
+        ? k.aheadOfFifth === 0 ? "in the top four, level on points with 5th" : `in the top four, ${p(k.aheadOfFifth)} ahead of 5th`
+        : k.behindFourth === 0 ? "level on points with 4th" : `${p(k.behindFourth!)} behind 4th`,
+    relegation:
+      k.aboveRelegation != null
+        ? k.aboveRelegation === 0 ? `level on points with ${ordinalOf(k.relegationPlace)}` : `${p(k.aboveRelegation)} above ${ordinalOf(k.relegationPlace)}`
+        : `in the drop zone, ${p(k.belowSafety!)} from safety`,
+    left: `${k.gamesLeft} game${k.gamesLeft === 1 ? "" : "s"} left`,
+  };
+}
+
+const ordinalOf = (i: number) => `${i}${["th", "st", "nd", "rd"][(i % 100 - 20) % 10] ?? ["th", "st", "nd", "rd"][i % 100] ?? "th"}`;

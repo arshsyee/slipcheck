@@ -16,6 +16,7 @@ import { writeFileSync } from "node:fs";
 import { buildDossier } from "../lib/dossier/build";
 import { reportHtml } from "./report-html";
 import { accaDecimal, impliedProbability, parseOdds } from "../lib/odds/convert";
+import { stakesText } from "../lib/stats/season";
 import type { MatchDossier } from "../lib/dossier/types";
 import { LEAGUES, MARKETS, type Leg } from "../lib/types";
 
@@ -136,6 +137,12 @@ function print(d: MatchDossier, ms: number) {
     const sign = (x: number | null | undefined) => (x == null ? null : `${x > 0 ? "+" : ""}${x.toFixed(1)}`);
     r2("Goals minus xG (+ = clinical)", sign(L(hs)?.goalsMinusXg), sign(L(as)?.goalsMinusXg));
     r2("Position, game by game", L(hs)?.positionByRound.map((p) => p.position).join(" → "), L(as)?.positionByRound.map((p) => p.position).join(" → "));
+    // What's at stake: gaps to the places that matter.
+    const st = (s2: typeof hs) => (L(s2) ? stakesText(L(s2)!.stakes) : null);
+    r2("Title race", st(hs)?.first, st(as)?.first);
+    r2("Top four", st(hs)?.fourth, st(as)?.fourth);
+    r2("Relegation", st(hs)?.relegation, st(as)?.relegation);
+    r2("Games left", st(hs)?.left, st(as)?.left);
     const last = (s: typeof hs) => s?.lastSeasonSameStage;
     r2("Same point last season", last(hs) ? `${ordinal(last(hs)!.position)} · ${pts(last(hs)!.points)}` : null, last(as) ? `${ordinal(last(as)!.position)} · ${pts(last(as)!.points)}` : null);
     for (const [t, s2] of [[d.home, hs], [d.away, as]] as const) {
