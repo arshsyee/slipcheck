@@ -16,8 +16,11 @@ export interface Squad {
   watch: string[];
   /** National teams: the sentence(s) on Wikipedia about players who withdrew from this squad. */
   withdrawals: string | null;
-  /** National teams: players marked injured/suspended/withdrawn for the current window ("Recent call-ups"). */
-  outs: SquadPlayer[];
+  /**
+   * National teams: players marked injured/suspended/withdrawn for the current window ("Recent call-ups").
+   * Optional: reports saved before this field existed (e.g. restored in the browser) don't have it.
+   */
+  outs?: SquadPlayer[];
 }
 
 const FPL_POS: Record<string, Position> = { GKP: "GK", DEF: "DEF", MID: "MID", FWD: "FWD" };

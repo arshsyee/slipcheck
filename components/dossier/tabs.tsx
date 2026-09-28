@@ -389,7 +389,7 @@ function SquadBody({ t }: { t: TeamSection }) {
             <p className="text-xs text-muted">Nobody flagged.</p>
           )
         ) : (
-          s.outs.length ? (
+          s.outs?.length ? (
             s.outs.map((p) => (
               <div key={p.name} className="text-xs">
                 <span className="text-danger">{p.name}</span> <span className="text-muted">{p.pos}, {p.note}{p.club ? ` · ${p.club}` : ""}</span>
