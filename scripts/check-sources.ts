@@ -9,6 +9,7 @@ import { staleLog } from "../lib/sources/cache";
 import { getInfoboxCoach } from "../lib/sources/coach";
 import { getInternationalResults, getNationalTeamInfo } from "../lib/sources/international";
 import { getFplSquad, getWikiSquad } from "../lib/sources/squad";
+import { getCupResults } from "../lib/sources/cups";
 import type { SourceId } from "../lib/sources/types";
 import { getFixtures, getSeason } from "../lib/sources/footballData";
 import { findTeam, getRecentResults, getStandings } from "../lib/sources/espn";
@@ -24,7 +25,7 @@ import { getCompetitionMatches } from "../lib/sources/uefa";
 const DAY = 86_400_000;
 
 interface Check {
-  id: SourceId | "football-data-fixtures" | "wikipedia-national" | "wikipedia-squad" | "fpl-starts";
+  id: SourceId | "football-data-fixtures" | "wikipedia-national" | "wikipedia-squad" | "fpl-starts" | "cups";
   name: string;
   /** Returns a one-line summary and the timestamp of the newest item (null = timeless data). */
   run: () => Promise<{ summary: string; newest: string | null }>;
@@ -150,6 +151,15 @@ const checks: Check[] = [
     },
   },
   {
+    id: "cups",
+    name: "Cup results (Wikipedia, OpenLigaDB)",
+    run: async () => {
+      const [efl, dfb] = await Promise.all([getCupResults("England", "Tottenham Hotspur", "x"), getCupResults("Germany", "Bayern Munich", "x")]);
+      if (!efl.length || !dfb.length) throw new Error(`EFL Cup ${efl.length} / DFB-Pokal ${dfb.length} Spurs/Bayern games found`);
+      return { summary: `Spurs ${efl.length} EFL Cup games, Bayern ${dfb.length} DFB-Pokal games`, newest: null };
+    },
+  },
+  {
     id: "international-results",
     name: "International results (CC0)",
     // International windows are ~2 months apart.
@@ -215,7 +225,7 @@ const ITEMS: { item: string; sources: Check["id"][]; core: boolean }[] = [
   { item: "Stadium location", sources: ["wikidata"], core: false },
   { item: "Lineups", sources: ["premier-league", "uefa", "espn"], core: false },
   { item: "Goal times (Bundesliga)", sources: ["openligadb"], core: false },
-  { item: "Domestic cup results", sources: ["espn"], core: false },
+  { item: "Domestic cup results", sources: ["cups"], core: false },
   { item: "Club profile, badge", sources: ["thesportsdb"], core: false },
 ];
 

@@ -1,0 +1,1960 @@
+{{Short description|67th season of the EFL Cup}}
+{{Use dmy dates|date=December 2025}}
+{{Infobox football tournament season
+| title = EFL Cup
+| year = 2026–27
+| other_titles = Carabao Cup 
+| image = Wembley.jpg 
+| image_size = 
+| caption = [[Wembley Stadium]] will host the final in March
+| country = England<br>Wales
+| dates = {{nowrap|1 August 2026 – 21 March 2027}}
+| num_teams = 92
+| scoring_leader = [[Harry Leonard (footballer, born 2003)|Harry Leonard]] (4 goals)
+| champions = 
+| count = 
+| runner-up = 
+| matches = 76
+| goals = 235
+| attendance =  
+| updated = 05:57, 20 September 2026 (UTC)<ref>{{cite web |title= Carabao Cup General Carabao Cup information |url=https://www.besoccer.com/competition/info/capital_one_cup/2027 |website=BeSoccer.com |access-date=20 September 2026}}</ref> 
+| prev_season = [[2025–26 EFL Cup|2025–26]]
+| next_season = ''[[2027–28 EFL Cup|2027–28]]''
+}}
+
+The '''2026–27 EFL Cup''' is the 67th and current season of the [[EFL Cup|English Football League Cup]].<ref name="si_mag">{{Cite magazine |author=McCormack, James|title=2026–27 Carabao Cup: Draw, Fixtures, Results and Guide to Each Round |url=https://www.si.com/soccer/2026-27-carabao-cup-draw-fixtures-results-guide-each-round |magazine=[[Sports Illustrated]]|date=9 September 2026 |access-date=20 September 2026 |language=en-us}}</ref> It is sponsored by [[Carabao Energy Drink]] and known as the '''Carabao Cup''' for sponsorship reasons,<ref>{{cite web |author=Williams, Callum |title=Carabao to launch Carabao Lager in UK after securing EFL title rights |url=https://insidersport.com/2026/03/16/carabao-cup-efl-extension-lager-launch/ |website=insidersport.com |publisher=Sports Betting Community Ltd |date=16 March 2026 |access-date=19 September 2026}}</ref> with the 2026–27 season marking the tenth season of Carabao's sponsorship of the competition.<ref>{{cite web |author=Ewing, Harry |title=Carabao renew EFL Cup title sponsorship for further three seasons |url=https://www.insideworldfootball.com/2023/10/18/carabao-renew-efl-cup-title-sponsorship-three-seasons/ |publisher=Inside World Football |date=18 October 2023 |access-date=21 September 2026 }}</ref> The EFL Cup is open to all clubs participating in the [[Premier League]] and the [[English Football League]].<ref name="all_clubs"/>
+
+The preliminary round began on 1 August 2026, followed by the tournament proper on 7 August 2026.<ref name="Round_One"/> This season's EFL Cup final will be held at [[Wembley Stadium]] on Sunday, 21 March 2027, marking the 20th consecutive year that the venue has hosted the competition's final.<ref name="si_mag"/>
+
+[[Manchester City F.C.|Manchester City]] are the defending champions, having beaten [[Arsenal F.C.|Arsenal]] in the [[2026 EFL Cup final|previous season's final]].<ref>{{cite news |author=Hytner, David |title=Manchester City win Carabao Cup after Nico O’Reilly’s double downs lacklustre Arsenal |url=https://www.theguardian.com/football/2026/mar/22/arsenal-manchester-city-carabao-cup-final-match-report |work=[[The Guardian]] |publisher=Guardian Media Group |date=22 March 2026 |access-date=19 September 2026}}</ref><ref name="si_mag"/> The winner of the competition qualifies for the play-off round of the [[2027–28 UEFA Conference League]].<ref>{{cite web |author=Winterburn, Sarah |title=How Premier League teams qualify for 2027/28 Champions League and Europa competitions |url=https://www.football365.com/news/how-premier-league-teams-qualify-for-2027-28-champions-league-and-europa-competitions |website=[[Football365|Football365.com]] |publisher=Planet Sport Ltd |date=19 September 2026 |access-date=20 September 2026}}</ref>
+
+==Teams==
+All 92 clubs in the Premier League and English Football League entered the season's EFL Cup.<ref name="all_clubs">{{cite web |title=EFL Cup second round: Premier League clubs' fixtures revealed |url=https://www.premierleague.com/en/news/4687523/efl-cup-second-round-premier-league-clubs-fixtures-revealed |publisher=Premier League |date=10 August 2026 |access-date=19 September 2026}}</ref> Access was distributed across the top 4 leagues of the [[English football league system]].
+
+There was a preliminary round before the first one due to the number of teams participating in Europe. This round consisted of the two newly promoted sides to [[2026–27 EFL League Two|2026–27 League Two]] – [[York City F.C.|York City]] and [[Rochdale A.F.C.|Rochdale]] – and the two lowest finishers not relegated from [[2025–26 EFL League Two|2025–26 League Two]], [[Tranmere Rovers F.C.|Tranmere Rovers]] and [[Crawley Town F.C.|Crawley Town]].<ref name="York_Host">{{cite web |title=York host Crawley; Tranmere welcome Rochdale in EFL Cup |url=https://www.bbc.com/sport/football/articles/clyp4648pe0o |website=bbc.com |publisher=[[BBC Sport]] |date=3 June 2026 |access-date=4 June 2026}}</ref>
+
+{| class="wikitable"
+!Phase<ref name="Premlim_Round">{{Cite web |title=Carabao Cup 2026/27 Preliminary Round draw |url=https://efl.com/news/2026/june/03/carabao-cup-2026-27-preliminary-round-draw/ |date=3 June 2026 |access-date=4 June 2026 |publisher=English Football League |language=en}}</ref>
+!Clubs entering in this round
+!Clubs advancing from previous round
+!Number of ties
+!Week commencing
+|-
+![[2026–27 EFL Cup#Preliminary round|Preliminary round]]<br />(4 clubs)
+|
+* 4 clubs from EFL League Two (two lowest-ranked clubs not relegated from previous season, and two newly promoted)
+|{{n/a}}
+|2
+|27 July 2026
+|-
+![[2026–27 EFL Cup#First round|First round]]<br />(70 clubs)
+|
+* 20 clubs from EFL League Two
+* 24 clubs from EFL League One
+* 24 clubs from EFL Championship
+|
+* 2 winners from preliminary round
+|35
+| 3 August 2026
+|-
+![[2026–27 EFL Cup#Second round|Second round]]<br />(46 clubs)
+|
+* 11 Premier League clubs (not involved in European competitions)
+|
+* 35 winners from first round
+|23
+| 24 August 2026
+|-
+![[2026–27 EFL Cup#Third round|Third round]]<br />(32 clubs)
+|
+* 9 Premier League clubs (involved in European competitions)
+|
+* 23 winners from second round
+|16
+| 7 September 2026<br> 14 September 2026
+|-
+![[2026–27 EFL Cup#Fourth round|Fourth round]]<br/>(16 clubs)
+|{{n/a}}
+|
+* 16 winners from third round
+|8
+| 26 October 2026
+|-
+![[2026–27 EFL Cup#Quarter-finals|Quarter-finals]]<br />(8 clubs)
+|{{n/a}}
+|
+* 8 winners from fourth round
+|4
+| 14 December 2026
+|-
+![[2026–27 EFL Cup#Semi-finals|Semi-finals]] <br />(4 clubs)
+|{{n/a}}
+|
+* 4 winners from quarter-finals
+|2 ([[Two-legged tie|over two-legs]])
+| 11 January 2027 <br> 1 February 2027
+|-
+![[2027 EFL Cup final|Final]]<br />(2 clubs)
+|{{n/a}}
+|
+* 2 winners from semi-finals
+|1
+| 21 March 2027
+|}
+
+==Rule changes==
+The regulations governing the EFL Cup were amended ahead of the [[2025–26 EFL Cup|2025–26 season]] to allow, in certain circumstances, a player to represent two clubs during the same season’s competition.<ref>{{cite news |last1=Colman |first1=Jonty |last2=Kinsella |first2=Nizaar |title=Chelsea's Guiu eligible for EFL Cup after mix-up |url=https://www.bbc.com/sport/football/articles/c89d12091qgo |work=BBC Sport |publisher=British Broadcasting Corporation |date=23 September 2025 |access-date=22 September 2026}}</ref>
+
+Under those provisions, a player who [[Transfer (association football)|transferred]] before the first leg of the semi-final could represent their new club in the [[Two-legged tie|second leg]] and, if selected, the final. A transfer completed after the first leg, however, rendered the player ineligible for any further participation in that season's competition. As a result, they could not feature in the final should their new club reach it.
+
+For the 2026–27 season, the regulations have been amended further. A player who transfers during the [[Transfer window|winter transfer window]] is now permitted to appear in the final for their new club, provided they satisfy the other eligibility criteria. They cannot, however, represent one club in the first leg of the semi-final and another in the second.<ref name="Key_Info"/>
+
+There has also been a modest revision to the regulations concerning [[Loan (sports)#Association football|players on loan]]. From 2026–27, a player registered on loan is automatically eligible to participate in the EFL Cup for their loan club, unless their parent club expressly provides otherwise. Previously, loan players needed written permission from their parent club before they could take part in the competition.<ref name="Key_Info"/>
+
+==Preliminary round==
+The preliminary round was required for the 2026–27 EFL Cup following the participation of nine [[Premier League]] clubs in European competitions, equalling the Premier League record set the previous season.<ref>{{cite web |author=Coverdale, David|title=How Palace's UEFA Conference League triumph affects European qualification |url=https://www.premierleague.com/en/news/4671711/how-crystal-palace-uefa-conference-league-final-affects-european-qualification |publisher=Premier League |date=27 May 2026 |access-date=20 September 2026}}</ref> It featured the two clubs promoted from the [[National League (division)|National League]], York City and Rochdale, and the two clubs that finished 21st and 22nd respectively in the [[2025–26 EFL League Two|previous season's League Two]], Tranmere Rovers and Crawley Town.<ref name="York_Host"/> The round reduced the number of teams entering the subsequent rounds so that 32 clubs could participate in the third round, when the nine European qualifiers entered the competition.<ref name="Premlim_Round"/>
+
+The draw was held on 3 June 2026, with Sanny Rudravajhala of Sky Sports hosting and former goalkeeper [[Lee Camp (footballer)|Lee Camp]] performing the draw.<ref name="Prelim_CFC">{{cite web |author=Johnson, Nick |title=Carabao Cup 2026/27 – Preliminary Draw |url=https://chesterfield-fc.co.uk/news/preliminary-carabao-cup-draw |website=chesterfield-fc.co.uk |publisher=Chesterfield F.C. |date=3 June 2026 |access-date=20 September 2026}}</ref> It paired newly promoted [[York City F.C.|York City]] with [[Crawley Town F.C.|Crawley Town]] at the [[York Community Stadium]], while [[Tranmere Rovers F.C.|Tranmere Rovers]] were handed [[home advantage]] against [[Rochdale A.F.C.|Rochdale]].<ref name="Prelim_CFC"/><ref name="Premlim_Round"/>
+
+Tranmere Rovers and Rochdale contested the opening match of the preliminary round at [[Prenton Park]] on 1 August, drawing 2–2, with Rochdale winning the ensuing [[Penalty shoot-out (association football)|penalty shoot-out]] 2–1. [[Charlie Whitaker]] and [[Jordan Davies (footballer)|Jordan Davies]] scored for Tranmere, while [[Ryan East]] and [[Zain Silcott-Duberry]] replied for Rochdale.<ref name="Tranmere_Rochdale">{{cite web |title=Tranmere miss four penalties in cup exit to Rochdale |url=https://www.bbc.com/sport/football/live/ce852vq2n1vt |website=bbc.com |publisher=[[BBC Sport]] |date=1 August 2026 |accessdate=20 September 2026}}</ref> Rochdale missed their first two penalties but converted their next two, while Tranmere missed four of their attempts in succession after scoring their first, resulting in their elimination.<ref name="Tranmere_Rochdale"/> It was only the second EFL Cup meeting between the clubs, following Rochdale's 3–2 aggregate victory in the [[1987–88 Football League Cup#First round|1987–88 first round]].<ref>{{cite web |title=Tranmere Rovers football club: record v Rochdale |url=https://www.11v11.com/teams/tranmere-rovers/tab/opposingTeams/opposition/Rochdale/ |website=11v11 |accessdate=20 September 2026}}</ref>
+
+In the other preliminary-round tie, York City lost 2–0 to Crawley Town on 3 August, with [[Gianmarco Di Biase]] opening the scoring before [[Danilo Orsi]] sealed the win from the penalty spot.<ref name="York_Crawley">{{cite web |title=Crawley win at York to set up Watford EFL Cup tie |url=https://www.bbc.com/sport/football/live/cwyrx1xr7eet |website=bbc.com |publisher=[[BBC Sport]] |date=3 August 2026 |accessdate=20 September 2026}}</ref> It marked York's return to the League Cup since 2015 and their first meeting with Crawley since the since the [[2015–16 Football League Two|2015–16 League Two]] campaign, when Crawley were unbeaten, winning one and drawing one.<ref>{{cite news |title=York City v Crawley Town pre match stat pack |url=https://www.efl.com/news/2026/august/03/york-city-v-crawley-town-pre-match-stat-pack/ |publisher=English Football League |date=3 August 2026 |accessdate=20 September 2026}}</ref> 
+
+Having both advanced as the visiting side in their preliminary-round ties,<ref name="Premlim_Round"/><ref name="Key_Info">{{cite news |title=Carabao Cup 2026/27 - Key Information |url=https://www.efl.com/news/2026/august/06/carabao-cup-2026-27---key-information-/ |publisher=English Football League |date=6 August 2026 |accessdate=22 September 2026}}</ref> Rochdale and Crawley Town were drawn on the road in the first round but were eliminated by higher-division opposition, losing 2–0 to [[Bradford City A.F.C.|Bradford City]] and 1–0 to [[Watford F.C.|Watford]], respectively.<ref name="Round_One"/><ref>{{cite news |author=Murray, Scott |title=Carabao Cup first round: wins for West Ham, Burnley and Millwall – as it happened |url=https://www.theguardian.com/football/live/2026/aug/08/west-ham-v-portsmouth-burnley-v-notts-county-carabao-cup-first-round-live |work=[[The Guardian]] |publisher=Guardian Media Group |date=8 August 2026 |access-date=20 September 2026}}</ref>
+
+{| class="wikitable"
+|+ Number of teams per tier still in the competition
+! width="20%" | Premier League{{efn|Premier League teams will join the competition in the second and third round.}}
+! width="20%" | Championship{{efn|name=two|Championship and League One teams joined the competition in the first round.}}
+! width="20%" | League One{{efn|name=two}}
+! width="20%" | League Two{{efn|20 League Two teams joined the competition in the first round.}}
+! width="20%" | Total
+|-
+|{{composition bar|20|20|width=150|#FFFEBB}}
+|{{composition bar|24|24|width=150|#FFFEBB}}
+|{{composition bar|24|24|width=150|#FFFEBB}}
+|{{composition bar|24|24|width=150|#99FF99}}
+|{{composition bar|92|92|width=150|#CCCCFF}}
+|}
+{{Notelist}}
+{{Football box collapsible
+|date=1 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=2–2
+|report=https://www.efl.com/match-centre/g2641326
+|team1='''[[Tranmere Rovers F.C.|Tranmere Rovers]] (4)'''
+|goals1=
+*[[Charlie Whitaker|Whitaker]] {{goal|4}}
+*[[Jordan Davies (footballer)|Davies]] {{goal|60}}
+|team2=[[Rochdale A.F.C.|Rochdale]] (4)
+|goals2=
+*[[Ryan East|East]] {{goal|11}}
+*[[Zain Silcott-Duberry|Silcott-Duberry]] {{goal|85}}
+|penalties1 =
+*[[Jordan Davies (footballer)|Davies]] {{pengoal}}
+*[[Zane Okoro|Okoro]] {{penmiss}}
+*[[Tom Ince|Ince]] {{penmiss}}
+*[[Charlie Whitaker|Whitaker]] {{penmiss}}
+*[[Courtney Baker-Richardson|Baker-Richardson]] {{penmiss}}
+|penaltyscore=1–2
+|penalties2 = 
+*{{penmiss}} [[Emmanuel Dieseruvwe|Dieseruvwe]]
+*{{penmiss}} [[Ethan Ebanks-Landell|Ebanks-Landell]]
+*{{pengoal}} [[Edward Francis (footballer)|Francis]]
+*{{pengoal}} [[Zain Silcott-Duberry|Silcott-Duberry]]
+|stadium=[[Prenton Park]]
+|location=[[Birkenhead]]
+|attendance=4,136
+|referee=Oliver Mackey
+}}
+{{Football box collapsible
+|date=3 August 2026
+|time=19:30 [[British Summer Time|BST]]
+|score=0–2
+|report=https://www.efl.com/match-centre/g2641327
+|team1='''[[York City F.C.|York City]] (4)'''
+|goals1=
+|team2=[[Crawley Town F.C.|Crawley Town]] (4)
+|goals2=
+*[[Gianmarco Di Biase|Di Biase]] {{goal|24}}
+*[[Danilo Orsi|Orsi]] {{goal|86|pen.}}
+|stadium=[[York Community Stadium]]
+|location=[[York]]
+|attendance=4,788
+|referee=Thomas Parsons
+}}
+
+==First round==
+A total of 70 teams played in the first round: the two winners from the preliminary round, the remaining 20 from [[EFL League Two|League Two]] (tier 4), 24 from [[EFL League One|League One]] (tier 3), and 24 from the [[EFL Championship|Championship]] (tier 2). The draw for this round was split on a geographical basis into northern and southern sections, where teams were drawn against a team from the same section. The draw was held on 25 June 2026, hosted by Dharmesh Sheth and performed by [[Kevin Nolan]] and [[Luke Chambers]].<ref name="Round_One">{{cite news |url=https://www.efl.com/news/2026/june/25/carabao-cup-round-one-draw-confirmed/ |title=Carabao Cup Round One draw confirmed |publisher=English Football League |date=25 June 2026 |access-date=27 June 2026}}</ref><ref>{{cite news |author=Hodgson, George |title=Carabao Cup first round draw in FULL: Preston North End just miss Blackpool and get Huddersfield Town |url=https://www.lep.co.uk/sport/football/preston-north-end/carabao-cup-draw-first-round-one-updates-news-preston-north-end-vs-huddersfield-town-8761519 |work=Lancashire Post |publisher=Iconic Media |date=25 June 2026 |access-date=20 September 2026}}</ref>
+
+{| class="wikitable"
+|+ Number of teams per tier still in the competition
+! width="20%" | Premier League{{efn|Premier League teams joined the competition in the second and third round.}}
+! width="20%" | Championship
+! width="20%" | League One
+! width="20%" | League Two
+! width="20%" | Total
+|-
+|{{composition bar|20|20|width=150|#FFFEBB}}
+|{{composition bar|24|24|width=150|#99FF99}}
+|{{composition bar|24|24|width=150|#99FF99}}
+|{{composition bar|22|24|width=150|#99FF99}}
+|{{composition bar|90|92|width=150|#CCCCFF}}
+|}
+{{Notelist}}
+
+===Northern section===
+{{Football box collapsible
+|date=7 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=3–0
+|report=https://www.efl.com/match-centre/g2649033
+|team1=[[Wolverhampton Wanderers F.C.|Wolverhampton Wanderers]] (2)
+|goals1=
+*[[Adam Armstrong (footballer)|Armstrong]] {{goal|14}}
+*[[André (footballer, born 2001)|André]] {{goal|34}}
+*[[Fer López|López]] {{goal|43}}
+|team2='''[[Port Vale F.C.|Port Vale]] (4)'''
+|goals2=
+|stadium=[[Molineux Stadium]]
+|location=[[Wolverhampton]]
+|attendance=21,360
+|referee=David Webb
+}}
+{{Football box collapsible
+|date=7 August 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2649027
+|team1=[[Middlesbrough F.C.|Middlesbrough]] (2)
+|goals1=
+*[[Will Lankshear|Lankshear]] {{goal|61}}
+|team2='''[[Wrexham A.F.C.|Wrexham]] (2)'''
+|goals2=
+|stadium=[[Riverside Stadium]]
+|location=[[Middlesbrough]]
+|attendance=18,221
+|referee=Will Finnie
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1 
+|penaltyscore=6–5
+|report=https://www.efl.com/match-centre/g2649029
+|team1=[[Barnsley F.C.|Barnsley]] (3)
+|goals1=
+*[[Cameron McGeehan|McGeehan]] {{goal|81}}
+|penalties1= 
+*[[Cameron McGeehan|McGeehan]] {{pengoal}}
+*[[Patrick Kelly (footballer, born 2004)|Kelly]] {{pengoal}}
+*[[Sam Gale|Gale]] {{pengoal}}
+*[[Luca Connell|Connell]] {{pengoal}}
+*[[Reyes Cleary|Cleary]] {{pengoal}}
+*[[Josh Earl (footballer)|Earl]] {{pengoal}}
+|team2='''[[Wigan Athletic F.C.|Wigan Athletic]] (3)'''
+|goals2=
+*[[Dara Costelloe|Costelloe]] {{goal|40}}
+|penalties2=
+*{{pengoal}} [[Max Power (footballer)|Power]] 
+*{{pengoal}} [[James Carragher|Carragher]] 
+*{{pengoal}} [[Akeel Higgins|Higgins]] 
+*{{pengoal}} [[Jensen Weir|Weir]] 
+*{{pengoal}} [[Fraser Murray|Murray]]
+*{{penmiss}} [[Jon Mellish|Mellish]]
+|stadium=[[Oakwell]]
+|location=[[Barnsley]]
+|attendance= 4,414
+|referee=Richard Eley
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=2–0
+|report=https://www.efl.com/match-centre/g2649036
+|team1=[[Bradford City A.F.C.|Bradford City]] (3)
+|goals1=
+*[[Will Swan (footballer)|Swan]] {{goal|45+1}}
+*[[Aden Baldwin|Baldwin]] {{goal|67}}
+|team2='''[[Rochdale A.F.C.|Rochdale]] (4)'''
+|goals2=
+|stadium=[[Valley Parade]]
+|location=[[Bradford]]
+|attendance=6,915
+|referee=Declan Brown
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1
+|report=https://www.efl.com/match-centre/g2649034
+|team1=[[Burnley F.C.|Burnley]] (2)
+|goals1=
+*[[Zian Flemming|Flemming]] {{goal|48}}
+|team2='''[[Notts County F.C.|Notts County]] (3)'''
+|goals2=
+*[[Callum Roberts (footballer)|Roberts]] {{goal|42}}
+|stadium=[[Turf Moor]]
+|location=[[Burnley]]
+|attendance=10,272
+|referee=Thomas Parsons
+|penalties1= 
+*[[Zian Flemming|Flemming]] {{pengoal}}
+*[[Zeki Amdouni|Amdouni]] {{pengoal}}
+*[[Mike Trésor|Trésor]] {{pengoal}}
+*[[Hannibal Mejbri|Mejbri]] {{penmiss}}
+*[[Kyle Walker|Walker]] {{pengoal}}
+|penaltyscore=4–3
+|penalties2=
+*{{penmiss}} [[Emile Acquah|Acquah]]
+*{{pengoal}} [[Dean Campbell|Campbell]]
+*{{pengoal}} [[Conor Grant (footballer, born 2001)|Grant]]
+*{{pengoal}} [[Jack Evans (footballer, born 2000)|Evans]]
+*{{penmiss}} [[Jacob Bedeau|Bedeau]]
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–2
+|report=https://www.efl.com/match-centre/g2649037
+|team1='''[[Burton Albion F.C.|Burton Albion]] (3)'''
+|goals1=
+[[Zac Scutt|Scutt]] {{goal|14}}
+|team2=[[Blackburn Rovers F.C.|Blackburn Rovers]] (2)
+|goals2=
+*[[Andri Guðjohnsen|Guðjohnsen]] {{goal|81}}
+*[[Jayden Fevrier|Fevrier]] {{goal|88}}
+|stadium=[[Pirelli Stadium]]
+|location=[[Burton upon Trent]]
+|attendance= 2,839
+|referee=Andrew Humphries
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=2–1
+|report=https://www.efl.com/match-centre/g2649060
+|team1=[[Crewe Alexandra F.C.|Crewe Alexandra]] (4)
+|goals1=
+*[[Jack Lankester|Lankester]] {{goal|6|pen.}}
+*[[Luca Moore|Moore]] {{goal|85}}
+|team2='''[[Accrington Stanley F.C.|Accrington Stanley]] (4)'''
+|goals2=
+*[[Farrend Rawson|Rawson]] {{goal|65}}
+|stadium=[[Gresty Road]]
+|location=[[Crewe]]
+|attendance= 2,961
+|referee=Ross Martin
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–2
+|report=https://www.efl.com/match-centre/g2649035
+|team1='''[[Derby County F.C.|Derby County]] (2)'''
+|goals1=
+*[[Sammie Szmodics|Szmodics]] {{goal|45+1}}
+|team2=[[Lincoln City F.C.|Lincoln City]] (2)
+|goals2=
+*[[Ben House|House]] {{goal|3}}
+*[[Dom Jefferies|Jefferies]] {{goal|23}}
+|stadium=[[Pride Park Stadium]]
+|location=[[Derby]]
+|attendance= 11,095
+|referee=Joshua Smith
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2649032
+|team1=[[Fleetwood Town F.C.|Fleetwood Town]] (4)
+|goals1=
+*[[Ched Evans|Evans]] {{goal|15}}
+|team2='''[[Chesterfield F.C.|Chesterfield]] (4)'''
+|goals2=
+|stadium=[[Highbury Stadium (Fleetwood)|Highbury Stadium]]
+|location=[[Fleetwood]]
+|attendance= 1,619
+|referee=Martin Coy
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–3
+|report=https://www.efl.com/match-centre/g2649039
+|team1='''[[Grimsby Town F.C.|Grimsby Town]] (4)'''
+|goals1=
+*[[Harvey Rodgers|Rodgers]] {{goal|90+2}}
+|team2=[[Blackpool F.C.|Blackpool]] (3)
+|goals2=
+*[[Niall Ennis|Ennis]] {{goal|3}}
+*[[Josh Bowler|Bowler]] {{goal|58}}
+*[[Kylian Kouassi|Kouassi]] {{goal|90+5}}
+|stadium=[[Blundell Park]]
+|location=[[Cleethorpes]]
+|attendance= 4,817
+|referee=Neil Hair
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1
+|penaltyscore=4–3
+|report=https://www.efl.com/match-centre/g2649040
+|team1=[[Preston North End F.C.|Preston North End]] (2)
+|goals1=
+*[[Jusef Erabi|Erabi]] {{goal|90+3}}
+|team2='''[[Huddersfield Town A.F.C.|Huddersfield Town]] (3)'''
+|goals2=
+*[[Radinio Balker|Balker]] {{goal|38}}
+| penalties1 =
+*[[Alfie Devine|Devine]] {{pengoal}}
+*[[Jusef Erabi|Erabi]] {{pengoal}}
+*[[Ali McCann|McCann]] {{pengoal}}
+*[[Andrew Moran|Moran]] {{penmiss}}
+*[[Delano Burgzorg|Burgzorg]] {{pengoal}}
+| penalties2 =
+*{{penmiss}} [[Ryan Ledson|Ledson]]
+*{{penmiss}} [[Marcus Harness|Harness]]
+*{{pengoal}} [[Bali Mumba|Mumba]]
+*{{pengoal}} [[Jay Smith-Sway|Smith-Sway]]
+*{{pengoal}} [[Joe Taylor (footballer, born 2002)|Taylor]]
+|stadium=[[Goodison Park]]
+|location=[[Liverpool, Merseyside|Liverpool]]<ref>{{cite web|url=https://www.lep.co.uk/sport/football/preston-north-end/preston-north-end-news-deepdale-everton-goodison-park-huddersfield-town-pnefc-8782366|title=Confirmed: Preston North End's Carabao Cup first round tie to be played at Goodison Park|publisher=Lancashire Post|date=7 July 2026|access-date=3 August 2026|author=Ross Chapman}}</ref>
+|attendance=6,120
+|referee=Seb Stockbridge
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1
+|penaltyscore=3–4
+|report=https://www.efl.com/match-centre/g2649038
+|team1='''[[Salford City F.C.|Salford City]] (4)'''
+|goals1=
+*[[Kyrell Malcolm|Malcolm]] {{goal|77}}
+|team2=[[Shrewsbury Town F.C.|Shrewsbury Town]] (4)
+|goals2=
+*[[Josh Davison|Davison]] {{goal|47}}
+|penalties1=
+*[[Macaulay Langstaff|Langstaff]] {{penmiss}}
+*[[Jorge Grant|Grant]] {{pengoal}}
+*[[Joe Powell (footballer, born 1998)|Powell]] {{pengoal}}
+*[[Daniel Udoh|Udoh]] {{penmiss}}
+*[[Ryan Graydon|Graydon]] {{penmiss}}
+*[[Abraham Odoh|Odoh]] {{penmiss}}
+*[[Adebola Oluwo|Oluwo]] {{pengoal}}
+*[[Ollie Turton|Turton]] {{penmiss}}
+|penalties2=
+*{{penmiss}} [[Tom Sang|Sang]]
+*{{pengoal}} [[Joe Gbodé|Gbodé]]
+*{{pengoal}} [[Jay Turner-Cooke|Turner-Cooke]]
+*{{penmiss}} [[Jack Price (footballer, born 1992)|Price]]
+*{{penmiss}} [[Josh Ruffels|Ruffels]]
+*{{penmiss}} [[Luca Hoole|Hoole]]
+*{{pengoal}} [[Will Boyle|Boyle]]
+*{{pengoal}} [[Arkell Jude-Boyd|Jude-Boyd]]
+|stadium=[[Moor Lane]]
+|location=[[Salford]]
+|attendance=1,936
+|referee=Oliver Mackey
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2649031
+|team1=[[Sheffield Wednesday F.C.|Sheffield Wednesday]] (3)
+|goals1=
+*[[Jamal Lowe|J. Lowe]] {{goal|70}}
+|team2='''[[Bolton Wanderers F.C.|Bolton Wanderers]] (2)'''
+|goals2=
+|stadium=[[Hillsborough Stadium]]
+|location=[[Sheffield]]
+|attendance= 15,834
+|referee= Elliot Bell
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1
+|penaltyscore=4–5
+|report=https://www.efl.com/match-centre/g2649059
+|team1='''[[Stockport County F.C.|Stockport County]] (3)'''
+|goals1=
+*[[Kyle Wootton|Wootton]] {{goal|51}}
+|team2=[[Doncaster Rovers F.C.|Doncaster Rovers]] (3)
+|goals2=
+*[[Alfie May|May]] {{goal|50}}
+|penalties1=
+*[[Ben Osborn|Osborn]] {{penmiss}}
+*[[Benoný Breki Andrésson|Andrésson]] {{pengoal}}
+*[[Kyle Wootton|Wootton]] {{pengoal}}
+*[[Lewis Fiorini|Fiorini]] {{pengoal}}
+*[[Jason Adigun|Adigun]] {{pengoal}}
+*[[Eoghan O'Connell|O'Connell]] {{penmiss}}
+|penalties2=
+*{{pengoal}} [[Alfie May|May]]
+*{{pengoal}} [[George Broadbent (footballer)|Broadbent]]
+*{{pengoal}} [[Owen Bailey|Bailey]]
+*{{penmiss}} [[Harry Clifton (footballer, born 1998)|Clifton]]
+*{{pengoal}} [[Jamie Sterry|Sterry]]
+*{{pengoal}} [[Hakeeb Adelakun|Adelakun]]
+|stadium=[[Edgeley Park]]
+|location=[[Stockport]]
+|attendance= 4,974
+|referee=Leigh Doughty
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=2–0
+|report=https://www.efl.com/match-centre/g2649061
+|team1=[[Stoke City F.C.|Stoke City]] (2)
+|goals1=
+*[[Oliver Norburn|Norburn]] {{goal|48|o.g.}}
+*[[Róbert Boženík|Boženík]] {{goal|82}}
+|team2='''[[Oldham Athletic A.F.C.|Oldham Athletic]] (4)'''
+|goals2=
+|stadium=[[Bet365 Stadium]]
+|location=[[Stoke-on-Trent]]
+|attendance= 10,157
+|referee=Edward Duckworth
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=17:30 [[British Summer Time|BST]]
+|score=1–4
+|report=https://www.efl.com/match-centre/g2649028
+|team1='''[[Rotherham United F.C.|Rotherham United]] (4)'''
+|goals1=
+*[[Fábio Tavares (footballer, born 2001)|Tavares]] {{goal|87}}
+|team2=[[West Bromwich Albion F.C.|West Bromwich Albion]] (2)
+|goals2=
+*[[Jimmy-Jay Morgan|Morgan]] {{goal|8||61}}
+*[[Harry Whitwell|Whitwell]] {{goal|24}}
+*[[Felix Horn Myhre|Myhre]] {{goal|43}}
+|stadium=[[New York Stadium]] 
+|location=[[Rotherham]]
+|attendance=4,850
+|referee=Tom Reeves
+}}
+{{Football box collapsible
+|date=9 August 2026
+|time=16:00 [[British Summer Time|BST]]
+|score=0–3
+|report=https://www.efl.com/match-centre/g2649030
+|team1='''[[Mansfield Town F.C.|Mansfield Town]] (3)'''
+|goals1=
+|team2=[[Sheffield United F.C.|Sheffield United]] (2)
+|goals2=
+*[[Patrick Bamford|Bamford]] {{goal|4}}
+*[[Mark McGuinness|McGuinness]] {{goal|71}}
+*[[Callum O'Hare|O'Hare]] {{goal|89}}
+|stadium=[[Field Mill]]
+|location=[[Mansfield]]
+|attendance=6,908
+|referee=Stephen Martin
+}}
+
+===Southern section===
+{{Football box collapsible
+|date=6 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=0–1
+|report=https://www.efl.com/match-centre/g2649045
+|team1='''[[Bristol City F.C.|Bristol City]] (2)'''
+|goals1=
+|team2=[[Walsall F.C.|Walsall]] (4)
+|goals2=
+*[[Aaron Pressley|Pressley]] {{goal|47}}
+|stadium=[[Ashton Gate (stadium)|Ashton Gate]]
+|location=[[Bristol]]
+|attendance=9,992
+|referee=Jacob Miles
+|note=Fixture was initially scheduled for 7 August, but was rescheduled to avoid a clash with the [[Bristol International Balloon Fiesta]].<ref>{{cite news |title=Walsall match rescheduled |url=https://www.bcfc.co.uk/city-men-news/walsall-match-rescheduled/ |access-date=20 July 2026 |publisher=Bristol City FC |date=20 July 2026}}</ref>
+}}
+{{Football box collapsible
+|date=7 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–2
+|report=https://www.efl.com/match-centre/g2649053
+|team1='''[[Wycombe Wanderers F.C.|Wycombe Wanderers]] (3)'''
+|goals1=
+*[[Ewan Henderson (footballer)|Henderson]] {{goal|39}}
+|team2=[[Stevenage F.C.|Stevenage]] (3)
+|goals2=
+*[[Dan Kemp (footballer)|Kemp]] {{goal|27}}
+*[[Josh Magennis|Magennis]] {{goal|90+5}}
+|stadium=[[Adams Park]]
+|location=[[High Wycombe]]
+|attendance=2,510
+|referee=Jamie O'Connor
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=13:00 [[British Summer Time|BST]]
+|score=2–1
+|report=https://www.efl.com/match-centre/g2649049
+|team1=[[Cambridge United F.C.|Cambridge United]] (3)
+|goals1=
+*[[Ben Knight (footballer)|Knight]] {{goal|52}}
+*[[Isaac Heath|Heath]] {{goal|57}}
+|team2='''[[Barnet F.C.|Barnet]] (4)'''
+|goals2=
+*[[Kabongo Tshimanga|Tshimanga]] {{goal|49}}
+|stadium=[[Abbey Stadium]]
+|location=[[Cambridge]]
+|attendance=3,521
+|referee= Carl Brook
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=14:00 [[British Summer Time|BST]]
+|score=1–1
+|report=https://www.efl.com/match-centre/g2649041
+|team1='''[[Queens Park Rangers F.C.|Queens Park Rangers]] (2)'''
+|goals1=
+*[[Mark Sykes (footballer)|Sykes]] {{goal|86|o.g.}}
+|team2=[[Millwall F.C.|Millwall]] (2)
+|goals2=
+*[[Luke Cundle|Cundle]] {{goal|53}}
+|penaltyscore=0–2
+|penalties1=
+*[[Ilias Chair|Chair]] {{penmiss}}
+*[[Harvey Vale|Vale]] {{penmiss}}
+*[[Kōki Saitō (footballer)|Saitō]] {{penmiss}}
+*[[Kwame Poku|Poku]] {{penmiss}}
+|penalties2=
+*{{pengoal}} [[Jake Cooper (footballer, born 1995)|Cooper]]
+*{{pengoal}} [[Mark Sykes (footballer)|Sykes]]
+*{{penmiss}} [[Camiel Neghli|Neghli]]
+*{{penmiss}} [[Taïryk Arconte|Arconte]]
+|stadium=[[Loftus Road]]
+|location=[[Shepherd's Bush]]
+|attendance=9,759
+|referee=Matt Donohue
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1
+|report=https://www.efl.com/match-centre/g2649057
+|team1=[[AFC Wimbledon]] (3)
+|goals1=
+*[[Callum Maycock|Maycock]] {{goal|90+7}}
+|penalties1=
+*[[Marcus Browne (footballer)|Browne]] {{pengoal}}
+*[[Jayden Stockley|Stockley]] {{pengoal}}
+*[[James Tilley (footballer)|Tilley]] {{pengoal}}
+*[[Myles Hippolyte|Hippolyte]] {{pengoal}}
+*[[Steve Seddon|Seddon]] {{pengoal}}
+|team2='''[[Newport County A.F.C.|Newport County]] (4)'''
+|goals2=
+*[[Yahya Bamba|Bamba]] {{goal|71}}
+|penalties2=
+*{{pengoal}} [[Gerard Garner|Garner]]
+*{{pengoal}} [[Cameron Norman|Norman]]
+*{{pengoal}} [[Ciaran Brennan|Brennan]]
+*{{pengoal}} [[Harrison Biggins|Biggins]]
+*{{penmiss}} [[Matthew Smith (footballer, born 1999)|Smith]]
+|stadium=[[Plough Lane]]
+|location=[[Wimbledon, London|Wimbledon]]
+|attendance=3,393
+|referee=Paul Howard
+|penaltyscore=5–4
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=0–1
+|report=https://www.efl.com/match-centre/g2649047
+|team1='''[[Bristol Rovers F.C.|Bristol Rovers]] (4)'''
+|goals1=
+|team2=[[Peterborough United F.C.|Peterborough United]] (3)
+|goals2=
+*[[Harry Leonard (footballer, born 2003)|Leonard]] {{goal|19|pen.}}
+|stadium=[[Memorial Stadium (Bristol)|Memorial Stadium]]
+|location=[[Bristol]]
+|attendance= 4,810
+|referee=David Rock
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–1
+|report=https://www.efl.com/match-centre/g2649054
+|team1='''[[Bromley F.C.|Bromley]] (3)'''
+|goals1=
+*[[Michael Cheek|Cheek]] {{goal|33}}
+|team2=[[Reading F.C.|Reading]] (3)
+|goals2=
+*[[Josh Stokes|Stokes]] {{goal|14}}
+|stadium=[[Hayes Lane]]
+|location=[[Bromley]]
+|attendance=3,496
+|referee=Craig Hicks
+|penalties1 =
+*[[Victor Adeboyejo|Adeboyejo]] {{pengoal}}
+*[[JJ McKiernan|McKiernan]] {{pengoal}}
+*[[Marcus Ifill|Ifill]] {{pengoal}}
+*[[Kamil Conteh|Conteh]] {{pengoal}}
+*[[Ethon Archer|Archer]] {{penmiss}}
+|penaltyscore=4–5
+|penalties2 =
+*{{pengoal}} [[Lewis Wing|Wing]]
+*{{pengoal}} [[Charlie Savage (footballer)|Savage]]
+*{{pengoal}} [[Jack Marriott (footballer)|Marriott]]
+*{{pengoal}} [[Liam Fraser|Fraser]]
+*{{pengoal}} [[Randell Williams|Williams]]
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=3–2
+|report=https://www.efl.com/match-centre/g2649044
+|team1=[[Cardiff City F.C.|Cardiff City]] (2)
+|goals1=
+*[[Yousef Salech|Salech]] {{goal|29|pen.|43}}
+*[[Jack Moylan|Moylan]] {{goal|77}}
+|team2='''[[Swindon Town F.C.|Swindon Town]] (4)'''
+|goals2=
+*[[Gabriel Osho|Osho]] {{goal|9|o.g.}}
+*[[Paul Glatzel|Glatzel]] {{goal|62}}
+|stadium=[[Cardiff City Stadium]]
+|location=[[Cardiff]]
+|attendance= 6,168
+|referee=Gavin Ward
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=0–3
+|report=https://www.efl.com/match-centre/g2649043
+|team1='''[[Gillingham F.C.|Gillingham]] (4)'''
+|goals1=
+|team2=[[Luton Town F.C.|Luton Town]] (3)
+|goals2=
+*[[Nahki Wells|Wells]] {{goal|43}}
+*[[Benedict Benagr|Benagr]] {{goal|59}}
+*[[Gideon Kodua|Kodua]] {{goal|78}}
+|stadium=[[Priestfield Stadium]]
+|location=[[Gillingham, Kent|Gillingham]]
+|attendance= 4,015
+|referee=Stephen Parkinson
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2649058
+|team1=[[Leicester City F.C.|Leicester City]] (3)
+|goals1=
+*[[Caleb Okoli|Okoli]] {{goal|15}}
+|team2='''[[Northampton Town F.C.|Northampton Town]] (4)'''
+|goals2=
+|stadium=[[King Power Stadium]]
+|location=[[Leicester]]
+|attendance=9,792
+|referee=Oliver Yates
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=2–0
+|report=https://www.efl.com/match-centre/g2649052
+|team1=[[Leyton Orient F.C.|Leyton Orient]] (3)
+|goals1=
+*[[Demetri Mitchell|Mitchell]] {{goal|85}}
+*[[Idris El Mizouni|El Mizouni]] {{goal|88}}
+|team2='''[[Oxford United F.C.|Oxford United]] (3)'''
+|goals2=
+|stadium=[[Brisbane Road]]
+|location=[[Leyton]]
+|attendance=3,783
+|referee=Alex Chilowicz
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=4–1
+|report=https://www.efl.com/match-centre/g2649050
+|team1=[[Norwich City F.C.|Norwich City]] (2)
+|goals1=
+*[[Mohamed Touré (soccer, born 2004)|Touré]] {{goal|1}}
+*[[Anis Ben Slimane|Slimane]] {{goal|7}}
+*[[Ben Chrisene|Chrisene]] {{goal|43}}
+*[[Andre Brooks|Brooks]] {{goal|59}}
+|team2='''[[Milton Keynes Dons F.C.|Milton Keynes Dons]] (3)'''
+|goals2=
+*[[Ryan Wintle|Wintle]] {{goal|56}}
+|stadium=[[Carrow Road]]
+|location=[[Norwich]]
+|attendance= 20,056
+|referee=Elliot Swallow
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=0–1
+|report=https://www.efl.com/match-centre/g2649055
+|team1='''[[Swansea City A.F.C.|Swansea City]] (2)'''
+|goals1=
+|team2=[[Birmingham City F.C.|Birmingham City]] (2)
+|goals2=
+*[[August Priske|Priske]] {{goal|44}}
+|stadium=[[Swansea.com Stadium]]
+|location=[[Swansea]]
+|attendance= 11,283
+|referee=Ruebyn Ricardo
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2649048
+|team1=[[Watford F.C.|Watford]] (2)
+|goals1=
+*[[Marc Bola|Bola]] {{goal|90+9}}
+|team2='''[[Crawley Town F.C.|Crawley Town]] (4)'''
+|goals2=
+|stadium=[[Vicarage Road]]
+|location=[[Watford]]
+|attendance= 6,907
+|referee=Harry Wager
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=15:00 [[British Summer Time|BST]]
+|score=3–1
+|report=https://www.efl.com/match-centre/g2649056
+|team1=[[West Ham United F.C.|West Ham United]] (2)
+|goals1=
+*[[Taty Castellanos|Castellanos]] {{goal|43||50}}
+*[[Jarrod Bowen|Bowen]] {{goal|45}}
+|team2='''[[Portsmouth F.C.|Portsmouth]] (2)'''
+|goals2=
+*[[Adrian Segečić|Segečić]] {{goal|33}}
+|stadium=[[London Stadium]]
+|location=[[Stratford, London|Stratford]]
+|attendance= 53,369
+|referee=Adam Herczeg
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=17:30 [[British Summer Time|BST]]
+|score=1–3
+|report=https://www.efl.com/match-centre/g2649042
+|team1='''[[Cheltenham Town F.C.|Cheltenham Town]] (4)'''
+|goals1=
+*[[George Miller (footballer, born 1998)|Miller]] {{goal|55}}
+|team2=[[Charlton Athletic F.C.|Charlton Athletic]] (2)
+|goals2=
+*[[Matt Godden|Godden]] {{goal|22}}
+*[[Sonny Carey|Carey]] {{goal|24}}
+*[[Tyreece Campbell|Campbell]] {{goal|37}}
+|stadium=[[Whaddon Road]]
+|location=[[Cheltenham]]
+|attendance=3,119
+|referee=Alan Dale
+}}
+{{Football box collapsible
+|date=8 August 2026
+|time=17:30 [[British Summer Time|BST]]
+|score=0–2
+|report=https://www.efl.com/match-centre/g2649051
+|team1='''[[Colchester United F.C.|Colchester United]] (4)'''
+|goals1=
+|team2=[[Southampton F.C.|Southampton]] (2)
+|goals2=
+*[[Cyle Larin|Larin]] {{goal|72}}
+*[[Romeo Akachukwu|Akachukwu]] {{goal|90+2}}
+|stadium=[[Colchester Community Stadium]]
+|location=[[Colchester]]
+|attendance= 5,822
+|referee=Isaac Searle
+}}
+{{Football box collapsible
+|date=10 August 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=2–0
+|report=https://www.efl.com/match-centre/g2649046
+|team1=[[Plymouth Argyle F.C.|Plymouth Argyle]] (3)
+|goals1=
+*[[Alex Hartridge|Hartridge]] {{goal|90+2}}
+*[[Aribim Pepple|Pepple]] {{goal|90+4}}
+|team2='''[[Exeter City F.C.|Exeter City]] (4)'''
+|goals2= 
+|stadium=[[Home Park]]
+|location=[[Plymouth]]
+|attendance= 16,755
+|referee=Dean Whitestone
+}}
+
+==Second round==
+A total of 46 teams played in the second round: 35 winners from the first round, and the 11 [[Premier League]] clubs not involved in European competitions.<ref name="all_clubs"/> The draw for this round was split on a geographical basis into northern and southern sections, where teams were drawn against a team from the same section. The draw was made on 10 August 2026, hosted by [[David Prutton]] and performed by [[Jobi McAnuff]] and [[Jamie Mackie]].<ref>{{cite news |title=Carabao Cup Round Two draw details confirmed |url=https://efl.com/news/2026/august/06/carabao-cup-round-two-draw-details-confirmed/ |url-status=dead |archive-url=https://web.archive.org/web/20260809152852/https://www.efl.com/news/2026/august/06/carabao-cup-round-two-draw-details-confirmed/ |publisher=English Football League |date=6 August 2026 |access-date=8 August 2026 |archive-date=9 August 2026}}</ref><ref>{{cite news |title=Carabao Cup Round Two draw confirmed |url=https://www.efl.com/news/2026/august/10/carabao-cup-round-two-draw-confirmed/ |publisher=English Football League |date=10 August 2026 |access-date=20 September 2026}}</ref>
+
+{| class="wikitable"
+|+ Number of teams per tier still in the competition
+! width="20%" | Premier League{{efn|Nine Premier League teams joined the competition in the third round.}}
+! width="20%" | Championship
+! width="20%" | League One
+! width="20%" | League Two
+! width="20%" | Total
+|-
+|{{composition bar|20|20|width=150|#99FF99}}
+|{{composition bar|17|24|width=150|#99FF99}}
+|{{composition bar|14|24|width=150|#99FF99}}
+|{{composition bar|4|24|width=150|#99FF99}}
+|{{composition bar|55|92|width=150|#CCCCFF}}
+|}
+{{Notelist}}
+
+===Northern section===
+{{Football box collapsible
+|date=25 August 2026
+|time=19:30 [[British Summer Time|BST]]
+|score=1–3
+|report=https://www.efl.com/match-centre/g2679880
+|team1='''[[Doncaster Rovers F.C.|Doncaster Rovers]] (3)'''
+|goals1= 
+*[[Isaac Hutchinson|Hutchinson]] {{goal|90+2}}
+|team2=[[Middlesbrough F.C.|Middlesbrough]] (2)
+|goals2= 
+*[[Kyle Joseph|Joseph]] {{goal|34}}
+*[[Will Lankshear|Lankshear]] {{goal|78}}
+*[[Jeremy Sarmiento|Sarmiento]] {{goal|87}}
+|stadium=[[Eco-Power Stadium]]
+|location=[[Doncaster]]
+|attendance=6,883
+|referee=Edward Duckworth
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=3–2
+|report=https://www.efl.com/match-centre/g2679881
+|team1=[[Barnsley F.C.|Barnsley]] (3)
+|goals1=
+*[[Reyes Cleary|Cleary]] {{goal|29}}
+*[[Tyrese Noslin|Noslin]] {{goal|31}}
+*[[Corey O'Keeffe|O'Keeffe]] {{goal|38}}
+|team2='''[[Crewe Alexandra F.C.|Crewe Alexandra]] (4)'''
+|goals2=
+*[[Adrien Thibaut|Thibaut]] {{goal|21}}
+*[[Joel Ewusi|Ewusi]] {{goal|89}}
+|stadium=[[Oakwell]]
+|location=[[Barnsley]]
+|attendance=3,002
+|referee=Leigh Doughty
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–2
+|report=https://www.efl.com/match-centre/g2679878
+|team1='''[[Blackburn Rovers F.C.|Blackburn Rovers]] (2)'''
+|goals1=
+*[[Dapo Afolayan|Afolayan]] {{goal|55}}
+|team2=[[Sheffield United F.C.|Sheffield United]] (2)
+|goals2=
+*[[Tom Cannon (footballer)|Cannon]] {{goal|20}}
+*[[Romelle Donovan|Donovan]] {{goal|81}}
+|stadium=[[Ewood Park]]
+|location=[[Blackburn]]
+|attendance=6,826
+|referee=David Webb
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–4
+|report=https://www.efl.com/match-centre/g2679883
+|team1='''[[Blackpool F.C.|Blackpool]] (3)'''
+|goals1=
+*[[Leighton Clarkson|Clarkson]] {{goal|45}}
+|team2=[[Lincoln City F.C.|Lincoln City]] (2)
+|goals2=
+*[[Tanto Olaofe|Olaofe]] {{goal|36}}
+*[[Tom Bayliss|Bayliss]] {{goal|53}}
+*[[Rob Street|Street]] {{goal|55}}
+*[[Callum Elder|Elder]] {{goal|77}}
+|stadium=[[Bloomfield Road]]
+|location=[[Blackpool]]
+|attendance=2,407
+|referee=Harry Wager
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=4–0
+|report=https://www.efl.com/match-centre/g2679886
+|team1=[[Fleetwood Town F.C.|Fleetwood Town]] (4)
+|goals1=
+*[[Will Boyle|Boyle]] {{goal|8|o.g.}}
+*[[Ched Evans|Evans]] {{goal|28||35}}
+*[[Will Davies (footballer)|Davies]] {{goal|90}}
+|team2='''[[Shrewsbury Town F.C.|Shrewsbury Town]] (4)'''
+|goals2=
+|stadium=[[Highbury Stadium (Fleetwood)|Highbury Stadium]]
+|location=[[Fleetwood]]
+|attendance=1,066
+|referee=Thomas Parsons
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=0–2
+|report=https://www.efl.com/match-centre/g2679884
+|team1='''[[Sheffield Wednesday F.C.|Sheffield Wednesday]] (3)'''
+|goals1= 
+|team2=[[Wolverhampton Wanderers F.C.|Wolverhampton Wanderers]] (2)
+|goals2= 
+*[[Sil Swinkels|Swinkels]] {{goal|3|o.g.}}
+*[[Saheed Olagunju|Olagunju]] {{goal|45+1}}
+|stadium=[[Hillsborough Stadium]]
+|location=[[Sheffield]]
+|attendance=13,586
+|referee=Ben Speedie
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–1
+|penaltyscore=4–5
+|report=https://www.efl.com/match-centre/g2679876
+|team1='''[[Stoke City F.C.|Stoke City]] (2)'''
+|goals1=
+*[[Róbert Boženík|Boženík]] {{goal|39}}
+|team2=[[Hull City A.F.C.|Hull City]] (1)
+|goals2=
+*[[Kieran Dowell|Dowell]] {{goal|45}}
+|stadium=[[Bet365 Stadium]]
+|location=[[Stoke-on-Trent]]
+|attendance=7,141
+|referee=John Busby
+|penalties1 =
+*[[Sorba Thomas|Thomas]] {{pengoal}}
+*[[Sam Gallagher (footballer, born 1995)|Gallagher]] {{pengoal}}
+*[[Bosun Lawal|Lawal]] {{pengoal}}
+*[[George Hirst (footballer)|Hirst]] {{penmiss}}
+*[[Djibril Soumaré|Soumaré]] {{pengoal}}
+|penalties2 =
+*{{pengoal}} [[Hidemasa Morita|Morita]]
+*{{pengoal}} [[Paddy McNair|McNair]] 
+*{{pengoal}} [[Elliot Stroud|Stroud]] 
+*{{pengoal}} [[Liam Millar|Millar]] 
+*{{pengoal}} [[Mohamed Belloumi|Belloumi]] 
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=0–2
+|report=https://www.efl.com/match-centre/g2679879
+|team1='''[[Nottingham Forest F.C.|Nottingham Forest]] (1)'''
+|goals1=
+|team2=[[Leeds United F.C.|Leeds United]] (1)
+|goals2=
+*[[Daniel James (footballer)|James]] {{goal|50}}
+*[[James Justin|Justin]] {{goal|75}}
+|stadium=[[City Ground]]
+|location=[[West Bridgford]]
+|attendance=24,542
+|referee=Andrew Kitchen
+}}
+{{Football box collapsible
+|date=26 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=0–0
+|penaltyscore=4–2
+|report=https://www.efl.com/match-centre/g2679885
+|team1=[[Bradford City A.F.C.|Bradford City]] (3)
+|goals1=
+|team2='''[[Burnley F.C.|Burnley]] (2)'''
+|goals2=
+|penalties1=
+*[[Antoni Sarcevic|Sarcevic]] {{pengoal}}
+*[[Macaulay Gillesphey|Gillesphey]] {{pengoal}}
+*[[Ibou Touray|Touray]] {{pengoal}}
+*[[Adam Phillips (footballer)|Phillips]] {{pengoal}}
+|penalties2=
+*{{pengoal}} [[Zian Flemming|Flemming]]
+*{{penmiss}} [[Zeki Amdouni|Amdouni]]
+*{{penmiss}} [[Jacob Bruun Larsen|Larsen]]
+*{{pengoal}} [[Marcus Edwards|Edwards]]
+|stadium=[[Valley Parade]]
+|location=[[Bradford]]
+|attendance=19,686
+|referee=Martin Coy
+}}
+{{Football box collapsible
+|date=26 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=3–2
+|report=https://www.efl.com/match-centre/g2679877
+|team1=[[Newcastle United F.C.|Newcastle United]] (1)
+|goals1=
+*[[Bazoumana Touré|Touré]] {{goal|38}}
+*[[Harvey Barnes|Barnes]] {{goal|48||81}}
+|team2='''[[West Bromwich Albion F.C.|West Bromwich Albion]] (2)'''
+|goals2=
+*[[Isaac Price|Price]] {{goal|19||77|pen.}} 
+|stadium=[[St James' Park]]
+|location=[[Newcastle upon Tyne]]
+|attendance=51,405
+|referee=[[Bobby Madley]]
+}}
+{{Football box collapsible
+|date=26 August 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=0–4
+|report=https://www.efl.com/match-centre/g2679882
+|team1='''[[Preston North End F.C.|Preston North End]] (2)'''
+|goals1=
+|team2=[[Everton F.C.|Everton]] (1)
+|goals2=
+*[[Thierno Barry (footballer, born 2002)|Barry]] {{goal|25||59||70}}
+*[[Brennan Johnson|Johnson]] {{goal|72}}
+|stadium=[[Deepdale]]
+|location=[[Preston, Lancashire|Preston]]
+|attendance=16,834
+|referee=[[Tony Harrington]]
+}}
+
+===Southern section===
+{{Football box collapsible
+|date=25 August 2026
+|time=19:00 [[British Summer Time|BST]]
+|score=1–2
+|report=https://www.efl.com/match-centre/g2679889
+|team1='''[[Cardiff City F.C.|Cardiff City]] (2)'''
+|goals1= 
+*[[Yousef Salech|Salech]] {{goal|90+3}}
+|team2=[[Norwich City F.C.|Norwich City]] (2)
+|goals2= 
+*[[Mathias Kvistgaarden|Kvistgaarden]] {{goal|25}}
+*[[Ante Crnac|Crnac]] {{goal|78}}
+|stadium=[[Cardiff City Stadium]]
+|location=[[Cardiff]]
+|attendance=5,432
+|referee=James Bell
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=0–1
+|report=https://www.efl.com/match-centre/g2679891
+|team1='''[[Cambridge United F.C.|Cambridge United]] (3)'''
+|goals1=
+|team2=[[Millwall F.C.|Millwall]] (2)
+|goals2=
+*[[Jake Cooper (footballer, born 1995)|Cooper]] {{goal|9}}
+|stadium=[[Abbey Stadium]]
+|location=[[Cambridge]]
+|attendance=5,363
+|referee=Paul Howard
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=3–1
+|report=https://www.efl.com/match-centre/g2679888
+|team1=[[Ipswich Town F.C.|Ipswich Town]] (1)
+|goals1=
+*[[Sindre Walle Egeli|Egeli]] {{goal|62}}
+*[[Marcelino Núñez|Núñez]] {{goal|71||90+1}}
+|team2='''[[Leicester City F.C.|Leicester City]] (3)'''
+|goals2=
+*[[Olabade Aluko|Aluko]] {{goal|67}}
+|stadium=[[Portman Road]]
+|location=[[Ipswich]]
+|attendance=21,559
+|referee=Lewis Smith
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=2–4
+|report=https://www.efl.com/match-centre/g2679896
+|team1='''[[Plymouth Argyle F.C.|Plymouth Argyle]] (3)'''
+|goals1=
+*[[Oliver Irow|Irow]] {{goal|21}}
+*[[Xavier Amaechi|Amaechi]] {{goal|54}}
+|team2=[[Coventry City F.C.|Coventry City]] (1)
+|goals2=
+*[[Taiwo Awoniyi|Awoniyi]] {{goal|3}}
+*[[Jack Rudoni|Rudoni]] {{goal|5}}
+*[[Ephron Mason-Clark|Mason-Clark]] {{goal|67}}
+*[[Victor Torp|Torp]] {{goal|78}}
+|stadium=[[Home Park]]
+|location=[[Plymouth]]
+|attendance=14,210
+|referee=Elliott Swallow
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–4
+|report=https://www.efl.com/match-centre/g2679893
+|team1='''[[Southampton F.C.|Southampton]] (2)'''
+|goals1=
+*[[Léo Scienza|Scienza]] {{goal|10}}
+|team2=[[West Ham United F.C.|West Ham United]] (2)
+|goals2=
+*[[Joshua Ajala|Ajala]] {{goal|41||53}}
+*[[Taty Castellanos|Castellanos]] {{goal|75}}
+*[[Jarrod Bowen|Bowen]] {{goal|84}}
+|stadium=[[St Mary's Stadium]]
+|location=[[Southampton]]
+|attendance=15,867
+|referee=Ruebyn Ricardo
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=0–3
+|report=https://www.efl.com/match-centre/g2679890
+|team1='''[[Stevenage F.C.|Stevenage]] (3)'''
+|goals1=
+|team2=[[Reading F.C.|Reading]] (3)
+|goals2=
+*[[Jacob Brown (footballer)|Brown]] {{goal|9}}
+*[[Paddy Lane (footballer)|Lane]] {{goal|24}}
+*[[Randell Williams|Williams]] {{goal|85}}
+|stadium=[[Broadhall Way]]
+|location=[[Stevenage]]
+|attendance=2,013
+|referee=Richard Eley
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=0–0
+|penaltyscore=5–6
+|report=https://www.efl.com/match-centre/g2679887
+|team1='''[[Walsall F.C.|Walsall]] (4)'''
+|goals1=
+|team2=[[Leyton Orient F.C.|Leyton Orient]] (3)
+|goals2=
+|stadium=[[Bescot Stadium]]
+|location=[[Walsall]]
+|attendance=2,679
+|referee=Andrew Humphries
+|penalties1 =
+*[[Lewis Simper|Simper]] {{penmiss}}
+*[[Courtney Clarke|Clarke]] {{pengoal}}
+*[[Mason Hancock|Hancock]] {{pengoal}}
+*[[Tai Sodje|Sodje]] {{pengoal}}
+*[[Aaron Pressley|Pressley]] {{pengoal}}
+*[[Charlie Crew|Crew]] {{pengoal}}
+*[[Declan Skura|Skura]] {{penmiss}}
+|penalties2 =
+*{{penmiss}} [[Jaze Kabia|Kabia]]
+*{{pengoal}} [[Isaac Hayden|Hayden]] 
+*{{pengoal}} [[Theo Archibald|Archibald]] 
+*{{pengoal}} [[Idris El Mizouni|El Mizouni]] 
+*{{pengoal}} [[Zech Obiero|Obiero]] 
+*{{pengoal}} [[Fin Stevens|Stevens]] 
+*{{pengoal}} [[Joseph Olowu|Olowu]] 
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–5
+|report=https://www.efl.com/match-centre/g2679894
+|team1='''[[Watford F.C.|Watford]] (2)'''
+|goals1=
+*[[Mamadou Doumbia (footballer, born 2006)|Doumbia]] {{goal|73}}
+|team2=[[Peterborough United F.C.|Peterborough United]] (3)
+|goals2=
+*[[James Clarridge|Clarridge]] {{goal|10|o.g.}}
+*[[Harry Leonard (footballer, born 2003)|Leonard]] {{goal|23||51}}
+*[[Bolu Shofowoke|Shofowoke]] {{goal|55}}
+*[[Harrison Jones (English footballer)|Jones]] {{goal|64}}
+|stadium=[[Vicarage Road]]
+|location=[[Watford]]
+|attendance=7,978
+|referee=Isaac Searle
+}}
+{{Football box collapsible
+|date=25 August 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=1–6
+|report=https://www.efl.com/match-centre/g2679892
+|team1='''[[Birmingham City F.C.|Birmingham City]] (2)'''
+|goals1=
+*[[Demarai Gray|Gray]] {{goal|28}}
+|team2=[[Brentford F.C.|Brentford]] (1)
+|goals2=
+*[[Callum Wilson|Wilson]] {{goal|6}}
+*[[Aaron Hickey|Hickey]] {{goal|35}}
+*[[Nathan Collins|Collins]] {{goal|40||77}}
+*[[Mikkel Damsgaard|Damsgaard]] {{goal|70}}
+*[[Igor Thiago|Thiago]] {{goal|73}}
+|stadium=[[St Andrew's (stadium)|St Andrew's]]
+|location=[[Birmingham]]
+|attendance=17,722
+|referee=[[Tim Robinson (referee)|Tim Robinson]]
+}}
+{{Football box collapsible
+|date=26 August 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=5–1
+|report=https://www.efl.com/match-centre/g2679898
+|team1=[[Tottenham Hotspur F.C.|Tottenham Hotspur]] (1)
+|goals1=
+*[[Mikey Moore|Moore]] {{goal|41}}
+*[[Dominic Solanke|Solanke]] {{goal|45}}
+*[[Kevin Danso|Danso]] {{goal|67}}
+*[[Sávio (footballer, born 2004)|Sávio]] {{goal|82}}
+*[[Ben Davies (footballer, born 1993)|Davies]] {{goal|85}}
+|team2='''[[Charlton Athletic F.C.|Charlton Athletic]] (2)'''
+|goals2=
+*[[Lloyd Jones (English footballer)|Jones]] {{goal|87}}
+|stadium=[[Tottenham Hotspur Stadium]]
+|location=[[Tottenham]]
+|attendance=49,008
+|referee=Adam Herczeg
+}}
+{{Football box collapsible
+|date=27 August 2026
+|time=19:30 [[British Summer Time|BST]]
+|score=2–0
+|report=https://www.efl.com/match-centre/g2679897
+|team1=[[Chelsea F.C.|Chelsea]] (1)
+|goals1=
+*[[Danny Welbeck|Welbeck]] {{goal|50}}
+*[[Hakeem Odoffin|Odoffin]] {{goal|79|o.g.}}
+|team2='''[[Luton Town F.C.|Luton Town]] (3)'''
+|goals2=
+|stadium=[[Stamford Bridge (stadium)|Stamford Bridge]]
+|location=[[Fulham]]
+|attendance= 32,210
+|referee=Elliot Bell
+}}
+{{Football box collapsible
+|date=27 August 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=3–0
+|report=https://www.efl.com/match-centre/g2679895
+|team1=[[Fulham F.C.|Fulham]] (1)
+|goals1=
+*[[Emile Smith Rowe|Smith Rowe]] {{goal|37}}
+*[[Rodrigo Muniz (Brazilian footballer)|Muniz]] {{goal|42}}
+*[[Gonzalo García (footballer, born 2004)|García]] {{goal|90+3}}
+|team2='''[[AFC Wimbledon]] (3)'''
+|goals2=
+|stadium=[[Craven Cottage]]
+|location=[[Fulham]]
+|attendance=17,714
+|referee=Anthony Backhouse
+}}
+
+==Third round==
+32 teams played in the third round: the 23 second round winners, and the nine Premier League teams involved in European competition. The draw was made on 26 August 2026 by [[Jermaine Beckford]] and [[Jamie Redknapp]].<ref>{{cite news |title=Carabao Cup Round Three Draw: Anfield set to host Liverpool vs Tottenham |url=https://www.efl.com/news/2026/august/26/carabao-cup-round-three-draw--anfield-set-to-host-liverpool-vs-tottenham |publisher=English Football League |date=26 August 2026 |access-date=27 August 2026}}</ref>
+
+In order to avoid scheduling issues, the eight clubs playing in the [[2026–27 UEFA Champions League|UEFA Champions League]] and [[2026–27 UEFA Europa League|UEFA Europa League]] could not be drawn against each other in the EFL Cup third round. There was a "pre-draw" to decide whether each of the eight clubs would play home or away. Eight clubs were then drawn from the remaining 24 to play against the eight Champions or Europa League sides. The remainder of the draw was open as usual.<ref>{{cite news|url=https://www.flashscore.com/news/all-you-need-to-know-about-the-efl-cup-draws-key-dates-teams-more/O2msMw0B/|title=All you need to know about the EFL Cup: Draws, key dates, teams & more|website=Flashscore|date=25 August 2026|access-date=26 August 2026}}</ref>
+
+Six Premier League clubs were eliminated in the third round, with all six defeats coming against fellow top-flight opposition. Tottenham Hotspur, Manchester United and Leeds United were joined in exiting the competition by newly promoted [[Ipswich Town F.C.|Ipswich Town]], Hull City and Coventry City.<ref>{{cite magazine |author=Langell, Amanda |title=2026–27 Carabao Cup Fourth Round Draw: All Fixtures |url=https://www.si.com/soccer/2026-27-carabao-cup-fourth-round-draw-all-fixtures |magazine=[[Sports Illustrated]] |date=16 September 2026 |access-date=22 September 2026}}</ref> Fleetwood Town, the only [[EFL League Two|fourth-tier]] side to reach the third round,<ref>{{cite web |author=Varley, Sam |title=Preview: Fleetwood Town vs Sheffield United - prediction, team news, lineups |url=https://www.sportsmole.co.uk/football/fleetwood-town/league-cup/preview/fleetwood-vs-sheff-utd-prediction-team-news-lineups_605129.html |website=Sports Mole |date=14 September 2026 |access-date=22 September 2026}}</ref> recorded the round's biggest upset by defeating [[EFL Championship|Championship]] club [[Sheffield United F.C.
+|Sheffield United]] 1-0, with goalkeeper [[Jay Lynch]] keeping his third clean sheet in as many EFL Cup matches this season.<ref>{{cite news |author=Statton, Kimberly |title=Fleetwood Stun Sheffield United to Make Carabao Cup History |url=https://thesportsencounter.com/2026/09/16/fleetwood-sheffield-united-1-0-carabao-cup-2026/ |publisher=The Sports Encounter |date=16 September 2026 |access-date=22 September 2026}}</ref><ref>{{cite news |author=Brown, Findlay |title=Fleetwood Town vs Arsenal Carabao Cup tie given official date and kick-off time |url=https://uk.sports.yahoo.com/news/fleetwood-town-vs-arsenal-carabao-160933767.html |work=Yahoo Sports |publisher=Yahoo |date=18 September 2026 |access-date=22 September 2026}}</ref><ref name="clean_sheets"/>
+
+[[Tottenham Hotspur F.C.|Tottenham Hotspur's]] difficult start to the season continued with a 3-1 defeat by Liverpool at [[Anfield]].<ref name="Pool_Spurs">{{cite news |author=Patel, Aadam |title=Liverpool 3-1 Tottenham: Dominik Szoboszlai stunner knocks Spurs out of Carabao Cup |url=https://www.bbc.com/sport/football/live/cx980d6p7l20t |work=[[BBC Sport]] |publisher=British Broadcasting Corporation |date=15 September 2026 |access-date=22 September 2026}}</ref><ref name="Spurs_Diff>{{cite news |title=Teenager Dowman scores twice as Arsenal progress in League Cup |url=https://www.reuters.com/sports/soccer/teenager-dowman-scores-twice-arsenal-progress-league-cup-2026-09-15/ |work=[[Reuters]] |publisher=Thomson Reuters |date=15 September 2026 |access-date=22 September 2026}}</ref> [[Alexis Mac Allister]] and [[Cody Gakpo]] put Liverpool two goals ahead before [[Conor Gallagher]] reduced the deficit midway through the second-half, scoring Tottenham's first goal against Premier League opposition this season.<ref name="Pool_Spurs"/><ref name="Spurs_Diff/> [[Dominik Szoboszlai]] restored Liverpool's two-goal advantage in stoppage time with a long-range strike to send the 10-time winners into the fourth round.<ref name="Pool_Spurs"/><ref>{{cite news |author=Foster, Richard |title=The big League Cup final quiz |url=https://www.theguardian.com/football/2026/mar/21/big-league-cup-final-quiz-arsenal-manchester-city-wembley-sunday |work=The Guardian |publisher=Guardian Media Group |date=21 March 2026 |access-date=22 September 2026}}</ref>
+
+The round also brought disappointment for [[Manchester United F.C.|Manchester United]],<ref>{{cite news |title=Michael Carrick shoulders blame for Manchester United's Carabao Cup collapse against Brighton |url=https://www.rte.ie/sport/soccer/2026/0916/1591837-carrick-shoulders-blame-for-uniteds-carabao-cup-collapse/ |work=[[RTÉ Sport]] |publisher=Raidió Teilifís Éireann |date=17 September 2026 |access-date=24 September 2026}}</ref><ref>{{cite news |author=Jackson, Jamie |title=‘We can’t accept that’: Carrick urges Manchester United to respond after cup collapse |url=https://www.theguardian.com/football/2026/sep/16/michael-carrick-manchester-united-carabao-cup-third-round-defeat-brighton |work=[[The Guardian]] |publisher=Guardian News & Media |date=17 September 2026 |access-date=24 September 2026}}</ref> who after surrendering a two-goal lead against Brighton. [[Shea Lacey]] and [[Mason Mount]] gave United an early advantage, but Brighton responded through [[Charalampos Kostoulas]], [[Pascal Groß]] and [[Maxim De Cuyper]] to win 3-2.<ref>{{cite news |author=Ferridge, Arthur |title=Manchester United 2-3 Brighton: Red Devils suffer Carabao Cup heartbreak again after shock comeback |url=https://www.standard.co.uk/sport/football/man-utd-brighton-carabao-cup-b1297269.html |work=[[The Standard (London newspaper)|The Standard]] |publisher=Evening Standard Limited |date=16 September 2026 |access-date=22 September 2026}}</ref> It was the first time in 50 years that United had lost at home after leading by two goals.<ref>{{cite news |author=Baldwin, Alan |title=Man Utd out of League Cup after going 2-0 up at home and then losing 3-2 in 50-year first |url=https://www.reuters.com/sports/soccer/man-utd-out-league-cup-after-going-2-0-up-home-then-losing-3-2-50-year-first-2026-09-16/ |work=[[Reuters]] |publisher=Thomson Reuters |date=16 September 2026 |access-date=22 September 2026}}</ref>
+
+In contrast, Chelsea produced a comeback of their own against Leeds United, recovering from 2-0 down to win 6-3 in a nine-goal contest, with eight of the nine goals coming after half-time.<ref>{{cite news |author=Arya, Yosua |title=Chaos at the Stamford Bridge! Cole Palmer inspires incredible Chelsea comeback as Leeds collapse in nine-goal Carabao Cup thriller |url=https://www.goal.com/en-gb/lists/chelsea-leeds-carabao-cup-nine-goals/blt39262f61875c8cac |work=[[Goal (website)|Goal]] |publisher=Integrated Media Company |date=9 September 2026 |access-date=22 September 2026}}</ref><ref>{{cite news |author=O'Connor, Robert |title=Chelsea blitz Leeds with second-half comeback in Carabao Cup thriller |url=https://www.independent.co.uk/sport/football/chelsea-leeds-carabao-cup-cole-palmer-b3047616.html |work=[[The Independent]] |publisher=Independent Digital News and Media |date=9 September 2026 |access-date=22 September 2026}}</ref> The match also marked the competitive debut of 16-year-old midfielder [[Reggie Watson]], son of former Premier League player [[Ben Watson (footballer, born July 1985)|Ben Watson]], who scored [[Wigan Athletic F.C.|Wigan Athletic's]] FA Cup final winner against Manchester City in [[2013 FA Cup final|2013]].<ref name="Watson_Chelsea">{{cite news |author=[[Agence France-Presse]] |title=Palmer, Rogers spark Chelsea's 6-goal spree in League Cup comeback |url=https://www.thescore.com/news/3595934/palmer-rogers-spark-chelseas-6-goal-spree-in-league-cup-comeback |work=theScore |publisher=Score Media and Gaming Inc. |date=9 September 2026 |access-date=22 September 2026}}</ref> Reggie became the fourth-youngest player to start a competitive match in [[Chelsea F.C.#History|Chelsea's history]] at the time of his debut.<ref name="Watson_Chelsea"/> [[Morgan Rogers]] was introduced at half-time and provided three<!-- DO NOT CHANGE: Sources, including Chelsea themselves, state that Rogers provided three assists. --> [[Assist (association football)|assists]] as Chelsea scored six times after the break to complete their comeback.<ref>{{cite web |author=Tear, Yann |title=Chelsea mount spectacular recovery via four half-time subs to see off Leeds United in Carabao Cup feast |url=https://www.capitalfootball.co.uk/single-post/chelsea-mount-spectacular-recovery-via-four-half-time-subs-to-see-off-leeds-united-in-carabao-cup-fe |website=Capital Football UK |date=18 September 2026 |access-date=22 September 2026}}</ref><ref>{{cite web |author=Erluson, Brynjar Ingi |title=Taldi sig eiga verðlaunin skilið - „Ég lagði upp fjögur og hann skoraði úr víti!“ |url=https://www.fotbolti.net/news/09-09-2026/taldi-sig-eiga-verdlaunin-skilid-eg-lagdi-upp-fjogur-og-hann-skoradi-ur-viti |website=Fotbolti.net |language=Icelandic |date=9 September 2026 |access-date=22 September 2026}}</ref><ref>{{cite web |title=Analysis: How devastating Palmer and Rogers helped turn tie around |url=https://www.chelseafc.com/en/news/article/analysis-how-devastating-palmer-and-rogers-helped-turn-tie-around |website=chelseafc.com |publisher=Chelsea F.C. |date=10 September 2026 |access-date=22 September 2026}}</ref> 
+
+[[Ryan Christie]] was another prominent individual performer in the third round, earning a nomination for the [[Carabao Energy Drink#Sponsorship|Carabao]] Cup Player of the Round.<ref>{{cite news |title='Here's hoping for a few more' - Christie |url=https://www.bbc.com/sport/football/articles/c36ljzw054ro |work=BBC Sport |publisher=British Broadcasting Corporation |date=9 September 2026 |access-date=22 September 2026}}</ref><ref name="Round3_Noms">{{cite news |title=Vote for the Carabao Cup Player of the Round - Round Three |url=https://www.efl.com/news/2026/september/21/Vote-for-the-Carabao-Cup-Player-of-the-Round--Round-Three/ |publisher=English Football League |date=21 September 2026 |access-date=22 September 2026}}</ref> The Scottish midfielder scored three times in a 4-0 victory over Championship side [[Lincoln City F.C.|Lincoln City]], becoming the first Bournemouth player to achieve the feat in the League Cup.<ref name="Chrstie_Triple">{{cite news |author=Mitchener, Mark |title=Christie breaks new ground with hat-trick |url=https://sports.yahoo.com/articles/christie-breaks-ground-hat-trick-162430582.html |work=Yahoo Sports |publisher=Yahoo |date=9 September 2026 |access-date=22 September 2026}}</ref> It came in [[AFC Bournemouth|Bournemouth's]] 175th League Cup match since the competition began in 1960.<ref name="Chrstie_Triple"/>
+
+Elsewhere, Everton advanced with a 1-0 victory over [[Wolverhampton Wanderers F.C.|Wolves]],<ref>{{cite news |author=Markham, Carl |title=Tyler Dibling's progression at Everton hailed as he shines in win over Wolves |url=https://www.irishnews.com/sport/soccer/tyler-diblings-progression-at-everton-hailed-as-he-shines-in-win-over-wolves-YQ2GLIFU6NII3D7AZ6SY5JQ2YM/ |work=[[The Irish News]] |publisher=The Irish News Ltd |date=16 September 2026 |access-date=24 September 2026}}</ref> while [[Coventry City F.C.|Coventry]] were defeated 3-1 by [[Aston Villa F.C.|Aston Villa]],<ref>{{cite news |title=Coventry 1-3 Aston Villa: What Lampard said |url=https://www.bbc.com/sport/football/articles/c6vgy1jgjp8jo |work=[[BBC Sport]] |publisher=British Broadcasting Corporation |date=17 September 2026 |access-date=24 September 2026}}</ref> with [[Tammy Abraham]] scoring twice.<ref>{{cite web |author=Dawson, Jack |title=Nicolas Jackson facing Aston Villa axe after Unai Emery has mind made up for him |url=https://www.footballinsider247.com/aston-villa/match/nicolas-jackson-facing-aston-villa-axe-after-unai-emery-has-mind-made-up-for-him |website=Football Insider |publisher=[[Future plc]] |date=18 September 2026 |access-date=24 September 2026}}</ref><ref>{{cite news |author=Fisher, Ben |title=Tammy Abraham's double powers Aston Villa to Carabao Cup win at Coventry |url=https://www.theguardian.com/football/2026/sep/16/coventry-aston-villa-carabao-cup-third-round-match-report |work=[[The Guardian]] |publisher=Guardian Media Group |date=16 September 2026 |access-date=24 September 2026}}</ref> [[Fulham F.C.|Fulham]] defeated West Ham 3-2,<ref>{{cite news |author=Steinberg, Jacob |title=Oscar Bobb takes Fulham past stubborn West Ham and into Carabao Cup last 16 |url=https://www.theguardian.com/football/2026/sep/15/west-ham-fulham-carabao-cup-third-round-match-report |work=[[The Guardian]] |publisher=Guardian Media Group |date=15 September 2026 |access-date=24 September 2026}}</ref> [[Brentford F.C.|Brentford]] beat Reading 2-1 and Peterborough United overcame Barnsley 7-6 on penalties after a 3-3 draw,<ref>{{cite news |author=Coates, Charlotte |title=Let them ref the games and be humans - Andrews |url=https://www.bbc.com/sport/football/articles/cxj06nmjl3l6o |work=BBC Sport |publisher=British Broadcasting Corporation |date=15 September 2026 |access-date=24 September 2026}}</ref><ref>{{cite news |title=Peterborough United 3-3 Barnsley |url=https://www.bbc.com/sport/football/live/c5x2zjpgwxlgt |work=BBC Sport |publisher=British Broadcasting Corporation |date=15 September 2026 |access-date=24 September 2026}}</ref> reaching the fourth round for the first time since [[2009–10 Football League Cup|2009]].<ref>{{cite news |title=Peterborough 3-3 Barnsley (7-6 on pens): Posh edge Carabao Cup third-round tie on penalties |url=https://www.skysports.com/football/news/13582702/peterborough-3-3-barnsley-7-6-on-pens-posh-edge-carabao-cup-third-round-tie-on-penalties |work=[[Sky Sports]] |publisher=Sky UK Limited |date=15 September 2026 |access-date=24 September 2026}}</ref> Manager [[Luke Williams (football manager)|Luke Williams]] oversaw the victory before being sacked four days later.<ref>{{cite news |author=Aloia, Andrew |title=Lowly Peterborough sack manager Williams |url=https://www.bbc.com/sport/football/articles/crz6z7ypq6x8o |work=BBC Sport |publisher=British Broadcasting Corporation |date=19 September 2026 |access-date=24 September 2026}}</ref>
+
+[[Crystal Palace F.C.|Crystal Palace]] defeated Middlesbrough 3-0,<ref>{{cite news |author=Tarling, Theo |title=Strand-Larsen brace sees Crystal Palace ease past Middlesbrough |url=https://www.london-now.co.uk/sport/26533621.strand-larsen-brace-sees-crystal-palace-ease-past-middlesbrough/ |work=London Now |publisher=Newsquest Media Group Ltd |date=8 September 2026 |access-date=24 September 2026}}</ref> with [[Jørgen Strand Larsen]] proving an aerial threat as he scored twice with [[Header (association football)|headers]] and was involved in all three goals,<ref name="Round3_Noms"/> setting up [[Daichi Kamada]] for the third.<ref name="Round3_Noms"/> Earlier in the round, Newcastle United, Sunderland and Bradford City had also secured victories.<ref>{{cite news |title=Carabao Cup round-up: Christie on fire, Toon slay Lions |url=https://www.rte.ie/sport/soccer/2026/0908/1590696-carabao-cup-round-up-christie-on-fire-toon-slay-lions/ |work=[[RTÉ Sport]] |publisher=Raidió Teilifís Éireann |date=8 September 2026 |access-date=24 September 2026}}</ref>
+
+Arsenal also progressed, defeating Ipswich Town 4-2 at [[Portman Road]].<ref name="Dowman_Double>{{cite news |author=Herman, Martyn |title=Teenager Dowman scores twice as Arsenal progress in League Cup |url=https://www.reuters.com/sports/soccer/teenager-dowman-scores-twice-arsenal-progress-league-cup-2026-09-15/ |work=[[Reuters]] |publisher=Thomson Reuters |date=15 September 2026 |access-date=22 September 2026}}</ref> Sixteen-year-old [[Max Dowman]], a fellow nominee for the Carabao Cup Player of the Round, scored a brace for the Gunners, while [[Mikel Merino]] and [[Noni Madueke]] also found the net.<ref name="Dowman_Double/><ref name="Round3_Noms"/>
+
+The final third-round fixture saw holders Manchester City begin their title defence with a 5-0 victory over [[Norwich City F.C.|Norwich City]] at the Etihad Stadium.<ref>{{cite web |author=Sharpe, Katharine |title=When is the EFL Cup fourth round draw? |url=https://www.bbc.com/sport/football/articles/clyegmmvr4vo |work=BBC Sport |publisher=British Broadcasting Corporation |date=16 September 2026 |access-date=24 September 2026}}</ref><ref name="City_Start">{{cite news |author=Ojha, Chiranjit |title=Teenager Samba strikes twice on debut as Man City thrash Norwich in League Cup |url=https://www.reuters.com/sports/soccer/teenager-samba-strikes-twice-debut-man-city-thrash-norwich-league-cup-2026-09-18/ |work=[[Reuters]] |publisher=Thomson Reuters |date=18 September 2026 |access-date=22 September 2026}}</ref> Like Reggie Watson, 17-year-old [[Floyd Samba]] is the son of a former Premier League player, [[Christopher Samba]].<ref>{{cite news |author=Marshall, Tyrone |title=Man City's 'Mancunian' son of Premier League star lights up Youth League win |url=https://www.manchestereveningnews.co.uk/sport/football/man-citys-mancunian-son-premier-32504583 |work=[[Manchester Evening News]] |publisher=Reach plc |date=18 September 2025 |access-date=22 September 2026}}</ref><ref name="Watson_Chelsea"/> He scored twice on his senior debut, with [[Rayan Cherki]], fellow debutant [[Allan (footballer, born 2004)|Allan]] and [[Ryan McAidoo]] also finding the net.<ref>{{cite news |title=Man City teenager Floyd Samba scores 2 goals in 5-0 win over Norwich in League Cup |url=https://abcnews.com/Sports/wireStory/man-city-teenager-floyd-samba-scores-2-goals-5-0-win-over-norwich-league-cup-136541562 |work=[[ABC News (United States)|ABC News]] |publisher=ABC News Internet Ventures |date=18 September 2026 |access-date=22 September 2026}}</ref> City advanced to the fourth round, where they will face Brighton & Hove Albion.<ref name="City_Start"/> The two sides will meet again at the [[Etihad Stadium]] in the Premier League three days later.<ref>{{cite web |title=Manchester City scores & fixtures |url=https://www.skysports.com/manchester-city-scores-fixtures/2026-10-01 |website=[[Sky Sports]] |publisher=Sky UK Limited |access-date=22 September 2026}}</ref>
+
+{| class="wikitable"
+|+ Number of teams per tier still in the competition
+! width="20%" | Premier League
+! width="20%" | Championship
+! width="20%" | League One
+! width="20%" | League Two
+! width="20%" | Total
+|-
+|{{composition bar|19|20|width=150|#99FF99}}
+|{{composition bar|7|24|width=150|#99FF99}}
+|{{composition bar|5|24|width=150|#99FF99}}
+|{{composition bar|1|24|width=150|#99FF99}}
+|{{composition bar|32|92|width=150|#CCCCFF}}
+|}
+{{Notelist}}
+
+{{Football box collapsible
+|date=8 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=4–0
+|report=https://www.efl.com/match-centre/g2685174
+|team1=[[AFC Bournemouth|Bournemouth]] (1)
+|goals1=
+*[[Ryan Christie|Christie]] {{goal|7||69||88}}
+*[[Rayan (footballer, born 2006)|Rayan]] {{goal|90+4}}
+|team2='''[[Lincoln City F.C.|Lincoln City]] (2)'''
+|goals2=
+|stadium=[[Dean Court]]
+|location=[[Bournemouth]]
+|attendance=10,090
+|referee=Elliot Bell
+}}
+{{Football box collapsible
+|date=8 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=3–0
+|report=https://www.efl.com/match-centre/g2685168
+|team1=[[Crystal Palace F.C.|Crystal Palace]] (1)
+|goals1=
+*[[Jørgen Strand Larsen|Larsen]] {{goal|37||53}}
+*[[Daichi Kamada|Kamada]] {{goal|72}}
+|team2='''[[Middlesbrough F.C.|Middlesbrough]] (2)'''
+|goals2=
+|stadium=[[Selhurst Park]]
+|location=[[Selhurst]]
+|attendance=13,074
+|referee=[[Tony Harrington]]
+}}
+{{Football box collapsible
+|date=8 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–3
+|report=https://www.efl.com/match-centre/g2685180
+|team1='''[[Leyton Orient F.C.|Leyton Orient]] (3)'''
+|goals1=
+*[[Macaulay Gillesphey|Gillesphey]] {{goal|38|o.g.}}
+|team2=[[Bradford City A.F.C.|Bradford City]] (3)
+|goals2=
+*[[Will Swan (footballer)|Swan]] {{goal|45}}
+*[[Stephen Humphrys|Humphrys]] {{goal|58}}
+*[[Nick Powell|Powell]] {{goal|88}}
+|stadium=[[Brisbane Road]]
+|location=[[Leyton]]
+|attendance=2,465
+|referee=Edward Duckworth
+}}
+{{Football box collapsible
+|date=8 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2685171
+|team1=[[Sunderland A.F.C.|Sunderland]] (1)
+|goals1=
+*[[Chemsdine Talbi|Talbi]] {{goal|71}}
+|team2='''[[Hull City A.F.C.|Hull City]] (1)'''
+|goals2=
+|stadium=[[Stadium of Light]]
+|location=[[Sunderland]]
+|attendance=25,472
+|referee=[[Paul Tierney (referee)|Paul Tierney]]
+}}
+{{Football box collapsible
+|date=8 September 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=0–1
+|report=https://www.efl.com/match-centre/g2685177
+|team1='''[[Millwall F.C.|Millwall]] (2)'''
+|goals1=
+|team2=[[Newcastle United F.C.|Newcastle United]] (1)
+|goals2=
+*[[Joe Willock|Willock]] {{goal|81}}
+|stadium=[[The Den]]
+|location=[[Bermondsey]]
+|attendance=14,698
+|referee=[[Craig Pawson]]
+}}
+{{Football box collapsible
+|date=9 September 2026
+|time=20:15 [[British Summer Time|BST]]
+|score=6–3
+|report=https://www.efl.com/match-centre/g2685176
+|team1=[[Chelsea F.C.|Chelsea]] (1)
+|goals1=
+*[[Cole Palmer|Palmer]] {{goal|53|pen.|55}}
+*[[Pedro Neto|Neto]] {{goal|60}}
+*[[Danny Welbeck|Welbeck]] {{goal|65||90+4}}
+*[[Valentín Barco|Barco]] {{goal|80}}
+|team2='''[[Leeds United F.C.|Leeds United]] (1)'''
+|goals2     =
+*[[Tarik Muharemović|Muharemović]] {{goal|23}}
+*[[Brenden Aaronson|Aaronson]] {{goal|48}}
+*[[Dominic Calvert-Lewin|Calvert-Lewin]] {{goal|75}}
+|stadium=[[Stamford Bridge (stadium)|Stamford Bridge]] 
+|location=[[Fulham]]
+|attendance=35,696
+|referee=[[Jarred Gillett]]
+|note=Kick-off was delayed by fifteen minutes due to disruption on the [[London Underground]].<ref>{{cite news |title=Kick-off against Leeds delayed |url=https://www.chelseafc.com/en/news/article/kick-off-against-leeds-delayed |access-date=9 September 2026 |publisher=Chelsea F.C. |date=9 September 2026}}</ref>
+}}
+{{Football box collapsible
+|date=15 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=3–3
+|penaltyscore=7–6
+|report=https://www.efl.com/match-centre/g2685182
+|team1=[[Peterborough United F.C.|Peterborough United]] (3)
+|goals1=
+*[[Harry Leonard (footballer, born 2003)|Leonard]] {{goal|19}}
+*[[Danny Ormerod|Ormerod]] {{goal|27||88}}
+|penalties1=
+*[[Harry Leonard (footballer, born 2003)|Leonard]] {{pengoal}}
+*[[Danny Ormerod|Ormerod]] {{pengoal}}
+*[[Chris Conn-Clarke|Conn-Clarke]] {{pengoal}}
+*[[Harley Mills|Mills]] {{pengoal}}
+*[[Liam Kelly (footballer, born 1995)|Kelly]] {{pengoal}}
+*[[Josh Feeney|Feeney]] {{pengoal}}
+*[[Harrison Jones (English footballer)|Jones]] {{pengoal}} 
+|team2='''[[Barnsley F.C.|Barnsley]] (3)'''
+|goals2=
+*[[Cameron McGeehan|McGeehan]] {{goal|1}}
+*[[Reyes Cleary|Cleary]] {{goal|40||74}}
+|penalties2=
+*{{pengoal}} [[Luca Connell|Connell]]
+*{{pengoal}} [[Patrick Kelly (footballer, born 2004)|Kelly]] 
+*{{pengoal}} [[Tyrese Noslin|Noslin]]
+*{{pengoal}} [[Arley Kay|Kay]]
+*{{pengoal}} [[Reyes Cleary|Cleary]]
+*{{pengoal}} [[Sam Gale|Gale]] 
+*{{penmiss}} [[Luke Alker|Alker]]
+|stadium=[[London Road Stadium]]
+|location=[[Peterborough]]
+|attendance=3,105
+|referee=Thomas Parsons
+}}
+{{Football box collapsible
+|date=15 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=2–3
+|report=https://www.efl.com/match-centre/g2685183
+|team1='''[[West Ham United F.C.|West Ham United]] (2)'''
+|goals1=
+*[[Morato (footballer, born 2001)|Morato]] {{goal|16}}
+*[[Pablo (footballer, born 2004)|Pablo]] {{goal|45+2}}
+|team2=[[Fulham F.C.|Fulham]] (1) 
+|goals2=
+*[[Rodrigo Muniz (Brazilian footballer)|Muniz]] {{goal|13}}
+*[[César Palacios (footballer, born 2004)|Palacios]] {{goal|37}}
+*[[Oscar Bobb|Bobb]] {{goal|78}}
+|stadium=[[London Stadium]]
+|location=[[Stratford, London|Stratford]]
+|attendance=41,808
+|referee=Gavin Ward
+}}
+{{Football box collapsible
+|date=15 September 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=2–4
+|report=https://www.efl.com/match-centre/g2685172
+|team1='''[[Ipswich Town F.C.|Ipswich Town]] (1)'''
+|goals1=
+*[[Anis Mehmeti|Mehmeti]] {{goal|62}}
+*[[Chuba Akpom|Akpom]] {{goal|90+1}}
+|team2=[[Arsenal F.C.|Arsenal]] (1)
+|goals2=
+*[[Max Dowman|Dowman]] {{goal|7||47}}
+*[[Noni Madueke|Madueke]] {{goal|16}}
+*[[Mikel Merino|Merino]] {{goal|58}}
+|stadium=[[Portman Road]]
+|location=[[Ipswich]]
+|attendance=28,966
+|referee=[[Peter Bankes]]
+}}
+{{Football box collapsible
+|date=15 September 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=3–1
+|report=https://www.efl.com/match-centre/g2685175
+|team1=[[Liverpool F.C.|Liverpool]] (1)
+|goals1=
+*[[Alexis Mac Allister|Mac Allister]] {{goal|21}}
+*[[Cody Gakpo|Gakpo]] {{goal|54}}
+*[[Dominik Szoboszlai|Szoboszlai]] {{goal|90+1}}
+|team2='''[[Tottenham Hotspur F.C.|Tottenham Hotspur]] (1)'''
+|goals2= 
+*[[Conor Gallagher|Gallagher]] {{goal|69}}
+|stadium=[[Anfield]]
+|location=[[Liverpool]]
+|attendance=60,169
+|referee=[[Andy Madley]]
+}}
+{{Football box collapsible
+|date=15 September 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=1–2
+|report=https://www.efl.com/match-centre/g2685181
+|team1='''[[Reading F.C.|Reading]] (3)'''
+|goals1=
+*[[Paudie O'Connor|O'Connor]] {{goal|72}}
+|team2=[[Brentford F.C.|Brentford]] (1)
+|goals2= 
+*[[Callum Wilson|Wilson]] {{goal|3}}
+*[[Fábio Carvalho (footballer, born 2002)|Carvalho]] {{goal|45+1}}
+|stadium=[[Madejski Stadium]]
+|location=[[Reading, Berkshire|Reading]]
+|attendance=13,489
+|referee=Tom Nield
+}}
+{{Football box collapsible
+|date=16 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2685179
+|team1=[[Everton F.C.|Everton]] (1)
+|goals1=
+*[[Charly Alcaraz|Alcaraz]] {{goal|80}}
+|team2='''[[Wolverhampton Wanderers F.C.|Wolverhampton Wanderers]] (2)'''
+|goals2=
+|stadium=[[Hill Dickinson Stadium]]
+|location=[[Liverpool]]
+|attendance=50,970
+|referee=[[Thomas Bramall]]
+}}
+{{Football box collapsible
+|date=16 September 2026
+|time=19:45 [[British Summer Time|BST]]
+|score=1–0
+|report=https://www.efl.com/match-centre/g2685178
+|team1=[[Fleetwood Town F.C.|Fleetwood Town]] (4)
+|goals1=
+*[[Rhys Norrington-Davies|Norrington-Davies]] {{goal|57|o.g.}}
+|team2='''[[Sheffield United F.C.|Sheffield United]] (2)'''
+|goals2=
+|stadium=[[Highbury Stadium (Fleetwood)|Highbury Stadium]]
+|location=[[Fleetwood]]
+|attendance=2,348
+|referee=Ben Speedie
+}}
+{{Football box collapsible
+|date=16 September 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=1–3
+|report=https://www.efl.com/match-centre/g2685173
+|team1='''[[Coventry City F.C.|Coventry City]] (1)'''
+|goals1=
+*[[Victor Torp|Torp]] {{goal|27}}
+|team2=[[Aston Villa F.C.|Aston Villa]] (1)
+|goals2=
+*[[Tammy Abraham|Abraham]] {{goal|7||59}}
+*[[Ross Barkley|Barkley]] {{goal|40}}
+|stadium=[[Coventry Building Society Arena]]
+|location=[[Coventry]]
+|attendance=24,577
+|referee=[[Robert Jones (referee)|Robert Jones]]
+}}
+{{Football box collapsible
+|date=16 September 2026
+|time=20:00 [[British Summer Time|BST]]
+|score=2–3
+|report=https://www.efl.com/match-centre/g2685169
+|team1='''[[Manchester United F.C.|Manchester United]] (1)'''
+|goals1=
+*[[Shea Lacey|Lacey]] {{goal|8}}
+*[[Mason Mount|Mount]] {{goal|10}}
+|team2=[[Brighton & Hove Albion F.C.|Brighton & Hove Albion]] (1)
+|goals2=
+*[[Charalampos Kostoulas|Kostoulas]] {{goal|45+1}}
+*[[Pascal Groß|Groß]] {{goal|65}}
+*[[Maxim De Cuyper|De Cuyper]] {{goal|69}}
+|stadium=[[Old Trafford]]
+|location=[[Trafford]]
+|attendance=73,670
+|referee=[[Farai Hallam]]
+}}
+{{Football box collapsible
+|date=17 September 2026
+|time=19:30 [[British Summer Time|BST]]
+|score=5–0
+|report=https://www.efl.com/match-centre/g2685170
+|team1=[[Manchester City F.C.|Manchester City]] (1)
+|goals1=
+*[[Floyd Samba|Samba]] {{goal|29||54}}
+*[[Rayan Cherki|Cherki]] {{goal|32}}
+*[[Allan (footballer, born 2004)|Allan]] {{goal|48}}
+*[[Ryan McAidoo|McAidoo]] {{goal|90}}
+|team2='''[[Norwich City F.C.|Norwich City]] (2)'''
+|goals2=
+|stadium=[[Etihad Stadium]]
+|location=[[Manchester]]
+|attendance=32,451
+|referee=Ruebyn Ricardo
+}}
+
+==Fourth round==
+The 16 third round winners were drawn to play each other in the fourth round. The draw took place on 16 September 2026, after the Manchester United vs Brighton & Hove Albion match concluded; [[Pien Meulensteen]] hosted the draw, while [[Jamie Redknapp]] and [[Ashley Young]] performed it.<ref name="round_four">{{cite news |url=https://efl.com/news/2026/september/08/carabao-cup-round-four-draw-details/ |title=Carabao Cup Round Four draw details |url-status=dead |archive-url=https://web.archive.org/web/20260910042949/https://www.efl.com/news/2026/september/08/carabao-cup-round-four-draw-details/ |publisher=English Football League |access-date=8 September 2026 |archive-date=10 September 2026 }}</ref> The eight matches will take place in the week commencing 26 October 2026.<ref name="round_four"/><ref name="fleet_draw">{{cite news|url=https://www.efl.com/news/2026/september/16/carabao-cup-round-four-draw-in-full/ |title=Carabao Cup Round Four draw in full |url-status=live |archive-url=https://web.archive.org/web/20260916225715/https://www.efl.com/news/2026/september/16/carabao-cup-round-four-draw-in-full/ |publisher=English Football League |access-date=17 September 2026 |archive-date=16 September 2026 }}</ref>
+ 
+Fleetwood Town are the sole League Two side remaining, reaching this stage of the competition for the first time in the club's history.<ref name="fleet_draw"/> Drawn against the defending Premier League champions, Fleetwood Town will host Arsenal at [[Highbury Stadium (Fleetwood)|Highbury Stadium]], which shares its name with [[Arsenal Stadium
+| Arsenal's former home ground]].<ref>{{cite news |url=https://www.beinsports.com/en-asia/football/league-cup/articles/arsenal-to-play-at-highbury-again-as-fleetwood-aim-for-efl-cup-giant-killing-2026-09-16 |title=Arsenal to play at Highbury again as Fleetwood aim for EFL Cup giant-killing |publisher=beIN Sports |date=16 September 2026  |access-date=17 September 2026}}</ref>
+
+The League One meeting of Bradford City and Peterborough United features little League Cup history between the sides.<ref name="Posh_EFL">{{cite news |author=Swann, Alan |title=No luck for Peterborough United in the Carabao Cup draw, but history gives them a chance |url=https://www.peterboroughtoday.co.uk/sport/football/peterborough-united/no-luck-for-peterborough-united-in-the-carabao-cup-draw-but-history-gives-them-a-chance-9070563 |date=16 September 2026 |access-date=17 September 2026 |work=[[Peterborough Telegraph]]}}</ref> Posh have only faced Bradford once before in the competition during the [[1977–78 Football League Cup#First round|1977–78 opening round]], while this is the furthest the Bantams have progressed since reaching the [[2013 Football League Cup final|2013 final]] at Wembley.<ref name="Posh_EFL"/><ref>{{cite web |title=Bantams to host Peterborough in cup |url=https://www.bradfordcityafc.com/news/2026/september/16/bantams-to-host-peterborough-in-cup/ |date=16 September 2026 |access-date=17 September 2026 |website=bradfordcityafc.com |publisher=Bradford City}}</ref>
+
+[[Xabi Alonso]] is set for his first return to Anfield as a manager outside of European competition, after Chelsea drew Liverpool in the fourth round.<ref name="Alonso_Return">{{cite news |author=Togher, Liam |title=When will Liverpool play Chelsea in Carabao Cup as fourth-round draw throws up familiar pairing |url=https://empireofthekop.com/2026/09/17/when-will-liverpool-play-chelsea-in-carabao-cup-fourth-round/ |date=17 September 2026 |access-date=17 September 2026 |website=empireofthekop.com }}</ref><ref name="fleet_draw"/> The tie marks the third time in six seasons that these two Premier League clubs have faced off in the EFL cup, having contested the [[2022 EFL Cup final|2022]] and [[2024 EFL Cup final|2024]] finals.<ref name="Alonso_Return"/>
+
+The draw also features five other all-Premier League ties, with Everton handed a showdown against [[2025 EFL Cup final|2025 winners]] Newcastle as they bid to end a 31-year wait for domestic cup silverware.<ref>{{cite web |author=Bould, Guilia |title=Moyes' cup comments prompt fan questions |url=https://www.bbc.com/sport/football/articles/c78058pjl95o |website=bbc.com |publisher=[[BBC Sport]] |date=26 August 2026 |access-date=17 September 2026}}</ref><ref name="fleet_draw"/> Bournemouth and Aston Villa, meanwhile, will lock horns in the competition for the first time.<ref>{{cite web |title=AFC Bournemouth football club: record v Aston Villa |url=https://www.11v11.com/teams/afc-bournemouth/tab/opposingTeams/opposition/Aston%20Villa/#google_vignette |website=11v11.com |access-date=17 September 2026}}</ref><ref name="fleet_draw"/> The remaining fixtures include an all-London clash between Fulham and Crystal Palace, Brentford travelling to the [[Stadium of Light]] to take on Sunderland, while defending champions Manchester City will face Brighton.<ref name="fleet_draw"/>
+
+{| class="wikitable"
+|+ Number of teams per tier still in the competition
+! width="20%" | Premier League
+! width="20%" | Championship
+! width="20%" | League One
+! width="20%" | League Two
+! width="20%" | Total
+|-
+|{{composition bar|13|20|width=150|#99FF99}}
+|{{composition bar|0|24|width=150|#99FF99}}
+|{{composition bar|2|24|width=150|#99FF99}}
+|{{composition bar|1|24|width=150|#99FF99}}
+|{{composition bar|16|92|width=150|#CCCCFF}}
+|}
+{{Notelist}}
+
+{{Football box collapsible
+|date=27 October 2026
+|time=19:45 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687776
+|team1=[[Bradford City A.F.C.|Bradford City]] (3)
+|goals1=
+|team2=[[Peterborough United F.C.|Peterborough United]] (3)
+|goals2=
+|stadium=[[Valley Parade]]
+|location=[[Bradford]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=27 October 2026
+|time=20:00 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687771
+|team1=[[Fleetwood Town F.C.|Fleetwood Town]] (4)
+|goals1=
+|team2=[[Arsenal F.C.|Arsenal]] (1)
+|goals2=
+|stadium=[[Highbury Stadium (Fleetwood)|Highbury Stadium]]
+|location=[[Fleetwood]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=28 October 2026
+|time=19:30 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687772
+|team1=[[Manchester City F.C.|Manchester City]] (1)
+|goals1=
+|team2=[[Brighton & Hove Albion F.C.|Brighton & Hove Albion]] (1)
+|goals2=
+|stadium=[[Etihad Stadium]]
+|location=[[Manchester]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=28 October 2026
+|time=19:45 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687778
+|team1=[[AFC Bournemouth|Bournemouth]] (1)
+|goals1=
+|team2=[[Aston Villa F.C.|Aston Villa]] (1)
+|goals2=
+|stadium=[[Dean Court]]
+|location=[[Bournemouth]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=28 October 2026
+|time=19:45 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687777
+|team1=[[Fulham F.C.|Fulham]] (1)
+|goals1=
+|team2=[[Crystal Palace F.C.|Crystal Palace]] (1)
+|goals2=
+|stadium=[[Craven Cottage]]
+|location=[[Fulham]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=28 October 2026
+|time=19:45 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687774
+|team1=[[Sunderland A.F.C.|Sunderland]] (1)
+|goals1=
+|team2=[[Brentford F.C.|Brentford]] (1)
+|goals2=
+|stadium=[[Stadium of Light]]
+|location=[[Sunderland]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=28 October 2026
+|time=20:00 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687775
+|team1=[[Liverpool F.C.|Liverpool]] (1)
+|goals1=
+|team2=[[Chelsea F.C.|Chelsea]] (1)
+|goals2=
+|stadium=[[Anfield]]
+|location=[[Liverpool]]
+|attendance=
+|referee=
+}}
+{{Football box collapsible
+|date=29 October 2026
+|time=19:45 [[Greenwich Mean Time|GMT]]
+|score=
+|report=https://www.efl.com/match-centre/g2687773
+|team1=[[Everton F.C.|Everton]] (1)
+|goals1=
+|team2=[[Newcastle United F.C.|Newcastle United]] (1)
+|goals2=
+|stadium=[[Hill Dickinson Stadium]]
+|location=[[Liverpool]]
+|attendance=
+|referee=
+}}
+
+==Statistics==
+===Top goalscorers===
+
+''Table correct as of 17 September 2026.''<ref>{{cite web |url=https://www.worldfootball.net/competition/co61/england-league-cup/se123376/2026-2027/statistics-goals/ |title=English League Cup 2026/2027: Top Scorer |work=WorldFootball.net |access-date=10 September 2026}}</ref><ref>{{cite web |url=https://www.espn.co.uk/football/stats/_/league/ENG.LEAGUE_CUP/season/2026/view/scoring |title=English Carabao Cup Scoring Stats - 2026-27 |work=ESPN |access-date=16 September 2026}}</ref>
+
+{| class="wikitable sortable"
+!Rank
+!Player
+!Club
+!Goals
+|-
+|align="center" | 1
+|align="left"| {{flagicon|ENG}} [[Harry Leonard (footballer, born 2003)|Harry Leonard]]
+|align="left"| [[Peterborough United F.C.|Peterborough United]]
+|align="center" | 4
+|-
+|align="center" rowspan=7| 2
+|align="left"| {{flagicon|FRA}} [[Thierno Barry (footballer, born 2002)|Thierno Barry]]
+|align="left"| [[Everton F.C.|Everton]]
+|align="center" rowspan=7| 3
+|-
+|align="left"| {{flagicon|ARG}} [[Taty Castellanos]]
+|align="left"| [[West Ham United F.C.|West Ham United]]
+|-
+|align="left"| {{flagicon|SCO}} [[Ryan Christie]]
+|align="left"| [[AFC Bournemouth|Bournemouth]]
+|-
+|align="left"| {{flagicon|ENG}} [[Reyes Cleary]]
+|align="left"| [[Barnsley F.C.|Barnsley]]
+|-
+|align="left"| {{flagicon|WAL}} [[Ched Evans]]
+|align="left"| [[Fleetwood Town F.C.|Fleetwood Town]]
+|-
+|align="left"| {{flagicon|DEN}} [[Yousef Salech]]
+|align="left"| [[Cardiff City F.C.|Cardiff City]]
+|-
+|align="left"| {{flagicon|ENG}} [[Danny Welbeck]]
+|align="left"| [[Chelsea F.C.|Chelsea]]
+|-
+|align="center" | 9
+|align="center" colspan="2"| ''Twenty players''
+|align="center" | 2
+|}
+
+====Hat-tricks====
+{| class="wikitable"
+|-
+! Player !! For !! Against !! Result !! Date
+|-
+|{{#invoke:flag|icon|FRA}} Thierno Barry
+|Everton
+|[[Preston North End F.C.|Preston North End]]
+|0–4 (A)<ref>{{#invoke:cite|news|author=Hunter, Andy|title=Thierno Barry fires hat-trick as ruthless Everton sweep Preston aside |url=https://www.theguardian.com/football/2026/aug/26/preston-everton-carabao-cup-match-report |work=[[The Guardian]] |publisher=Guardian Media Group |date=26 August 2026 |access-date=22 September 2026}}</ref>
+|26 August 2026
+|-
+|{{#invoke:flag|icon|SCO}} Ryan Christie
+|Bournemouth
+|[[Lincoln City F.C.|Lincoln City]]
+|4–0 (H)<ref>{{cite news|title=Ryan Christie hat-trick helps Bournemouth cruise past Lincoln |url=https://www.irishnews.com/sport/soccer/ryan-christie-hat-trick-helps-bournemouth-cruise-past-lincoln-5ZXRHQ52RNNPBG6OIA65IWR344/ |work=[[The Irish News]] |publisher=The Irish News Ltd |date=8 September 2026 |access-date=22 September 2026}}</ref>
+|8 September 2026
+|}
+
+===Clean sheets===
+
+''Table correct as of 22 September 2026.''<ref name="clean_sheets">{{cite web |title=2026-2027 EFL Cup Stats |url=https://fbref.com/en/comps/690/EFL-Cup-Stats |website=fbref.com |publisher=[[Sports Reference]] |access-date=22 September 2026}}</ref>
+
+{| class="wikitable sortable"
+|-
+!Rank
+!Player
+!Club
+!Clean<br>sheets
+|-
+|align="center" | 1
+|align="left"| {{flagicon|ENG}} [[Jay Lynch (footballer)|Jay Lynch]]
+|align="left"| [[Fleetwood Town F.C.|Fleetwood Town]]
+|align="center" | 3
+|-
+|align="center" rowspan=3| 2
+|align="left"| {{flagicon|SCO}} [[Jon McCracken]]
+|align="left"| [[Bradford City A.F.C.|Bradford City]]
+|align="center" rowspan=3| 2
+|-
+|align="left"| {{flagicon|ENG}} [[Jordan Pickford]]
+|align="left"| [[Everton F.C.|Everton]]
+|-
+|align="left"| {{flagicon|ENG}} [[Jed Ward]]
+|align="left"| [[Walsall F.C.|Walsall]]
+|-
+|align="center" | 5
+|align="center" colspan="2"| ''Twenty-seven players''
+|align="center" | 1
+|}
+
+==Awards==
+{| class="wikitable"
+|-
+!rowspan="2"|Round
+!colspan="2"|Player of the Round
+!colspan="2"|Goal of the Round
+!rowspan="2"|References
+|-
+!Player!!Club
+!Player!!Club
+|-
+|[[2026–27 EFL Cup#First round|Round One]]
+|{{#invoke:flag|icon|DEN}} [[Yousef Salech]]
+|[[Cardiff City F.C.|Cardiff City]]
+|<div style="text-align:center;">''Pending''<ref>{{#invoke:cite|news|title=Vote for the Carabao Cup Goal of Round One |url=https://www.efl.com/news/2026/august/18/vote-for-the-carabao-cup-goal-of-round-one/ |publisher=English Football League |date=18 August 2026 |access-date=24 September 2026}}</ref></div>
+|
+|<ref>{{#invoke:cite|news|title=Yousef Salech wins Carabao Cup Player of the Round |url=https://www.efl.com/news/2026/august/24/yousef-salech-wins-carabao-cup-player-of-the-round/ |publisher=English Football League |date=24 August 2026 |access-date=24 September 2026}}</ref>
+|-
+|[[2026–27 EFL Cup#Second round|Round Two]]
+|{{#invoke:flag|icon|FRA}} [[Thierno Barry (footballer, born 2002)|Thierno Barry]]
+|[[Everton F.C.|Everton]]
+|<div style="text-align:center;">''Pending''<ref>{{#invoke:cite|news|title=Vote for the Carabao Cup Goal of Round Two |url=https://www.efl.com/news/2026/september/01/vote-for-the-carabao-cup-goal-of-round-two/ |publisher=English Football League |date=1 September 2026 |access-date=24 September 2026}}</ref></div>
+|
+|<ref>{{#invoke:cite|news|title=Thierno Barry wins Carabao Cup Player of the Round |url=https://www.efl.com/news/2026/september/09/thierno-barry-wins-carabao-cup-player-of-the-round/ |publisher=English Football League |date=9 September 2026 |access-date=24 September 2026}}</ref>
+|}
+
+==References==
+{{Reflist}}
+
+{{EFL Cup}}
+{{2026–27 in English men's football}}
+{{2026–27 in European football (UEFA)}}
+
+{{DEFAULTSORT:2026-27 EFL Cup}}
+[[Category:EFL Cup seasons]]
+[[Category:2026–27 in English men's football cups|League Cup]]
+[[Category:2026–27 English Football League|Cup]]

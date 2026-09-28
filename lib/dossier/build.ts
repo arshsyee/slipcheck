@@ -1,12 +1,11 @@
 import type { League, Leg } from "../types";
-import { CUP_SLUGS, DOMESTIC_LEAGUES, LEAGUE_INFO, leagueInfo, seasonCode, seasonStart, type LeagueInfo } from "../leagues";
+import { DOMESTIC_LEAGUES, LEAGUE_INFO, leagueInfo, seasonCode, seasonStart, type LeagueInfo } from "../leagues";
 import { fromSource, type SourceId, type SourceResult } from "../sources/types";
 import { getFixtures, getSeason, getSeasons, FD_SOURCE_URL, type FixtureRow, type MatchRow } from "../sources/footballData";
 import {
   findTeam,
   findUpcomingEvent,
   getSchedule,
-  getRecentResults,
   getStandings,
   getSummary,
   UEFA_SLUGS,
@@ -21,6 +20,7 @@ import { getClubFacts } from "../sources/wikidata";
 import { getClubProfile, getNextMatch, type NextMatch } from "../sources/sportsDb";
 import { getFplTeam } from "../sources/fpl";
 import { getFplSquad, getWikiSquad } from "../sources/squad";
+import { getCupResults } from "../sources/cups";
 import { getClubGoalProfile } from "../sources/openLigaDb";
 import { aboutClub, AVAILABILITY_RE, playersInHeadlines, getBbcClubNews, getGoogleClubNews, mergeHeadlines, type Headline } from "../sources/news";
 import { cached, HOUR, staleLog } from "../sources/cache";
@@ -236,8 +236,8 @@ async function buildTeam(
             return table.find((r) => r.teamId === espn?.id) ?? table.find((r) => r.team === hit?.name) ?? null;
           })
         : null,
-    // Domestic cups: ESPN is the only free source, so they're an optional extra.
-    espn && dInfo && CUP_SLUGS[dInfo.country]?.length ? call("espn", () => getRecentResults(CUP_SLUGS[dInfo.country], espn.id)) : null,
+    // Domestic cups: Wikipedia season pages (OpenLigaDB for the DFB-Pokal).
+    dInfo ? call(dInfo.country === "Germany" ? "openligadb" : "wikipedia", () => getCupResults(dInfo.country, name, teamId)) : null,
     call("uefa", () => getEuropeResults(name, teamId), "https://www.uefa.com"),
     isEpl ? call("fpl", () => getFplTeam(name), "https://fantasy.premierleague.com") : null,
     dInfo?.openLigaDb ? call("openligadb", () => getClubGoalProfile(dInfo.openLigaDb!, name), "https://www.openligadb.de") : null,

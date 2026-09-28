@@ -146,7 +146,6 @@ function print(d: MatchDossier, ms: number) {
   r2("Rest days", d.home.restDays?.toString(), d.away.restDays?.toString());
   const lm = (t: typeof d.home) => (t.lastMatch ? `${t.lastMatch.score.replace(" at home", " (H)").replace(" away", " (A)").replace(" neutral", " (N)")} v ${t.lastMatch.opponent}, ${t.lastMatch.date.slice(0, 10)}` : null);
   r2("Last game", lm(d.home), lm(d.away));
-  if (!intl && d.sourceLog.some((x) => x.source === "espn" && !x.ok)) console.log(`   ${dim("Domestic cup games not included: ESPN (the only free source for cups) is unavailable.")}`);
 
   section("3d. Coach");
   for (const t of [d.home, d.away]) {
