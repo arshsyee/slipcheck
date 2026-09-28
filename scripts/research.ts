@@ -189,7 +189,26 @@ function print(d: MatchDossier, ms: number) {
     // Every meeting counted in the summary, each with the winner spelled out.
     const winner = (m: (typeof h.meetings)[number]) => (m.homeGoals === m.awayGoals ? "draw" : `${m.homeGoals > m.awayGoals ? m.home : m.away} won`);
     h.meetings.forEach((m) => console.log(`     ${m.kickoff.slice(0, 10)}  ${pad(`${m.home} ${m.homeGoals}-${m.awayGoals} ${m.away}`, 44)}${pad(dim(winner(m)), 18)}${intl ? dim(m.competition) : ""}`));
-  } else console.log(`   Head-to-head: ${d.h2h?.ok ? dim(intl ? "they have never met" : "no league meetings in the last 5 seasons") : NA}`);
+  } else if (!d.h2h && !intl) console.log(`   League: ${dim("no league meetings: the clubs play in different leagues")}`);
+  else console.log(`   Head-to-head: ${d.h2h?.ok ? dim(intl ? "they have never met" : "no league meetings in the last 5 seasons") : red(`source down (${d.h2h?.error ?? "unknown"})`)}`);
+  // Outside the league, last 5 seasons: Europe and domestic cups.
+  const others: [string, typeof d.h2hEurope, string][] = [
+    ["Europe", d.h2hEurope, "no meetings in UEFA competitions in the last 5 seasons"],
+    ["Domestic cups", d.h2hCups, "no cup meetings in the last 5 seasons"],
+  ];
+  if (!intl)
+    for (const [label, r, empty] of others) {
+      if (!r) continue;
+      if (!r.ok) console.log(`   ${label}: ${red(`source down (${r.error})`)}`);
+      else if (!r.data.length) console.log(`   ${label}: ${dim(empty)}`);
+      else {
+        console.log(`   ${label}, last 5 seasons:`);
+        r.data.forEach((m) => {
+          const w = m.homeGoals === m.awayGoals ? "draw" : `${m.homeGoals > m.awayGoals ? m.home : m.away} won`;
+          console.log(`     ${m.kickoff.slice(0, 10)}  ${pad(`${m.home} ${m.homeGoals}-${m.awayGoals} ${m.away}`, 44)}${pad(dim(w), 18)}${dim(m.competition)}`);
+        });
+      }
+    }
   if (d.referee?.ok && d.referee.data) {
     const r = d.referee.data;
     console.log(`   Referee ${r.name}: ${r.games} league games this season, ${n(r.yellowsPerGame, 1)} yellows and ${n(r.redsPerGame, 2)} reds per game; home team won ${Math.round((r.homeWinRate ?? 0) * r.games)}.`);

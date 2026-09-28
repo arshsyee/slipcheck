@@ -14,13 +14,13 @@ import {
   type EspnTeam,
 } from "../sources/espn";
 import { findPlFixture, type PlFixture } from "../sources/premierLeague";
-import { findUefaMatch, getEuropeResults, getUefaLineups, type UefaMatch } from "../sources/uefa";
+import { findUefaMatch, getEuropeResults, getUefaMeetings, getUefaLineups, type UefaMatch } from "../sources/uefa";
 import { geocodeCity, getKickoffWeather } from "../sources/weather";
 import { getClubFacts } from "../sources/wikidata";
 import { getClubProfile, getNextMatch, type NextMatch } from "../sources/sportsDb";
 import { getFplTeam } from "../sources/fpl";
 import { getFplSquad, getWikiSquad } from "../sources/squad";
-import { getCupResults } from "../sources/cups";
+import { getCupMeetings, getCupResults } from "../sources/cups";
 import { getClubGoalProfile } from "../sources/openLigaDb";
 import { aboutClub, AVAILABILITY_RE, playersInHeadlines, getBbcClubNews, getGoogleClubNews, mergeHeadlines, type Headline } from "../sources/news";
 import { cached, HOUR, staleLog } from "../sources/cache";
@@ -141,7 +141,8 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
   // --- Teams, head-to-head, referee, weather, lineups: all in parallel ---
   const sameDivision = homeDomestic && homeDomestic === awayDomestic ? LEAGUE_INFO[homeDomestic as keyof typeof LEAGUE_INFO].fd : null;
 
-  const [home, away, h2h, weather, lineups] = await Promise.all([
+  const country = (l: League | null) => (l ? LEAGUE_INFO[l as keyof typeof LEAGUE_INFO].country : null);
+  const [home, away, h2h, weather, lineups, h2hEurope, h2hCups] = await Promise.all([
     buildTeam("home", homeName, homeEspn, homeDomestic, leagueId, kickoff, call),
     buildTeam("away", awayName, awayEspn, awayDomestic, leagueId, kickoff, call),
     sameDivision
@@ -155,6 +156,11 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
       : null,
     fixture.kickoff ? weatherFor(uefa, homeEspn?.name ?? homeName, homeDomestic, fixture, call) : null,
     lineupsFor(pl, uefa, summary, call, plR, uefaR, summaryR),
+    // Meetings outside the league, last 5 seasons: Europe (UEFA) and domestic cups (same country only).
+    call("uefa", () => getUefaMeetings(homeName, awayName), "https://www.uefa.com"),
+    country(homeDomestic) && country(homeDomestic) === country(awayDomestic)
+      ? call(country(homeDomestic) === "Germany" ? "openligadb" : "wikipedia", () => getCupMeetings(country(homeDomestic)!, homeName, awayName))
+      : null,
   ]);
 
   const referee =
@@ -185,6 +191,8 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
     away,
     weather,
     h2h,
+    h2hEurope,
+    h2hCups,
     referee,
     lineups,
     matchNews,
