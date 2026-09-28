@@ -218,3 +218,20 @@ describe("cup results from Wikipedia (real EFL Cup page, 2026-09-28)", () => {
     expect(spurs.map((x) => `${x.home} ${x.homeGoals}-${x.awayGoals} ${x.away}`)).toEqual(["Tottenham Hotspur 5-1 Charlton Athletic", "Liverpool 3-1 Tottenham Hotspur"]);
   });
 });
+
+describe("what's at stake in the table (real Premier League snapshot, 2026-09-23)", () => {
+  it("gives the gaps to 1st, the top four and relegation, and games left", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { parseCsv, toMatchRow } = await import("../lib/sources/footballData");
+    const { computeTable } = await import("../lib/stats/table");
+    const { stakes } = await import("../lib/stats/season");
+    const rows = parseCsv(readFileSync("tests/fixtures/snapshot/E0.csv", "utf8")).map(toMatchRow).filter((r) => r != null);
+    const table = computeTable(rows, "EPL");
+    // Man City 1st on 15, Arsenal 2nd on 12, Leeds 5th on 9 (as the report showed that day).
+    expect(stakes(table, "Arsenal", "EPL")).toMatchObject({ toFirst: 3, leadOverSecond: null, behindFourth: null, aheadOfFifth: 3, relegationPlace: 18, gamesLeft: 33 });
+    const bottom = table.at(-1)!;
+    const s = stakes(table, bottom.team, "EPL");
+    expect(s.aboveRelegation).toBeNull();
+    expect(s.belowSafety).toBe(table[16].points - bottom.points);
+  });
+});
