@@ -25,8 +25,8 @@ export function FormTab({ d }: Props) {
               <Unavailable result={t.stats}>No league results found for {t.name}.</Unavailable>
             ) : (
               <>
-                <FormLine label="Last 5" block={s.overall} n={5} />
-                <FormLine label={t.side === "home" ? "Last 5 at home" : "Last 5 away"} block={s.venue} n={5} />
+                <FormLine label="League · last 5" block={s.overall} n={5} />
+                <FormLine label={t.side === "home" ? "League · last 5 at home" : "League · last 5 away"} block={s.venue} n={5} />
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <Mini label="Last 10" value={`${s.overall.form10.won}-${s.overall.form10.drawn}-${s.overall.form10.lost}`} sub="W-D-L" />
                   <Mini label="Points (10)" value={String(s.overall.form10.points)} sub={`of ${s.overall.form10.games.length * 3}`} />
@@ -34,6 +34,7 @@ export function FormTab({ d }: Props) {
                 </div>
               </>
             )}
+            <SeasonRuns t={t} />
             {t.lastMatch && (
               <p className="text-xs text-muted">
                 Last played {t.lastMatch.opponent} ({t.lastMatch.score}, {t.lastMatch.competition}) ·{" "}
@@ -192,8 +193,85 @@ function Legend({ d }: Props) {
 
 // ---------------- Head-to-head ----------------
 
+/** Head-to-head in three groups: league, Europe, domestic cups. */
 export function H2HTab({ d }: Props) {
-  if (!d.h2h) return <Unavailable>Head-to-head is only available when both clubs play in the same league.</Unavailable>;
+  const intl = d.league.country === "International";
+  if (intl) return <LeagueH2H d={d} />;
+  return (
+    <div className="space-y-5">
+      <div>
+        <SectionTitle>League</SectionTitle>
+        <LeagueH2H d={d} />
+      </div>
+      <div>
+        <SectionTitle>Champions League / Europe · last 5 seasons</SectionTitle>
+        <Meetings result={d.h2hEurope} empty="No meetings in UEFA competitions in the last 5 seasons." />
+      </div>
+      <div>
+        <SectionTitle>Domestic cups · last 5 seasons</SectionTitle>
+        {d.h2hCups ? <Meetings result={d.h2hCups} empty="No cup meetings in the last 5 seasons." /> : <p className="text-xs text-muted">Clubs from different countries don&apos;t meet in domestic cups.</p>}
+      </div>
+    </div>
+  );
+}
+
+function Meetings({ result, empty }: { result: MatchDossier["h2hEurope"]; empty: string }) {
+  if (!result) return <p className="text-xs text-muted">{empty}</p>;
+  if (!result.ok) return <Unavailable result={result} />;
+  if (!result.data.length) return <p className="text-xs text-muted">{empty}</p>;
+  return (
+    <ul className="divide-y divide-line/60 rounded-xl border border-line">
+      {result.data.map((m, i) => (
+        <li key={i} className="grid grid-cols-[88px_1fr_auto_1fr] items-center gap-2 px-3 py-2 text-sm">
+          <span className="text-xs text-muted">{new Date(m.kickoff).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "2-digit" })}</span>
+          <span className="truncate text-right">{m.home}</span>
+          <span className="tabular rounded-md bg-surface-2 px-2 py-0.5 font-medium">
+            {m.homeGoals}–{m.awayGoals}
+          </span>
+          <span className="truncate">{m.away}</span>
+          <span className="col-span-4 -mt-1 text-right text-[11px] text-muted">{m.competition}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** This season outside the league: Europe and domestic cups, each its own section. */
+function SeasonRuns({ t }: { t: TeamSection }) {
+  const runs = t.season.ok ? (t.season.data?.otherCompetitions ?? []) : [];
+  const groups = [
+    { title: "Champions League / Europe · this season", runs: runs.filter((r) => /uefa/i.test(r.competition)), empty: "No European games played this season." },
+    { title: "Domestic cups · this season", runs: runs.filter((r) => !/uefa/i.test(r.competition)), empty: "No cup games played this season." },
+  ];
+  return (
+    <>
+      {groups.map((g) => (
+        <div key={g.title}>
+          <SectionTitle>{g.title}</SectionTitle>
+          {g.runs.length ? (
+            <ul className="space-y-1 text-xs">
+              {g.runs.flatMap((r) =>
+                r.results.map((x, i) => (
+                  <li key={`${r.competition}${i}`} className="flex items-center gap-2">
+                    <span className={clsx("w-5 shrink-0 rounded text-center font-semibold", x.result === "W" ? "bg-win/15 text-win" : x.result === "L" ? "bg-danger/15 text-danger" : "bg-surface-2")}>{x.result}</span>
+                    <span className="tabular">{x.score}</span>
+                    <span className="truncate">{x.venue === "home" ? "v" : "@"} {x.opponent}</span>
+                    <span className="ml-auto shrink-0 text-muted">{r.competition} · {new Date(x.date).toLocaleDateString(undefined, { day: "numeric", month: "short" })}</span>
+                  </li>
+                )),
+              )}
+            </ul>
+          ) : (
+            <p className="text-xs text-muted">{g.empty}</p>
+          )}
+        </div>
+      ))}
+    </>
+  );
+}
+
+function LeagueH2H({ d }: Props) {
+  if (!d.h2h) return <p className="text-xs text-muted">No league meetings: the clubs play in different leagues.</p>;
   if (!d.h2h.ok) return <Unavailable result={d.h2h} />;
   const h = d.h2h.data;
   const intl = d.league.country === "International";

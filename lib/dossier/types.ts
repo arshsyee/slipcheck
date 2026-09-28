@@ -7,7 +7,7 @@ import type { AvailabilityEntry, PlayerForm } from "../sources/fpl";
 import type { ClubProfile } from "../sources/sportsDb";
 import type { ClubFacts } from "../sources/wikidata";
 import type { Averages, FormSummary, Rates, TeamGame } from "../stats/team";
-import type { HeadToHead, RefereeStats } from "../stats/match";
+import type { H2HMeeting, HeadToHead, RefereeStats } from "../stats/match";
 import type { GoalTiming, ScorerLine } from "../sources/openLigaDb";
 import type { Coach } from "../sources/coach";
 import type { Squad } from "../sources/squad";
@@ -114,6 +114,10 @@ export interface MatchDossier {
   away: TeamSection;
   weather: SourceResult<KickoffWeather | null> | null;
   h2h: SourceResult<HeadToHead> | null;
+  /** Meetings in UEFA competitions, last 5 seasons (null for national teams). Optional: older saved reports lack it. */
+  h2hEurope?: SourceResult<H2HMeeting[]> | null;
+  /** Meetings in domestic cups, last 5 seasons (only when both clubs are from the same country). */
+  h2hCups?: SourceResult<H2HMeeting[]> | null;
   referee: SourceResult<RefereeStats | null> | null;
   lineups: SourceResult<Lineup[]> | null;
   matchNews: SourceResult<Headline[]> | null;

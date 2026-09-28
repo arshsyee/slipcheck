@@ -1,8 +1,9 @@
 import { z } from "zod";
-import { cached, HOUR, MINUTE } from "./cache";
+import { cached, DAY, HOUR, MINUTE } from "./cache";
 import { fetchJson } from "./http";
 import { bestTeamMatch, matchFixture } from "../teams/match";
 import type { EspnEvent } from "./espn";
+import type { H2HMeeting } from "../stats/match";
 
 const BASE = "https://match.uefa.com/v5";
 
@@ -51,7 +52,8 @@ export function uefaSeasonYear(date = new Date()) {
 
 export function getCompetitionMatches(competitionId: number, seasonYear = uefaSeasonYear()): Promise<UefaMatch[]> {
   const url = `${BASE}/matches?competitionId=${competitionId}&seasonYear=${seasonYear}&limit=500&order=ASC&offset=0`;
-  return cached(`uefa:${url}`, HOUR, async () => {
+  // Past seasons don't change: keep them a month.
+  return cached(`uefa:${url}`, seasonYear < uefaSeasonYear() ? 30 * DAY : HOUR, async () => {
     const d = await fetchJson(url, z.array(MatchSchema));
     return d.map((m) => {
       const ref = m.referees?.find((r) => r.role === "REFEREE") ?? m.referees?.[0];
@@ -116,6 +118,24 @@ export async function getEuropeResults(club: string, teamId: string): Promise<Es
         })),
     )
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/** Meetings between two clubs in UEFA club competitions over the last `seasons` seasons (this one included), newest first. */
+export async function getUefaMeetings(a: string, b: string, seasons = 5): Promise<H2HMeeting[]> {
+  const years = Array.from({ length: seasons }, (_, i) => uefaSeasonYear() - i);
+  const lists = await Promise.all(UEFA_COMPETITIONS.flatMap((c) => years.map(async (y) => ({ c, matches: await getCompetitionMatches(c.id, y) }))));
+  const out: H2HMeeting[] = [];
+  for (const { c, matches } of lists) {
+    const names = [...new Set(matches.flatMap((m) => [m.home, m.away]))];
+    const ha = bestTeamMatch(a, names, 0.8)?.name;
+    const hb = bestTeamMatch(b, names, 0.8)?.name;
+    if (!ha || !hb) continue;
+    for (const m of matches) {
+      if (!m.score || !((m.home === ha && m.away === hb) || (m.home === hb && m.away === ha))) continue;
+      out.push({ competition: c.name, kickoff: m.kickoff, home: m.home, away: m.away, homeGoals: m.score.home, awayGoals: m.score.away });
+    }
+  }
+  return out.sort((x, y) => y.kickoff.localeCompare(x.kickoff));
 }
 
 export interface UefaLineup {

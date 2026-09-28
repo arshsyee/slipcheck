@@ -1,10 +1,11 @@
 import { z } from "zod";
-import { cached, HOUR } from "./cache";
+import { cached, DAY, HOUR } from "./cache";
 import { fetchJson } from "./http";
 import { getSeasonMatches, openLigaSeason } from "./openLigaDb";
 import { params, plain, templates } from "./squad";
 import { bestTeamMatch } from "../teams/match";
 import type { EspnEvent } from "./espn";
+import type { H2HMeeting } from "../stats/match";
 
 /**
  * Domestic cup results without ESPN: OpenLigaDB for the DFB-Pokal, Wikipedia's season pages for the rest.
@@ -59,15 +60,15 @@ export function parseFootballBoxes(wikitext: string): CupMatch[] {
 
 const ParseSchema = z.object({ parse: z.object({ wikitext: z.string() }).optional() });
 
-function wikiCup(title: string): Promise<CupMatch[]> {
-  return cached(`cups:wiki:${title}`, 6 * HOUR, async () => {
+function wikiCup(title: string, past = false): Promise<CupMatch[]> {
+  return cached(`cups:wiki:${title}`, past ? 30 * DAY : 6 * HOUR, async () => {
     const d = await fetchJson(`https://en.wikipedia.org/w/api.php?action=parse&format=json&formatversion=2&redirects=1&prop=wikitext&page=${encodeURIComponent(title)}`, ParseSchema);
     return parseFootballBoxes(d.parse?.wikitext ?? "");
   });
 }
 
-async function openLigaCup(league: string): Promise<CupMatch[]> {
-  const matches = await getSeasonMatches(league, openLigaSeason());
+async function openLigaCup(league: string, season = openLigaSeason()): Promise<CupMatch[]> {
+  const matches = await getSeasonMatches(league, season);
   return matches.filter((m) => m.finished && m.score).map((m) => ({ date: m.kickoff, home: m.home, away: m.away, homeGoals: m.score![0], awayGoals: m.score![1], penalties: null }));
 }
 
@@ -96,4 +97,31 @@ export async function getCupResults(country: string, club: string, teamId: strin
         away: { id: m.away === hit.name ? teamId : m.away, name: m.away, score: m.awayGoals },
       }));
   });
+}
+
+/** Cup meetings between two clubs from the same country over the last `seasons` seasons, newest first. */
+export async function getCupMeetings(country: string, a: string, b: string, seasons = 5): Promise<H2HMeeting[]> {
+  const now = new Date();
+  const back = (k: number) => new Date(Date.UTC(now.getUTCFullYear() - k, now.getUTCMonth(), now.getUTCDate()));
+  const lists = await Promise.all(
+    (CUPS[country] ?? []).flatMap((cup) =>
+      Array.from({ length: seasons }, async (_, k) => ({
+        cup,
+        // A cup page that doesn't exist (e.g. not started yet) is simply empty.
+        matches: await (cup.openLigaDb ? openLigaCup(cup.openLigaDb, openLigaSeason(back(k))) : wikiCup(cup.wikipedia!(seasonLabel(back(k))), k > 0)).catch(() => [] as CupMatch[]),
+      })),
+    ),
+  );
+  const out: H2HMeeting[] = [];
+  for (const { cup, matches } of lists) {
+    const names = [...new Set(matches.flatMap((m) => [m.home, m.away]))];
+    const ha = bestTeamMatch(a, names, 0.8)?.name;
+    const hb = bestTeamMatch(b, names, 0.8)?.name;
+    if (!ha || !hb) continue;
+    for (const m of matches) {
+      if (!((m.home === ha && m.away === hb) || (m.home === hb && m.away === ha))) continue;
+      out.push({ competition: m.penalties ? `${cup.name} (penalties ${m.penalties})` : cup.name, kickoff: m.date, home: m.home, away: m.away, homeGoals: m.homeGoals, awayGoals: m.awayGoals });
+    }
+  }
+  return out.sort((x, y) => y.kickoff.localeCompare(x.kickoff));
 }
