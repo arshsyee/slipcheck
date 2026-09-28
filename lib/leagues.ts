@@ -38,6 +38,8 @@ export const MARKET_LABEL: Record<Market, string> = {
   total_goals: "Number of goals",
   asian_handicap: "Win by a margin",
   btts: "Both teams score",
+  total_corners: "Number of corners",
+  total_cards: "Number of cards",
   other: "Something else",
 };
 

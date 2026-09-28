@@ -9,7 +9,8 @@
  *   npm run research -- "Arsenal v Leeds" --odds 4/6 "Inter v Parma" --odds 2.1   (what the odds imply, and the accumulator's combined chance)
  *
  * Options apply to the match before them. --league is optional (EPL, LA_LIGA, UCL, …); it's inferred when left out.
- * Markets: 1x2 (default, pick = home team), double_chance, draw_no_bet, total_goals, asian_handicap, btts.
+ * Markets: 1x2 (default, pick = home team), double_chance, draw_no_bet, total_goals, asian_handicap, btts,
+ *          total_corners (default line 9.5), total_cards (default line 3.5).
  */
 import { writeFileSync } from "node:fs";
 import { buildDossier } from "../lib/dossier/build";
@@ -45,8 +46,9 @@ function parseArgs(argv: string[]): { legs: Leg[]; json: boolean; html: string |
   for (const l of legs) {
     if (!LEAGUES.includes(l.league)) throw new Error(`Unknown league ${l.league}. Use one of: ${LEAGUES.join(", ")}`);
     if (!MARKETS.includes(l.market)) throw new Error(`Unknown market ${l.market}. Use one of: ${MARKETS.join(", ")}`);
-    if (!l.selection) l.selection = l.market === "btts" ? "Yes" : l.market === "total_goals" ? "Over" : (l.homeTeam ?? "");
-    if (l.line == null && l.market === "total_goals") l.line = 2.5;
+    const overUnder = l.market === "total_goals" || l.market === "total_corners" || l.market === "total_cards";
+    if (!l.selection) l.selection = l.market === "btts" ? "Yes" : overUnder ? "Over" : (l.homeTeam ?? "");
+    if (l.line == null && overUnder) l.line = { total_goals: 2.5, total_corners: 9.5, total_cards: 3.5 }[l.market as "total_goals"];
   }
   return { legs, json, html };
 }
