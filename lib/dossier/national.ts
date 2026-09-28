@@ -162,7 +162,7 @@ async function team(
           ...info,
           data: wiki?.coach
             ? {
-                coach: { name: wiki.coach, since: null, age: null, nationality: null, predecessor: null, agreement: "wikipedia-only", wikipediaName: wiki.coach, wikidataName: null },
+                coach: { name: wiki.coach, since: null, sinceYear: null, age: null, nationality: null, predecessor: null, agreement: "wikipedia-only", wikipediaName: wiki.coach, wikidataName: null },
                 record: null,
               }
             : null,

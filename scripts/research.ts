@@ -156,7 +156,7 @@ function print(d: MatchDossier, ms: number) {
     }
     const k = c.coach;
     const flag = k.agreement === "conflict" ? ` ${red("!")} sources disagree (Wikipedia: ${k.wikipediaName}, Wikidata: ${k.wikidataName})` : "";
-    console.log(`   ${bold(t.name)}: ${k.name}${k.age ? `, ${k.age}` : ""}${k.nationality ? `, ${k.nationality}` : ""}${k.since ? ` · in charge since ${k.since.slice(0, 10)}` : intl ? "" : ` · start date ${NA}`}${flag}`);
+    console.log(`   ${bold(t.name)}: ${k.name}${k.age ? `, ${k.age}` : ""}${k.nationality ? `, ${k.nationality}` : ""}${k.since ? ` · in charge since ${k.since.slice(0, 10)}` : k.sinceYear ? ` · in charge since ${k.sinceYear} ${dim("(exact date not public, so no record since arrival)")}` : intl ? "" : ` · start date ${NA}`}${flag}`);
     const r = c.record;
     if (r) {
       if (r.allCompsThisSeason.played) console.log(`     This season, all competitions: ${splitStr(r.allCompsThisSeason)}`);
@@ -308,7 +308,7 @@ function printSquad(t: MatchDossier["home"], NA: string) {
     if (s.asOf && s.asOf.length >= 25) console.log(`     ${dim(s.asOf)}`);
     for (const pos of POS_ORDER) {
       const ps = s.players.filter((p) => p.pos === pos);
-      wrapRow(pos, ps.map((p) => `${p.number ? `${p.number} ` : ""}${p.name}${p.caps != null ? dim(` ${p.caps} cap${p.caps === 1 ? "" : "s"}`) : ""}${p.note === "captain" ? dim(" (captain)") : ""}`));
+      wrapRow(pos, ps.map((p) => `${p.number ? `${p.number} ` : ""}${p.name}${p.caps != null ? dim(` ${p.caps} cap${p.caps === 1 ? "" : "s"}`) : ""}${p.note === "captain" || p.note === "vice-captain" ? dim(` (${p.note})`) : ""}`));
     }
   }
 

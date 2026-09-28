@@ -197,7 +197,8 @@ export function parseWikiSquad(wikitext: string): { players: SquadPlayer[]; asOf
       number: p.no ? plain(p.no) || null : null,
       status: "unknown",
       chance: null,
-      note: /captain/i.test(p.other ?? "") ? "captain" : null,
+      // Read the shown text: the link target of "vice-captain" also contains "captain".
+      note: /vice/i.test(plain(p.other ?? "")) ? "vice-captain" : /captain/i.test(plain(p.other ?? "")) ? "captain" : null,
       starts: null,
       minutes: null,
       goals: num(p.goals),
@@ -240,7 +241,7 @@ export function parseRecentWithdrawals(wikitext: string, since: string): SquadPl
 
 /** Squad from a club's or national team's Wikipedia page. No availability or lineups: Wikipedia doesn't have them. */
 export function getWikiSquad(title: string): Promise<Squad | null> {
-  return cached(`squad:wiki:v4:${title}`, 6 * HOUR, async () => {
+  return cached(`squad:wiki:v5:${title}`, 6 * HOUR, async () => {
     const d = await fetchJson(`https://en.wikipedia.org/w/api.php?action=parse&format=json&formatversion=2&redirects=1&prop=wikitext&page=${encodeURIComponent(title)}`, ParseSchema);
     const parsed = parseWikiSquad(d.parse?.wikitext ?? "");
     if (!parsed) return null;

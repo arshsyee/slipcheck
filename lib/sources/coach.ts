@@ -12,7 +12,9 @@ import { getEntities, itemId, label, timeOf } from "./wikidata";
  */
 export interface Coach {
   name: string;
+  /** Appointment date; null when the source only knows the year (see `sinceYear`). */
   since: string | null;
+  sinceYear: number | null;
   age: number | null;
   nationality: string | null;
   /** The coach before them, if they left during the current season (for before/after comparisons). */
@@ -33,7 +35,7 @@ interface Tenure {
 
 /** Every head-coach spell (P286) recorded on Wikidata for a club, newest first. Uses the entity API (fast). */
 export function getCoachHistory(clubQid: string): Promise<Tenure[]> {
-  return cached(`coach:wikidata:v2:${clubQid}`, 12 * HOUR, async () => {
+  return cached(`coach:wikidata:v3:${clubQid}`, 12 * HOUR, async () => {
     const club = (await getEntities([clubQid], "claims"))[clubQid];
     const spells = (club?.claims?.P286 ?? []).map((c) => ({
       id: itemId(c),
@@ -103,11 +105,14 @@ export async function getCoach(clubQid: string, wikipediaTitle: string | null, s
   const agreement: Coach["agreement"] =
     wikiName && current ? (samePerson(wikiName, current.name) ? "confirmed" : "conflict") : wikiName ? "wikipedia-only" : "wikidata-only";
 
-  const since = spell?.start ?? null;
+  // Wikidata gives some dates only to the year ("+2026-00-00"): never treat that as 1 January.
+  const since = spell?.start && !/-00/.test(spell.start.slice(0, 10)) ? spell.start : null;
+  const sinceYear = spell?.start ? Number(spell.start.slice(0, 4)) || null : null;
   const prev = since ? history.find((t) => t.end && t.end <= since && t.end >= seasonStart && !samePerson(t.name, name)) : null;
   return {
     name,
     since,
+    sinceYear,
     age: spell?.dob ? Math.floor((Date.now() - new Date(spell.dob).getTime()) / (365.25 * DAY)) : null,
     nationality: spell?.nationality ?? null,
     predecessor: prev ? { name: prev.name, until: prev.end } : null,

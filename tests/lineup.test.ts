@@ -60,3 +60,15 @@ describe("national-team withdrawals (real Wikipedia, England, 2026-09-23)", () =
     expect(outs.find((p) => p.name === "Nick Pope")).toBeUndefined();
   });
 });
+
+describe("captain labels (real Wikipedia rows, Real Madrid, 2026-09-28)", () => {
+  it("tells the captain from the vice-captain", () => {
+    const w = `===Current squad===
+{{Fs start}}
+{{Fs player|no=7|pos=FW|nat=BRA|name=[[Vinícius Júnior]]|other=[[Captain (association football)#Vice-captain|vice-captain]]}}
+{{Fs player|no=8|pos=MF|nat=URU|name=[[Federico Valverde]]|other=[[Captain (association football)|captain]]}}
+{{Fs end}}`;
+    const s = parseWikiSquad(w)!;
+    expect(s.players.map((p) => [p.name, p.note])).toEqual([["Vinícius Júnior", "vice-captain"], ["Federico Valverde", "captain"]]);
+  });
+});

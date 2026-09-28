@@ -200,6 +200,8 @@ describe("players named in injury headlines (real headlines, 2026-09-23)", () =>
     // Still catches real absences.
     expect([...playersInHeadlines(["Odilon Kossounou"], [h("CAN 2027 Qualifiers: Kossounou ruled out, Ivory Coast reshuffles defense ahead of Ghana clash")]).keys()]).toEqual(["Odilon Kossounou"]);
     expect(playersInHeadlines(["Eric García"], [h("Joan García ruled out with knee injury")]).size).toBe(0);
+    // Good news about an injury is not an absence (real, 2026-09-28).
+    expect(playersInHeadlines(["Kylian Mbappé"], [h("Real Madrid Breathe a Sigh of Relief After Kylian Mbappé Injury Update")]).size).toBe(0);
   });
 });
 
