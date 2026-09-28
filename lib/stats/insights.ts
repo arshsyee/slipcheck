@@ -6,7 +6,8 @@ import { isDraw, teamScore } from "../teams/match";
 import { MARKET_LABEL, seasonStart as seasonStartIso } from "../leagues";
 import { impliedProbability } from "../odds/convert";
 
-const n = (x: number | null | undefined, dp = 1) => (x == null ? "?" : x.toFixed(dp));
+// "—" for missing: the report shows it as the red "N/A · no free source".
+const n = (x: number | null | undefined, dp = 1) => (x == null ? "—" : x.toFixed(dp));
 
 /** Which side(s) a selection backs, e.g. "Arsenal or Draw" → home + draw. */
 export function sidesOf(selection: string, home: string, away: string): (Side | "draw")[] {
@@ -63,7 +64,7 @@ export function buildPick(
   const title = `${MARKET_LABEL[leg.market]}: ${leg.selection}${leg.line != null ? ` ${leg.line > 0 && leg.market === "asian_handicap" ? "+" : ""}${leg.line}` : ""}`;
   const sides = sidesOf(leg.selection, home.name, away.name);
   const pickSide: Pick["pickSide"] =
-    leg.market === "total_goals" || leg.market === "btts" ? "both" : sides.length === 1 ? sides[0] : sides.includes("home") ? "home" : sides.includes("away") ? "away" : null;
+    leg.market === "total_goals" || leg.market === "btts" || leg.market === "total_corners" || leg.market === "total_cards" ? "both" : sides.length === 1 ? sides[0] : sides.includes("home") ? "home" : sides.includes("away") ? "away" : null;
 
   // What the slip's odds mean, as a probability. Not a prediction: the bettor compares it with the counts below.
   if (leg.oddsDecimal && leg.oddsDecimal > 1) {
@@ -120,7 +121,7 @@ export function buildPick(
   }
 
   const primaryTab: Pick["primaryTab"] =
-    leg.market === "total_goals" || leg.market === "btts" || leg.market === "asian_handicap" ? "stats" : "form";
+    leg.market === "1x2" || leg.market === "double_chance" || leg.market === "draw_no_bet" || leg.market === "other" ? "form" : "stats";
   return { pickSide, title, bullets: bullets.slice(0, 8), stats: marketStats(leg, home, away), primaryTab };
 }
 
@@ -198,6 +199,25 @@ export function marketStats(leg: Leg, home: TeamSection, away: TeamSection): Pic
         all("Both teams scored", (g) => count(g, (x) => x.gf > 0 && x.ga > 0)),
         all("xG per game (for – against)", xg),
       ];
+    case "total_corners":
+    case "total_cards": {
+      // Match totals (both teams), from the games where the source recorded them.
+      const corners = leg.market === "total_corners";
+      const total = (x: TeamGame) => (corners ? (x.corners != null && x.cornersAgainst != null ? x.corners + x.cornersAgainst : null) : x.yellows != null && x.reds != null && x.cardsAgainst != null ? x.yellows + x.reds + x.cardsAgainst : null);
+      const known = (g: TeamGame[]) => g.filter((x) => total(x) != null);
+      const what = corners ? "corners" : "cards";
+      const lineCC = leg.line ?? (corners ? 9.5 : 3.5);
+      const over = `${Math.floor(lineCC) + 1}+ ${what}`;
+      const own = (x: TeamGame) => (corners ? x.corners : x.yellows != null && x.reds != null ? x.yellows + x.reds : null);
+      const opp = (x: TeamGame) => (corners ? x.cornersAgainst : x.cardsAgainst);
+      return [
+        venue(`Games with ${over}`, (g) => count(known(g), (x) => total(x)! > lineCC)),
+        venue("Per game (both teams)", (g) => n(avgOf(known(g), total), 1)),
+        venue(corners ? "Won – conceded per game" : "Own – opponent's per game", (g) => (known(g).length ? `${n(avgOf(known(g), own), 1)} – ${n(avgOf(known(g), opp), 1)}` : "—")),
+        all(`Games with ${over}`, (g) => count(known(g), (x) => total(x)! > lineCC)),
+        all(`${over} in last 5`, (g) => count(known(g).slice(0, 5), (x) => total(x)! > lineCC)),
+      ];
+    }
     case "asian_handicap": {
       // The line is quoted for the picked side; the other side gets the opposite line.
       const pickHome = sidesOf(leg.selection, home.name, away.name)[0] !== "away";

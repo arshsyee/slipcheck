@@ -20,6 +20,8 @@ export interface TeamGame {
   cornersAgainst: number | null;
   yellows: number | null;
   reds: number | null;
+  /** Yellow + red cards shown to the opponent in this game. */
+  cardsAgainst: number | null;
   result: "W" | "D" | "L";
   referee: string | null;
 }
@@ -53,6 +55,7 @@ export function gamesFor(rows: MatchRow[], name: string, venue: Venue = "all"): 
         cornersAgainst: home ? r.ac : r.hc,
         yellows: home ? r.hy : r.ay,
         reds: home ? r.hr : r.ar,
+        cardsAgainst: (home ? r.ay : r.hy) != null && (home ? r.ar : r.hr) != null ? (home ? r.ay! + r.ar! : r.hy! + r.hr!) : null,
         result: gf > ga ? ("W" as const) : gf < ga ? ("L" as const) : ("D" as const),
         referee: r.referee,
       };

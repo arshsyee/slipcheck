@@ -17,6 +17,7 @@ Extract every selection exactly as shown. Rules:
   "total_goals" = Over/Under or Total Goals;
   "asian_handicap" = Asian Handicap or Handicap with a goal line;
   "btts" = Both Teams To Score;
+  "total_corners" = Over/Under total match corners; "total_cards" = Over/Under total match cards (yellow and red);
   "other" = anything else (goalscorers, cards, corners, player props, bet builders, correct score, specials).
 - selection: the team for 1x2 / draw_no_bet / asian_handicap (or "Draw"); "Home or Draw"-style picks as "<team> or Draw" /
   "<team> or <team>" for double chance; "Over"/"Under" for totals; "Yes"/"No" for BTTS; otherwise the text as shown.

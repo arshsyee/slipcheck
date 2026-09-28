@@ -20,7 +20,9 @@ export const EMPTY_LEG: Leg = {
   oddsDecimal: null,
 };
 
-const HAS_LINE = new Set<Leg["market"]>(["total_goals", "asian_handicap"]);
+const HAS_LINE = new Set<Leg["market"]>(["total_goals", "asian_handicap", "total_corners", "total_cards"]);
+/** A typical starting line when switching to an over/under market. */
+const DEFAULT_LINE: Partial<Record<Leg["market"], number>> = { total_goals: 2.5, total_corners: 9.5, total_cards: 3.5, asian_handicap: 0 };
 
 const PICK_HINT: Record<Leg["market"], string> = {
   "1x2": "Team or Draw",
@@ -29,6 +31,8 @@ const PICK_HINT: Record<Leg["market"], string> = {
   total_goals: "Over / Under",
   asian_handicap: "Team",
   btts: "Yes / No",
+  total_corners: "Over / Under",
+  total_cards: "Over / Under",
   other: "As on the slip",
 };
 
@@ -78,7 +82,7 @@ export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange
                 value={leg.market}
                 onChange={(e) => {
                   const market = e.target.value as Leg["market"];
-                  setLeg(i, { market, line: HAS_LINE.has(market) ? (leg.line ?? (market === "total_goals" ? 2.5 : 0)) : null });
+                  setLeg(i, { market, line: HAS_LINE.has(market) ? (DEFAULT_LINE[market] ?? 0) : null });
                 }}
               >
                 {MARKETS.map((m) => (
