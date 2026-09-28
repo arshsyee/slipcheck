@@ -161,8 +161,44 @@ describe("headline attribution (real Google News headlines, 2026-09-23)", () => 
     expect(aboutClub(sportingFeed, "Sporting CP", "Lens").map((x) => x.title)).toEqual(["Sporting CP boss confirms Hjulmand fitness doubt"]);
   });
 
+  it("files a headline under the team named first, possessives included (real, 2026-09-23)", () => {
+    const feed = [h("Football: Soccer-Chelsea's Joao Pedro out of Brazil's friendlies against Australia, India with injury")];
+    expect(aboutClub(feed, "Australia", "Brazil")).toEqual([]);
+    expect(aboutClub(feed, "Brazil", "Australia")).toHaveLength(1);
+  });
+
   it("finds clubs by name inside real headlines", () => {
     expect(mentionIndex("Arteta agrees new deal with champions Arsenal", "Arsenal")).toBeGreaterThanOrEqual(0);
     expect(mentionIndex("Valverde to miss Korea friendly after ankle injury", "Real Madrid")).toBe(-1);
+  });
+});
+
+describe("players named in injury headlines (real headlines, 2026-09-23)", () => {
+  const h = (title: string) => ({ title, url: "https://news.google.com", published: null, publisher: "", source: "google-news" as const });
+  it("matches full names and unique surnames, never shared ones", async () => {
+    const { playersInHeadlines } = await import("../lib/sources/news");
+    const heads = [
+      h("Ghana boss issues Mohammed Kudus injury update after Tottenham star withdraws from squad"),
+      h("Nathaniel Adjei Withdraws from Ghana Squad After Hamstring Injury"),
+    ];
+    const hits = playersInHeadlines(["Mohammed Kudus", "Jordan Ayew", "André Ayew", "Lawrence Ati-Zigi"], heads);
+    expect([...hits.keys()]).toEqual(["Mohammed Kudus"]);
+    // "Ayew" is shared by two players, so a surname-only mention must not flag either.
+    expect(playersInHeadlines(["Jordan Ayew", "André Ayew"], [h("Ayew doubtful for Ivory Coast clash")]).size).toBe(0);
+  });
+
+  it("never flags returns, call-ups, replacements, or a different player with the same surname", async () => {
+    const { playersInHeadlines } = await import("../lib/sources/news");
+    const spain = ["Eric García", "Dean Huijsen", "Iván Fresneda", "Fermín López"];
+    const heads = [
+      h("Spain’s UEFA Nations League squad: Fermín López returns, Joan García absent"),
+      h("Huijsen and Fermín return to Spain squad with big surprises"),
+      h("Official: Iván Fresneda replaces injured Pedro Porro for Spain"),
+      h("Branthwaite reveals brain study helped him conquer injuries and earn England call"),
+    ];
+    expect(playersInHeadlines([...spain, "Jarrad Branthwaite"], heads).size).toBe(0);
+    // Still catches real absences.
+    expect([...playersInHeadlines(["Odilon Kossounou"], [h("CAN 2027 Qualifiers: Kossounou ruled out, Ivory Coast reshuffles defense ahead of Ghana clash")]).keys()]).toEqual(["Odilon Kossounou"]);
+    expect(playersInHeadlines(["Eric García"], [h("Joan García ruled out with knee injury")]).size).toBe(0);
   });
 });

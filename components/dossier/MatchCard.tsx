@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import { AlertTriangle, CalendarClock, CheckCircle2, CloudRain, Crosshair, MapPin, Sun, Cloud, Wind, XCircle } from "lucide-react";
@@ -10,13 +10,14 @@ import { SOURCES, type SourceId } from "@/lib/sources/types";
 import { MARKET_LABEL } from "@/lib/leagues";
 import { formatOdds } from "@/lib/odds/convert";
 import { Crest, kickoffLabel, timeAgo } from "./bits";
-import { AvailabilityTab, ClubTab, FormTab, H2HTab, MatchCentreTab, NewsTab, RefereeTab, StatsTab } from "./tabs";
+import { AvailabilityTab, ClubTab, FormTab, H2HTab, MatchCentreTab, NewsTab, RefereeTab, SquadTab, StatsTab } from "./tabs";
 
 const TABS: { id: DossierTab; label: string }[] = [
   { id: "form", label: "Form" },
   { id: "stats", label: "Stats" },
   { id: "h2h", label: "Head-to-head" },
   { id: "availability", label: "Availability" },
+  { id: "squad", label: "Squad" },
   { id: "referee", label: "Referee" },
   { id: "matchCentre", label: "Match centre" },
   { id: "news", label: "News" },
@@ -25,7 +26,7 @@ const TABS: { id: DossierTab; label: string }[] = [
 
 export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: OddsFormat }) {
   const [tab, setTab] = useState<DossierTab>(d.pick.primaryTab);
-  const TabBody = { form: FormTab, stats: StatsTab, h2h: H2HTab, availability: AvailabilityTab, referee: RefereeTab, matchCentre: MatchCentreTab, news: NewsTab, club: ClubTab }[tab];
+  const TabBody = { form: FormTab, stats: StatsTab, h2h: H2HTab, availability: AvailabilityTab, squad: SquadTab, referee: RefereeTab, matchCentre: MatchCentreTab, news: NewsTab, club: ClubTab }[tab];
   const pick = d.pick.pickSide;
 
   return (
@@ -84,11 +85,35 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
       </div>
 
       {/* Pick focus */}
-      {d.pick.bullets.length > 0 && (
-        <div className="border-b border-line/70 bg-accent/[0.04] px-5 py-4">
-          <div className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
-            <Crosshair size={13} /> What matters for this pick
-          </div>
+      <div className="border-b border-line/70 bg-accent/[0.04] px-5 py-4">
+        <div className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-accent">
+          <Crosshair size={13} /> What matters for this pick
+        </div>
+        {d.pick.stats.length > 0 ? (
+          <table className="tabular mb-3 w-full text-sm">
+            <tbody>
+              {d.pick.stats.map((r, i) => (
+                <Fragment key={i}>
+                  {r.group !== d.pick.stats[i - 1]?.group && (
+                    <tr>
+                      <th className="pt-2 pb-1 text-left text-xs font-normal text-muted">{r.group}</th>
+                      <th className="pt-2 pb-1 text-right text-xs font-medium">{d.home.name}</th>
+                      <th className="pt-2 pb-1 text-right text-xs font-medium">{d.away.name}</th>
+                    </tr>
+                  )}
+                  <tr className="border-t border-line/40">
+                    <td className="py-1 pr-2 text-muted">{r.label}</td>
+                    <td className="whitespace-nowrap py-1 text-right">{r.home === "—" ? <NoSource /> : r.home}</td>
+                    <td className="whitespace-nowrap py-1 pl-3 text-right">{r.away === "—" ? <NoSource /> : r.away}</td>
+                  </tr>
+                </Fragment>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p className="mb-2 text-sm text-danger">Comparison N/A · no free source has these teams.</p>
+        )}
+        {d.pick.bullets.length > 0 && (
           <ul className="space-y-1.5 text-sm">
             {d.pick.bullets.map((b, i) => (
               <li key={i} className="flex gap-2">
@@ -97,8 +122,8 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
               </li>
             ))}
           </ul>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Tabs */}
       <div className="border-b border-line/70 px-2">
@@ -135,7 +160,7 @@ function TeamSide({ d, side, highlighted }: { d: MatchDossier; side: "home" | "a
   return (
     <div className={clsx("flex min-w-0 items-center gap-3", side === "away" && "flex-row-reverse text-right")}>
       <div className={clsx("rounded-full p-1", highlighted && "ring-2 ring-accent/60")}>
-        <Crest src={t.espn?.logo} name={t.name} size={48} />
+        <Crest src={t.badge} name={t.name} size={48} />
       </div>
       <div className="min-w-0">
         <div className="truncate text-lg font-semibold leading-tight">{t.name}</div>
@@ -235,4 +260,9 @@ export function MatchCardSkeleton({ index, home, away }: { index: number; home: 
       </div>
     </div>
   );
+}
+
+/** Shown wherever no free source has the value: honest, not blank. */
+function NoSource() {
+  return <span className="text-xs text-danger">N/A · no free source</span>;
 }

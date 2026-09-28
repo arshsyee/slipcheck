@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { cached, HOUR, MINUTE } from "./cache";
 import { fetchJson } from "./http";
-import { matchFixture } from "../teams/match";
+import { bestTeamMatch, matchFixture } from "../teams/match";
+import type { EspnEvent } from "./espn";
 
 const BASE = "https://match.uefa.com/v5";
 
@@ -15,6 +16,8 @@ export interface UefaMatch {
   stadium: { name: string | null; city: string | null; capacity: number | null; lat: number | null; lon: number | null } | null;
   referee: string | null;
   lineupStatus: string | null;
+  /** Final score incl. extra time; null until finished. */
+  score: { home: number; away: number } | null;
 }
 
 const Translated = z.object({ EN: z.string().optional() }).partial().optional();
@@ -24,6 +27,7 @@ const MatchSchema = z.object({
   kickOffTime: z.object({ dateTime: z.string() }),
   status: z.string(),
   lineupStatus: z.string().optional(),
+  score: z.object({ total: z.object({ home: z.number(), away: z.number() }).optional() }).optional(),
   homeTeam: TeamSchema,
   awayTeam: TeamSchema,
   round: z.object({ translations: z.object({ name: Translated }).partial().optional() }).optional(),
@@ -69,6 +73,7 @@ export function getCompetitionMatches(competitionId: number, seasonYear = uefaSe
           : null,
         referee: ref?.person?.translations?.name?.EN ?? null,
         lineupStatus: m.lineupStatus ?? null,
+        score: m.status === "FINISHED" && m.score?.total ? m.score.total : null,
       };
     });
   });
@@ -77,6 +82,40 @@ export function getCompetitionMatches(competitionId: number, seasonYear = uefaSe
 export async function findUefaMatch(competitionId: number, home: string | null, away: string | null): Promise<UefaMatch | null> {
   const upcoming = (await getCompetitionMatches(competitionId)).filter((m) => m.status !== "FINISHED");
   return matchFixture(home, away, upcoming);
+}
+
+/** UEFA club competitions: Champions League, Europa League, Conference League. */
+export const UEFA_COMPETITIONS = [
+  { id: 1, name: "UEFA Champions League", slug: "uefa.champions" },
+  { id: 14, name: "UEFA Europa League", slug: "uefa.europa" },
+  { id: 2019, name: "UEFA Conference League", slug: "uefa.europa.conf" },
+];
+
+/**
+ * A club's finished European matches this season (qualifiers included), from UEFA itself.
+ * Returned in the same shape as ESPN events; our club's `id` is `teamId`, opponents use their name.
+ */
+export async function getEuropeResults(club: string, teamId: string): Promise<EspnEvent[]> {
+  const lists = await Promise.all(UEFA_COMPETITIONS.map(async (c) => ({ c, matches: await getCompetitionMatches(c.id) })));
+  const names = [...new Set(lists.flatMap((l) => l.matches.flatMap((m) => [m.home, m.away])))];
+  const hit = bestTeamMatch(club, names);
+  if (!hit) return [];
+  return lists
+    .flatMap(({ c, matches }) =>
+      matches
+        .filter((m) => m.score && (m.home === hit.name || m.away === hit.name))
+        .map((m) => ({
+          id: `uefa:${m.id}`,
+          date: m.kickoff,
+          completed: true,
+          competition: c.name,
+          slug: c.slug,
+          venue: m.stadium?.name ?? null,
+          home: { id: m.home === hit.name ? teamId : m.home, name: m.home, score: m.score!.home },
+          away: { id: m.away === hit.name ? teamId : m.away, name: m.away, score: m.score!.away },
+        })),
+    )
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export interface UefaLineup {

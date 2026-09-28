@@ -13,7 +13,8 @@ const fetchJson: typeof fetchJsonRaw = async (url, schema, init) => {
   try {
     return await fetchJsonRaw(url, schema, init);
   } catch (e) {
-    if (e instanceof Error && / 403$/.test(e.message)) blocked = new Error(`${e.message} (ESPN is blocking requests; skipped for this run)`);
+    // Same error for every later call, so the report reads the same whichever request hit the block first.
+    if (e instanceof Error && / 403$/.test(e.message)) blocked = e;
     throw e;
   }
 };
@@ -211,11 +212,11 @@ export function getSchedule(slug: string, teamId: string, fixtures = false): Pro
   }, { disk: true });
 }
 
-/** This season's results across the domestic league, domestic cups and UEFA competitions, newest first. */
-export async function getRecentResults(domesticSlug: string, teamId: string, cupSlugs: string[] = []): Promise<EspnEvent[]> {
-  const lists = await Promise.all(
-    [domesticSlug, ...cupSlugs, ...UEFA_SLUGS].map((s) => getSchedule(s, teamId).catch(() => [] as EspnEvent[])),
-  );
+/** This season's results in the given competitions (e.g. domestic cups), newest first. Throws if every one failed. */
+export async function getRecentResults(slugs: string[], teamId: string): Promise<EspnEvent[]> {
+  const settled = await Promise.allSettled(slugs.map((s) => getSchedule(s, teamId)));
+  if (settled.length && settled.every((r) => r.status === "rejected")) throw (settled[0] as PromiseRejectedResult).reason;
+  const lists = settled.map((r) => (r.status === "fulfilled" ? r.value : []));
   const seen = new Set<string>();
   return lists
     .flat()

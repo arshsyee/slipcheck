@@ -1,4 +1,4 @@
-import type { Currency, OddsFormat } from "../types";
+import type { OddsFormat } from "../types";
 
 export function americanToDecimal(american: number): number {
   if (american === 0) throw new Error("American odds cannot be 0");
@@ -63,13 +63,6 @@ export function accaDecimal(legs: number[]): number {
 
 export function impliedProbability(decimal: number): number {
   return 1 / decimal;
-}
-
-const SYMBOL: Record<Currency, string> = { GBP: "en-GB", EUR: "de-DE", USD: "en-US" };
-
-export function formatMoney(n: number | null | undefined, currency: Currency = "GBP"): string {
-  if (n == null) return "—";
-  return n.toLocaleString(SYMBOL[currency], { style: "currency", currency });
 }
 
 const round = (n: number, dp: number) => Math.round(n * 10 ** dp) / 10 ** dp;

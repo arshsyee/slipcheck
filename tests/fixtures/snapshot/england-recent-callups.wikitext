@@ -1,0 +1,41 @@
+===Recent call-ups===
+The following players have also been called up to the England squad within the last twelve months.
+<!--Sorted by position, most recent call-up, caps, goals and last name. Only update at the end of the game.-->
+{{nat fs r start}}
+{{nat fs r player|no=|pos=GK|name=[[Dean Henderson]]|age={{Birth date and age|1997|3|12|df=y}}|caps=6|goals=0|club=[[Crystal Palace F.C.|Crystal Palace]]|clubnat=ENG|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=GK|name=[[Aaron Ramsdale]]|age={{Birth date and age|1998|5|14|df=y}}|caps=5|goals=0|club=[[Southampton F.C.|Southampton]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}} <sup>WD</sup>}}
+{{nat fs r player|no=|pos=GK|name=[[Nick Pope (footballer)|Nick Pope]]|age={{Birth date and age|1992|4|19|df=y}}|caps=10|goals=0|club=[[Newcastle United F.C.|Newcastle United]]|clubnat=ENG|latest={{sort|2025-11-13|v. {{fb|SRB}}, 13 November 2025}} <sup>INJ</sup>}}
+{{nat fs break}}
+{{nat fs r player|no=|pos=DF|name=[[Tino Livramento]]|age={{Birth date and age|2002|11|12|df=y}}|caps=6|goals=0|club=[[Newcastle United F.C.|Newcastle United]]|clubnat=ENG|latest={{sort|2026-09-26|v. {{fb|ESP}}, 26 September 2026 <sup>INJ</sup>}}}}
+{{nat fs r player|no=|pos=DF|name=[[John Stones]]|age={{Birth date and age|1994|5|28|df=y}}|caps=94|goals=3|club=[[Inter Milan]]|clubnat=ITA|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=DF|name=[[Reece James]]|age={{Birth date and age|1999|12|8|df=y}}|caps=29|goals=1|club=[[Chelsea F.C.|Chelsea]]|clubnat=ENG|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=DF|name=[[Djed Spence]]|age={{Birth date and age|2000|8|9|df=y}}|caps=14|goals=0|club=[[Inter Milan]]|clubnat=ITA|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=DF|name=[[Dan Burn]]|age={{Birth date and age|1992|5|9|df=y}}|caps=11|goals=0|club=[[Newcastle United F.C.|Newcastle United]]|clubnat=ENG|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=DF|name=[[Harry Maguire]]|age={{Birth date and age|1993|3|5|df=y}}|caps=66|goals=7|club=[[Manchester United F.C.|Manchester United]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}}}}
+{{nat fs r player|no=|pos=DF|name=[[Ben White (footballer)|Ben White]]|age={{Birth date and age|1997|10|8|df=y}}|caps=6|goals=1|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}}}}
+{{nat fs r player|no=|pos=DF|name=[[Fikayo Tomori]]|age={{Birth date and age|1997|12|19|df=y}}|caps=6|goals=0|club=[[AC Milan]]|clubnat=ITA|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}} <sup>WD</sup>}}
+{{nat fs break}}
+{{nat fs r player|no=|pos=MF|name=[[Declan Rice]]|other=[[Captain (association football)|vice-captain]]|age={{Birth date and age|1999|1|14|df=y}}|caps=80|goals=8|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG|latest={{sort|2026-09-26|v. {{fb|ESP}}, 26 September 2026 <sup>INJ</sup>}}}}
+{{nat fs r player|no=|pos=MF|name=[[Cole Palmer]]|age={{Birth date and age|2002|5|6|df=y}}|caps=14|goals=2|club=[[Chelsea F.C.|Chelsea]]|clubnat=ENG|latest={{sort|2026-09-26|v. {{fb|ESP}}, 26 September 2026 <sup>INJ</sup>}}}}
+{{nat fs r player|no=|pos=MF|name=[[Kobbie Mainoo]]|age={{Birth date and age|2005|4|19|df=y}}|caps=14|goals=0|club=[[Manchester United F.C.|Manchester United]]|clubnat=ENG|latest={{sort|2026-09-26|v. {{fb|ESP}}, 26 September 2026 <sup>INJ</sup>}}}}
+{{nat fs r player|no=|pos=MF|name=[[Jordan Henderson]]|age={{Birth date and age|1990|6|17|df=y}}|caps=91|goals=3|club=[[Chelsea F.C.|Chelsea]]|clubnat=ENG|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=MF|name=[[Josh King (footballer, born 2007)|Josh King]]|age={{Birth date and age|2007|1|03|df=y}}|caps=0|goals=0|club=[[Fulham FC|Fulham]]|clubnat=ENG|latest={{sort|2026-06-10|v. {{fb|CRC}}, 10 June 2026}}}}
+{{nat fs r player|no=|pos=MF|name=[[Ethan Nwaneri]]|age={{Birth date and age|2007|3|21|df=y}}|caps=0|goals=0|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG|latest={{sort|2026-06-10|v. {{fb|CRC}}, 10 June 2026}}}}
+{{nat fs r player|no=|pos=MF|name=[[Adam Wharton]]|age={{Birth date and age|2004|2|6|df=y}}|caps=4|goals=0|club=[[Crystal Palace F.C.|Crystal Palace]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}} <sup>INJ</sup>}}
+{{nat fs r player|no=|pos=MF|name=[[Ruben Loftus-Cheek]]|age={{Birth date and age|1996|1|23|df=y}}|caps=11|goals=0|club=[[AC Milan]]|clubnat=ITA|latest={{sort|2025-10-14|v. {{fb|LAT}}, 14 October 2025}}}}
+{{nat fs break}}
+{{nat fs r player|no=|pos=FW|name=[[Marcus Rashford]]|age={{Birth date and age|1997|10|31|df=y}}|caps=78|goals=19|club=[[Manchester United F.C.|Manchester United]]|clubnat=ENG|latest={{sort|2026-09-26|v. {{fb|ESP}}, 26 September 2026 <sup>INJ</sup>}}}}
+{{nat fs r player|no=|pos=FW|name=[[Ollie Watkins]]|age={{Birth date and age|1995|12|30|df=y}}|caps=24|goals=7|club=[[Al Hilal SFC|Al-Hilal]]|clubnat=KSA|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=FW|name=[[Noni Madueke]]|age={{Birth date and age|2002|3|10|df=y}}|caps=16|goals=1|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=FW|name=[[Ivan Toney]]|age={{Birth date and age|1996|3|16|df=y}}|caps=10|goals=1|club=[[Al-Ahli Saudi FC|Al-Ahli]]|clubnat=KSA|latest={{sort|2026-07-18|[[2026 FIFA World Cup]]}}}}
+{{nat fs r player|no=|pos=FW|name=[[Phil Foden]]|age={{Birth date and age|2000|5|28|df=y}}|caps=49|goals=4|club=[[Manchester City F.C.|Manchester City]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}}}}
+{{nat fs r player|no=|pos=FW|name=[[Jarrod Bowen]]|age={{Birth date and age|1996|12|20|df=y}}|caps=22|goals=1|club=[[West Ham United F.C.|West Ham United]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}}}}
+{{nat fs r player|no=|pos=FW|name=[[Dominic Solanke]]|age={{Birth date and age|1997|9|14|df=y}}|caps=5|goals=0|club=[[Tottenham Hotspur F.C.|Tottenham Hotspur]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}}}}
+{{nat fs r player|no=|pos=FW|name=[[Harvey Barnes]]|age={{Birth date and age|1997|12|9|df=y}}|caps=2|goals=0|club=[[Newcastle United F.C.|Newcastle United]]|clubnat=ENG|latest={{sort|2026-03-31|v. {{fb|JPN}}, 31 March 2026}}}} 
+{{nat fs break}}
+<sup>INJ</sup> Withdrew due to injury<br />
+<sup>PRE</sup> Preliminary squad / standby<br />
+<sup>RET</sup> Retired from the national team<br />
+<sup>SUS</sup> Serving suspension<br />
+<sup>WD</sup> Player withdrew from the squad due to non-injury issue.
+{{nat fs end}}
