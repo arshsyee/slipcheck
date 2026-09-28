@@ -112,7 +112,7 @@ export function aboutClub(headlines: Headline[], club: string, opponent: string)
 /** A headline saying someone can't play. */
 const OUT_RE = /ruled out|withdr[ae]w|injur|\bmiss(es|ing)?\b|doubt|suspend|\bban(ned)?\b|setback|sidelined|absen(ce|t)|surgery|\bblow\b|\bout of\b/i;
 /** …unless it's (also) about someone coming in: then who is out vs in is ambiguous, so it isn't used. */
-const IN_RE = /\breturns?\b|\breturn to\b|called up|call-?up|\bcall\b|replac|recalled|back in\b|\bearns?\b/i;
+const IN_RE = /\breturns?\b|\breturn to\b|called up|call-?up|\bcall\b|replac|recalled|back in\b|\bearns?\b|relief|boost|fit again|all clear/i;
 
 /**
  * Squad players that injury headlines say may not play. A headline counts only if it reports an absence and isn't
