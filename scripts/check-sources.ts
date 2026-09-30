@@ -17,7 +17,6 @@ import { getKickoffWeather } from "../lib/sources/weather";
 import { getClubFacts } from "../lib/sources/wikidata";
 import { getBbcClubNews, getGoogleClubNews } from "../lib/sources/news";
 import { getClubProfile } from "../lib/sources/sportsDb";
-import { getFplTeam } from "../lib/sources/fpl";
 import { findPlFixture } from "../lib/sources/premierLeague";
 import { getCompetitionMatches } from "../lib/sources/uefa";
 
@@ -115,9 +114,10 @@ const checks: Check[] = [
     id: "fpl",
     name: "Fantasy Premier League",
     run: async () => {
-      const t = await getFplTeam("Arsenal");
+      const t = await getFplSquad("Arsenal");
       if (!t) throw new Error("team not found");
-      return { summary: `${t.availability.length} flagged, top xG+xA ${t.keyPlayers[0]?.player}`, newest: latest(t.availability.map((a) => a.since)) };
+      const flagged = t.players.filter((p) => p.status !== "available").length;
+      return { summary: `Arsenal: ${t.players.length} players, ${flagged} flagged`, newest: null };
     },
   },
   {

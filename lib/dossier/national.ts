@@ -153,7 +153,6 @@ async function team(
     restDays: restDays(lastMatch?.date, kickoff),
     lastMatch,
     availability: news.ok ? { ...news, data: { kind: "news", headlines: news.data.filter((h) => AVAILABILITY_RE.test(h.title)).slice(0, 6) } } : news,
-    keyPlayers: null,
     goalProfile: null,
     profile: { ...profile, ok: true, data: { sportsDb: profile.ok ? profile.data : null, wikidata: null } } as TeamSection["profile"],
     season: { ...info, ok: true, data: null } as TeamSection["season"],
