@@ -15,10 +15,7 @@ export async function POST(request: Request) {
   if (file.size > MAX_BYTES) return errorResponse("Image is larger than 8 MB", 400);
 
   const apiKey = settings.provider === "openai" ? settings.openaiKey : settings.anthropicKey;
-  if (!apiKey) {
-    const name = settings.provider === "openai" ? "OpenAI" : "Anthropic (Claude)";
-    return errorResponse(`Add your ${name} API key in Settings first`, 400);
-  }
+  if (!apiKey) return errorResponse("Add a Claude or ChatGPT key in Settings first", 400);
 
   try {
     const slip = await parseSlip({

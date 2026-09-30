@@ -6,7 +6,7 @@ import type { ClientSettings } from "./types";
 const STORAGE_KEY = "slipcheck.settings.v1";
 const CHANGE_EVENT = "slipcheck:settings";
 const SERVER = "__server__";
-const DEFAULTS: ClientSettings = { provider: "anthropic" };
+const DEFAULTS: ClientSettings = {};
 
 export interface EnvStatus {
   anthropic: boolean;
@@ -62,10 +62,7 @@ export function useSettings() {
     [settings],
   );
 
-  const hasAiKey =
-    settings.provider === "openai"
-      ? Boolean(settings.openaiKey || env?.openai)
-      : Boolean(settings.anthropicKey || env?.anthropic);
+  const hasAiKey = Boolean(settings.anthropicKey || settings.openaiKey || env?.anthropic || env?.openai);
 
   return { settings, update, env, loaded, hasAiKey };
 }

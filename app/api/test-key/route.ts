@@ -4,11 +4,9 @@ import { resolveSettings } from "@/lib/keys";
 import type { ClientSettings } from "@/lib/types";
 
 export async function POST(request: Request) {
-  const { which, settings } = (await request.json()) as {
-    which: "anthropic" | "openai";
-    settings?: Partial<ClientSettings>;
-  };
+  const { settings } = (await request.json()) as { settings?: Partial<ClientSettings> };
   const s = resolveSettings(settings);
+  const which = s.provider;
   const key = which === "anthropic" ? s.anthropicKey : s.openaiKey;
   if (!key) return Response.json({ ok: false, message: "No key entered" });
   return Response.json(which === "anthropic" ? await testClaudeKey(key) : await testOpenAIKey(key));
