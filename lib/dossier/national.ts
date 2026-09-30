@@ -1,5 +1,5 @@
 import type { Leg } from "../types";
-import { fromSource, type SourceId, type SourceResult } from "../sources/types";
+import type { SourceId, SourceResult } from "../sources/types";
 import { getInternationalResults, getNationalTeamInfo, INTL_RESULTS_URL, resolveNationalTeam, type IntlRow } from "../sources/international";
 import { findUefaMatch } from "../sources/uefa";
 import { getClubProfile, getNextMatch } from "../sources/sportsDb";
@@ -7,12 +7,12 @@ import { getVenueCoords } from "../sources/wikidata";
 import { getWikiSquad } from "../sources/squad";
 import { geocodeCity, getKickoffWeather } from "../sources/weather";
 import { aboutClub, AVAILABILITY_RE, getGoogleClubNews } from "../sources/news";
-import { staleLog, DAY } from "../sources/cache";
+import { DAY } from "../sources/cache";
 import { averages, form, gamesFor, rates } from "../stats/team";
 import { headToHead, restDays } from "../stats/match";
 import { buildPick } from "../stats/insights";
 import { matchFixture, teamScore } from "../teams/match";
-import { flagPlayersInNews, lineupsFor, mergeFixture, nextAfter, sourceOfKey } from "./build";
+import { flagPlayersInNews, lineupsFor, mergeFixture, nextAfter } from "./build";
 import { getUpcomingMatches } from "../sources/upcoming";
 import type { MatchDossier, Side, StatBlock, TeamSection, TeamStats } from "./types";
 
@@ -29,15 +29,13 @@ export async function nationalTeams(leg: Leg): Promise<[string, string] | null> 
   return h && a ? [h, a] : null;
 }
 
-export async function buildNationalDossier(leg: Leg, legIndex: number, names: [string, string]): Promise<MatchDossier> {
-  const log: MatchDossier["sourceLog"] = [];
-  const staleFrom = staleLog.length;
-  const call = async <T>(source: SourceId, run: () => Promise<T>, url?: string): Promise<SourceResult<T>> => {
-    const r = await fromSource(source, run, url);
-    log.push({ source, ok: r.ok, fetchedAt: r.fetchedAt, error: r.ok ? undefined : r.error, url });
-    return r;
-  };
-
+/** The match data for two national teams; buildDossier adds the source log. */
+export async function buildNationalDossier(
+  leg: Leg,
+  legIndex: number,
+  names: [string, string],
+  call: <T>(s: SourceId, r: () => Promise<T>, url?: string) => Promise<SourceResult<T>>,
+): Promise<Omit<MatchDossier, "sourceLog" | "stale" | "builtAt">> {
   // Fixture: UEFA for the Nations League, else TheSportsDB (friendlies, other confederations).
   const [uefaR, sdbR] = await Promise.all([
     call("uefa", () => findUefaMatch(NATIONS_LEAGUE, leg.homeTeam, leg.awayTeam), "https://www.uefa.com"),
@@ -98,9 +96,6 @@ export async function buildNationalDossier(leg: Leg, legIndex: number, names: [s
     referee: null,
     lineups,
     pick: buildPick({ ...leg, homeTeam: home, awayTeam: away }, homeT, awayT, h2h?.ok ? h2h.data : null),
-    sourceLog: log,
-    stale: staleLog.slice(staleFrom).map((x) => ({ source: sourceOfKey(x.key), savedAt: x.savedAt, error: x.error })),
-    builtAt: new Date().toISOString(),
   };
 }
 
