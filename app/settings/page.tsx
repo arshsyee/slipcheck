@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Check, ExternalLink, Eye, EyeOff, Loader2, ShieldCheck, X } from "lucide-react";
 import clsx from "clsx";
 import { useSettings } from "@/lib/useSettings";
@@ -41,7 +40,7 @@ export default function SettingsPage() {
   if (!loaded) return null;
 
   return (
-    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mx-auto max-w-2xl space-y-8">
+    <div className="rise mx-auto max-w-2xl space-y-8">
       <div>
         <h1 className="text-3xl font-semibold tracking-tight">Settings</h1>
         <p className="mt-2 text-muted">
@@ -132,7 +131,7 @@ export default function SettingsPage() {
         You can also put keys in <code className="rounded bg-surface-2 px-1">.env.local</code> (see{" "}
         <code className="rounded bg-surface-2 px-1">.env.example</code>) so they never touch the browser.
       </p>
-    </motion.div>
+    </div>
   );
 }
 

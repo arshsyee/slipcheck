@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useState } from "react";
-import { motion } from "framer-motion";
 import clsx from "clsx";
 import { AlertTriangle, CalendarClock, CheckCircle2, CloudRain, Crosshair, MapPin, Sun, Cloud, Wind, XCircle } from "lucide-react";
 import type { DossierTab, MatchDossier } from "@/lib/dossier/types";
@@ -30,12 +29,7 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
   const pick = d.pick.pickSide;
 
   return (
-    <motion.article
-      id={`leg-${d.legIndex}`}
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="glass scroll-mt-48 overflow-hidden rounded-2xl"
-    >
+    <article id={`leg-${d.legIndex}`} className="rise glass scroll-mt-48 overflow-hidden rounded-2xl">
       {/* Header */}
       <div className="border-b border-line/70 p-5">
         <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
@@ -149,7 +143,7 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
       </div>
 
       <SourcesFooter d={d} />
-    </motion.article>
+    </article>
   );
 }
 
