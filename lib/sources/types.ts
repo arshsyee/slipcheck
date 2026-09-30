@@ -12,19 +12,19 @@ export type SourceId =
   | "uefa"
   | "international-results";
 
-export const SOURCES: Record<SourceId, { name: string; homepage: string; tier: "A" | "B" }> = {
-  "football-data": { name: "football-data.co.uk", homepage: "https://www.football-data.co.uk", tier: "A" },
-  openligadb: { name: "OpenLigaDB", homepage: "https://www.openligadb.de", tier: "A" },
-  "open-meteo": { name: "Open-Meteo", homepage: "https://open-meteo.com", tier: "A" },
-  wikidata: { name: "Wikidata", homepage: "https://www.wikidata.org", tier: "A" },
-  wikipedia: { name: "Wikipedia", homepage: "https://en.wikipedia.org", tier: "A" },
-  bbc: { name: "BBC Sport", homepage: "https://www.bbc.co.uk/sport/football", tier: "A" },
-  "google-news": { name: "Google News", homepage: "https://news.google.com", tier: "A" },
-  thesportsdb: { name: "TheSportsDB", homepage: "https://www.thesportsdb.com", tier: "A" },
-  fpl: { name: "Fantasy Premier League", homepage: "https://fantasy.premierleague.com", tier: "B" },
-  "premier-league": { name: "Premier League", homepage: "https://www.premierleague.com", tier: "B" },
-  uefa: { name: "UEFA", homepage: "https://www.uefa.com", tier: "B" },
-  "international-results": { name: "International results (martj42, CC0)", homepage: "https://github.com/martj42/international_results", tier: "A" },
+export const SOURCES: Record<SourceId, { name: string; homepage: string }> = {
+  "football-data": { name: "football-data.co.uk", homepage: "https://www.football-data.co.uk" },
+  openligadb: { name: "OpenLigaDB", homepage: "https://www.openligadb.de" },
+  "open-meteo": { name: "Open-Meteo", homepage: "https://open-meteo.com" },
+  wikidata: { name: "Wikidata", homepage: "https://www.wikidata.org" },
+  wikipedia: { name: "Wikipedia", homepage: "https://en.wikipedia.org" },
+  bbc: { name: "BBC Sport", homepage: "https://www.bbc.co.uk/sport/football" },
+  "google-news": { name: "Google News", homepage: "https://news.google.com" },
+  thesportsdb: { name: "TheSportsDB", homepage: "https://www.thesportsdb.com" },
+  fpl: { name: "Fantasy Premier League", homepage: "https://fantasy.premierleague.com" },
+  "premier-league": { name: "Premier League", homepage: "https://www.premierleague.com" },
+  uefa: { name: "UEFA", homepage: "https://www.uefa.com" },
+  "international-results": { name: "International results (martj42, CC0)", homepage: "https://github.com/martj42/international_results" },
 };
 
 /** A source's display name and link; any name we no longer know (e.g. in an old saved report) shows as itself. */
