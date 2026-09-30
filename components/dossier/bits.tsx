@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { AlertCircle } from "lucide-react";
 import type { SourceId, SourceResult } from "@/lib/sources/types";
-import { SOURCES } from "@/lib/sources/types";
+import { sourceInfo } from "@/lib/sources/types";
 import type { TeamGame } from "@/lib/stats/team";
 
 export function timeAgo(iso: string | null | undefined): string {
@@ -84,7 +84,7 @@ export function Unavailable({ result, children }: { result?: SourceResult<unknow
         {children ?? "Not available."}
         {result && !result.ok && (
           <div className="mt-0.5 text-xs opacity-80">
-            {SOURCES[result.source].name}: {result.error}
+            {sourceInfo(result.source).name}: {result.error}
           </div>
         )}
       </div>
@@ -95,13 +95,13 @@ export function Unavailable({ result, children }: { result?: SourceResult<unknow
 export function SourceTag({ source, at }: { source: SourceId; at?: string }) {
   return (
     <a
-      href={SOURCES[source].homepage}
+      href={sourceInfo(source).homepage}
       target="_blank"
       rel="noreferrer"
       className="inline-flex items-center gap-1 text-[11px] text-muted hover:text-fg"
       title={at ? `Fetched ${new Date(at).toLocaleString()}` : undefined}
     >
-      {SOURCES[source].name}
+      {sourceInfo(source).name}
       {at && <span className="opacity-70">· {timeAgo(at)}</span>}
     </a>
   );
