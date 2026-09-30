@@ -36,7 +36,7 @@ const Schema = z.object({
 
 /** TheSportsDB club profile via its public test key ("3"). */
 export function getClubProfile(club: string): Promise<ClubProfile | null> {
-  return cached(`sportsdb:v2:${club}`, 7 * DAY, async () => {
+  return cached(`sportsdb:v3:${club}`, 7 * DAY, async () => {
     const url = `https://www.thesportsdb.com/api/v1/json/3/searchteams.php?t=${encodeURIComponent(club)}`;
     const d = await fetchJson(url, Schema);
     const soccer = (d.teams ?? []).filter((t) => (t.strSport ?? "Soccer") === "Soccer");
@@ -52,7 +52,8 @@ export function getClubProfile(club: string): Promise<ClubProfile | null> {
       stadium: t.strStadium ?? null,
       capacity: n(t.intStadiumCapacity),
       location: t.strLocation ?? null,
-      badge: t.strBadge ?? null,
+      // Images moved to r2.; www. image links now 404.
+      badge: t.strBadge?.replace("://www.thesportsdb.com/images/", "://r2.thesportsdb.com/images/") ?? null,
       website: t.strWebsite ? (t.strWebsite.startsWith("http") ? t.strWebsite : `https://${t.strWebsite}`) : null,
       description: description && description.length > 600 ? `${description.slice(0, 597)}…` : description,
     };
