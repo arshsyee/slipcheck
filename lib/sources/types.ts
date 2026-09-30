@@ -27,6 +27,9 @@ export const SOURCES: Record<SourceId, { name: string; homepage: string; tier: "
   "international-results": { name: "International results (martj42, CC0)", homepage: "https://github.com/martj42/international_results", tier: "A" },
 };
 
+/** A source's display name and link; any name we no longer know (e.g. in an old saved report) shows as itself. */
+export const sourceInfo = (id: string) => SOURCES[id as SourceId] ?? { name: id, homepage: "https://github.com/arshsyee/slipcheck" };
+
 /** Every dossier section carries where its data came from and when. */
 export type SourceResult<T> =
   | { ok: true; data: T; source: SourceId; fetchedAt: string; url?: string }

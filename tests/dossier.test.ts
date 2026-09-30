@@ -87,3 +87,11 @@ describe("a source that goes down after we've seen it", () => {
     vi.restoreAllMocks();
   });
 });
+
+describe("source names in old saved reports", () => {
+  it("shows a source we no longer use by its own name instead of crashing", async () => {
+    const { sourceInfo } = await import("../lib/sources/types");
+    expect(sourceInfo("espn").name).toBe("espn");
+    expect(sourceInfo("uefa").name).toBe("UEFA");
+  });
+});

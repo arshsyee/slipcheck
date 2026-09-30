@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { AlertTriangle, CalendarClock, CheckCircle2, CloudRain, Crosshair, MapPin, Sun, Cloud, Wind, XCircle } from "lucide-react";
 import type { DossierTab, MatchDossier } from "@/lib/dossier/types";
 import type { OddsFormat } from "@/lib/types";
-import { SOURCES, type SourceId } from "@/lib/sources/types";
+import { sourceInfo, type SourceId } from "@/lib/sources/types";
 import { MARKET_LABEL } from "@/lib/leagues";
 import { formatOdds } from "@/lib/odds/convert";
 import { Crest, kickoffLabel, timeAgo } from "./bits";
@@ -211,14 +211,14 @@ function SourcesFooter({ d }: { d: MatchDossier }) {
       {[...bySource].map(([id, s]) => (
         <a
           key={id}
-          href={SOURCES[id].homepage}
+          href={sourceInfo(id).homepage}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-1 hover:text-fg"
           title={s.ok ? `Fetched ${new Date(s.at).toLocaleString()}` : s.errors.join("\n")}
         >
           {s.ok ? <CheckCircle2 size={11} className="text-win" /> : <XCircle size={11} className="text-danger" />}
-          {SOURCES[id].name}
+          {sourceInfo(id).name}
         </a>
       ))}
       <span className="ml-auto">Built {timeAgo(d.builtAt)}</span>
