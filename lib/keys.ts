@@ -5,10 +5,11 @@ import type { AIProvider, ClientSettings } from "./types";
  * Everything runs on the user's own machine, so keys only ever go to the providers.
  */
 export function resolveSettings(s: Partial<ClientSettings> = {}) {
-  // The keys decide: the browser's key first, otherwise whichever key .env.local has.
+  // The chosen provider if it has a key (browser or .env.local), otherwise whichever key there is.
   const anthropicKey = s.anthropicKey || process.env.ANTHROPIC_API_KEY || "";
   const openaiKey = s.openaiKey || process.env.OPENAI_API_KEY || "";
-  const provider: AIProvider = s.anthropicKey ? "anthropic" : s.openaiKey ? "openai" : anthropicKey ? "anthropic" : openaiKey ? "openai" : "anthropic";
+  const has = { anthropic: anthropicKey, openai: openaiKey };
+  const provider: AIProvider = s.provider && has[s.provider] ? s.provider : anthropicKey ? "anthropic" : openaiKey ? "openai" : "anthropic";
   return {
     provider,
     anthropicKey,

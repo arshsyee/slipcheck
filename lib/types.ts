@@ -43,6 +43,7 @@ export type AIProvider = "anthropic" | "openai";
 
 /** Keys + prefs the browser sends to the local API routes. */
 export interface ClientSettings {
+  provider?: AIProvider;
   anthropicKey?: string;
   openaiKey?: string;
 }
