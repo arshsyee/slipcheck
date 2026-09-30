@@ -1,9 +1,10 @@
 /**
- * Records every club name per division from football-data.co.uk and ESPN into
- * tests/fixtures/team-names.json, so team matching is tested against real names offline.
+ * Records every club name per division from football-data.co.uk into tests/fixtures/team-names.json, so team
+ * matching is tested against real names offline. The ESPN names alongside were recorded on 2026-09-23 (ESPN now
+ * blocks us) and are kept as recorded: they're the everyday spellings people type on slips.
  *   npx tsx scripts/collect-team-names.ts
  */
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { DOMESTIC_LEAGUES, LEAGUE_INFO, seasonCode } from "../lib/leagues";
 
 const UA = { "user-agent": "Mozilla/5.0 (SlipCheck)" };
@@ -24,12 +25,6 @@ async function fdNames(div: string): Promise<string[]> {
   return [...names].sort();
 }
 
-async function espnNames(slug: string): Promise<{ id: string; name: string }[]> {
-  const res = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${slug}/teams?limit=1000`);
-  const d = (await res.json()) as { sports: { leagues: { teams: { team: { id: string; displayName: string } }[] }[] }[] };
-  return d.sports[0].leagues[0].teams.map((t) => ({ id: t.team.id, name: t.team.displayName })).sort((x, y) => x.name.localeCompare(y.name));
-}
-
 async function otherSources() {
   const json = async (url: string) => (await fetch(url, { headers: UA })).json();
   const season = new Date().getUTCMonth() >= 6 ? new Date().getUTCFullYear() : new Date().getUTCFullYear() - 1;
@@ -46,12 +41,13 @@ async function otherSources() {
 }
 
 async function main() {
-  const out: Record<string, { fd: string[]; espn: { id: string; name: string }[] }> = {};
+  type Names = Record<string, { fd: string[]; espn: { id: string; name: string }[] }>;
+  const recorded: Names = JSON.parse(readFileSync("tests/fixtures/team-names.json", "utf8"));
+  const out: Names = {};
   for (const league of DOMESTIC_LEAGUES) {
-    const info = LEAGUE_INFO[league];
-    const [fd, espn] = await Promise.all([fdNames(info.fd!), espnNames(info.espn)]);
-    out[league] = { fd, espn };
-    console.log(league.padEnd(16), `fd=${fd.length}`, `espn=${espn.length}`);
+    const fd = await fdNames(LEAGUE_INFO[league].fd!);
+    out[league] = { fd, espn: recorded[league]?.espn ?? [] };
+    console.log(league.padEnd(16), `fd=${fd.length}`);
   }
   writeFileSync("tests/fixtures/team-names.json", JSON.stringify(out, null, 1));
   const other = await otherSources();
