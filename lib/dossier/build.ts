@@ -237,7 +237,7 @@ async function buildTeam(
       : Promise.resolve({ ok: false as const, error: "No league data for this club", source: "football-data" as const, fetchedAt: new Date().toISOString() }),
     dInfo?.fd
       ? call("football-data", async () => {
-          // Our own table from results: verified more reliable than ESPN's (see scripts/verify-core.ts).
+          // Our own table from results: checked more reliable than ESPN's (2026-09-23: 378/398 rows identical, the rest adjudicated on Wikipedia).
           const rows = await getSeason(dInfo.fd!);
           const fdName = resolveName(name, rows) ?? resolveName(slipName, rows);
           const row = computeTable(rows, domestic ?? undefined, await deductionsFor(dInfo, rows)).find((r) => r.team === fdName) ?? null;

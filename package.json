@@ -9,7 +9,6 @@
     "lint": "eslint",
     "test": "vitest run",
     "check-sources": "tsx scripts/check-sources.ts",
-    "verify": "tsx scripts/verify-core.ts",
     "research": "tsx scripts/research.ts"
   },
   "dependencies": {
