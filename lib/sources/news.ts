@@ -100,9 +100,16 @@ export function mentionIndex(title: string, club: string): number {
   return best;
 }
 
-/** Keep only headlines that name `club`, and name it before the opponent. Search results often match only the article body. */
+/** Other sports and women's teams share names with men's football teams ("England", "Arsenal"). */
+const NOT_THIS_TEAM_RE = /\b(cricket|wicket|wicketkeeper|t20|odi|test series|tri-series|rugby|tennis|netball|women|womens|lionesses|wsl|nwsl)\b/i;
+
+/**
+ * Keep only headlines that name `club`, and name it before the opponent (search results often match only the article
+ * body), and aren't about another sport or the women's team.
+ */
 export function aboutClub(headlines: Headline[], club: string, opponent: string): Headline[] {
   return headlines.filter((h) => {
+    if (NOT_THIS_TEAM_RE.test(h.title) && !/women/i.test(club)) return false;
     const own = mentionIndex(h.title, club);
     const opp = mentionIndex(h.title, opponent);
     return own >= 0 && (opp < 0 || own <= opp);
@@ -112,7 +119,7 @@ export function aboutClub(headlines: Headline[], club: string, opponent: string)
 /** A headline saying someone can't play. */
 const OUT_RE = /ruled out|withdr[ae]w|injur|\bmiss(es|ing)?\b|doubt|suspend|\bban(ned)?\b|setback|sidelined|absen(ce|t)|surgery|\bblow\b|\bout of\b/i;
 /** …unless it's (also) about someone coming in: then who is out vs in is ambiguous, so it isn't used. */
-const IN_RE = /\breturns?\b|\breturn to\b|called up|call-?up|\bcall\b|replac|recalled|back in\b|\bearns?\b|relief|boost|fit again|all clear/i;
+const IN_RE = /\breturns?\b|\breturn to\b|called up|call-?up|\bcall\b|replac|recalled|back in\b|\bearns?\b|relief|boost|fit again|all clear|in (the )?squad|named in|included/i;
 
 /**
  * Squad players that injury headlines say may not play. A headline counts only if it reports an absence and isn't
