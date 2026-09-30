@@ -2,6 +2,10 @@
 
 *Draft for the owner's review, 2026-09-30 (revised: open source only, no paid tier). Nothing here is built yet.*
 
+## Official statement
+
+**SlipCheck is not gambling. It's information gathering.** It takes no bets, handles no money, and gives no tips or predictions. Use this wording wherever SlipCheck describes itself: ad applications, app stores, payment or hosting sign-ups, and the site itself.
+
 ## The one-paragraph version
 
 SlipCheck stays **fully open source and free**. The next phase adds an optional **account** that does one thing: it saves the slips and accas you've researched, so you can log back in and see them. That's the whole feature. There's no paid plan and nothing is locked behind one.
@@ -51,7 +55,7 @@ Hosting, the database and bandwidth should cost roughly **£0–25 a month** at 
 
 ## 4. Can we run ads? Yes, with caveats
 
-- **Google AdSense.** Google restricts ads on pages that *let users gamble for real money*. On those pages fewer advertisers bid, and some pages get no ads at all. SlipCheck takes no bets, so it probably isn't in that category, but a betting-related site may still get some reduced ad serving. We'd only know after applying.
+- **Google AdSense.** Google restricts ads on pages that *let users gamble for real money*. SlipCheck isn't gambling, it's information gathering (see the official statement), so apply on that basis. Google makes the final call on review.
 - **Block gambling ads.** AdSense lets a site block sensitive ad categories, including gambling. **We should block them.** Showing bookmaker ads beside an honest fact tool would pay us when users bet more, the same conflict as affiliate links.
 - **It won't earn much at first.** Display ads typically earn a few pounds per 1,000 page views, so ads start to matter only at tens of thousands of visits a month. Until then, donations probably earn about the same.
 - **Cookie consent.** Personalised ads in the UK need a consent banner (UK GDPR and PECR). Non-personalised ads avoid most of that but earn less.

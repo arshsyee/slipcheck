@@ -1,6 +1,6 @@
 # SlipCheck: for AI agents
 
-SlipCheck gathers free, public football facts for the matches on a bet slip. It never predicts. The analysis is yours, and must be clearly yours.
+SlipCheck gathers free, public football facts for the matches on a bet slip. It never predicts. **Official statement:** SlipCheck is not gambling, it's information gathering; it takes no bets, handles no money, and gives no tips. The analysis is yours, and must be clearly yours.
 
 ## Using it
 

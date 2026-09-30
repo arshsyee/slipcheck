@@ -1,5 +1,7 @@
 # SlipCheck
 
+**SlipCheck is not gambling. It's information gathering.** It takes no bets, handles no money, and gives no tips or predictions.
+
 The canvas, not the painter: SlipCheck gathers **free, public football data** for every match on your bet slip and puts it in one place. It makes no predictions and gives no tips. Bring your own AI key (Claude, ChatGPT, Grok, Gemini or OpenRouter) to read slips and analyse the data.
 
 For every match you get:
