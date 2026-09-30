@@ -33,7 +33,7 @@ SlipCheck gathers free, public football facts for the matches on a bet slip. It 
 - **Never guess:** missing data shows as red N/A, and a missed flag beats a false one.
 - **Keep output deterministic:** the same command twice gives the same output.
 - **Tests use real recorded data only.**
-- **One change per pull request.** Don't merge unless asked.
+- **Git:** follow the workflow in CLAUDE.md (short-lived branches, tests are the gate, PRs only when review matters).
 
 <!-- BEGIN:nextjs-agent-rules -->
 

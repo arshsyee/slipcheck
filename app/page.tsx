@@ -166,12 +166,9 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col gap-6 lg:flex-row">
-            {preview && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={preview} alt="Uploaded slip" className="max-h-72 w-full rounded-xl border border-line object-contain lg:w-48" />
-            )}
+            {preview && <SlipPhoto src={preview} />}
             <div className="min-w-0 flex-1">
-              <LegEditor slip={slip} onChange={setSlip} oddsFormat={oddsFormat} />
+              <LegEditor slip={slip} onChange={(f) => setSlip((s) => s && f(s))} oddsFormat={oddsFormat} />
             </div>
           </div>
         </section>
@@ -298,6 +295,22 @@ function SamplePicker({ samples, onPick }: { samples: SampleSlip[] | null; onPic
         </div>
       )}
     </div>
+  );
+}
+
+/** The slip beside the legs so every read can be checked. Phones: a strip, tap to see it whole. */
+function SlipPhoto({ src }: { src: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <button onClick={() => setOpen(!open)} aria-label={open ? "Shrink slip photo" : "Show whole slip photo"} className="shrink-0 self-start lg:sticky lg:top-24 lg:w-72 lg:cursor-default">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt="Your slip"
+        className={clsx("w-full rounded-xl border border-line object-cover object-top lg:max-h-[70vh] lg:object-contain", open ? "max-h-none" : "max-h-24")}
+      />
+      <span className="mt-1 block text-xs text-muted lg:hidden">{open ? "Tap to shrink" : "Tap to see the whole slip"}</span>
+    </button>
   );
 }
 

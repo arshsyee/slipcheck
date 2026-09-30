@@ -1,4 +1,4 @@
-import type { League, Market } from "./types";
+import type { League, Leg, Market } from "./types";
 
 export interface LeagueInfo {
   label: string;
@@ -38,6 +38,45 @@ export const MARKET_LABEL: Record<Market, string> = {
   total_cards: "Number of cards",
   other: "Something else",
 };
+
+export const HAS_LINE = new Set<Leg["market"]>(["total_goals", "asian_handicap", "total_corners", "total_cards"]);
+/** A typical starting line when switching to an over/under market. */
+export const DEFAULT_LINE: Partial<Record<Leg["market"], number>> = { total_goals: 2.5, total_corners: 9.5, total_cards: 3.5, asian_handicap: 0 };
+
+/** The picks a market allows, as the slip reader writes them (see LegSchema). null = free text. */
+export function pickOptions(market: Leg["market"], home: string, away: string): string[] | null {
+  switch (market) {
+    case "1x2":
+      return [home, "Draw", away];
+    case "double_chance":
+      return [`${home} or Draw`, `${home} or ${away}`, `Draw or ${away}`];
+    case "draw_no_bet":
+    case "asian_handicap":
+      return [home, away];
+    case "total_goals":
+    case "total_corners":
+    case "total_cards":
+      return ["Over", "Under"];
+    case "btts":
+      return ["Yes", "No"];
+    default:
+      return null;
+  }
+}
+
+/** What's missing or doesn't fit, so the leg gets an amber outline. */
+export function legProblems(leg: Leg): string[] {
+  const home = leg.homeTeam ?? "";
+  const away = leg.awayTeam ?? "";
+  const opts = pickOptions(leg.market, home, away);
+  const out: string[] = [];
+  if (!home || !away) out.push("A team is missing.");
+  if (opts && !opts.some((o) => o.toLowerCase() === leg.selection.trim().toLowerCase()))
+    out.push(leg.selection ? `The slip was read as “${leg.selection}”. Pick one above.` : "No pick chosen.");
+  if (HAS_LINE.has(leg.market) && leg.line == null) out.push("No line set.");
+  if (leg.oddsDecimal == null) out.push("No odds entered.");
+  return out;
+}
 
 /** football-data.co.uk season code for the season containing `date` (Aug–Jun seasons): 2026-09 → "2627". */
 export function seasonCode(date = new Date(), yearsBack = 0): string {
