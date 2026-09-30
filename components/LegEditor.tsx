@@ -31,7 +31,8 @@ export function LegEditor({ slip, onChange }: { slip: Slip; onChange: (update: (
         const problems = legProblems(leg);
         const step = leg.market === "asian_handicap" ? 0.25 : 1;
         return (
-          <div key={i} className={clsx("space-y-3 rounded-xl border bg-surface/60 p-3", problems.length ? "border-warn/60" : "border-line")}>
+          // The one animation on this screen: each pick rises in as the slip is read, one after another.
+          <div key={i} style={{ animationDelay: `${i * 90}ms` }} className={clsx("rise space-y-3 rounded-xl border bg-surface/60 p-3", problems.length ? "border-warn/60" : "border-line")}>
             <div className="flex items-center gap-2">
               <input className={clsx(input, "w-full min-w-0 font-medium")} value={home} placeholder="Home team" aria-label="Home team" onChange={(e) => setLeg(i, { homeTeam: e.target.value || null })} />
               <span className="text-sm text-muted">v</span>
@@ -136,7 +137,7 @@ function OddsInput({ value, onChange }: { value: number | null; onChange: (v: nu
     <input
       className={clsx(input, "tabular w-20", invalid && "border-danger", value == null && !invalid && "border-warn/60")}
       value={text}
-      placeholder="odds? 2.5x"
+      placeholder="odds?"
       aria-label="Odds"
       title="Payout multiplier (2.5x). 6/4 or 2.5 also work."
       onChange={(e) => setText(e.target.value)}

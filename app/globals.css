@@ -45,7 +45,7 @@ input[type="number"]::-webkit-inner-spin-button {
   opacity: 0.4;
 }
 
-/* Entrance and loading animations (plain CSS; no animation library). */
+/* Entrance animation (plain CSS; no animation library). */
 @keyframes rise {
   from {
     opacity: 0;
@@ -55,20 +55,8 @@ input[type="number"]::-webkit-inner-spin-button {
 .rise {
   animation: rise 0.35s ease-out both;
 }
-@keyframes scan {
-  from {
-    top: -20%;
-  }
-  to {
-    top: 100%;
-  }
-}
-.scan {
-  animation: scan 1.6s ease-in-out infinite;
-}
 @media (prefers-reduced-motion: reduce) {
-  .rise,
-  .scan {
+  .rise {
     animation: none;
   }
 }

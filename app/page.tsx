@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Camera, Database, FlaskConical, KeyRound, Loader2, RotateCcw, Sparkles } from "lucide-react";
+import { ArrowRight, Database, FlaskConical, KeyRound, Loader2, RotateCcw, Sparkles } from "lucide-react";
 import clsx from "clsx";
 import { SlipDropzone } from "@/components/SlipDropzone";
 import { LegEditor } from "@/components/LegEditor";
@@ -125,55 +125,47 @@ export default function Home() {
 
       {error && <div className="rise mx-auto max-w-2xl rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>}
 
-      {(stage === "upload" || stage === "parsing") && (
-        <div className="mx-auto max-w-2xl">
-          {stage === "parsing" ? (
-            <ParsingState preview={preview} />
-          ) : (
-            <>
-              <SlipDropzone onFile={handleFile} disabled={loaded && !hasAiKey} />
-              <SamplePicker
-                samples={samples}
-                onPick={(s) => {
-                  setPreview(null);
-                  research(s.slip);
-                }}
-              />
-            </>
-          )}
-        </div>
-      )}
-
-      {slip && stage === "review" && (
-        <section className="rise glass rounded-2xl p-5 sm:p-6">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <h2 className="text-lg font-semibold">Check your slip</h2>
-              <p className="text-sm text-muted">Fix anything that was read wrong, then gather the match data.</p>
-            </div>
-            <div className="flex gap-2">
-              <label className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted transition hover:text-fg">
-                <Camera size={14} /> {preview ? "Retake photo" : "Use a photo"}
-                {/* No capture attribute: phones offer both the camera and the photo library. */}
-                <input type="file" accept="image/*" className="sr-only" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
-              </label>
-              <button onClick={reset} className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted transition hover:text-fg">
-                <RotateCcw size={14} /> Start over
-              </button>
-              <button
-                onClick={() => research()}
-                disabled={!slip.legs.some((l) => l.homeTeam || l.awayTeam)}
-                className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg shadow-[0_0_24px_rgba(46,224,127,0.35)] transition hover:brightness-110 disabled:opacity-50"
-              >
-                <Sparkles size={15} /> Research {slip.legs.length > 1 ? `${slip.legs.length} matches` : "match"}
-              </button>
-            </div>
+      {stage !== "results" && (
+        // One screen: the photo on the left, the picks on the right. The only motion is picks arriving.
+        <section className="grid gap-6 lg:grid-cols-[18rem_minmax(0,1fr)]">
+          <div className="self-start lg:sticky lg:top-24">
+            <SlipDropzone onFile={handleFile} disabled={loaded && !hasAiKey} preview={preview} />
           </div>
-          <div className="flex flex-col gap-6 lg:flex-row">
-            {preview && <SlipPhoto src={preview} />}
-            <div className="min-w-0 flex-1">
-              <LegEditor slip={slip} onChange={(f) => setSlip((s) => s && f(s))} />
-            </div>
+          <div className="min-w-0 space-y-3">
+            {slip && stage === "review" ? (
+              <>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h2 className="font-semibold">Your picks</h2>
+                  <div className="flex gap-2">
+                    <button onClick={reset} className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted hover:text-fg">
+                      <RotateCcw size={14} /> Start over
+                    </button>
+                    <button
+                      onClick={() => research()}
+                      disabled={!slip.legs.some((l) => l.homeTeam || l.awayTeam)}
+                      className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-bg hover:brightness-110 disabled:opacity-50"
+                    >
+                      <Sparkles size={15} /> Research {slip.legs.length > 1 ? `${slip.legs.length} matches` : "match"}
+                    </button>
+                  </div>
+                </div>
+                <LegEditor slip={slip} onChange={(f) => setSlip((s) => s && f(s))} />
+              </>
+            ) : stage === "parsing" ? (
+              <p className="py-6 text-sm text-muted">Reading your slip…</p>
+            ) : (
+              <>
+                <p className="py-6 text-sm text-muted">Your picks show up here once your slip is read.</p>
+                <SamplePicker
+                  samples={samples}
+                  onPick={(s) => {
+                    setPreview(null);
+                    setSlip(s.slip);
+                    setStage("review");
+                  }}
+                />
+              </>
+            )}
           </div>
         </section>
       )}
@@ -273,25 +265,21 @@ function SlipSummary({
 
 function SamplePicker({ samples, onPick }: { samples: SampleSlip[] | null; onPick: (s: SampleSlip) => void }) {
   return (
-    <div className="mt-10">
+    <div>
       <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider text-muted">
         <FlaskConical size={13} /> Or try a sample slip (real upcoming fixtures)
       </div>
       {samples === null ? (
-        <div className="grid gap-2 sm:grid-cols-3">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="glass h-[74px] animate-pulse rounded-xl" />
-          ))}
-        </div>
+        <p className="text-sm text-muted">Loading samples…</p>
       ) : samples.length === 0 ? (
         <p className="text-sm text-muted">No samples available right now.</p>
       ) : (
-        <div className="grid gap-2 sm:grid-cols-3">
+        <div className="grid gap-2">
           {samples.map((s) => (
-            <button key={s.id} onClick={() => onPick(s)} className="glass group rounded-xl px-4 py-3 text-left transition hover:border-accent/50">
+            <button key={s.id} onClick={() => onPick(s)} className="glass rounded-xl px-4 py-3 text-left hover:border-accent/50">
               <div className="flex items-center justify-between gap-2">
                 <span className="font-medium">{s.title}</span>
-                <ArrowRight size={14} className="text-muted transition group-hover:translate-x-0.5 group-hover:text-accent" />
+                <ArrowRight size={14} className="text-muted" />
               </div>
               <div className="mt-0.5 text-xs text-muted">{s.blurb}</div>
             </button>
@@ -302,35 +290,3 @@ function SamplePicker({ samples, onPick }: { samples: SampleSlip[] | null; onPic
   );
 }
 
-/** The slip beside the legs so every read can be checked. Phones: a strip, tap to see it whole. */
-function SlipPhoto({ src }: { src: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <button onClick={() => setOpen(!open)} aria-label={open ? "Shrink slip photo" : "Show whole slip photo"} className="shrink-0 self-start lg:sticky lg:top-24 lg:w-72 lg:cursor-default">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt="Your slip"
-        className={clsx("w-full rounded-xl border border-line object-cover object-top lg:max-h-[70vh] lg:object-contain", open ? "max-h-none" : "max-h-24")}
-      />
-      <span className="mt-1 block text-xs text-muted lg:hidden">{open ? "Tap to shrink" : "Tap to see the whole slip"}</span>
-    </button>
-  );
-}
-
-function ParsingState({ preview }: { preview: string | null }) {
-  return (
-    <div className="glass flex flex-col items-center gap-5 rounded-3xl px-6 py-12">
-      {preview && (
-        <div className="relative overflow-hidden rounded-xl border border-line">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={preview} alt="" className="max-h-64 object-contain opacity-70" />
-          <div className="scan absolute inset-x-0 h-16 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
-        </div>
-      )}
-      <div className="flex items-center gap-2 text-sm text-muted">
-        <Loader2 size={16} className="animate-spin text-accent" /> Reading your slip…
-      </div>
-    </div>
-  );
-}
