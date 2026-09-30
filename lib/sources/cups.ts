@@ -4,7 +4,7 @@ import { fetchJson } from "./http";
 import { getSeasonMatches, openLigaSeason } from "./openLigaDb";
 import { params, plain, templates } from "./squad";
 import { bestTeamMatch } from "../teams/match";
-import type { EspnEvent } from "./espn";
+import type { MatchEvent } from "../stats/season";
 import type { H2HMeeting } from "../stats/match";
 
 /**
@@ -115,7 +115,7 @@ async function openLigaCup(league: string, season = openLigaSeason()): Promise<C
  * This season's domestic cup games for a club, in the same shape as league/European results (our club's id = `teamId`).
  * Names must match closely (0.8): a cup draw is full of lower-league clubs with similar names.
  */
-export async function getCupResults(country: string, club: string, teamId: string): Promise<EspnEvent[]> {
+export async function getCupResults(country: string, club: string, teamId: string): Promise<MatchEvent[]> {
   const season = seasonLabel();
   const lists = await Promise.all(
     (CUPS[country] ?? []).map(async (cup) => ({ cup, matches: await (cup.openLigaDb ? openLigaCup(cup.openLigaDb) : wikiCup(cup.wikipedia!(season))) })),

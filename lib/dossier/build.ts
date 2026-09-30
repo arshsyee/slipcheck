@@ -2,17 +2,6 @@ import type { League, Leg } from "../types";
 import { DOMESTIC_LEAGUES, LEAGUE_INFO, leagueInfo, seasonCode, seasonStart, type LeagueInfo } from "../leagues";
 import { fromSource, type SourceId, type SourceResult } from "../sources/types";
 import { getFixtures, getSeason, getSeasons, FD_SOURCE_URL, type FixtureRow, type MatchRow } from "../sources/footballData";
-import {
-  findTeam,
-  findUpcomingEvent,
-  getSchedule,
-  getStandings,
-  getSummary,
-  UEFA_SLUGS,
-  type EspnEvent,
-  type EspnSummary,
-  type EspnTeam,
-} from "../sources/espn";
 import { findPlFixture, type PlFixture } from "../sources/premierLeague";
 import { findUefaMatch, getEuropeResults, getUefaMeetings, getUefaLineups, type UefaMatch } from "../sources/uefa";
 import { geocodeCity, getKickoffWeather } from "../sources/weather";
@@ -23,12 +12,12 @@ import { getFplSquad, getWikiSquad } from "../sources/squad";
 import { getCupMeetings, getCupResults } from "../sources/cups";
 import { getUpcomingMatches, type UpcomingMatch } from "../sources/upcoming";
 import { getClubGoalProfile } from "../sources/openLigaDb";
-import { aboutClub, AVAILABILITY_RE, playersInHeadlines, getBbcClubNews, getGoogleClubNews, mergeHeadlines, type Headline } from "../sources/news";
+import { aboutClub, AVAILABILITY_RE, playersInHeadlines, getBbcClubNews, getGoogleClubNews, mergeHeadlines } from "../sources/news";
 import { cached, HOUR, staleLog } from "../sources/cache";
 import { averages, form, gamesFor, rates, resolveName } from "../stats/team";
 import { headToHead, refereeStats, restDays, sameReferee } from "../stats/match";
 import { buildPick } from "../stats/insights";
-import { coachRecord, leagueSeason, otherCompetitions, sameStageLastSeason } from "../stats/season";
+import { coachRecord, leagueSeason, otherCompetitions, sameStageLastSeason, type MatchEvent } from "../stats/season";
 import { getCoach } from "../sources/coach";
 import { computeTable } from "../stats/table";
 import { bestTeamMatch, matchFixture, teamScore } from "../teams/match";
@@ -70,7 +59,7 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
   let homeName = leg.homeTeam ?? "";
   let awayName = leg.awayTeam ?? "";
 
-  // The organisers' own fixture lists (Premier League, UEFA) don't need ESPN ids, so ask them first.
+  // The organisers' own fixture lists first (Premier League, UEFA).
   const [plR, uefaR] = await Promise.all([
     leagueId === "EPL" ? call("premier-league", () => findPlFixture(homeName || null, awayName || null), "https://www.premierleague.com") : null,
     info?.uefaCompetitionId ? call("uefa", () => findUefaMatch(info.uefaCompetitionId!, homeName || null, awayName || null), "https://www.uefa.com") : null,
@@ -110,38 +99,7 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
     info?.fd ? leagueId : findDomesticLeague(awayName),
   ]);
 
-  // --- ESPN identities + the ESPN event ---
-  const espnSlugs = (domestic: League | null) => [
-    ...(domestic ? countrySlugs(LEAGUE_INFO[domestic as keyof typeof LEAGUE_INFO].country) : []),
-    ...(info && !info.fd ? [info.espn] : []),
-  ];
-  let [homeEspnR, awayEspnR] = await Promise.all([
-    call("espn", () => findTeam(homeName, espnSlugs(homeDomestic))),
-    call("espn", () => findTeam(awayName, espnSlugs(awayDomestic))),
-  ]);
-
-  // Still missing an opponent (e.g. La Liga slip with one team, fixture list not out yet): use the club's next ESPN fixture.
-  if (info && (!homeName || !awayName)) {
-    const one = homeEspnR.ok && homeEspnR.data ? homeEspnR.data : awayEspnR.ok && awayEspnR.data ? awayEspnR.data : null;
-    const next = one ? (await getSchedule(info.espn, one.id, true).catch(() => [])).find((e) => !e.completed) : null;
-    if (next) {
-      homeName = next.home.name;
-      awayName = next.away.name;
-      [homeEspnR, awayEspnR] = await Promise.all([
-        call("espn", () => findTeam(homeName, espnSlugs(homeDomestic ?? leagueId))),
-        call("espn", () => findTeam(awayName, espnSlugs(awayDomestic ?? leagueId))),
-      ]);
-    }
-  }
-  const homeEspn = homeEspnR.ok ? homeEspnR.data : null;
-  const awayEspn = awayEspnR.ok ? awayEspnR.data : null;
-
-  const eventR = info && homeEspn && awayEspn ? await call("espn", () => findUpcomingEvent(info.espn, homeEspn.id, awayEspn.id)) : null;
-  const event = eventR?.ok ? eventR.data : null;
-  const summaryR = event && info ? await call("espn", () => getSummary(info.espn, event.id)) : null;
-  const summary = summaryR?.ok ? summaryR.data : null;
-
-  const fixture = mergeFixture(fdFixture, event?.date ?? null, summary, pl, uefa, sdb);
+  const fixture = mergeFixture(fdFixture, pl, uefa, sdb);
   const kickoff = fixture.kickoff ?? new Date().toISOString();
 
   // --- Teams, head-to-head, referee, weather, lineups: all in parallel ---
@@ -149,8 +107,8 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
 
   const country = (l: League | null) => (l ? LEAGUE_INFO[l as keyof typeof LEAGUE_INFO].country : null);
   const [home, away, h2h, weather, lineups, h2hEurope, h2hCups] = await Promise.all([
-    buildTeam("home", homeName, homeEspn, homeDomestic, leagueId, kickoff, call),
-    buildTeam("away", awayName, awayEspn, awayDomestic, leagueId, kickoff, call),
+    buildTeam("home", homeName, homeDomestic, leagueId, kickoff, call),
+    buildTeam("away", awayName, awayDomestic, leagueId, kickoff, call),
     sameDivision
       ? call("football-data", async () => {
           const rows = await getSeasons(sameDivision, 4);
@@ -160,8 +118,8 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
           return headToHead(rows, h, a);
         }, FD_SOURCE_URL(sameDivision))
       : null,
-    fixture.kickoff ? weatherFor(uefa, homeEspn?.name ?? homeName, homeDomestic, fixture, call) : null,
-    lineupsFor(pl, uefa, summary, call, plR, uefaR, summaryR),
+    fixture.kickoff ? weatherFor(uefa, homeName, homeDomestic, fixture, call) : null,
+    lineupsFor(pl, uefa, call, plR, uefaR),
     // Meetings outside the league, last 5 seasons: Europe (UEFA) and domestic cups (same country only).
     call("uefa", () => getUefaMeetings(homeName, awayName), "https://www.uefa.com"),
     country(homeDomestic) && country(homeDomestic) === country(awayDomestic)
@@ -186,8 +144,6 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
   }
   for (const t of [home, away]) flagPlayersInNews(t);
 
-  const matchNews = summaryR ? (summaryR.ok ? { ...summaryR, data: summaryR.data.news.map(toHeadline) } : summaryR) : null;
-
   return {
     legIndex,
     leg,
@@ -201,7 +157,6 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
     h2hCups,
     referee,
     lineups,
-    matchNews,
     pick: buildPick({ ...leg, homeTeam: home.name, awayTeam: away.name }, home, away, h2h?.ok ? h2h.data : null),
     sourceLog: log,
     stale: staleLog.slice(staleFrom).map((x) => ({ source: sourceOfKey(x.key), savedAt: x.savedAt, error: x.error })),
@@ -214,19 +169,18 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
 async function buildTeam(
   side: Side,
   slipName: string,
-  espn: EspnTeam | null,
   domestic: League | null,
   competition: League,
   kickoff: string,
   call: <T>(s: SourceId, r: () => Promise<T>, url?: string) => Promise<SourceResult<T>>,
 ): Promise<TeamSection> {
-  const name = espn?.name ?? slipName;
+  const name = slipName;
   const dInfo = domestic ? (LEAGUE_INFO[domestic as keyof typeof LEAGUE_INFO] as LeagueInfo) : null;
   const isEpl = domestic === "EPL";
   const uk = dInfo?.country === "England" || dInfo?.country === "Scotland";
 
-  // Our club's id in merged match lists: ESPN's when we have it, else the name.
-  const teamId = espn?.id ?? name;
+  // Our club's id in merged match lists.
+  const teamId = name;
   const [stats, standing, cups, europe, fpl, goalProfile, profile, news, squad, upcoming] = await Promise.all([
     dInfo?.fd
       ? call("football-data", async () => {
@@ -240,16 +194,10 @@ async function buildTeam(
           // Our own table from results: checked more reliable than ESPN's (2026-09-23: 378/398 rows identical, the rest adjudicated on Wikipedia).
           const rows = await getSeason(dInfo.fd!);
           const fdName = resolveName(name, rows) ?? resolveName(slipName, rows);
-          const row = computeTable(rows, domestic ?? undefined, await deductionsFor(dInfo, rows)).find((r) => r.team === fdName) ?? null;
+          const row = computeTable(rows, domestic ?? undefined).find((r) => r.team === fdName) ?? null;
           return row ? { ...row, team: name } : null;
         }, FD_SOURCE_URL(dInfo.fd))
-      : dInfo
-        ? call("espn", async () => {
-            const table = await getStandings(dInfo.espn);
-            const hit = bestTeamMatch(name, table.map((r) => r.team));
-            return table.find((r) => r.teamId === espn?.id) ?? table.find((r) => r.team === hit?.name) ?? null;
-          })
-        : null,
+      : null,
     // Domestic cups: Wikipedia season pages (OpenLigaDB for the DFB-Pokal).
     dInfo ? call(dInfo.country === "Germany" ? "openligadb" : "wikipedia", () => getCupResults(dInfo.country, name, teamId)) : null,
     call("uefa", () => getEuropeResults(name, teamId), "https://www.uefa.com"),
@@ -281,17 +229,17 @@ async function buildTeam(
   ]);
 
   // Every result this season: league (football-data.co.uk), Europe (UEFA), cups (Wikipedia / OpenLigaDB). One game per day at most.
-  const leagueEvents: EspnEvent[] = (stats.ok ? (stats.data?.overall.allGames ?? []) : []).map((g) => ({
+  const leagueEvents: MatchEvent[] = (stats.ok ? (stats.data?.overall.allGames ?? []) : []).map((g) => ({
     id: `fd:${g.kickoff}`,
     date: g.kickoff,
     completed: true,
     competition: dInfo?.label ?? "League",
-    slug: dInfo?.espn ?? "league",
+    slug: dInfo?.slug ?? "league",
     venue: null,
     home: g.venue === "home" ? { id: teamId, name, score: g.gf } : { id: g.opponent, name: g.opponent, score: g.ga },
     away: g.venue === "home" ? { id: g.opponent, name: g.opponent, score: g.ga } : { id: teamId, name, score: g.gf },
   }));
-  const byDay = new Map<string, EspnEvent>();
+  const byDay = new Map<string, MatchEvent>();
   for (const e of [...leagueEvents, ...(europe.ok ? europe.data : []), ...(cups?.ok ? cups.data : [])]) {
     if (e.completed && !byDay.has(e.date.slice(0, 10))) byDay.set(e.date.slice(0, 10), e);
   }
@@ -303,12 +251,12 @@ async function buildTeam(
       const rows = await getSeason(dInfo.fd);
       const fdName = resolveName(name, rows) ?? resolveName(slipName, rows);
       if (!fdName) return null;
-      const league = leagueSeason(rows, fdName, domestic!, await deductionsFor(dInfo, rows));
+      const league = leagueSeason(rows, fdName, domestic!);
       // Same stage last season (same division; promoted clubs weren't in it).
       const lastRows = await getSeason(dInfo.fd, seasonCode(new Date(), 1)).catch(() => [] as MatchRow[]);
       const lastName = resolveName(name, lastRows);
       const lastSeasonSameStage = league && lastName ? sameStageLastSeason(lastRows, lastName, league.table.played, domestic!, dInfo.label) : null;
-      return { league, lastSeasonSameStage, otherCompetitions: dInfo ? otherCompetitions(events, teamId, dInfo.espn) : [] };
+      return { league, lastSeasonSameStage, otherCompetitions: dInfo ? otherCompetitions(events, teamId, dInfo.slug) : [] };
     }, dInfo?.fd ? FD_SOURCE_URL(dInfo.fd) : undefined),
     call("wikidata", async () => {
       const facts = await getClubFacts(name, dInfo?.country);
@@ -316,7 +264,7 @@ async function buildTeam(
       const c = await getCoach(facts.qid, facts.wikipediaTitle, seasonStart());
       if (!c) return null;
       let record = null;
-      // League form under the coach comes from football-data.co.uk, so it still works when ESPN (cups, Europe) is down.
+      // League form under the coach comes from football-data.co.uk, so it works whichever cup or Europe sources respond.
       if (c.since) {
         const seasons = dInfo?.fd ? await getSeasons(dInfo.fd, 4) : [];
         const fdName = resolveName(name, seasons);
@@ -347,8 +295,7 @@ async function buildTeam(
   return {
     side,
     name,
-    espn: espn ? { id: espn.id, logo: espn.logo, color: espn.color, abbreviation: espn.abbreviation } : null,
-    badge: (profile.ok ? profile.data.sportsDb?.badge : null) ?? espn?.logo ?? null,
+    badge: profile.ok ? (profile.data.sportsDb?.badge ?? null) : null,
     standing,
     stats,
     restDays: restDays(lastMatch?.date, kickoff),
@@ -375,17 +322,16 @@ function teamStats(rows: MatchRow[], fdName: string, division: string, side: Sid
 
 // ---------------- fixture ----------------
 
-export function mergeFixture(fd: FixtureRow | null, espnDate: string | null, espn: EspnSummary | null, pl: PlFixture | null, uefa: UefaMatch | null, sdb: NextMatch | null = null): FixtureInfo {
+export function mergeFixture(fd: FixtureRow | null, pl: PlFixture | null, uefa: UefaMatch | null, sdb: NextMatch | null = null): FixtureInfo {
   const sources: SourceId[] = [];
   if (sdb) sources.push("thesportsdb");
   if (fd) sources.push("football-data");
-  if (espnDate) sources.push("espn");
   if (pl) sources.push("premier-league");
   if (uefa) sources.push("uefa");
 
-  // Most authoritative first: the competition organiser, then ESPN, then football-data.co.uk.
-  const kickoffs = [pl?.kickoff, uefa?.kickoff, espnDate, fd?.kickoff, sdb?.kickoff].filter(Boolean) as string[];
-  const referees = [pl?.referee, uefa?.referee, espn?.referee, fd?.referee].filter(Boolean) as string[];
+  // Most authoritative first: the competition organiser, then football-data.co.uk, then TheSportsDB.
+  const kickoffs = [pl?.kickoff, uefa?.kickoff, fd?.kickoff, sdb?.kickoff].filter(Boolean) as string[];
+  const referees = [pl?.referee, uefa?.referee, fd?.referee].filter(Boolean) as string[];
   const conflicts: string[] = [];
   if (kickoffs.length > 1 && kickoffs.some((k) => Math.abs(new Date(k).getTime() - new Date(kickoffs[0]).getTime()) > 30 * 60_000)) {
     conflicts.push("Sources list different kick-off times; showing the organiser's.");
@@ -397,8 +343,8 @@ export function mergeFixture(fd: FixtureRow | null, espnDate: string | null, esp
   return {
     found: sources.length > 0,
     kickoff: kickoffs[0] ?? null,
-    venue: pl?.ground ?? uefa?.stadium?.name ?? espn?.venue?.name ?? sdb?.venue ?? null,
-    city: pl?.city ?? uefa?.stadium?.city ?? espn?.venue?.city ?? null,
+    venue: pl?.ground ?? uefa?.stadium?.name ?? sdb?.venue ?? null,
+    city: pl?.city ?? uefa?.stadium?.city ?? null,
     capacity: uefa?.stadium?.capacity ?? null,
     referee: referees[0] ?? null,
     round: uefa?.round ?? null,
@@ -430,44 +376,25 @@ async function weatherFor(
 export async function lineupsFor(
   pl: PlFixture | null,
   uefa: UefaMatch | null,
-  espn: EspnSummary | null,
   call: <T>(s: SourceId, r: () => Promise<T>, url?: string) => Promise<SourceResult<T>>,
   plR: SourceResult<unknown> | null,
   uefaR: SourceResult<unknown> | null,
-  espnR: SourceResult<unknown> | null,
 ): Promise<SourceResult<Lineup[]> | null> {
   if (pl?.lineups.length && plR) return { ...plR, ok: true, data: pl.lineups } as SourceResult<Lineup[]>;
   if (uefa) {
     const r = await call("uefa", () => getUefaLineups(uefa.id), `https://www.uefa.com`);
     if (r.ok && r.data.length) return r;
   }
-  if (espn?.lineups.length && espnR) return { ...espnR, ok: true, data: espn.lineups } as SourceResult<Lineup[]>;
-  const any = plR ?? uefaR ?? espnR;
+  const any = plR ?? uefaR;
   // Nothing published yet is normal before ~1 hour to kick-off.
   return any ? { ok: true, data: [], source: any.source, fetchedAt: any.fetchedAt } : null;
 }
 
 // ---------------- helpers ----------------
 
-/** Points deductions from ESPN's table, keyed by football-data.co.uk club name. */
-export async function deductionsFor(info: LeagueInfo, rows: MatchRow[]): Promise<Map<string, number>> {
-  const table = await getStandings(info.espn).catch(() => []);
-  const out = new Map<string, number>();
-  for (const t of table) {
-    if (!t.deductions) continue;
-    const fdName = resolveName(t.team, rows);
-    if (fdName) out.set(fdName, t.deductions);
-  }
-  return out;
-}
-
 function leagueFromDiv(div: string): League | null {
   const hit = DOMESTIC_LEAGUES.find((l) => LEAGUE_INFO[l].fd === div);
   return hit ?? null;
-}
-
-function countrySlugs(country: string): string[] {
-  return DOMESTIC_LEAGUES.filter((l) => LEAGUE_INFO[l].country === country).map((l) => LEAGUE_INFO[l].espn);
 }
 
 /** For UEFA matches: which domestic division a club plays in, by searching every football-data.co.uk file. */
@@ -487,19 +414,13 @@ export function findDomesticLeague(club: string): Promise<League | null> {
   });
 }
 
-function toHeadline(n: EspnSummary["news"][number]): Headline {
-  return { title: n.headline, url: n.url ?? "https://www.espn.com/soccer", published: n.published, publisher: "ESPN", source: "espn" };
-}
-
-export { UEFA_SLUGS };
-
 /** From the club's side: "won 3-0 at home", "lost 1-2 away". */
 function plainScore(gf: number | null, ga: number | null, venue: "home" | "away") {
   if (gf == null || ga == null) return `score unknown (${venue})`;
   return `${gf > ga ? "won" : gf < ga ? "lost" : "drew"} ${gf}-${ga} ${venue === "home" ? "at home" : "away"}`;
 }
 
-/** Cache keys start with the source ("espn:…", "fd:…"). */
+/** Cache keys start with the source ("fd:…", "uefa:…"). */
 export function sourceOfKey(key: string): SourceId {
   const p = key.split(":")[0];
   const map: Record<string, SourceId> = { intl: key.startsWith("intl:wiki") ? "wikipedia" : "international-results", fd: "football-data", pl: "premier-league", sportsdb: "thesportsdb", weather: "open-meteo", geocode: "open-meteo", coach: key.startsWith("coach:wikipedia") ? "wikipedia" : "wikidata", news: key.includes("bbc") ? "bbc" : "google-news" };

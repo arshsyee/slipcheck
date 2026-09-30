@@ -13,7 +13,6 @@ export interface ClubProfile {
   badge: string | null;
   website: string | null;
   description: string | null;
-  espnId: string | null;
 }
 
 const Schema = z.object({
@@ -30,7 +29,6 @@ const Schema = z.object({
         strBadge: z.string().nullable().optional(),
         strWebsite: z.string().nullable().optional(),
         strDescriptionEN: z.string().nullable().optional(),
-        idESPN: z.string().nullable().optional(),
       }),
     )
     .nullable(),
@@ -57,7 +55,6 @@ export function getClubProfile(club: string): Promise<ClubProfile | null> {
       badge: t.strBadge ?? null,
       website: t.strWebsite ? (t.strWebsite.startsWith("http") ? t.strWebsite : `https://${t.strWebsite}`) : null,
       description: description && description.length > 600 ? `${description.slice(0, 597)}…` : description,
-      espnId: t.idESPN ?? null,
     };
   });
 }

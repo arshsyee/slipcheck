@@ -1,6 +1,5 @@
 export type SourceId =
   | "football-data"
-  | "espn"
   | "openligadb"
   | "open-meteo"
   | "wikidata"
@@ -22,7 +21,6 @@ export const SOURCES: Record<SourceId, { name: string; homepage: string; tier: "
   bbc: { name: "BBC Sport", homepage: "https://www.bbc.co.uk/sport/football", tier: "A" },
   "google-news": { name: "Google News", homepage: "https://news.google.com", tier: "A" },
   thesportsdb: { name: "TheSportsDB", homepage: "https://www.thesportsdb.com", tier: "A" },
-  espn: { name: "ESPN", homepage: "https://www.espn.com/soccer", tier: "B" },
   fpl: { name: "Fantasy Premier League", homepage: "https://fantasy.premierleague.com", tier: "B" },
   "premier-league": { name: "Premier League", homepage: "https://www.premierleague.com", tier: "B" },
   uefa: { name: "UEFA", homepage: "https://www.uefa.com", tier: "B" },

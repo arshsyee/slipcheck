@@ -1,6 +1,21 @@
 import type { MatchRow } from "../sources/footballData";
-import type { StandingRow } from "../sources/espn";
 import type { League } from "../types";
+
+export interface StandingRow {
+  teamId: string;
+  team: string;
+  rank: number;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDiff: number;
+  points: number;
+  /** Points docked by the league (a results-only source can't know them; pass them in if known). */
+  deductions?: number;
+}
 
 /** How each league separates clubs level on points (checked against ESPN's published tables). */
 // "h2h" = head-to-head record among the tied clubs, always. "h2h-complete" = only once every tied club has

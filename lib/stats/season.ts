@@ -1,8 +1,20 @@
 import type { MatchRow } from "../sources/footballData";
-import type { EspnEvent, StandingRow } from "../sources/espn";
+import type { StandingRow } from "./table";
 import type { League } from "../types";
 import { computeTable } from "./table";
 import { gamesFor, round, type TeamGame } from "./team";
+
+/** A played or scheduled match in any competition, from our own club's point of view (`id` = our club's id). */
+export interface MatchEvent {
+  id: string;
+  date: string;
+  completed: boolean;
+  competition: string;
+  slug: string;
+  venue: string | null;
+  home: { id: string; name: string; score: number | null };
+  away: { id: string; name: string; score: number | null };
+}
 
 export interface Split {
   played: number;
@@ -82,7 +94,7 @@ export function stakes(table: StandingRow[], team: string, league: League): Stak
 }
 
 /** The club's domestic league season so far. `fdName` is the football-data.co.uk spelling. */
-export function leagueSeason(rows: MatchRow[], fdName: string, league: League, deductions: Map<string, number>): LeagueSeason | null {
+export function leagueSeason(rows: MatchRow[], fdName: string, league: League, deductions: Map<string, number> = new Map()): LeagueSeason | null {
   const table = computeTable(rows, league, deductions);
   const row = table.find((r) => r.team === fdName);
   if (!row) return null;
@@ -145,8 +157,8 @@ export interface CompetitionRun {
 }
 
 /** Results outside the domestic league this season (Europe, cups), grouped by competition. */
-export function otherCompetitions(events: EspnEvent[], teamId: string, domesticSlug: string): CompetitionRun[] {
-  const byComp = new Map<string, EspnEvent[]>();
+export function otherCompetitions(events: MatchEvent[], teamId: string, domesticSlug: string): CompetitionRun[] {
+  const byComp = new Map<string, MatchEvent[]>();
   for (const e of events) {
     if (!e.completed || e.slug === domesticSlug) continue;
     byComp.set(e.competition, [...(byComp.get(e.competition) ?? []), e]);
@@ -184,12 +196,12 @@ export interface CoachRecord {
 /** Form since the coach's appointment date. */
 export function coachRecord(
   since: string,
-  espnEvents: EspnEvent[],
+  events: MatchEvent[],
   teamId: string,
   leagueGames: TeamGame[],
   seasonStartIso: string,
 ): CoachRecord {
-  const mine = espnEvents
+  const mine = events
     .filter((e) => e.completed && e.date >= since)
     .sort((a, b) => b.date.localeCompare(a.date))
     .map((e) => {

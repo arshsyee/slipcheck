@@ -683,12 +683,6 @@ export function NewsTab({ d }: Props) {
           {t.news.ok ? t.news.data.length ? <HeadlineList items={t.news.data.slice(0, 8)} /> : <p className="text-sm text-muted">No recent headlines.</p> : <Unavailable result={t.news} />}
         </div>
       ))}
-      {d.matchNews?.ok && d.matchNews.data.length > 0 && (
-        <div className="md:col-span-2">
-          <SectionTitle>League news (ESPN)</SectionTitle>
-          <HeadlineList items={d.matchNews.data} />
-        </div>
-      )}
     </div>
   );
 }

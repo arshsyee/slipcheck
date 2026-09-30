@@ -1,6 +1,6 @@
 import type { League, Leg } from "../types";
 import type { SourceId, SourceResult } from "../sources/types";
-import type { EspnLineup, StandingRow } from "../sources/espn";
+import type { StandingRow } from "../stats/table";
 import type { KickoffWeather } from "../sources/weather";
 import type { Headline } from "../sources/news";
 import type { AvailabilityEntry, PlayerForm } from "../sources/fpl";
@@ -39,8 +39,7 @@ export interface TeamStats {
 export interface TeamSection {
   side: Side;
   name: string;
-  espn: { id: string; logo: string | null; color: string | null; abbreviation: string } | null;
-  /** Club badge image: TheSportsDB, else ESPN. */
+  /** Club badge image (TheSportsDB). */
   badge: string | null;
   standing: SourceResult<StandingRow | null> | null;
   stats: SourceResult<TeamStats | null>;
@@ -51,7 +50,7 @@ export interface TeamSection {
   keyPlayers: SourceResult<PlayerForm[]> | null;
   goalProfile: SourceResult<{ matches: number; topScorers: ScorerLine[]; timing: GoalTiming } | null> | null;
   profile: SourceResult<{ sportsDb: ClubProfile | null; wikidata: ClubFacts | null }>;
-  /** How the club's season is going: league (from results) + Europe/cups (ESPN). */
+  /** How the club's season is going: league (from results) + Europe (UEFA) and cups (Wikipedia / OpenLigaDB). */
   season: SourceResult<{ league: LeagueSeason | null; lastSeasonSameStage: SameStageLastSeason | null; otherCompetitions: CompetitionRun[] } | null>;
   /** National teams only: FIFA and Elo world ranking (Wikipedia). */
   ranking?: SourceResult<{ fifa: number | null; elo: number | null; asOf: string | null } | null>;
@@ -85,7 +84,7 @@ export interface FixtureInfo {
   round: string | null;
   /** Which sources agreed on/provided the fixture. */
   sources: SourceId[];
-  /** e.g. ESPN and the Premier League disagree on the referee. */
+  /** e.g. UEFA and football-data.co.uk disagree on the referee. */
   conflicts: string[];
 }
 
@@ -126,7 +125,6 @@ export interface MatchDossier {
   h2hCups?: SourceResult<H2HMeeting[]> | null;
   referee: SourceResult<RefereeStats | null> | null;
   lineups: SourceResult<Lineup[]> | null;
-  matchNews: SourceResult<Headline[]> | null;
   /** First in the layout: the bet, key facts and the market-specific numbers. */
   pick: Pick;
   /** Every source call made for this match (for the sources footer). */
@@ -136,4 +134,3 @@ export interface MatchDossier {
   builtAt: string;
 }
 
-export type { EspnLineup };
