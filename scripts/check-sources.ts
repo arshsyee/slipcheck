@@ -12,7 +12,6 @@ import { getFplSquad, getWikiSquad } from "../lib/sources/squad";
 import { getCupResults } from "../lib/sources/cups";
 import type { SourceId } from "../lib/sources/types";
 import { getFixtures, getSeason } from "../lib/sources/footballData";
-import { findTeam, getRecentResults, getStandings } from "../lib/sources/espn";
 import { getSeasonMatches } from "../lib/sources/openLigaDb";
 import { getKickoffWeather } from "../lib/sources/weather";
 import { getClubFacts } from "../lib/sources/wikidata";
@@ -53,20 +52,9 @@ const checks: Check[] = [
       const all = await getFixtures();
       const f = all.filter((x) => new Date(x.kickoff).getTime() > Date.now());
       const divs = new Set(f.map((x) => x.div)).size;
-      // The file is published a few days before each round, so it's often empty during breaks; PL/UEFA/ESPN cover that.
+      // The file is published a few days before each round, so it's often empty during breaks; the Premier League, UEFA and TheSportsDB cover that.
       if (!f.length) throw new Error(`reachable, but no upcoming matches listed (normal between rounds); ${all.length} past rows`);
       return { summary: `${f.length} of ${all.length} listed are upcoming (${divs} divisions)`, newest: null };
-    },
-  },
-  {
-    id: "espn",
-    name: "ESPN standings + results",
-    maxAgeDays: 21,
-    run: async () => {
-      const table = await getStandings("eng.1");
-      const team = await findTeam("Arsenal", ["eng.1"]);
-      const results = team ? await getRecentResults(["eng.1"], team.id) : [];
-      return { summary: `table ${table.length} rows, Arsenal ${results.length} results`, newest: results[0]?.date ?? null };
     },
   },
   {
@@ -213,7 +201,7 @@ const ITEMS: { item: string; sources: Check["id"][]; core: boolean }[] = [
   { item: "League table, form, goals, xG, head-to-head", sources: ["football-data"], core: true },
   { item: "Referee stats (England)", sources: ["football-data"], core: false },
   { item: "European results", sources: ["uefa"], core: true },
-  { item: "Fixture, kick-off, venue", sources: ["football-data-fixtures", "premier-league", "uefa", "espn"], core: true },
+  { item: "Fixture, kick-off, venue", sources: ["football-data-fixtures", "premier-league", "uefa", "thesportsdb"], core: true },
   { item: "Coach", sources: ["wikipedia", "wikidata"], core: true },
   { item: "Squad by position", sources: ["fpl", "wikipedia-squad"], core: true },
   { item: "Likely XI (Premier League)", sources: ["fpl-starts"], core: false },
@@ -223,7 +211,7 @@ const ITEMS: { item: string; sources: Check["id"][]; core: boolean }[] = [
   { item: "Injury/team news (other leagues)", sources: ["google-news", "bbc"], core: true },
   { item: "Weather at kick-off", sources: ["open-meteo"], core: false },
   { item: "Stadium location", sources: ["wikidata"], core: false },
-  { item: "Lineups", sources: ["premier-league", "uefa", "espn"], core: false },
+  { item: "Lineups", sources: ["premier-league", "uefa"], core: false },
   { item: "Goal times (Bundesliga)", sources: ["openligadb"], core: false },
   { item: "Domestic cup results", sources: ["cups"], core: false },
   { item: "Club profile, badge", sources: ["thesportsdb"], core: false },

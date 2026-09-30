@@ -3,8 +3,8 @@ import type { League, Market } from "./types";
 export interface LeagueInfo {
   label: string;
   country: string;
-  /** ESPN soccer league slug (site.api.espn.com/apis/site/v2/sports/soccer/{espn}). */
-  espn: string;
+  /** Short competition key used to tell league games from cups and Europe in merged match lists. */
+  slug: string;
   /** football-data.co.uk division code; null for UEFA competitions (use each club's domestic division). */
   fd: string | null;
   /** OpenLigaDB league shortcut, where available. */
@@ -13,12 +13,12 @@ export interface LeagueInfo {
 }
 
 export const LEAGUE_INFO: Record<Exclude<League, "OTHER">, LeagueInfo> = {
-  EPL: { label: "Premier League", country: "England", espn: "eng.1", fd: "E0" },
-  LA_LIGA: { label: "La Liga", country: "Spain", espn: "esp.1", fd: "SP1" },
-  SERIE_A: { label: "Serie A", country: "Italy", espn: "ita.1", fd: "I1" },
-  BUNDESLIGA: { label: "Bundesliga", country: "Germany", espn: "ger.1", fd: "D1", openLigaDb: "bl1" },
-  LIGUE_1: { label: "Ligue 1", country: "France", espn: "fra.1", fd: "F1" },
-  UCL: { label: "Champions League", country: "Europe", espn: "uefa.champions", fd: null, uefaCompetitionId: 1 },
+  EPL: { label: "Premier League", country: "England", slug: "eng.1", fd: "E0" },
+  LA_LIGA: { label: "La Liga", country: "Spain", slug: "esp.1", fd: "SP1" },
+  SERIE_A: { label: "Serie A", country: "Italy", slug: "ita.1", fd: "I1" },
+  BUNDESLIGA: { label: "Bundesliga", country: "Germany", slug: "ger.1", fd: "D1", openLigaDb: "bl1" },
+  LIGUE_1: { label: "Ligue 1", country: "France", slug: "fra.1", fd: "F1" },
+  UCL: { label: "Champions League", country: "Europe", slug: "uefa.champions", fd: null, uefaCompetitionId: 1 },
 };
 
 export function leagueInfo(league: League): LeagueInfo | null {

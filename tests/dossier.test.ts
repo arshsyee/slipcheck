@@ -56,7 +56,6 @@ describe("buildDossier with most sources failing (no network)", () => {
     expect(d.home.news.ok).toBe(false); // every news feed down → reported, not an empty list
     expect(d.home.availability.ok).toBe(false); // FPL and news both down
     const failed = new Set(d.sourceLog.filter((s) => !s.ok).map((s) => s.source));
-    expect(failed.has("espn")).toBe(true);
     expect(failed.has("fpl")).toBe(true);
     expect(failed.has("google-news")).toBe(true);
     expect(d.sourceLog.some((s) => s.ok && s.source === "football-data")).toBe(true);

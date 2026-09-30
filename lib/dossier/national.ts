@@ -52,7 +52,7 @@ export async function buildNationalDossier(leg: Leg, legIndex: number, names: [s
   ]);
   const uefa = uefaR.ok ? uefaR.data : null;
   const sdb = sdbR.ok ? sdbR.data : null;
-  const fixture = mergeFixture(null, null, null, null, uefa, sdb);
+  const fixture = mergeFixture(null, null, uefa, sdb);
 
   // Orientation from the fixture list when the slip had it the other way round.
   let [home, away] = names;
@@ -76,7 +76,7 @@ export async function buildNationalDossier(leg: Leg, legIndex: number, names: [s
           return getKickoffWeather(coords.lat, coords.lon, fixture.kickoff!);
         }, "https://open-meteo.com")
       : null,
-    lineupsFor(null, uefa, null, call, null, uefa ? uefaR : null, null),
+    lineupsFor(null, uefa, call, null, uefa ? uefaR : null),
   ]);
 
   const h2h = resultsR.ok ? { ...resultsR, data: headToHead(rows, home, away) } : null;
@@ -97,7 +97,6 @@ export async function buildNationalDossier(leg: Leg, legIndex: number, names: [s
     h2h,
     referee: null,
     lineups,
-    matchNews: null,
     pick: buildPick({ ...leg, homeTeam: home, awayTeam: away }, homeT, awayT, h2h?.ok ? h2h.data : null),
     sourceLog: log,
     stale: staleLog.slice(staleFrom).map((x) => ({ source: sourceOfKey(x.key), savedAt: x.savedAt, error: x.error })),
@@ -148,7 +147,6 @@ async function team(
   return {
     side,
     name,
-    espn: null,
     badge: profile.ok ? (profile.data?.badge ?? null) : null,
     standing: null,
     stats,

@@ -2,7 +2,7 @@ import { z } from "zod";
 import { cached, DAY, HOUR, MINUTE } from "./cache";
 import { fetchJson } from "./http";
 import { bestTeamMatch, matchFixture } from "../teams/match";
-import type { EspnEvent } from "./espn";
+import type { MatchEvent } from "../stats/season";
 import type { H2HMeeting } from "../stats/match";
 
 const BASE = "https://match.uefa.com/v5";
@@ -97,7 +97,7 @@ export const UEFA_COMPETITIONS = [
  * A club's finished European matches this season (qualifiers included), from UEFA itself.
  * Returned in the same shape as ESPN events; our club's `id` is `teamId`, opponents use their name.
  */
-export async function getEuropeResults(club: string, teamId: string): Promise<EspnEvent[]> {
+export async function getEuropeResults(club: string, teamId: string): Promise<MatchEvent[]> {
   const lists = await Promise.all(UEFA_COMPETITIONS.map(async (c) => ({ c, matches: await getCompetitionMatches(c.id) })));
   const names = [...new Set(lists.flatMap((l) => l.matches.flatMap((m) => [m.home, m.away])))];
   const hit = bestTeamMatch(club, names);

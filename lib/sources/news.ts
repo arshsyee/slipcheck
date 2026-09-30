@@ -8,7 +8,7 @@ export interface Headline {
   url: string;
   published: string | null;
   publisher: string;
-  source: "bbc" | "google-news" | "espn";
+  source: "bbc" | "google-news";
 }
 
 /** Minimal RSS 2.0 item parser (BBC and Google News both publish plain RSS). */
