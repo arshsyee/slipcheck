@@ -42,16 +42,6 @@ export function handicapRecord(games: TeamGame[], line: number) {
   return { win, push, lose, games: games.length };
 }
 
-/** "in all 4 away games" / "in 3 of 4 away games" / "in none of their 4 away games". Counts, never bare percentages. */
-export function inGames(g: TeamGame[], f: (x: TeamGame) => boolean, what: string) {
-  const k = g.filter(f).length;
-  if (!g.length) return `in no ${what} yet`;
-  if (g.length === 1) return k ? `in their only ${what.replace(/s$/, "")}` : `in none of their ${what} (1 played)`;
-  if (k === g.length) return g.length === 2 ? `in both ${what}` : `in all ${k} ${what}`;
-  if (k === 0) return `in none of their ${g.length} ${what}`;
-  return `in ${k} of ${g.length} ${what}`;
-}
-
 export function buildPick(
   leg: Leg,
   home: TeamSection,

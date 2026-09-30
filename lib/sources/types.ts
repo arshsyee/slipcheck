@@ -43,5 +43,3 @@ export async function fromSource<T>(source: SourceId, run: () => Promise<T>, url
     return { ok: false, error: e instanceof Error ? e.message : String(e), source, fetchedAt, url };
   }
 }
-
-export class NotFoundError extends Error {}
