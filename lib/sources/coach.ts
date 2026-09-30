@@ -60,7 +60,7 @@ export function getCoachHistory(clubQid: string): Promise<Tenure[]> {
         };
       })
       .sort((a, b) => (b.start ?? "").localeCompare(a.start ?? ""));
-  }, { disk: true });
+  });
 }
 
 const ParseSchema = z.object({ parse: z.object({ wikitext: z.string() }).optional() });

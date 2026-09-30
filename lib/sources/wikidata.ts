@@ -105,7 +105,7 @@ export function getClubFacts(clubName: string, country?: string | null): Promise
       lon: point?.longitude ?? null,
       wikipediaTitle: club.sitelinks?.enwiki?.title ?? null,
     };
-  }, { disk: true });
+  });
 }
 
 /** Coordinates of a stadium by its exact name (for weather). Null when no single exact match exists. */

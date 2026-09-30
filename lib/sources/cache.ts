@@ -22,8 +22,7 @@ export const staleLog: { key: string; savedAt: string; error: string }[] = [];
  * If the loader fails, the last saved copy (up to 14 days old) is returned and recorded in `staleLog`:
  * a source outage shows old-but-labelled data instead of a hole. Concurrent callers share one request.
  */
-export async function cached<T>(key: string, ttlMs: number, load: () => Promise<T>, opts: { disk?: boolean } = {}): Promise<T> {
-  const disk = opts.disk ?? true;
+export async function cached<T>(key: string, ttlMs: number, load: () => Promise<T>): Promise<T> {
   // SLIPCHECK_LIVE=1 (health checks): always ask the source; saved copies are only a fallback.
   if (process.env.SLIPCHECK_LIVE === "1") ttlMs = -1;
   const hit = memory.get(key);
@@ -33,24 +32,22 @@ export async function cached<T>(key: string, ttlMs: number, load: () => Promise<
   if (pending) return pending as Promise<T>;
 
   const run = (async () => {
-    if (disk) {
-      const fromDisk = await readDisk<T>(key, ttlMs);
-      if (fromDisk !== undefined) {
-        memory.set(key, { at: Date.now(), value: fromDisk });
-        return fromDisk;
-      }
+    const fromDisk = await readDisk<T>(key, ttlMs);
+    if (fromDisk !== undefined) {
+      memory.set(key, { at: Date.now(), value: fromDisk });
+      return fromDisk;
     }
     let value: T;
     try {
       value = await load();
     } catch (e) {
-      const saved = disk ? await readDiskAny<T>(key) : undefined;
+      const saved = await readDiskAny<T>(key);
       if (!saved) throw e;
       staleLog.push({ key, savedAt: saved.savedAt, error: e instanceof Error ? e.message : String(e) });
       return saved.value;
     }
     memory.set(key, { at: Date.now(), value });
-    if (disk) await writeDisk(key, value).catch(() => {});
+    await writeDisk(key, value).catch(() => {});
     return value;
   })();
 
