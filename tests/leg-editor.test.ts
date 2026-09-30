@@ -19,3 +19,13 @@ describe("leg review", () => {
     expect(legProblems(leg({ market: "total_goals", selection: "Over", line: null }))).toEqual(["No line set."]);
   });
 });
+
+describe("odds as a multiplier", () => {
+  it("reads any slip format and shows Nx", async () => {
+    const { formatOdds, parseOdds } = await import("../lib/odds/convert");
+    expect(["2.5x", "2.5", "6/4", " 6 / 4 "].map(parseOdds)).toEqual([2.5, 2.5, 2.5, 2.5]);
+    expect(parseOdds("evens")).toBe(2);
+    expect(parseOdds("abc")).toBeNull();
+    expect([2.5, 10, 1.7272, 21.3125].map(formatOdds)).toEqual(["2.5x", "10x", "1.73x", "21.31x"]);
+  });
+});

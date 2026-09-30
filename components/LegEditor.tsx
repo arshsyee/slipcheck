@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AlertTriangle, Minus, Plus, Trash2 } from "lucide-react";
 import clsx from "clsx";
-import { MARKETS, type Leg, type OddsFormat, type Slip } from "@/lib/types";
+import { MARKETS, type Leg, type Slip } from "@/lib/types";
 import { DEFAULT_LINE, HAS_LINE, LEAGUE_INFO, MARKET_LABEL, legProblems, pickOptions } from "@/lib/leagues";
 import { formatOdds, parseOdds } from "@/lib/odds/convert";
 
@@ -18,7 +18,7 @@ const GROUPS = Object.entries(LEAGUE_INFO).reduce<Record<string, [string, string
 
 /** Review of the parsed slip: one card per leg, picks as buttons, anything missing outlined in amber. */
 // onChange takes an updater: an odds box saving on blur and a button click land in the same tick, and must not overwrite each other.
-export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange: (update: (s: Slip) => Slip) => void; oddsFormat: OddsFormat }) {
+export function LegEditor({ slip, onChange }: { slip: Slip; onChange: (update: (s: Slip) => Slip) => void }) {
   const setLeg = (i: number, patch: Partial<Leg>) =>
     onChange((s) => ({ ...s, legs: s.legs.map((l, j) => (j === i ? { ...l, ...patch } : l)) }));
 
@@ -108,7 +108,7 @@ export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange
                 </span>
               )}
               <span className="ml-auto flex items-center gap-1.5 text-sm text-muted">
-                @ <OddsInput key={`leg-${i}-${leg.oddsDecimal}`} value={leg.oddsDecimal} format={oddsFormat} onChange={(v) => setLeg(i, { oddsDecimal: v })} />
+                <OddsInput key={`leg-${i}-${leg.oddsDecimal}`} value={leg.oddsDecimal} onChange={(v) => setLeg(i, { oddsDecimal: v })} />
               </span>
             </div>
 
@@ -129,16 +129,16 @@ export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange
 }
 
 /** Text box that accepts 6/4 or 2.5 and stores decimal odds; commits on blur. Remounted (via key) when the value changes elsewhere. */
-function OddsInput({ value, format, onChange }: { value: number | null; format: OddsFormat; onChange: (v: number | null) => void }) {
-  const [text, setText] = useState(value != null ? formatOdds(value, format) : "");
+function OddsInput({ value, onChange }: { value: number | null; onChange: (v: number | null) => void }) {
+  const [text, setText] = useState(value != null ? formatOdds(value) : "");
   const invalid = text.trim() !== "" && parseOdds(text) == null;
   return (
     <input
       className={clsx(input, "tabular w-20", invalid && "border-danger", value == null && !invalid && "border-warn/60")}
       value={text}
-      placeholder="odds?"
+      placeholder="odds? 2.5x"
       aria-label="Odds"
-      title="Fractional (6/4) or decimal (2.5)"
+      title="Payout multiplier (2.5x). 6/4 or 2.5 also work."
       onChange={(e) => setText(e.target.value)}
       onBlur={() => onChange(parseOdds(text))}
     />

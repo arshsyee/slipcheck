@@ -4,7 +4,6 @@ import { Fragment, useState } from "react";
 import clsx from "clsx";
 import { AlertTriangle, CalendarClock, CheckCircle2, CloudRain, Crosshair, MapPin, Sun, Cloud, Wind, XCircle } from "lucide-react";
 import type { DossierTab, MatchDossier } from "@/lib/dossier/types";
-import type { OddsFormat } from "@/lib/types";
 import { sourceInfo, type SourceId } from "@/lib/sources/types";
 import { MARKET_LABEL } from "@/lib/leagues";
 import { formatOdds } from "@/lib/odds/convert";
@@ -23,7 +22,7 @@ const TABS: { id: DossierTab; label: string }[] = [
   { id: "club", label: "Club" },
 ];
 
-export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: OddsFormat }) {
+export function MatchCard({ d }: { d: MatchDossier }) {
   // Closed by default so the slip reads as an overview; clicking the open tab closes it.
   const [tab, setTab] = useState<DossierTab | null>(null);
   const TabBody = tab && { form: FormTab, stats: StatsTab, h2h: H2HTab, availability: AvailabilityTab, squad: SquadTab, referee: RefereeTab, matchCentre: MatchCentreTab, news: NewsTab, club: ClubTab }[tab];
@@ -64,7 +63,7 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
             {MARKET_LABEL[d.leg.market]}: <b className="font-semibold">{d.leg.selection}</b>
             {d.leg.line != null && ` ${d.leg.market === "asian_handicap" && d.leg.line > 0 ? "+" : ""}${d.leg.line}`}
           </span>
-          {d.leg.oddsDecimal && <span className="tabular rounded-full bg-surface-2 px-3 py-1 text-muted">@ {formatOdds(d.leg.oddsDecimal, oddsFormat)} on your slip · implies {Math.round((1 / d.leg.oddsDecimal) * 100)}%</span>}
+          {d.leg.oddsDecimal && <span className="tabular rounded-full bg-surface-2 px-3 py-1 text-muted">{formatOdds(d.leg.oddsDecimal)} on your slip · implies {Math.round((1 / d.leg.oddsDecimal) * 100)}%</span>}
           {d.fixture.referee && <span className="rounded-full bg-surface-2 px-3 py-1 text-muted">Referee: {d.fixture.referee}</span>}
           {!d.fixture.found && (
             <span className="flex items-center gap-1 rounded-full bg-warn/10 px-3 py-1 text-warn">

@@ -15,7 +15,7 @@
 import { writeFileSync } from "node:fs";
 import { buildDossier } from "../lib/dossier/build";
 import { reportHtml } from "./report-html";
-import { accaDecimal, impliedProbability, parseOdds } from "../lib/odds/convert";
+import { accaDecimal, formatOdds, impliedProbability, parseOdds } from "../lib/odds/convert";
 import { stakesText } from "../lib/stats/season";
 import type { MatchDossier } from "../lib/dossier/types";
 import { LEAGUES, MARKETS, type Leg } from "../lib/types";
@@ -36,7 +36,7 @@ function parseArgs(argv: string[]): { legs: Leg[]; json: boolean; html: string |
     else if (a === "--line" && cur) cur.line = Number(next());
     else if (a === "--odds" && cur) {
       const o = parseOdds(next());
-      if (o == null) throw new Error("--odds takes 6/4, 2.5 or evens");
+      if (o == null) throw new Error("--odds takes 2.5x, 2.5, 6/4 or evens");
       cur.oddsDecimal = o;
     }
     else if (!a.startsWith("--")) {
@@ -290,7 +290,7 @@ async function main() {
     const line =
       priced.length < legs.length
         ? `  ${bold("All picks together")}: ${red(`combined chance N/A · ${legs.length - priced.length} of ${legs.length} picks have no odds (add --odds)`)}`
-        : `  ${bold("All picks together")}: combined odds ${acca.toFixed(2)} imply a ${fmtPct(impliedProbability(acca))} chance that all ${legs.length} win (bookmaker margins included).`;
+        : `  ${bold("All picks together")}: combined odds ${formatOdds(acca)} imply a ${fmtPct(impliedProbability(acca))} chance that all ${legs.length} win (bookmaker margins included).`;
     console.log(`\n${line}`);
     blocks.push(line);
   }

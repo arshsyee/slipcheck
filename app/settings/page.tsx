@@ -85,32 +85,6 @@ export default function SettingsPage() {
         </label>
       </section>
 
-      <section className="glass rounded-2xl p-6">
-        <h2 className="text-sm font-medium uppercase tracking-wider text-muted">Odds display</h2>
-        <div className="mt-4 grid grid-cols-3 gap-3">
-          {(
-            [
-              ["fractional", "Fractional", "6/4"],
-              ["decimal", "Decimal", "2.50"],
-            ] as const
-          ).map(([id, label, example]) => (
-            <button
-              key={id}
-              onClick={() => update({ oddsFormat: id })}
-              className={clsx(
-                "rounded-xl border px-4 py-3 text-left transition",
-                (settings.oddsFormat ?? "fractional") === id
-                  ? "border-accent bg-accent/10 shadow-[0_0_0_1px_var(--color-accent)]"
-                  : "border-line hover:border-muted/50",
-              )}
-            >
-              <div className="font-medium">{label}</div>
-              <div className="tabular text-xs text-muted">{example}</div>
-            </button>
-          ))}
-        </div>
-      </section>
-
       <section className="glass space-y-6 rounded-2xl p-6">
         <h2 className="text-sm font-medium uppercase tracking-wider text-muted">API key</h2>
         {KEY_FIELDS.map((f) => (

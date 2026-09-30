@@ -40,7 +40,6 @@ export type League = (typeof LEAGUES)[number];
 export type Market = (typeof MARKETS)[number];
 
 export type AIProvider = "anthropic" | "openai";
-export type OddsFormat = "decimal" | "fractional";
 
 /** Keys + prefs the browser sends to the local API routes. */
 export interface ClientSettings {
@@ -49,5 +48,4 @@ export interface ClientSettings {
   openaiKey?: string;
   anthropicModel?: string;
   openaiModel?: string;
-  oddsFormat?: OddsFormat;
 }

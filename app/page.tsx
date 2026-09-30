@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Database, FlaskConical, KeyRound, Loader2, RotateCcw, Sparkles } from "lucide-react";
+import { ArrowRight, Camera, Database, FlaskConical, KeyRound, Loader2, RotateCcw, Sparkles } from "lucide-react";
 import clsx from "clsx";
 import { SlipDropzone } from "@/components/SlipDropzone";
 import { LegEditor } from "@/components/LegEditor";
@@ -19,7 +19,6 @@ type LegState = { status: "loading" } | { status: "ready"; dossier: MatchDossier
 
 export default function Home() {
   const { settings, hasAiKey, loaded } = useSettings();
-  const oddsFormat = settings.oddsFormat ?? "fractional";
   const [stage, setStage] = useState<Stage>("upload");
   const [preview, setPreview] = useState<string | null>(null);
   const [slip, setSlip] = useState<Slip | null>(null);
@@ -153,6 +152,11 @@ export default function Home() {
               <p className="text-sm text-muted">Fix anything that was read wrong, then gather the match data.</p>
             </div>
             <div className="flex gap-2">
+              <label className="flex cursor-pointer items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted transition hover:text-fg">
+                <Camera size={14} /> {preview ? "Retake photo" : "Use a photo"}
+                {/* No capture attribute: phones offer both the camera and the photo library. */}
+                <input type="file" accept="image/*" className="sr-only" onChange={(e) => e.target.files?.[0] && handleFile(e.target.files[0])} />
+              </label>
               <button onClick={reset} className="flex items-center gap-1.5 rounded-lg border border-line px-3 py-2 text-sm text-muted transition hover:text-fg">
                 <RotateCcw size={14} /> Start over
               </button>
@@ -168,7 +172,7 @@ export default function Home() {
           <div className="flex flex-col gap-6 lg:flex-row">
             {preview && <SlipPhoto src={preview} />}
             <div className="min-w-0 flex-1">
-              <LegEditor slip={slip} onChange={(f) => setSlip((s) => s && f(s))} oddsFormat={oddsFormat} />
+              <LegEditor slip={slip} onChange={(f) => setSlip((s) => s && f(s))} />
             </div>
           </div>
         </section>
@@ -179,7 +183,7 @@ export default function Home() {
           <SlipSummary slip={slip} legs={legs} onEdit={() => setStage("review")} onReset={reset} />
           {legs.map((l, i) =>
             l.status === "ready" ? (
-              <MatchCard key={i} d={l.dossier} oddsFormat={oddsFormat} />
+              <MatchCard key={i} d={l.dossier} />
             ) : l.status === "loading" ? (
               <MatchCardSkeleton key={i} index={i} home={slip.legs[i].homeTeam} away={slip.legs[i].awayTeam} />
             ) : (

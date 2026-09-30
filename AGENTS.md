@@ -12,7 +12,7 @@ SlipCheck gathers free, public football facts for the matches on a bet slip. It 
    The options after a match apply to that match:
    - `--league` `EPL|LA_LIGA|SERIE_A|BUNDESLIGA|LIGUE_1|UCL`; leave it out for national teams
    - `--market` `1x2|double_chance|draw_no_bet|total_goals|asian_handicap|btts|total_corners|total_cards`
-   - `--pick`, `--line`, `--odds` (6/4, 2.5, evens)
+   - `--pick`, `--line`, `--odds` (2.5x, 6/4, 2.5, evens; shown as a multiplier, 2.5x)
 3. **Read the text output, about 2,000 tokens per match.** Use `--json` (about 22,000 tokens per match) only if you need raw per-game data. Gathering the data uses no AI tokens.
 
 ## Rules when passing facts on
