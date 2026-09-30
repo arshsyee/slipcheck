@@ -167,6 +167,15 @@ describe("headline attribution (real Google News headlines, 2026-09-23)", () => 
     expect(aboutClub(feed, "Brazil", "Australia")).toHaveLength(1);
   });
 
+  it("drops other sports and the women's team from a men's team's news (real, 2026-09-30)", () => {
+    const feed = [
+      h("Jos Buttler: England wicketkeeper ruled out of tri-series in Pakistan with injury"),
+      h("England Women: Ella Toone and Chloe Kelly miss out as Sarina Wiegman names squad to face Greece"),
+      h("England vs Spain: Thomas Tuchel says Cole Palmer's injury absences are preventing Chelsea forward from impressing"),
+    ];
+    expect(aboutClub(feed, "England", "Spain").map((x) => x.title)).toEqual([feed[2].title]);
+  });
+
   it("finds clubs by name inside real headlines", () => {
     expect(mentionIndex("Arteta agrees new deal with champions Arsenal", "Arsenal")).toBeGreaterThanOrEqual(0);
     expect(mentionIndex("Valverde to miss Korea friendly after ankle injury", "Real Madrid")).toBe(-1);
@@ -200,6 +209,8 @@ describe("players named in injury headlines (real headlines, 2026-09-23)", () =>
     // Still catches real absences.
     expect([...playersInHeadlines(["Odilon Kossounou"], [h("CAN 2027 Qualifiers: Kossounou ruled out, Ivory Coast reshuffles defense ahead of Ghana clash")]).keys()]).toEqual(["Odilon Kossounou"]);
     expect(playersInHeadlines(["Eric García"], [h("Joan García ruled out with knee injury")]).size).toBe(0);
+    // A player "in squad" is not absent, even when the same headline rules someone else out (real, 2026-09-30).
+    expect(playersInHeadlines(["Ezri Konsa"], [h("England defender Nico O'Reilly to miss Czech Republic match but Ezri Konsa in squad")]).size).toBe(0);
     // Good news about an injury is not an absence (real, 2026-09-28).
     expect(playersInHeadlines(["Kylian Mbappé"], [h("Real Madrid Breathe a Sigh of Relief After Kylian Mbappé Injury Update")]).size).toBe(0);
   });

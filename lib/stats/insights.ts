@@ -135,7 +135,8 @@ const pts = (n: number) => `${n} point${n === 1 ? "" : "s"}`;
 const fmt = (x: number) => (Number.isInteger(x) ? String(x) : x.toFixed(1));
 
 /** "3 of 4" */
-const count = (g: TeamGame[], f: (x: TeamGame) => boolean) => (g.length ? `${g.filter(f).length} of ${g.length}` : "—");
+/** "2 of 5 games": always say what's being counted. */
+const count = (g: TeamGame[], f: (x: TeamGame) => boolean) => (g.length ? `${g.filter(f).length} of ${g.length} game${g.length === 1 ? "" : "s"}` : "—");
 const ppg = (g: TeamGame[]) => (g.length ? (g.filter((x) => x.gf > x.ga).length * 3 + g.filter((x) => x.gf === x.ga).length) / g.length : null);
 const avgOf = (g: TeamGame[], f: (x: TeamGame) => number | null) => {
   const v = g.map(f).filter((x): x is number => x != null);
@@ -188,7 +189,8 @@ export function marketStats(leg: Leg, home: TeamSection, away: TeamSection): Pic
         venue(`Games with ${plus}`, (g) => count(g, (x) => x.gf + x.ga > line)),
         venue("Goals per game (both teams)", (g) => n(avgOf(g, (x) => x.gf + x.ga), 1)),
         all(`Games with ${plus}`, (g) => count(g, (x) => x.gf + x.ga > line)),
-        all(`${plus} in last 5`, (g) => count(g.slice(0, 5), (x) => x.gf + x.ga > line)),
+        // Only once there are more than 5 games; before that it repeats the row above.
+        ...(ho.length > 5 || ao.length > 5 ? [all(`${plus}, last 5 games`, (g) => count(g.slice(0, 5), (x) => x.gf + x.ga > line))] : []),
         all("xG per game (for – against)", xg),
       ];
     case "btts":
@@ -215,7 +217,7 @@ export function marketStats(leg: Leg, home: TeamSection, away: TeamSection): Pic
         venue("Per game (both teams)", (g) => n(avgOf(known(g), total), 1)),
         venue(corners ? "Won – conceded per game" : "Own – opponent's per game", (g) => (known(g).length ? `${n(avgOf(known(g), own), 1)} – ${n(avgOf(known(g), opp), 1)}` : "—")),
         all(`Games with ${over}`, (g) => count(known(g), (x) => total(x)! > lineCC)),
-        all(`${over} in last 5`, (g) => count(known(g).slice(0, 5), (x) => total(x)! > lineCC)),
+        ...(known(ho).length > 5 || known(ao).length > 5 ? [all(`${over}, last 5 games`, (g) => count(known(g).slice(0, 5), (x) => total(x)! > lineCC))] : []),
       ];
     }
     case "asian_handicap": {

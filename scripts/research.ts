@@ -142,7 +142,7 @@ function print(d: MatchDossier, ms: number) {
     r2("Title race", st(hs)?.first, st(as)?.first);
     r2("Top four", st(hs)?.fourth, st(as)?.fourth);
     r2("Relegation", st(hs)?.relegation, st(as)?.relegation);
-    r2("Games left", st(hs)?.left, st(as)?.left);
+    r2("Games left", L(hs)?.stakes.gamesLeft.toString(), L(as)?.stakes.gamesLeft.toString());
     const last = (s: typeof hs) => s?.lastSeasonSameStage;
     r2("Same point last season", last(hs) ? `${ordinal(last(hs)!.position)} · ${pts(last(hs)!.points)}` : null, last(as) ? `${ordinal(last(as)!.position)} · ${pts(last(as)!.points)}` : null);
     for (const [t, s2] of [[d.home, hs], [d.away, as]] as const) {
