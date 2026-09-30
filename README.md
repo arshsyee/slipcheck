@@ -90,7 +90,6 @@ npm run check-sources   # asks every source live, then shows each data item and 
 npm test          # offline, on real recorded data (tests/fixtures/snapshot)
 npm run lint
 npx tsc --noEmit
-npm run verify -- accuracy|goals|referees|xg|coverage   # cross-check sources against each other (live)
 ```
 
 Code map:
