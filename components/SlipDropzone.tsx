@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { ImageUp } from "lucide-react";
 import clsx from "clsx";
 
@@ -27,9 +26,8 @@ export function SlipDropzone({ onFile, disabled }: { onFile: (f: File) => void; 
   }, [accept]);
 
   return (
-    <motion.button
+    <button
       type="button"
-      whileHover={{ scale: disabled ? 1 : 1.005 }}
       onClick={() => input.current?.click()}
       onDragOver={(e) => {
         e.preventDefault();
@@ -45,7 +43,7 @@ export function SlipDropzone({ onFile, disabled }: { onFile: (f: File) => void; 
       className={clsx(
         "group relative flex w-full flex-col items-center justify-center gap-4 overflow-hidden rounded-3xl border-2 border-dashed px-6 py-16 text-center transition",
         over ? "border-accent bg-accent/5" : "border-line hover:border-accent/60",
-        disabled && "cursor-not-allowed opacity-60",
+        disabled ? "cursor-not-allowed opacity-60" : "hover:scale-[1.005]",
       )}
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(400px_200px_at_50%_0%,rgba(46,224,127,0.12),transparent)] opacity-0 transition group-hover:opacity-100" />
@@ -63,6 +61,6 @@ export function SlipDropzone({ onFile, disabled }: { onFile: (f: File) => void; 
         className="hidden"
         onChange={(e) => accept(e.target.files?.[0])}
       />
-    </motion.button>
+    </button>
   );
 }

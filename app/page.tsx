@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Database, FlaskConical, KeyRound, Loader2, RotateCcw, Sparkles } from "lucide-react";
 import clsx from "clsx";
 import { SlipDropzone } from "@/components/SlipDropzone";
@@ -105,13 +104,9 @@ export default function Home() {
     <div className="space-y-10">
       {stage !== "results" && (
         <section className="mx-auto max-w-2xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-xs text-muted"
-          >
+          <div className="rise inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-xs text-muted">
             <Database size={13} className="text-accent" /> Free public data · Premier League, La Liga, Serie A, Bundesliga, Ligue 1 + Champions League
-          </motion.div>
+          </div>
           <h1 className="mt-5 text-4xl font-semibold tracking-tight sm:text-5xl">
             Know every match <span className="bg-gradient-to-r from-accent to-emerald-300 bg-clip-text text-transparent">on your slip</span>
           </h1>
@@ -129,18 +124,7 @@ export default function Home() {
         </Link>
       )}
 
-      <AnimatePresence>
-        {error && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mx-auto max-w-2xl rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-danger"
-          >
-            {error}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {error && <div className="rise mx-auto max-w-2xl rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm text-danger">{error}</div>}
 
       {(stage === "upload" || stage === "parsing") && (
         <div className="mx-auto max-w-2xl">
@@ -162,7 +146,7 @@ export default function Home() {
       )}
 
       {slip && stage === "review" && (
-        <motion.section initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-2xl p-5 sm:p-6">
+        <section className="rise glass rounded-2xl p-5 sm:p-6">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
             <div>
               <h2 className="text-lg font-semibold">Check your slip</h2>
@@ -190,7 +174,7 @@ export default function Home() {
               <LegEditor slip={slip} onChange={setSlip} oddsFormat={oddsFormat} />
             </div>
           </div>
-        </motion.section>
+        </section>
       )}
 
       {slip && stage === "results" && (
@@ -324,11 +308,7 @@ function ParsingState({ preview }: { preview: string | null }) {
         <div className="relative overflow-hidden rounded-xl border border-line">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={preview} alt="" className="max-h-64 object-contain opacity-70" />
-          <motion.div
-            className="absolute inset-x-0 h-16 bg-gradient-to-b from-transparent via-accent/30 to-transparent"
-            animate={{ top: ["-20%", "100%"] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-          />
+          <div className="scan absolute inset-x-0 h-16 bg-gradient-to-b from-transparent via-accent/30 to-transparent" />
         </div>
       )}
       <div className="flex items-center gap-2 text-sm text-muted">
