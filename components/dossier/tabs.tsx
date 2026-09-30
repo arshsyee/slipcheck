@@ -591,38 +591,6 @@ export function MatchCentreTab({ d }: Props) {
         )}
       </div>
 
-      {(d.home.keyPlayers || d.away.keyPlayers) && (
-        <div>
-          <SectionTitle>Key attackers this season (xG + xA)</SectionTitle>
-          <div className="grid gap-4 md:grid-cols-2">
-            {[d.home, d.away].map((t) => (
-              <div key={t.side}>
-                <div className="mb-1 text-xs text-muted">{t.name}</div>
-                {t.keyPlayers?.ok ? (
-                  <table className="w-full text-sm">
-                    <tbody>
-                      {t.keyPlayers.data.map((p, i) => (
-                        <tr key={i} className="border-b border-line/50 last:border-0">
-                          <td className="py-1">{p.player}</td>
-                          <td className="tabular py-1 text-right text-muted">
-                            {p.goals}G {p.assists}A
-                          </td>
-                          <td className="tabular py-1 text-right">
-                            {fix(p.xg, 1)} xG · {fix(p.xa, 1)} xA
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <Unavailable result={t.keyPlayers} />
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {(d.home.goalProfile || d.away.goalProfile) && (
         <div>
           <SectionTitle>Top scorers &amp; when goals come</SectionTitle>

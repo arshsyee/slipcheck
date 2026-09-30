@@ -21,6 +21,15 @@ export interface SquadPlayer {
   inNews?: { title: string; publisher: string } | null;
 }
 
+/** One player on an official availability list (Premier League, from FPL). */
+export interface AvailabilityEntry {
+  player: string;
+  position: string;
+  status: SquadPlayer["status"];
+  chance: number | null;
+  news: string;
+}
+
 export interface LikelyLineup {
   /** e.g. "4-3-3", from the team's most recent lineup. */
   shape: string;

@@ -3,7 +3,6 @@ import type { SourceId, SourceResult } from "../sources/types";
 import type { StandingRow } from "../stats/table";
 import type { KickoffWeather } from "../sources/weather";
 import type { Headline } from "../sources/news";
-import type { AvailabilityEntry, PlayerForm } from "../sources/fpl";
 import type { ClubProfile } from "../sources/sportsDb";
 import type { ClubFacts } from "../sources/wikidata";
 import type { Averages, FormSummary, Rates, TeamGame } from "../stats/team";
@@ -11,6 +10,7 @@ import type { H2HMeeting, HeadToHead, RefereeStats } from "../stats/match";
 import type { GoalTiming, ScorerLine } from "../sources/openLigaDb";
 import type { Coach } from "../sources/coach";
 import type { Squad } from "../sources/squad";
+import type { AvailabilityEntry } from "../stats/lineup";
 import type { CoachRecord, CompetitionRun, LeagueSeason, SameStageLastSeason } from "../stats/season";
 
 export type Side = "home" | "away";
@@ -47,7 +47,6 @@ export interface TeamSection {
   lastMatch: { date: string; competition: string; opponent: string; score: string } | null;
   /** Premier League: official FPL flags. Elsewhere: availability-related headlines. */
   availability: SourceResult<{ kind: "official"; players: AvailabilityEntry[] } | { kind: "news"; headlines: Headline[] }>;
-  keyPlayers: SourceResult<PlayerForm[]> | null;
   goalProfile: SourceResult<{ matches: number; topScorers: ScorerLine[]; timing: GoalTiming } | null> | null;
   profile: SourceResult<{ sportsDb: ClubProfile | null; wikidata: ClubFacts | null }>;
   /** How the club's season is going: league (from results) + Europe (UEFA) and cups (Wikipedia / OpenLigaDB). */

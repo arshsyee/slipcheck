@@ -7,7 +7,6 @@ import { findUefaMatch, getEuropeResults, getUefaMeetings, getUefaLineups, type 
 import { geocodeCity, getKickoffWeather } from "../sources/weather";
 import { getClubFacts } from "../sources/wikidata";
 import { getClubProfile, getNextMatch, type NextMatch } from "../sources/sportsDb";
-import { getFplTeam } from "../sources/fpl";
 import { getFplSquad, getWikiSquad } from "../sources/squad";
 import { getCupMeetings, getCupResults } from "../sources/cups";
 import { getUpcomingMatches, type UpcomingMatch } from "../sources/upcoming";
@@ -181,7 +180,7 @@ async function buildTeam(
 
   // Our club's id in merged match lists.
   const teamId = name;
-  const [stats, standing, cups, europe, fpl, goalProfile, profile, news, squad, upcoming] = await Promise.all([
+  const [stats, standing, cups, europe, goalProfile, profile, news, squad, upcoming] = await Promise.all([
     dInfo?.fd
       ? call("football-data", async () => {
           const rows = await getSeason(dInfo.fd!);
@@ -201,7 +200,6 @@ async function buildTeam(
     // Domestic cups: Wikipedia season pages (OpenLigaDB for the DFB-Pokal).
     dInfo ? call(dInfo.country === "Germany" ? "openligadb" : "wikipedia", () => getCupResults(dInfo.country, name, teamId)) : null,
     call("uefa", () => getEuropeResults(name, teamId), "https://www.uefa.com"),
-    isEpl ? call("fpl", () => getFplTeam(name), "https://fantasy.premierleague.com") : null,
     dInfo?.openLigaDb ? call("openligadb", () => getClubGoalProfile(dInfo.openLigaDb!, name), "https://www.openligadb.de") : null,
     call("thesportsdb", async () => {
       const [sportsDb, wikidata] = await Promise.all([getClubProfile(name).catch(() => null), getClubFacts(name, dInfo?.country).catch(() => null)]);
@@ -285,9 +283,20 @@ async function buildTeam(
       }
     : null;
 
+  // Premier League: the official list is the FPL squad's non-available players.
+  const fplSquad = isEpl && squad?.ok && squad.data?.source === "fpl" ? squad : null;
   const availability: TeamSection["availability"] =
-    fpl?.ok && fpl.data
-      ? { ...fpl, data: { kind: "official", players: fpl.data.availability } }
+    fplSquad
+      ? {
+          ...fplSquad,
+          data: {
+            kind: "official",
+            players: fplSquad.data!.players
+              .filter((p) => p.status !== "available" && p.status !== "unknown")
+              .map((p) => ({ player: p.name, position: p.pos, status: p.status, chance: p.chance, news: p.note ?? "" }))
+              .sort((a, b) => (a.chance ?? 0) - (b.chance ?? 0) || a.player.localeCompare(b.player)),
+          },
+        }
       : news.ok
         ? { ...news, data: { kind: "news", headlines: news.data.filter((h) => AVAILABILITY_RE.test(h.title)).slice(0, 6) } }
         : news;
@@ -301,7 +310,6 @@ async function buildTeam(
     restDays: restDays(lastMatch?.date, kickoff),
     lastMatch,
     availability,
-    keyPlayers: fpl ? (fpl.ok ? { ...fpl, data: fpl.data?.keyPlayers ?? [] } : fpl) : null,
     goalProfile,
     profile,
     season,
