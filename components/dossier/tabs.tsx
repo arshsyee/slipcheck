@@ -432,7 +432,7 @@ function SquadBody({ t }: { t: TeamSection }) {
       {L && L.xi.length ? (
         <>
           <p className="text-xs text-muted">
-            Likely XI <b className="text-fg">{L.shape}</b>: most starts in the last {L.window} league games, injured left out. Not an official lineup. “3/{L.window}” = started 3 of the last {L.window}.
+            Likely XI <b className="text-fg">{L.shape}</b>: most starts in the last {L.window} league games, injured left out. Not an official lineup. “3/{L.window}” = started 3 of the last {L.window}. Amber = doubtful, with the official chance of playing from Fantasy Premier League (FPL).
           </p>
           {/* Pitch: forwards at the top, goalkeeper at the bottom. */}
           <div className="space-y-2 rounded-xl border border-win/20 bg-win/[0.06] p-3">
@@ -441,7 +441,7 @@ function SquadBody({ t }: { t: TeamSection }) {
                 {L.xi.filter((p) => p.pos === pos).map((p) => (
                   <span key={p.name} className={clsx("rounded-md px-2 py-1 text-xs", p.status === "doubtful" ? "bg-warn/15 text-warn" : "bg-surface-2")}>
                     {p.name} <span className="tabular text-muted">{p.starts}/{L.window}</span>
-                    {p.status === "doubtful" && p.chance != null && <span> · {p.chance}%</span>}
+                    {p.status === "doubtful" && p.chance != null && <span> · {p.chance}% to play (FPL)</span>}
                   </span>
                 ))}
               </div>
