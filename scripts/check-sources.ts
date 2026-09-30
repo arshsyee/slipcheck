@@ -107,7 +107,10 @@ const checks: Check[] = [
     run: async () => {
       const p = await getClubProfile("Bayern Munich");
       if (!p) throw new Error("club not found");
-      return { summary: `${p.name}, ${p.stadium}`, newest: null };
+      // Image hosts move (www. → r2. in 2026); a dead badge link must fail here, not show a blank on the page.
+      const img = p.badge ? await fetch(p.badge, { method: "HEAD" }) : null;
+      if (!img?.ok) throw new Error(`badge image ${img ? `HTTP ${img.status}` : "missing"}: ${p.badge}`);
+      return { summary: `${p.name}, ${p.stadium}, badge loads`, newest: null };
     },
   },
   {

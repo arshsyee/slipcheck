@@ -1,6 +1,7 @@
 "use client";
 
 import clsx from "clsx";
+import { useState } from "react";
 import { AlertCircle } from "lucide-react";
 import type { SourceId, SourceResult } from "@/lib/sources/types";
 import { sourceInfo } from "@/lib/sources/types";
@@ -117,12 +118,14 @@ export function SectionTitle({ children, right }: { children: React.ReactNode; r
 }
 
 export function Crest({ src, name, size = 36 }: { src: string | null | undefined; name: string; size?: number }) {
-  if (!src)
+  // A dead image link (a source moving its images) falls back to initials, never an empty box.
+  const [broken, setBroken] = useState(false);
+  if (!src || broken)
     return (
       <span className="grid shrink-0 place-items-center rounded-full bg-surface-2 text-xs font-bold text-muted" style={{ width: size, height: size }}>
         {name.slice(0, 2).toUpperCase()}
       </span>
     );
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src={src} alt="" width={size} height={size} className="shrink-0 object-contain" style={{ width: size, height: size }} />;
+  return <img src={src} onError={() => setBroken(true)} alt="" width={size} height={size} className="shrink-0 object-contain" style={{ width: size, height: size }} />;
 }
