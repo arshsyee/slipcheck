@@ -80,8 +80,13 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
   const sdbR =
     !pl && !uefa && !fdFixture && (homeName || awayName)
       ? await call("thesportsdb", async () => {
-          const m = await getNextMatch(homeName || awayName);
-          return m && new Date(m.kickoff).getTime() > Date.now() ? matchFixture(homeName || null, awayName || null, [m]) : null;
+          // Ask both clubs: one of them may play a friendly or cup game first (Augsburg v Hertha before Augsburg v Bayern).
+          for (const t of [homeName, awayName].filter(Boolean)) {
+            const m = await getNextMatch(t).catch(() => null);
+            const hit = m && new Date(m.kickoff).getTime() > Date.now() ? matchFixture(homeName || null, awayName || null, [m]) : null;
+            if (hit) return hit;
+          }
+          return null;
         }, "https://www.thesportsdb.com")
       : null;
   const sdb = sdbR?.ok ? sdbR.data : null;
