@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import clsx from "clsx";
 import { MARKETS, type Leg, type OddsFormat, type Slip } from "@/lib/types";
 import { LEAGUE_INFO, MARKET_LABEL } from "@/lib/leagues";
@@ -9,16 +9,6 @@ import { formatOdds, parseOdds } from "@/lib/odds/convert";
 
 const input =
   "w-full rounded-md border border-line bg-surface px-2 py-1.5 text-sm outline-none transition focus:border-accent disabled:opacity-40";
-
-export const EMPTY_LEG: Leg = {
-  league: "EPL",
-  homeTeam: "",
-  awayTeam: "",
-  market: "1x2",
-  selection: "",
-  line: null,
-  oddsDecimal: null,
-};
 
 const HAS_LINE = new Set<Leg["market"]>(["total_goals", "asian_handicap", "total_corners", "total_cards"]);
 /** A typical starting line when switching to an over/under market. */
@@ -119,12 +109,7 @@ export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange
         ))}
       </div>
 
-      <button
-        onClick={() => onChange({ ...slip, legs: [...slip.legs, { ...EMPTY_LEG }] })}
-        className="flex items-center gap-1.5 text-sm text-muted transition hover:text-accent"
-      >
-        <Plus size={15} /> Add selection
-      </button>
+      
     </div>
   );
 }

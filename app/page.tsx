@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Database, FlaskConical, KeyRound, Loader2, PencilLine, RotateCcw, Sparkles } from "lucide-react";
+import { ArrowRight, Database, FlaskConical, KeyRound, Loader2, RotateCcw, Sparkles } from "lucide-react";
 import clsx from "clsx";
 import { SlipDropzone } from "@/components/SlipDropzone";
-import { EMPTY_LEG, LegEditor } from "@/components/LegEditor";
+import { LegEditor } from "@/components/LegEditor";
 import { MatchCard, MatchCardSkeleton } from "@/components/dossier/MatchCard";
 import { Crest } from "@/components/dossier/bits";
 import { useSettings } from "@/lib/useSettings";
@@ -17,7 +17,6 @@ import type { Slip } from "@/lib/types";
 type Stage = "upload" | "parsing" | "review" | "results";
 type LegState = { status: "loading" } | { status: "ready"; dossier: MatchDossier } | { status: "error"; error: string };
 
-const BLANK_SLIP: Slip = { legs: [{ ...EMPTY_LEG }] };
 
 export default function Home() {
   const { settings, hasAiKey, loaded } = useSettings();
@@ -48,7 +47,7 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       const parsed = data.slip as Slip;
-      if (!parsed.legs.length) throw new Error("Couldn't find any football selections in that image. Try a clearer screenshot, or enter the bet manually.");
+      if (!parsed.legs.length) throw new Error("Couldn't find any football selections in that image. Try a clearer screenshot.");
       setSlip(parsed);
       setStage("review");
     } catch (e) {
@@ -125,7 +124,7 @@ export default function Home() {
       {loaded && !hasAiKey && stage === "upload" && (
         <Link href="/settings" className="glass mx-auto flex max-w-2xl items-center gap-3 rounded-xl px-4 py-3 text-sm transition hover:border-warn">
           <KeyRound size={18} className="shrink-0 text-warn" />
-          <span className="flex-1">Add a Claude or ChatGPT API key to read slip screenshots. You can still enter bets by hand or try a sample.</span>
+          <span className="flex-1">Add a Claude or ChatGPT API key to read slip screenshots. Until then, try a sample.</span>
           <ArrowRight size={16} className="text-muted" />
         </Link>
       )}
@@ -150,17 +149,6 @@ export default function Home() {
           ) : (
             <>
               <SlipDropzone onFile={handleFile} disabled={loaded && !hasAiKey} />
-              <div className="mt-4 text-center">
-                <button
-                  onClick={() => {
-                    setSlip(structuredClone(BLANK_SLIP));
-                    setStage("review");
-                  }}
-                  className="inline-flex items-center gap-1.5 text-sm text-muted transition hover:text-fg"
-                >
-                  <PencilLine size={14} /> or enter a bet manually
-                </button>
-              </div>
               <SamplePicker
                 samples={samples}
                 onPick={(s) => {
