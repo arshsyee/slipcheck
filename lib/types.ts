@@ -27,7 +27,7 @@ export const LegSchema = z.object({
       "The pick. 1x2 / draw_no_bet / asian_handicap: a team name or 'Draw'. double_chance: two outcomes joined by ' or ', e.g. 'Arsenal or Draw'. total_goals / total_corners / total_cards: 'Over' or 'Under'. btts: 'Yes' or 'No'. other: the text as shown.",
     ),
   line: z.number().nullable().describe("Goal line for totals (2.5) or handicap for the picked team (-0.75); null otherwise"),
-  oddsDecimal: z.number().nullable().describe("This leg's odds as a DECIMAL number, e.g. 2.5 (convert 6/4 to 2.5, +150 to 2.5)"),
+  oddsDecimal: z.number().nullable().describe("This leg's odds as a DECIMAL number, e.g. 2.5 (convert 6/4 to 2.5)"),
 });
 
 export const SlipSchema = z.object({
@@ -40,7 +40,7 @@ export type League = (typeof LEAGUES)[number];
 export type Market = (typeof MARKETS)[number];
 
 export type AIProvider = "anthropic" | "openai";
-export type OddsFormat = "decimal" | "fractional" | "american";
+export type OddsFormat = "decimal" | "fractional";
 
 /** Keys + prefs the browser sends to the local API routes. */
 export interface ClientSettings {

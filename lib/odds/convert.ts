@@ -1,19 +1,5 @@
 import type { OddsFormat } from "../types";
 
-export function americanToDecimal(american: number): number {
-  if (american === 0) throw new Error("American odds cannot be 0");
-  return american > 0 ? 1 + american / 100 : 1 + 100 / Math.abs(american);
-}
-
-export function decimalToAmerican(decimal: number): number {
-  if (decimal <= 1) throw new Error("Decimal odds must be > 1");
-  return decimal >= 2 ? Math.round((decimal - 1) * 100) : Math.round(-100 / (decimal - 1));
-}
-
-export function fractionalToDecimal(num: number, den: number): number {
-  return 1 + num / den;
-}
-
 // Fractions bookmakers actually quote; anything else falls back to the nearest simple fraction.
 const LADDER: [number, number][] = [
   [1, 10], [1, 8], [1, 7], [1, 6], [1, 5], [2, 9], [1, 4], [2, 7], [3, 10], [1, 3], [4, 11], [2, 5], [4, 9], [1, 2],
@@ -35,14 +21,13 @@ export function decimalToFractional(decimal: number): string {
   return `${Math.round(target * 100)}/100`;
 }
 
-/** Accepts "2.5", "6/4", "+150", "-200" and returns decimal odds, or null if unparseable. */
+/** Accepts "2.5", "6/4" or "evens" and returns decimal odds, or null if unparseable. */
 export function parseOdds(input: string): number | null {
   const s = input.trim();
   if (!s) return null;
   const frac = s.match(/^(\d+(?:\.\d+)?)\s*\/\s*(\d+(?:\.\d+)?)$/);
-  if (frac) return Number(frac[2]) > 0 ? round(fractionalToDecimal(Number(frac[1]), Number(frac[2])), 4) : null;
+  if (frac) return Number(frac[2]) > 0 ? round(1 + Number(frac[1]) / Number(frac[2]), 4) : null;
   if (/^evens?$/i.test(s)) return 2;
-  if (/^[+-]\d{3,}$/.test(s)) return round(americanToDecimal(Number(s)), 4);
   const n = Number(s);
   return Number.isFinite(n) && n > 1 ? n : null;
 }
@@ -50,10 +35,6 @@ export function parseOdds(input: string): number | null {
 export function formatOdds(decimal: number | null | undefined, format: OddsFormat = "decimal"): string {
   if (decimal == null) return "—";
   if (format === "fractional") return decimal === 2 ? "Evens" : decimalToFractional(decimal);
-  if (format === "american") {
-    const a = decimalToAmerican(decimal);
-    return a > 0 ? `+${a}` : `${a}`;
-  }
   return decimal.toFixed(2);
 }
 

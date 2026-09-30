@@ -92,7 +92,6 @@ export default function SettingsPage() {
             [
               ["fractional", "Fractional", "6/4"],
               ["decimal", "Decimal", "2.50"],
-              ["american", "American", "+150"],
             ] as const
           ).map(([id, label, example]) => (
             <button

@@ -114,7 +114,7 @@ export function LegEditor({ slip, onChange, oddsFormat }: { slip: Slip; onChange
   );
 }
 
-/** Text box that accepts 6/4, 2.5 or +150 and stores decimal odds; commits on blur. Remounted (via key) when the value changes elsewhere. */
+/** Text box that accepts 6/4 or 2.5 and stores decimal odds; commits on blur. Remounted (via key) when the value changes elsewhere. */
 function OddsInput({ value, format, onChange }: { value: number | null; format: OddsFormat; onChange: (v: number | null) => void }) {
   const [text, setText] = useState(value != null ? formatOdds(value, format) : "");
   const invalid = text.trim() !== "" && parseOdds(text) == null;
@@ -123,7 +123,7 @@ function OddsInput({ value, format, onChange }: { value: number | null; format: 
       className={clsx(input, "tabular", invalid && "border-danger")}
       value={text}
       placeholder={format === "fractional" ? "6/4" : "2.50"}
-      title="Fractional (6/4), decimal (2.5) or American (+150)"
+      title="Fractional (6/4) or decimal (2.5)"
       onChange={(e) => setText(e.target.value)}
       onBlur={() => onChange(parseOdds(text))}
     />

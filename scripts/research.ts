@@ -36,7 +36,7 @@ function parseArgs(argv: string[]): { legs: Leg[]; json: boolean; html: string |
     else if (a === "--line" && cur) cur.line = Number(next());
     else if (a === "--odds" && cur) {
       const o = parseOdds(next());
-      if (o == null) throw new Error("--odds takes 6/4, 2.5, evens or +150");
+      if (o == null) throw new Error("--odds takes 6/4, 2.5 or evens");
       cur.oddsDecimal = o;
     }
     else if (!a.startsWith("--")) {
