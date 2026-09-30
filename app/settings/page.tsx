@@ -4,11 +4,7 @@ import { useState } from "react";
 import { Check, Eye, EyeOff, Loader2, X } from "lucide-react";
 import clsx from "clsx";
 import { useSettings } from "@/lib/useSettings";
-import { providerOf } from "@/lib/keys";
-
-const NAME = { anthropic: "Claude", openai: "ChatGPT" } as const;
-const GET_KEY = { anthropic: "https://console.anthropic.com/settings/keys", openai: "https://platform.openai.com/api-keys" } as const;
-const FIELD = { anthropic: "anthropicKey", openai: "openaiKey" } as const;
+import { PROVIDERS, PROVIDER_IDS, providerOf, type AIProvider } from "@/lib/ai/providers";
 
 export default function SettingsPage() {
   const { settings, update, env, loaded } = useSettings();
@@ -16,18 +12,19 @@ export default function SettingsPage() {
   const [status, setStatus] = useState<{ ok: boolean; message: string } | "loading" | null>(null);
   if (!loaded) return null;
 
-  // The selector picks whose key the box shows; each provider keeps its own key.
-  const provider = settings.provider ?? (settings.openaiKey && !settings.anthropicKey ? "openai" : "anthropic");
-  const key = settings[FIELD[provider]] ?? "";
+  // The dropdown picks whose key the box shows; each provider keeps its own key.
+  const provider: AIProvider = settings.provider ?? PROVIDER_IDS.find((p) => settings.keys?.[p]) ?? "anthropic";
+  const info = PROVIDERS[provider];
+  const key = settings.keys?.[provider] ?? "";
+  const fromEnv = !key && env?.[provider];
   // Judge only a full-length key, so typing "sk-" on the way to "sk-ant-" doesn't flip anything.
   const judge = (v: string) => (v.length >= 20 ? providerOf(v) : undefined);
   const who = judge(key);
-  const fromEnv = !key && env?.[provider];
 
-  // A key that says whose it is (sk-ant- = Claude) switches the selector to match.
+  // A key that says whose it is (sk-ant- = Claude, xai- = Grok, …) switches the dropdown to match.
   function setKey(v: string) {
     const p = judge(v) ?? provider;
-    update({ provider: p, [FIELD[p]]: v });
+    update({ provider: p, keys: { ...settings.keys, [p]: v } });
     setStatus(null);
   }
 
@@ -37,7 +34,7 @@ export default function SettingsPage() {
       const res = await fetch("/api/test-key", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ settings }),
+        body: JSON.stringify({ settings: { ...settings, provider } }),
       });
       setStatus(await res.json());
     } catch {
@@ -48,37 +45,21 @@ export default function SettingsPage() {
   return (
     <div className="mx-auto max-w-xl space-y-3">
       <h1 className="text-2xl font-semibold tracking-tight">Your AI key</h1>
-      <p className="text-sm text-muted">Reads your slip photo. It stays in this browser.</p>
-      <div className="flex items-center justify-between gap-2">
-        <div role="radiogroup" aria-label="Provider" className="inline-flex rounded-lg border border-line p-0.5">
-          {(["anthropic", "openai"] as const).map((p) => (
-            <button
-              key={p}
-              role="radio"
-              aria-checked={provider === p}
-              onClick={() => {
-                update({ provider: p });
-                setStatus(null);
-              }}
-              className={clsx("rounded-md px-3 py-1 text-sm", provider === p ? "bg-accent/15 text-accent" : "text-muted hover:text-fg")}
-            >
-              {NAME[p]}
-            </button>
-          ))}
-        </div>
-        <a href={GET_KEY[provider]} target="_blank" rel="noreferrer" className="text-xs text-accent hover:underline">
-          Get a {NAME[provider]} key
+      <p className="text-sm text-muted">
+        Reads your slip photo. It stays in this browser.{" "}
+        <a href={info.keyUrl} target="_blank" rel="noreferrer" className="text-accent hover:underline">
+          Get a {info.name} key
         </a>
-      </div>
-      <div className="flex gap-2">
-        <div className="relative flex-1">
+      </p>
+      <div className="flex flex-wrap gap-2">
+        <div className="relative min-w-0 flex-1 basis-60">
           <input
             type={show ? "text" : "password"}
             autoComplete="off"
             spellCheck={false}
-            aria-label={`${NAME[provider]} key`}
+            aria-label={`${info.name} key`}
             className="w-full rounded-lg border border-line bg-surface px-3 py-2 pr-10 font-mono text-sm outline-none focus:border-accent"
-            placeholder={fromEnv ? "Set in .env.local" : provider === "anthropic" ? "sk-ant-…" : "sk-…"}
+            placeholder={fromEnv ? "Set in .env.local" : `${info.prefix}…`}
             value={key}
             onChange={(e) => setKey(e.target.value.trim())}
           />
@@ -86,11 +67,26 @@ export default function SettingsPage() {
             {show ? <EyeOff size={16} /> : <Eye size={16} />}
           </button>
         </div>
+        <select
+          aria-label="Provider"
+          value={provider}
+          onChange={(e) => {
+            update({ provider: e.target.value as AIProvider });
+            setStatus(null);
+          }}
+          className="rounded-lg border border-line bg-surface px-3 py-2 text-sm outline-none focus:border-accent"
+        >
+          {PROVIDER_IDS.map((p) => (
+            <option key={p} value={p}>
+              {PROVIDERS[p].name}
+            </option>
+          ))}
+        </select>
         <button onClick={test} disabled={!key && !fromEnv} className="rounded-lg border border-line px-4 text-sm hover:border-accent hover:text-accent disabled:opacity-40">
           Test
         </button>
       </div>
-      <p className={clsx("flex items-center gap-1.5 text-xs", status && status !== "loading" ? (status.ok ? "text-accent" : "text-danger") : key && !who ? "text-danger" : "text-muted")}>
+      <p className={clsx("flex items-center gap-1.5 text-xs", status && status !== "loading" ? (status.ok ? "text-accent" : "text-danger") : who === null ? "text-danger" : "text-muted")}>
         {status === "loading" ? (
           <>
             <Loader2 size={12} className="animate-spin" /> Checking…
@@ -99,8 +95,8 @@ export default function SettingsPage() {
           <>
             {status.ok ? <Check size={12} /> : <X size={12} />} {status.message}
           </>
-        ) : key ? (
-          who !== null ? null : `That doesn't look like a ${NAME[provider]} key.`
+        ) : who === null ? (
+          `That doesn't look like a ${info.name} key.`
         ) : fromEnv ? (
           "Using the key in .env.local."
         ) : null}

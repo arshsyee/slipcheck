@@ -3,17 +3,18 @@ import { zodResponseFormat } from "openai/helpers/zod";
 import { SlipSchema, type Slip } from "../types";
 import { SLIP_PROMPT } from "./prompt";
 
-export const DEFAULT_OPENAI_MODEL = "gpt-5";
-
+/** ChatGPT, Grok, Gemini and OpenRouter all take OpenAI's chat format; only the address and name differ. */
 export async function parseSlipWithOpenAI(opts: {
+  name: string;
+  baseURL: string;
   apiKey: string;
-  model?: string;
+  model: string;
   imageBase64: string;
   mimeType: string;
 }): Promise<Slip> {
-  const client = new OpenAI({ apiKey: opts.apiKey });
+  const client = new OpenAI({ apiKey: opts.apiKey, baseURL: opts.baseURL });
   const completion = await client.chat.completions.parse({
-    model: opts.model || DEFAULT_OPENAI_MODEL,
+    model: opts.model,
     messages: [
       {
         role: "user",
@@ -27,17 +28,21 @@ export async function parseSlipWithOpenAI(opts: {
   });
 
   const message = completion.choices[0]?.message;
-  if (message?.refusal) throw new Error("OpenAI declined to read this image.");
-  if (!message?.parsed) throw new Error("OpenAI returned an unreadable response. Try a clearer screenshot.");
+  if (message?.refusal) throw new Error(`${opts.name} declined to read this image.`);
+  if (!message?.parsed) throw new Error(`${opts.name} returned an unreadable response. Try a clearer screenshot.`);
   return message.parsed;
 }
 
-export async function testOpenAIKey(apiKey: string): Promise<{ ok: boolean; message: string }> {
+/** OpenRouter lists models without a key, so it's checked on /key, which needs one. */
+export async function testOpenAIKey(name: string, baseURL: string, apiKey: string): Promise<{ ok: boolean; message: string }> {
   try {
-    await new OpenAI({ apiKey }).models.list();
-    return { ok: true, message: "Connected to OpenAI" };
+    const path = baseURL.includes("openrouter.ai") ? "/key" : "/models";
+    const res = await fetch(baseURL + path, { headers: { authorization: `Bearer ${apiKey}` } });
+    // Gemini and Grok answer a bad key with 400, the rest with 401/403; this GET sends nothing else that could be wrong.
+    if ([400, 401, 403].includes(res.status)) return { ok: false, message: `Invalid ${name} key` };
+    if (!res.ok) return { ok: false, message: `${name} answered HTTP ${res.status}` };
+    return { ok: true, message: `Connected to ${name}` };
   } catch (e) {
-    if (e instanceof OpenAI.AuthenticationError) return { ok: false, message: "Invalid OpenAI API key" };
     return { ok: false, message: e instanceof Error ? e.message : "Connection failed" };
   }
 }

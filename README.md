@@ -1,6 +1,6 @@
 # SlipCheck
 
-The canvas, not the painter: SlipCheck gathers **free, public football data** for every match on your bet slip and puts it in one place. It makes no predictions and gives no tips. Bring your own AI (Claude or ChatGPT key) to read slips and analyse the data.
+The canvas, not the painter: SlipCheck gathers **free, public football data** for every match on your bet slip and puts it in one place. It makes no predictions and gives no tips. Bring your own AI key (Claude, ChatGPT, Grok, Gemini or OpenRouter) to read slips and analyse the data.
 
 For every match you get:
 - a comparison table for your bet type
@@ -42,7 +42,7 @@ npm run research -- "Arsenal v Leeds" "Inter v Parma" --league SERIE_A --market 
 
 Options per match: `--league EPL|LA_LIGA|SERIE_A|BUNDESLIGA|LIGUE_1|UCL`, `--market 1x2|double_chance|draw_no_bet|total_goals|asian_handicap|btts`, `--pick`, `--line`. Add `--json` for the full data.
 
-Or use the web app: `npm run dev`, then open http://localhost:3000. Sample slips come from real upcoming fixtures. To read slip screenshots, add a Claude or ChatGPT key in Settings or in `.env.local` (see `.env.example`).
+Or use the web app: `npm run dev`, then open http://localhost:3000. Sample slips come from real upcoming fixtures. To read slip screenshots, add an AI key (Claude, ChatGPT, Grok, Gemini or OpenRouter) in Settings or in `.env.local` (see `.env.example`).
 
 ## What's in a report
 

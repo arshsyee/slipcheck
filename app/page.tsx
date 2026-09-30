@@ -118,7 +118,7 @@ export default function Home() {
       {loaded && !hasAiKey && stage === "upload" && (
         <Link href="/settings" className="glass mx-auto flex max-w-2xl items-center gap-3 rounded-xl px-4 py-3 text-sm transition hover:border-warn">
           <KeyRound size={18} className="shrink-0 text-warn" />
-          <span className="flex-1">Add a Claude or ChatGPT API key to read slip screenshots. Until then, try a sample.</span>
+          <span className="flex-1">Add an AI key (Claude, ChatGPT, Grok, Gemini or OpenRouter) to read slip screenshots. Until then, try a sample.</span>
           <ArrowRight size={16} className="text-muted" />
         </Link>
       )}

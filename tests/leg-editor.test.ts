@@ -29,3 +29,10 @@ describe("odds as a multiplier", () => {
     expect([2.5, 10, 1.7272, 21.3125].map(formatOdds)).toEqual(["2.5x", "10x", "1.73x", "21.31x"]);
   });
 });
+
+describe("AI keys", () => {
+  it("tell whose they are", async () => {
+    const { providerOf } = await import("../lib/ai/providers");
+    expect(["sk-ant-x", "sk-or-x", "sk-proj-x", "xai-x", "AIzaX", "hello"].map(providerOf)).toEqual(["anthropic", "openrouter", "openai", "xai", "gemini", null]);
+  });
+});

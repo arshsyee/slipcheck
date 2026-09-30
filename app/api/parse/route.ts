@@ -14,14 +14,13 @@ export async function POST(request: Request) {
   if (!ALLOWED.includes(file.type)) return errorResponse("Upload a PNG, JPG, WEBP or GIF screenshot", 400);
   if (file.size > MAX_BYTES) return errorResponse("Image is larger than 8 MB", 400);
 
-  const apiKey = settings.provider === "openai" ? settings.openaiKey : settings.anthropicKey;
-  if (!apiKey) return errorResponse("Add a Claude or ChatGPT key in Settings first", 400);
+  if (!settings.apiKey) return errorResponse("Add an AI key in Settings first", 400);
 
   try {
     const slip = await parseSlip({
       provider: settings.provider,
-      apiKey,
-      model: settings.provider === "openai" ? settings.openaiModel : settings.anthropicModel,
+      apiKey: settings.apiKey,
+      model: settings.model,
       imageBase64: Buffer.from(await file.arrayBuffer()).toString("base64"),
       mimeType: file.type,
     });

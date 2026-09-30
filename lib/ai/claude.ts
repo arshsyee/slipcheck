@@ -3,19 +3,17 @@ import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { SlipSchema, type Slip } from "../types";
 import { SLIP_PROMPT } from "./prompt";
 
-export const DEFAULT_CLAUDE_MODEL = "claude-sonnet-5";
-
 type ImageMime = "image/png" | "image/jpeg" | "image/webp" | "image/gif";
 
 export async function parseSlipWithClaude(opts: {
   apiKey: string;
-  model?: string;
+  model: string;
   imageBase64: string;
   mimeType: string;
 }): Promise<Slip> {
   const client = new Anthropic({ apiKey: opts.apiKey });
   const response = await client.messages.parse({
-    model: opts.model || DEFAULT_CLAUDE_MODEL,
+    model: opts.model,
     max_tokens: 16000,
     messages: [
       {

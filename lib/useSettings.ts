@@ -2,17 +2,15 @@
 
 import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import type { ClientSettings } from "./types";
+import type { AIProvider } from "./ai/providers";
 
 const STORAGE_KEY = "slipcheck.settings.v1";
 const CHANGE_EVENT = "slipcheck:settings";
 const SERVER = "__server__";
 const DEFAULTS: ClientSettings = {};
 
-export interface EnvStatus {
-  anthropic: boolean;
-  openai: boolean;
-  provider: "anthropic" | "openai";
-}
+/** Which providers have a key in .env.local. */
+export type EnvStatus = Partial<Record<AIProvider, boolean>>;
 
 function subscribe(cb: () => void) {
   window.addEventListener(CHANGE_EVENT, cb);
@@ -62,7 +60,7 @@ export function useSettings() {
     [settings],
   );
 
-  const hasAiKey = Boolean(settings.anthropicKey || settings.openaiKey || env?.anthropic || env?.openai);
+  const hasAiKey = Object.values(settings.keys ?? {}).some(Boolean) || Object.values(env ?? {}).some(Boolean);
 
   return { settings, update, env, loaded, hasAiKey };
 }

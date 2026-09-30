@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { AIProvider } from "./ai/providers";
 
 // Scope: Europe's top 5 leagues + the Champions League.
 export const LEAGUES = ["EPL", "LA_LIGA", "SERIE_A", "BUNDESLIGA", "LIGUE_1", "UCL", "OTHER"] as const;
@@ -39,11 +40,8 @@ export type Slip = z.infer<typeof SlipSchema>;
 export type League = (typeof LEAGUES)[number];
 export type Market = (typeof MARKETS)[number];
 
-export type AIProvider = "anthropic" | "openai";
-
 /** Keys + prefs the browser sends to the local API routes. */
 export interface ClientSettings {
   provider?: AIProvider;
-  anthropicKey?: string;
-  openaiKey?: string;
+  keys?: Partial<Record<AIProvider, string>>;
 }
