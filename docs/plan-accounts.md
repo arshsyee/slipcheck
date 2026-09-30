@@ -84,5 +84,5 @@ Hosting, the database and bandwidth should cost roughly **£0–25 a month** at 
 
 1. Host online with accounts that only save slips, keeping the local version account-free? (This plan assumes yes.)
 2. Ads on the hosted site: yes, with gambling ads blocked, or donations only to start? (Recommended: donations only at launch. Add ads once traffic justifies it and the data terms are checked.)
-3. Open-source license: **MIT** (anyone can reuse it, even commercially) or **AGPL** (anyone who hosts a copy must share their changes)? The repo has no license file yet, so this is needed before going public.
+3. ~~Open-source license~~ **Decided: AGPL-3.0** (2026-09-30), see [LICENSE](../LICENSE).
 4. Keep slip photos? (Recommended: no. Read them, then delete.)
