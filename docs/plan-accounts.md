@@ -47,7 +47,7 @@ The hosted website can carry **ads** (with gambling ads blocked) and a **donate*
 
 ## 3. Paying for hosting: ads and donations
 
-Hosting, the database and bandwidth should cost roughly **£0–25 a month** at small scale, on the free and hobby tiers.
+Hosting, the database and bandwidth should cost roughly **$0–30 a month** at small scale, on the free and hobby tiers.
 
 **Donations:** GitHub Sponsors and a "Buy me a coffee" link. This fits an open-source project and has no conflict of interest.
 
@@ -57,7 +57,7 @@ Hosting, the database and bandwidth should cost roughly **£0–25 a month** at 
 
 - **Google AdSense.** Google restricts ads on pages that *let users gamble for real money*. SlipCheck isn't gambling, it's information gathering (see the official statement), so apply on that basis. Google makes the final call on review.
 - **Block gambling ads.** AdSense lets a site block sensitive ad categories, including gambling. **We should block them.** Showing bookmaker ads beside an honest fact tool would pay us when users bet more, the same conflict as affiliate links.
-- **It won't earn much at first.** Display ads typically earn a few pounds per 1,000 page views, so ads start to matter only at tens of thousands of visits a month. Until then, donations probably earn about the same.
+- **It won't earn much at first.** Display ads typically earn a few dollars per 1,000 page views, so ads start to matter only at tens of thousands of visits a month. Until then, donations probably earn about the same.
 - **Cookie consent.** Personalised ads in the UK need a consent banner (UK GDPR and PECR). Non-personalised ads avoid most of that but earn less.
 - **Design cost.** Ads clash with the swift, minimal look. If we add them, use one quiet slot, never between your picks, and never in the match reports.
 - **Local and self-hosted copies** have no ads, and that's fine.
