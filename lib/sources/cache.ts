@@ -92,8 +92,3 @@ async function writeDisk(key: string, value: unknown) {
   await mkdir(cacheDir(), { recursive: true });
   await writeFile(diskPath(key), JSON.stringify(value));
 }
-
-/** For tests. */
-export function clearMemoryCache() {
-  memory.clear();
-}

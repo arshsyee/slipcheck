@@ -25,10 +25,6 @@ export function leagueInfo(league: League): LeagueInfo | null {
   return league === "OTHER" ? null : LEAGUE_INFO[league];
 }
 
-export function leagueLabel(league: League) {
-  return league === "OTHER" ? "Other" : LEAGUE_INFO[league].label;
-}
-
 export const DOMESTIC_LEAGUES = (Object.keys(LEAGUE_INFO) as Exclude<League, "OTHER">[]).filter((l) => LEAGUE_INFO[l].fd);
 
 export const MARKET_LABEL: Record<Market, string> = {
