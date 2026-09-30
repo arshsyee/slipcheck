@@ -104,6 +104,10 @@ export function buildPick(
       const r = c.record.allCompsThisSeason.played ? c.record.allCompsThisSeason : c.record.league;
       bullets.push(`${t.name} have a new coach, ${c.coach.name}, since ${c.coach.since.slice(0, 10)}.${r ? ` Under them: won ${r.won}, drew ${r.drawn}, lost ${r.lost}.` : " No games under them yet."}`);
     }
+    // Rotation risk: a game soon after this one.
+    if (t.after && t.after.daysAfter <= 4) {
+      bullets.push(`${t.name} play ${t.after.venue === "home" ? "" : "away at "}${t.after.opponent} (${t.after.competition}) ${t.after.daysAfter} day${t.after.daysAfter === 1 ? "" : "s"} after this match.`);
+    }
     if (t.restDays != null && t.restDays <= 3) bullets.push(`${t.name} last played ${t.restDays} day${t.restDays === 1 ? "" : "s"} before this match.`);
     // No official list: players this team's injury headlines name (from the squad cross-check).
     const named = t.squad?.ok ? (t.squad.data?.players.filter((p) => p.inNews).map((p) => p.name) ?? []) : [];

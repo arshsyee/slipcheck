@@ -58,6 +58,12 @@ export interface TeamSection {
   /** Current coach (Wikipedia + Wikidata) and form since they arrived. */
   coach: SourceResult<{ coach: Coach; record: CoachRecord | null } | null>;
   news: SourceResult<Headline[]>;
+  /**
+   * Rotation risk: the team's next match after this one. `complete` is false when a league's full fixture list isn't in
+   * any free source (La Liga, Serie A, Ligue 1, national friendlies), so an unlisted game could come first.
+   * Optional: older saved reports lack it.
+   */
+  after?: { date: string; competition: string; opponent: string; venue: "home" | "away"; daysAfter: number; complete: boolean } | null;
   /** Squad by position, who's out, likely XI (Premier League only), players to watch. */
   squad: SourceResult<Squad | null> | null;
 }

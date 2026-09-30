@@ -36,6 +36,15 @@ export function FormTab({ d }: Props) {
               </>
             )}
             <StakesLine t={t} />
+            {t.after && (
+              <div>
+                <SectionTitle>{t.after.complete ? "Next game after this" : "Next known game after this"}</SectionTitle>
+                <p className={clsx("text-xs", t.after.daysAfter <= 4 && "font-medium text-warn")}>
+                  {t.after.competition} {t.after.venue === "home" ? "v" : "@"} {t.after.opponent} · {t.after.daysAfter} days later
+                </p>
+                {!t.after.complete && <p className="text-[11px] text-muted">Not every fixture is in a free list, so another game could come first.</p>}
+              </div>
+            )}
             <SeasonRuns t={t} />
             {t.lastMatch && (
               <p className="text-xs text-muted">

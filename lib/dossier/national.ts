@@ -12,7 +12,8 @@ import { averages, form, gamesFor, rates } from "../stats/team";
 import { headToHead, restDays } from "../stats/match";
 import { buildPick } from "../stats/insights";
 import { matchFixture, teamScore } from "../teams/match";
-import { flagPlayersInNews, lineupsFor, mergeFixture, sourceOfKey } from "./build";
+import { flagPlayersInNews, lineupsFor, mergeFixture, nextAfter, sourceOfKey } from "./build";
+import { getUpcomingMatches } from "../sources/upcoming";
 import type { MatchDossier, Side, StatBlock, TeamSection, TeamStats } from "./types";
 
 /** UEFA's id for the Nations League in its match API. */
@@ -141,6 +142,8 @@ async function team(
   ]);
   const wiki = info.ok ? info.data : null;
   const squad = wiki ? await call("wikipedia", () => getWikiSquad(wiki.wikipediaTitle), "https://en.wikipedia.org") : null;
+  // National teams: Nations League fixtures only; friendlies aren't in any free list, so it's never "complete".
+  const upcoming = await call("uefa", () => getUpcomingMatches(name, null, true), "https://www.uefa.com");
 
   return {
     side,
@@ -170,6 +173,7 @@ async function team(
       : info,
     news,
     squad,
+    after: nextAfter(upcoming.ok ? upcoming.data : [], kickoff, false),
   };
 }
 

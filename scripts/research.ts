@@ -164,6 +164,11 @@ function print(d: MatchDossier, ms: number) {
   r2("Rest days", d.home.restDays?.toString(), d.away.restDays?.toString());
   const lm = (t: typeof d.home) => (t.lastMatch ? `${t.lastMatch.score.replace(" at home", " (H)").replace(" away", " (A)").replace(" neutral", " (N)")} v ${t.lastMatch.opponent}, ${t.lastMatch.date.slice(0, 10)}` : null);
   r2("Last game", lm(d.home), lm(d.away));
+  // Rotation risk: the next game after this one.
+  const nx = (t: typeof d.home) => (t.after ? `${t.after.competition} ${t.after.venue === "home" ? "v" : "@"} ${t.after.opponent}, ${t.after.daysAfter} days later` : null);
+  row(intl || [d.home, d.away].some((t) => t.after && !t.after.complete) ? "Next known game after this" : "Next game after this", cell(nx(d.home)), cell(nx(d.away)));
+  if ([d.home, d.away].some((t) => !t.after?.complete))
+    console.log(`   ${dim(intl ? "Only Nations League fixtures are in a free list: a friendly could come first." : "La Liga, Serie A and Ligue 1 list only the next round for free: a league game could come first.")}`);
 
   section("3d. Coach");
   for (const t of [d.home, d.away]) {
