@@ -109,6 +109,10 @@ Code map:
 - **Phase 4:** an MCP server or plugin, so your own AI can read SlipCheck directly.
 - **Phase 5:** saved slips and history.
 
+## License
+
+[AGPL-3.0](LICENSE). You can use, copy and change SlipCheck freely. If you host a changed copy for other people, you must share your changes under the same license. The license covers SlipCheck's code only; match data stays under each source's own terms.
+
 ---
 
 Information only, not betting advice. 18+. Need help? [BeGambleAware.org](https://www.begambleaware.org) · National Gambling Helpline 0808 8020 133.
