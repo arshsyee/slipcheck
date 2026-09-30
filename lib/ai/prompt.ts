@@ -22,5 +22,5 @@ Extract every selection exactly as shown. Rules:
 - selection: the team for 1x2 / draw_no_bet / asian_handicap (or "Draw"); "Home or Draw"-style picks as "<team> or Draw" /
   "<team> or <team>" for double chance; "Over"/"Under" for totals; "Yes"/"No" for BTTS; otherwise the text as shown.
 - line: the goal line for totals (2.5) or the handicap on the picked team (-0.75, +1). Null otherwise.
-- oddsDecimal: that selection's odds as DECIMAL. Convert fractional (6/4 → 2.5, 11/10 → 2.1, Evens → 2.0) and American (+150 → 2.5).
+- oddsDecimal: that selection's odds as DECIMAL. Convert fractional (6/4 → 2.5, 11/10 → 2.1, Evens → 2.0).
 If the image is not a football bet slip, return an empty legs array.`;
