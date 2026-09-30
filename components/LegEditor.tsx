@@ -140,7 +140,11 @@ function OddsInput({ value, onChange }: { value: number | null; onChange: (v: nu
       aria-label="Odds"
       title="Payout multiplier (2.5x). 6/4 or 2.5 also work."
       onChange={(e) => setText(e.target.value)}
-      onBlur={() => onChange(parseOdds(text))}
+      onBlur={() => {
+        const v = parseOdds(text);
+        if (v != null) setText(formatOdds(v)); // Always show the multiplier, whatever was typed.
+        onChange(v);
+      }}
     />
   );
 }
