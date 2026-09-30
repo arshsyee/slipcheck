@@ -35,6 +35,12 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
     log.push({ source, ok: r.ok, fetchedAt: r.fetchedAt, error: r.ok ? undefined : r.error, url });
     return r;
   };
+  // Where every source call ended up, and which ones served a saved copy: added to every report.
+  const sources = () => ({
+    sourceLog: log,
+    stale: staleLog.slice(staleFrom).map((x) => ({ source: sourceOfKey(x.key), savedAt: x.savedAt, error: x.error })),
+    builtAt: new Date().toISOString(),
+  });
 
   // --- Which competition, and which way round ---
   const fixtures = await call("football-data", getFixtures, "https://www.football-data.co.uk/fixtures.csv");
@@ -51,7 +57,7 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
   // National teams (Nations League, qualifiers, friendlies) have their own sources.
   if (leagueId === "OTHER") {
     const national = await nationalTeams(leg);
-    if (national) return buildNationalDossier(leg, legIndex, national);
+    if (national) return { ...(await buildNationalDossier(leg, legIndex, national, call)), ...sources() };
   }
   const info = leagueInfo(leagueId);
 
@@ -157,9 +163,7 @@ export async function buildDossier(leg: Leg, legIndex: number): Promise<MatchDos
     referee,
     lineups,
     pick: buildPick({ ...leg, homeTeam: home.name, awayTeam: away.name }, home, away, h2h?.ok ? h2h.data : null),
-    sourceLog: log,
-    stale: staleLog.slice(staleFrom).map((x) => ({ source: sourceOfKey(x.key), savedAt: x.savedAt, error: x.error })),
-    builtAt: new Date().toISOString(),
+    ...sources(),
   };
 }
 
@@ -429,7 +433,7 @@ function plainScore(gf: number | null, ga: number | null, venue: "home" | "away"
 }
 
 /** Cache keys start with the source ("fd:…", "uefa:…"). */
-export function sourceOfKey(key: string): SourceId {
+function sourceOfKey(key: string): SourceId {
   const p = key.split(":")[0];
   const map: Record<string, SourceId> = { intl: key.startsWith("intl:wiki") ? "wikipedia" : "international-results", fd: "football-data", pl: "premier-league", sportsdb: "thesportsdb", weather: "open-meteo", geocode: "open-meteo", coach: key.startsWith("coach:wikipedia") ? "wikipedia" : "wikidata", news: key.includes("bbc") ? "bbc" : "google-news" };
   return map[p] ?? (p as SourceId);
