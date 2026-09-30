@@ -128,7 +128,7 @@ export function getSeason(div: string, season = seasonCode()): Promise<MatchRow[
   return cached(`fd:${url}`, ttl, async () => {
     const rows = parseCsv(await fetchText(url));
     return rows.map(toMatchRow).filter((r): r is MatchRow => r !== null);
-  }, { disk: true });
+  });
 }
 
 /** Current season plus `back` previous seasons, oldest first. Missing past seasons (e.g. newly added divisions) are skipped. */
@@ -151,7 +151,7 @@ export function getFixtures(): Promise<FixtureRow[]> {
         away: r.AwayTeam,
         referee: r.Referee || null,
       }));
-  }, { disk: true });
+  });
 }
 
 export const FD_SOURCE_URL = (div: string) => `${BASE}/mmz4281/${seasonCode()}/${div}.csv`;
