@@ -70,23 +70,32 @@ interface PlPlayer {
   position: string | null;
 }
 
-/** Official Premier League fixture: ground, referee, and team sheets once published. */
-export async function findPlFixture(home: string | null, away: string | null): Promise<PlFixture | null> {
+/** A club's next Premier League fixtures (up to 10), soonest first. */
+export async function getPlUpcoming(club: string): Promise<{ id: number; home: string; away: string; kickoff: string | null }[]> {
   const [season, teams] = await Promise.all([currentSeasonId(), teamIds()]);
-  const club = home ?? away;
-  if (!club) return null;
   const hit = bestTeamMatch(club, teams.map((t) => t.name));
   const teamId = teams.find((t) => t.name === hit?.name)?.id;
-  if (teamId == null) return null;
-
-  const upcoming = await cached(`pl:fixtures:${season}:${teamId}`, HOUR, async () => {
+  if (teamId == null) return [];
+  return cached(`pl:fixtures:v2:${season}:${teamId}`, HOUR, async () => {
     const d = await fetchJson(
       `${BASE}/fixtures?comps=1&compSeasons=${season}&teams=${teamId}&statuses=U,L&pageSize=10&sort=asc`,
       Page(FixtureSchema),
       { headers: HEADERS },
     );
-    return d.content.map((f) => ({ id: f.id, home: f.teams[0]?.team.name ?? "", away: f.teams[1]?.team.name ?? "" }));
+    return d.content.map((f) => ({
+      id: f.id,
+      home: f.teams[0]?.team.name ?? "",
+      away: f.teams[1]?.team.name ?? "",
+      kickoff: f.kickoff?.millis ? new Date(f.kickoff.millis).toISOString() : null,
+    }));
   });
+}
+
+/** Official Premier League fixture: ground, referee, and team sheets once published. */
+export async function findPlFixture(home: string | null, away: string | null): Promise<PlFixture | null> {
+  const club = home ?? away;
+  if (!club) return null;
+  const upcoming = await getPlUpcoming(club);
   const fixture = matchFixture(home, away, upcoming);
   if (!fixture) return null;
 

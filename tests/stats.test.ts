@@ -246,3 +246,15 @@ describe("what's at stake in the table (real Premier League snapshot, 2026-09-23
     expect(s.belowSafety).toBe(table[16].points - bottom.points);
   });
 });
+
+describe("next game after this one (real Arsenal fixtures, 2026-09-30)", () => {
+  it("skips this match itself and counts days from its kick-off", async () => {
+    const { nextAfter } = await import("../lib/dossier/build");
+    const upcoming = [
+      { date: "2026-10-10T11:30:00.000Z", competition: "Premier League", opponent: "Leeds United", venue: "home" as const },
+      { date: "2026-10-13T19:00:00.000Z", competition: "UEFA Champions League", opponent: "Lille", venue: "home" as const },
+    ];
+    expect(nextAfter(upcoming, "2026-10-10T11:30:00.000Z", true)).toMatchObject({ opponent: "Lille", daysAfter: 3, complete: true });
+    expect(nextAfter(upcoming.slice(0, 1), "2026-10-10T11:30:00.000Z", true)).toBeNull();
+  });
+});

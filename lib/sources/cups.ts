@@ -58,6 +58,45 @@ export function parseFootballBoxes(wikitext: string): CupMatch[] {
   return out;
 }
 
+/** Ties with a date and both teams but no score yet (draws that are made, games not played). */
+export function parseUpcomingBoxes(wikitext: string): { date: string; home: string; away: string }[] {
+  const out: { date: string; home: string; away: string }[] = [];
+  for (const t of templates(wikitext)) {
+    const p = params(t);
+    if (!/^football ?box( collapsible)?$/i.test(p[0])) continue;
+    if (/\d+\s*[–-]\s*\d+/.test(plain(p.score ?? ""))) continue;
+    const start = (p.date ?? "").match(/\{\{\s*start date\s*\|\s*(\d{4})\s*\|\s*(\d{1,2})\s*\|\s*(\d{1,2})/i);
+    const when = start ? Date.UTC(+start[1], +start[2] - 1, +start[3], 12) : Date.parse(`${plain(p.date ?? "")} 12:00 UTC`);
+    const team = (v?: string) => plain(v ?? "").replace(/\(\d+\)/g, "").trim();
+    const home = team(p.team1);
+    const away = team(p.team2);
+    // "Winner of match 12" placeholders never match a club name, so they drop out later.
+    if (Number.isNaN(when) || !home || !away) continue;
+    out.push({ date: new Date(when).toISOString(), home, away });
+  }
+  return out;
+}
+
+/** This season's scheduled, unplayed domestic cup ties for a country's cups. */
+export async function getUpcomingCupTies(country: string): Promise<{ date: string; home: string; away: string; competition: string }[]> {
+  const season = seasonLabel();
+  const lists = await Promise.all(
+    (CUPS[country] ?? []).map(async (cup) => {
+      if (cup.openLigaDb) {
+        const matches = await getSeasonMatches(cup.openLigaDb, openLigaSeason());
+        return matches.filter((m) => !m.finished).map((m) => ({ date: m.kickoff, home: m.home, away: m.away, competition: cup.name }));
+      }
+      const title = cup.wikipedia!(season);
+      const ties = await cached(`cups:wiki-upcoming:${title}`, 6 * HOUR, async () => {
+        const d = await fetchJson(`https://en.wikipedia.org/w/api.php?action=parse&format=json&formatversion=2&redirects=1&prop=wikitext&page=${encodeURIComponent(title)}`, ParseSchema);
+        return parseUpcomingBoxes(d.parse?.wikitext ?? "");
+      });
+      return ties.map((x) => ({ ...x, competition: cup.name }));
+    }),
+  );
+  return lists.flat();
+}
+
 const ParseSchema = z.object({ parse: z.object({ wikitext: z.string() }).optional() });
 
 function wikiCup(title: string, past = false): Promise<CupMatch[]> {

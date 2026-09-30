@@ -21,6 +21,7 @@ import { getClubProfile, getNextMatch, type NextMatch } from "../sources/sportsD
 import { getFplTeam } from "../sources/fpl";
 import { getFplSquad, getWikiSquad } from "../sources/squad";
 import { getCupMeetings, getCupResults } from "../sources/cups";
+import { getUpcomingMatches, type UpcomingMatch } from "../sources/upcoming";
 import { getClubGoalProfile } from "../sources/openLigaDb";
 import { aboutClub, AVAILABILITY_RE, playersInHeadlines, getBbcClubNews, getGoogleClubNews, mergeHeadlines, type Headline } from "../sources/news";
 import { cached, HOUR, staleLog } from "../sources/cache";
@@ -226,7 +227,7 @@ async function buildTeam(
 
   // Our club's id in merged match lists: ESPN's when we have it, else the name.
   const teamId = espn?.id ?? name;
-  const [stats, standing, cups, europe, fpl, goalProfile, profile, news, squad] = await Promise.all([
+  const [stats, standing, cups, europe, fpl, goalProfile, profile, news, squad, upcoming] = await Promise.all([
     dInfo?.fd
       ? call("football-data", async () => {
           const rows = await getSeason(dInfo.fd!);
@@ -275,9 +276,11 @@ async function buildTeam(
             return facts?.wikipediaTitle ? getWikiSquad(facts.wikipediaTitle) : null;
           }, "https://en.wikipedia.org")
         : null,
+    // Rotation risk: upcoming fixtures from every free list (UEFA, league, cups).
+    call("uefa", () => getUpcomingMatches(name, domestic, false), "https://www.uefa.com"),
   ]);
 
-  // Every result this season: league (football-data.co.uk), Europe (UEFA), cups (ESPN, when up). One game per day at most.
+  // Every result this season: league (football-data.co.uk), Europe (UEFA), cups (Wikipedia / OpenLigaDB). One game per day at most.
   const leagueEvents: EspnEvent[] = (stats.ok ? (stats.data?.overall.allGames ?? []) : []).map((g) => ({
     id: `fd:${g.kickoff}`,
     date: g.kickoff,
@@ -358,6 +361,7 @@ async function buildTeam(
     coach,
     news,
     squad,
+    after: nextAfter(upcoming.ok ? upcoming.data : [], kickoff, domestic === "EPL" || domestic === "BUNDESLIGA"),
   };
 }
 
@@ -517,4 +521,11 @@ export function flagPlayersInNews(t: TeamSection) {
   const flagged = players.filter((p) => p.inNews).map((p) => p.name);
   const watch = squad.watch.map((w) => (flagged.some((n) => w.startsWith(`${n}:`) || w.startsWith(`${n} `)) ? `${w} Named in injury news: may miss out.` : w));
   t.squad = { ...t.squad!, ok: true, data: { ...squad, players, watch } } as TeamSection["squad"];
+}
+
+/** The first scheduled match after this one (6 hours' margin so this match itself never counts). */
+export function nextAfter(upcoming: UpcomingMatch[], kickoff: string, complete: boolean): TeamSection["after"] {
+  const t = new Date(kickoff).getTime();
+  const m = upcoming.find((x) => new Date(x.date).getTime() > t + 6 * 3_600_000);
+  return m ? { ...m, daysAfter: Math.round((new Date(m.date).getTime() - t) / 86_400_000), complete } : null;
 }
