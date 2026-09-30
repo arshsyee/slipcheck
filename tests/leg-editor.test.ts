@@ -14,7 +14,7 @@ describe("leg review", () => {
   it("flags only what's missing or doesn't fit", () => {
     expect(legProblems(leg({}))).toEqual([]);
     expect(legProblems(leg({ selection: "england" }))).toEqual([]);
-    expect(legProblems(leg({ oddsDecimal: null }))).toEqual(["No odds entered."]);
+    expect(legProblems(leg({ oddsDecimal: null }))).toEqual([]); // odds are optional
     expect(legProblems(leg({ selection: "Englnd" }))[0]).toContain("“Englnd”");
     expect(legProblems(leg({ market: "total_goals", selection: "Over", line: null }))).toEqual(["No line set."]);
   });

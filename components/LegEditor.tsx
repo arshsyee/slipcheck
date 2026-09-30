@@ -135,9 +135,9 @@ function OddsInput({ value, onChange }: { value: number | null; onChange: (v: nu
   const invalid = text.trim() !== "" && parseOdds(text) == null;
   return (
     <input
-      className={clsx(input, "tabular w-20", invalid && "border-danger", value == null && !invalid && "border-warn/60")}
+      className={clsx(input, "tabular w-20", invalid && "border-danger")}
       value={text}
-      placeholder="odds?"
+      placeholder="odds"
       aria-label="Odds"
       title="Payout multiplier (2.5x). 6/4 or 2.5 also work."
       onChange={(e) => setText(e.target.value)}

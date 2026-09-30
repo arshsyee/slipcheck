@@ -74,7 +74,6 @@ export function legProblems(leg: Leg): string[] {
   if (opts && !opts.some((o) => o.toLowerCase() === leg.selection.trim().toLowerCase()))
     out.push(leg.selection ? `The slip was read as “${leg.selection}”. Pick one above.` : "No pick chosen.");
   if (HAS_LINE.has(leg.market) && leg.line == null) out.push("No line set.");
-  if (leg.oddsDecimal == null) out.push("No odds entered.");
   return out;
 }
 
