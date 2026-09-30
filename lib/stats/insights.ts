@@ -114,9 +114,7 @@ export function buildPick(
     if (!st) bullets.push(`No league stats for ${t.name}: SlipCheck covers the Premier League, La Liga, Serie A, Bundesliga and Ligue 1.`);
   }
 
-  const primaryTab: Pick["primaryTab"] =
-    leg.market === "1x2" || leg.market === "double_chance" || leg.market === "draw_no_bet" || leg.market === "other" ? "form" : "stats";
-  return { pickSide, title, bullets: bullets.slice(0, 8), stats: marketStats(leg, home, away), primaryTab };
+  return { pickSide, title, bullets: bullets.slice(0, 8), stats: marketStats(leg, home, away) };
 }
 
 function ordinal(i: number) {

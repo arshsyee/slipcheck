@@ -24,8 +24,9 @@ const TABS: { id: DossierTab; label: string }[] = [
 ];
 
 export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: OddsFormat }) {
-  const [tab, setTab] = useState<DossierTab>(d.pick.primaryTab);
-  const TabBody = { form: FormTab, stats: StatsTab, h2h: H2HTab, availability: AvailabilityTab, squad: SquadTab, referee: RefereeTab, matchCentre: MatchCentreTab, news: NewsTab, club: ClubTab }[tab];
+  // Closed by default so the slip reads as an overview; clicking the open tab closes it.
+  const [tab, setTab] = useState<DossierTab | null>(null);
+  const TabBody = tab && { form: FormTab, stats: StatsTab, h2h: H2HTab, availability: AvailabilityTab, squad: SquadTab, referee: RefereeTab, matchCentre: MatchCentreTab, news: NewsTab, club: ClubTab }[tab];
   const pick = d.pick.pickSide;
 
   return (
@@ -120,14 +121,14 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
       </div>
 
       {/* Tabs */}
-      <div className="border-b border-line/70 px-2">
+      <div className={clsx("px-2", TabBody && "border-b border-line/70")}>
         <div role="tablist" className="-mb-px flex gap-1 overflow-x-auto">
           {TABS.map((t) => (
             <button
               key={t.id}
               role="tab"
               aria-selected={tab === t.id}
-              onClick={() => setTab(t.id)}
+              onClick={() => setTab(tab === t.id ? null : t.id)}
               className={clsx(
                 "whitespace-nowrap border-b-2 px-3 py-3 text-sm transition",
                 tab === t.id ? "border-accent text-fg" : "border-transparent text-muted hover:text-fg",
@@ -138,9 +139,11 @@ export function MatchCard({ d, oddsFormat }: { d: MatchDossier; oddsFormat: Odds
           ))}
         </div>
       </div>
-      <div role="tabpanel" className="p-5">
-        <TabBody d={d} />
-      </div>
+      {TabBody && (
+        <div role="tabpanel" className="p-5">
+          <TabBody d={d} />
+        </div>
+      )}
 
       <SourcesFooter d={d} />
     </article>

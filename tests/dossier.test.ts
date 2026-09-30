@@ -66,7 +66,6 @@ describe("buildDossier with most sources failing (no network)", () => {
     // Arsenal in the snapshot: 4-0-1 overall.
     expect(row("Last 5 (oldest → newest)")?.home.split(" ").filter((x) => x === "W")).toHaveLength(4);
     expect(row("Record")?.group).toBe("Arsenal at home · Leeds United away");
-    expect(d.pick.primaryTab).toBe("form");
   });
 });
 

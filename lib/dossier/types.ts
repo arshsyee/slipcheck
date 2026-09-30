@@ -103,8 +103,6 @@ export interface Pick {
   bullets: string[];
   /** The numbers that matter for this bet type, home vs away. */
   stats: PickStat[];
-  /** Tab to open first. */
-  primaryTab: DossierTab;
 }
 
 export type DossierTab = "form" | "stats" | "h2h" | "availability" | "squad" | "referee" | "matchCentre" | "news" | "club";
