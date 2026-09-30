@@ -57,6 +57,10 @@ Or use the web app: `npm run dev`, then open http://localhost:3000. Sample slips
 | Matchup | Every head-to-head meeting counted, with the winner (and the competition for national teams) |
 | Lineup & squad | Premier League: likely XI (most starts in the last 5 games, injured left out; not an official lineup), next in line per position, who's out, penalty and free-kick takers. Other clubs: squad by position. National teams: this window's squad with caps, and injured withdrawals by name. Players named in injury headlines are flagged, with the headline |
 
+## AI token use
+
+Gathering the data uses **no AI tokens**: it's all plain requests to free sources. Your own key is only used to read the slip photo, about 2,500 to 5,000 tokens per slip. If you give a report to an AI, each match's text report is about 2,000 tokens. Measurements and how to keep it low: [docs/token-costs.md](docs/token-costs.md).
+
 ## Data sources
 
 All free, no key:
